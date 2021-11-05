@@ -18,11 +18,12 @@ const Nav = ({ items }) => {
 const itemsShapeTypes = PropTypes.shape({
     title: PropTypes.string.isRequired,
     logo: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
-})
+    type: PropTypes.string.isRequired,
+    view: PropTypes.bool
+});
 
 Nav.propTypes = {
     items: PropTypes.arrayOf(itemsShapeTypes)
-}
+};
 
 export default Nav;
