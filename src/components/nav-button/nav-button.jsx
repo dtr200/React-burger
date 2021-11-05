@@ -10,8 +10,10 @@ const NavButton = ({ title, logo, type, view }) => {
         burger: () => <BurgerIcon type={type} />,
         list: () => <ListIcon type={type} />,
         profile: () => <ProfileIcon type={type} />
-    }    
+    }   
+
     const spanStyle = `${styles.title} pl-2 ${view ? styles.active : ''}`;
+    
     return (
         <button className={`${styles.navButton} pl-5 pr-5 pt-4 pb-4`}>
             {dict[logo]()}
@@ -23,7 +25,8 @@ const NavButton = ({ title, logo, type, view }) => {
 NavButton.propTypes = {
     title: PropTypes.string.isRequired,
     logo: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    view: PropTypes.bool
 }
 
 export default NavButton;
