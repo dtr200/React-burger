@@ -1,4 +1,37 @@
+@font-face{
+  font-family: 'JetBrainsMono';
+  font-weight: 500;
+  font-style: normal;
+  src: url('./fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+@font-face{
+  font-family: 'JetBrainsMono';
+  font-weight: 700;
+  font-style: normal;
+  src: url('./fonts/JetBrainsMono-Bold.woff2') format('woff2');
+}
+
+@font-face{
+  font-family: 'Iceland';
+  font-weight: 500;
+  font-style: normal;
+  src: url('./fonts/Iceland.woff2') format('woff2');
+}
+
 body {
+  --space: 4px;
+  /* Width */
+  --max-width-desktop: 1920px;
+  --max-content-width-desktop: 1280px;
+  /* Background*/
+  --main-background: #131316;
+  --header-background: #1C1C21;
+  /* Text */
+  --text-main-white: #ffffff;
+  --text-primary-light : #f2f2f3;
+  --text-dark-grey: #8585AD;
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

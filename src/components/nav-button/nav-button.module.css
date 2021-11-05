@@ -1,0 +1,16 @@
+.navButton{ 
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: calc(var(--space) * 10);
+}
+.title{
+    font-family: 'JetBrainsMono', Arial, sans-serif;
+    font-size: calc(var(--space) * 4);
+    line-height: calc(var(--space) * 6);
+    color: var(--text-dark-grey);
+}
+.active{
+    color: var(--text-primary-light);
+}
