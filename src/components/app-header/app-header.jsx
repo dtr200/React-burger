@@ -8,11 +8,11 @@ import styles from './app-header.module.css';
 class AppHeader extends Component {
     
     navButtonsData = [
-        { title: 'Конструктор', logo: 'burger', type: 'primary', status: 'active' },
-        { title: 'Лента заказов', logo: 'list', type: 'secondary', status: 'notActive' }
+        { title: 'Конструктор', logo: 'burger', type: 'primary', view: true },
+        { title: 'Лента заказов', logo: 'list', type: 'secondary', view: false }
     ]
     authButtonData = 
-        { title: 'Личный кабинет', logo: 'profile', type: 'secondary', status: 'notActive' };
+        { title: 'Личный кабинет', logo: 'profile', type: 'secondary', view: false };
 
     render(){
         return (
