@@ -5,17 +5,17 @@ import { BurgerIcon, ListIcon, ProfileIcon, Box } from
 
 import styles from './nav-button.module.css';
 
-const NavButton = ({ title, logo, type, status }) => {
+const NavButton = ({ title, logo, type, view }) => {
     const dict = {
         burger: () => <BurgerIcon type={type} />,
         list: () => <ListIcon type={type} />,
         profile: () => <ProfileIcon type={type} />
     }    
-
+    const spanStyle = `${styles.title} pl-2 ${view ? styles.active : ''}`;
     return (
         <button className={`${styles.navButton} pl-5 pr-5 pt-4 pb-4`}>
             {dict[logo]()}
-            <span className={`${styles.title} pl-2`}>{title}</span>
+            <span className={spanStyle}>{title}</span>
         </button>
     )
 }
