@@ -98,7 +98,7 @@ const ingredientsShapeTypes = PropTypes.shape({
     __v: PropTypes.number.isRequired
 });
 
-BurgerIngredients.propTypes = 
+BurgerIngredients.propTypes =
     PropTypes.arrayOf(ingredientsShapeTypes).isRequired;
 
 export default BurgerIngredients;

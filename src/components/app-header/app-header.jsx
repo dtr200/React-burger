@@ -19,7 +19,9 @@ class AppHeader extends Component {
             <header className={`${styles.appHeader} pt-4 pb-4`}>
                 <div className={styles.appHeaderContainer}>
                     <Nav items={this.navButtonsData} />
-                    <Logo />
+                    <div className={styles.logo}>
+                        <Logo/>
+                    </div>
                     <Auth {...this.authButtonData} />
                 </div>
             </header>
