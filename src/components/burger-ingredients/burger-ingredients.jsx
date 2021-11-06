@@ -46,7 +46,7 @@ class BurgerIngredients extends Component {
         const { tab } = this.state;
         const blocks = this.createIngredientsBlocks();
         return(
-            <section className={styles.burgerIngredients}>
+            <section className={`${styles.burgerIngredients} pr-4`}>
                 <h1 className={`mt-10 mb-5 text text_type_main-large`}>
                     Соберите бургер
                 </h1>
@@ -57,17 +57,17 @@ class BurgerIngredients extends Component {
                 { blocks.map((block, i) => {
                     return (
                         <section key={i}>
-                            <h2 className={`text text_type_main-medium`}>
+                            <h2 className={`text text_type_main-medium mt-10 mb-6`}>
                                 { this.dict[block.title] }
                             </h2>
-                            <ul className={styles.ingredientsList}>
-                                { block.items.map((item, i) =>
-                                    ( <li key={i}>
-                                        <ItemCart 
-                                            name={item.name}
-                                            price={item.price}
-                                            image={item.image}/>
-                                    </li>)) }
+                            <ul className={`${styles.ingredientsList} pl-4 pr-4`}>
+                                { block.items.map((item, i) => (
+                                    <ItemCart 
+                                        name={item.name}
+                                        price={item.price}
+                                        image={item.image}
+                                        key={i} />
+                                    )) }
                             </ul>
                         </section>
                     )

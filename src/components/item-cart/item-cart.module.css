@@ -1,0 +1,15 @@
+.itemCart{
+    display: grid;
+    justify-content: center;
+}
+.price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 9px;
+}
+.name{
+    display: block;
+    height: calc(var(--space) * 12);
+    text-align: center;
+}
