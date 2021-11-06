@@ -1,5 +1,21 @@
 .burgerIngredients{
-    width: 50%;
+    width: 50%;    
+}
+.ingredients{
+    max-height: calc(var(--space) * 179);
+    display: grid;
+    row-gap: calc(var(--space) * 10);    
+    overflow: auto;
+    scrollbar-width: thin;
+}
+.ingredients::-webkit-scrollbar {
+    width: calc(var(--space) * 2);
+}    
+::-webkit-scrollbar-track {
+    background-color: var(--input-color);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--text-dark-grey);
 }
 .ingredientsList{
     display: grid;

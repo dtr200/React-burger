@@ -32,6 +32,8 @@ body {
   --text-main-white: #ffffff;
   --text-primary-light : #f2f2f3;
   --text-dark-grey: #8585AD;
+  /* Other colors */
+  --input-color: #2F2F37;
 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

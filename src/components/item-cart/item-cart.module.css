@@ -1,6 +1,7 @@
 .itemCart{
     display: grid;
     justify-content: center;
+    position: relative;
 }
 .price{
     display: flex;

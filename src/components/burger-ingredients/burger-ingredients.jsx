@@ -8,13 +8,14 @@ import styles from './burger-ingredients.module.css';
 class BurgerIngredients extends Component {
 
     state = {
-        tab: 'Булки'
+        tab: 'Булки',
+        selected: []
     }
 
     dict = {
-        bun: 'Булки',
-        main: 'Начинки',
-        sauce: 'Соусы'
+        bun: 'Булки',        
+        sauce: 'Соусы',
+        main: 'Начинки'
     }
 
     createIngredientsBlocks = () => {
@@ -30,16 +31,16 @@ class BurgerIngredients extends Component {
         return blocks;
     }
 
-    getTabs = () => {
-        const { data } = this.props;
-        return Array.from(
-            new Set(
-                data.map(item => 
-                    this.dict[item.type])));
-    }
+    getTabs = () => 
+        Object.values(this.dict);
 
     onTabClick = (title) => {
         this.setState({ tab: title });
+    }
+
+    onSelected = (e) => {
+        const id = e.target.parentNode.dataset.id;
+        console.log(id)
     }
 
     render(){        
@@ -54,24 +55,29 @@ class BurgerIngredients extends Component {
                     clickHandler={this.onTabClick}
                     getTabs={this.getTabs}
                     active={tab} />
-                { blocks.map((block, i) => {
-                    return (
-                        <section key={i}>
-                            <h2 className={`text text_type_main-medium mt-10 mb-6`}>
-                                { this.dict[block.title] }
-                            </h2>
-                            <ul className={`${styles.ingredientsList} pl-4 pr-4`}>
-                                { block.items.map((item, i) => (
-                                    <ItemCart 
-                                        name={item.name}
-                                        price={item.price}
-                                        image={item.image}
-                                        key={i} />
-                                    )) }
-                            </ul>
-                        </section>
-                    )
-                }) }
+                <section className={styles.ingredients}>
+                    { blocks.map((block, i) => {
+                        return (
+                            <section key={i}>
+                                <h2 className={`text text_type_main-medium mb-6`} 
+                                    id={block.title}>
+                                    { this.dict[block.title] }
+                                </h2>
+                                <ul className={`${styles.ingredientsList} pl-4 pr-4`}>
+                                    { block.items.map((item, i) => (
+                                        <ItemCart 
+                                            id={item._id}
+                                            name={item.name}
+                                            price={item.price}
+                                            image={item.image}
+                                            selectItem={this.onSelected}
+                                            key={i} />
+                                        )) }
+                                </ul>
+                            </section>
+                        )
+                    }) }
+                </section>                
             </section>
         )
     }
