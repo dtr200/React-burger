@@ -15,10 +15,10 @@ const NavButton = ({ title, logo, type, view }) => {
     const spanStyle = `${styles.title} pl-2 ${view ? styles.active : ''}`;
     
     return (
-        <button className={`${styles.navButton} pl-5 pr-5 pt-4 pb-4`}>
+        <a href='#' className={`${styles.navButton} pl-5 pr-5 pt-4 pb-4`}>
             {dict[logo]()}
             <span className={spanStyle}>{title}</span>
-        </button>
+        </a>
     )
 }
 
