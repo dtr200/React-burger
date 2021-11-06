@@ -1,7 +1,10 @@
 .burgerIngredients{
-    color: white;
+    width: 50%;
 }
 .ingredientsList{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: calc(var(--space) * 6);
+    row-gap: calc(var(--space) * 8);
     list-style-type: none;
-    padding-left: 0;
 }

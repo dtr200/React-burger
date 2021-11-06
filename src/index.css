@@ -23,7 +23,8 @@ body {
   --space: 4px;
   /* Width */
   --max-width-desktop: 1920px;
-  --max-content-width-desktop: 1280px;
+  --max-header-width-desktop: 1280px;
+  --max-content-width-desktop: 1240px;
   /* Background*/
   --main-background: #131316;
   --header-background: #1C1C21;

@@ -10,7 +10,7 @@ class BurgerConstructor extends Component {
     render(){
         const { data } = this.props;
         return(
-            <section className={`${styles.burgerConstructor} pt-25`}>
+            <section className={`${styles.burgerConstructor} pt-25 pl-4 pr-4`}>
                 <ul className={styles.list}>
                     {
                         data.map((slice, i) => {   

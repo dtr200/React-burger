@@ -5,7 +5,7 @@
 }
 .appHeaderContainer{
     width: 100%;
-    max-width: var(--max-content-width-desktop);
+    max-width: var(--max-header-width-desktop);
     display: flex;
     justify-content: space-between;
     align-items: center;
