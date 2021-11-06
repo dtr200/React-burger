@@ -1,0 +1,5 @@
+.main{
+    display: flex;
+    justify-content: center;
+    column-gap: calc(var(--space) * 10);
+}
