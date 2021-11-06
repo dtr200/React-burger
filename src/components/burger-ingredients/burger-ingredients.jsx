@@ -1,53 +1,77 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { ConstructorElement, DragIcon } from 
-    '@ya.praktikum/react-developer-burger-ui-components';
+import IngredientsNav from "../ingredients-nav/ingredients-nav";
+import ItemCart from '../item-cart/item-cart';
 
 import styles from './burger-ingredients.module.css';
 
 class BurgerIngredients extends Component {
 
-    render(){
+    state = {
+        tab: 'Булки'
+    }
+
+    dict = {
+        bun: 'Булки',
+        main: 'Начинки',
+        sauce: 'Соусы'
+    }
+
+    createIngredientsBlocks = () => {
         const { data } = this.props;
+        const blocks = [];
+
+        for(let key in this.dict){
+            const item = { title: key };
+            item.items = data.filter(elem => 
+                elem.type === key)
+            blocks.push(item);
+        }
+        return blocks;
+    }
+
+    getTabs = () => {
+        const { data } = this.props;
+        return Array.from(
+            new Set(
+                data.map(item => 
+                    this.dict[item.type])));
+    }
+
+    onTabClick = (title) => {
+        this.setState({ tab: title });
+    }
+
+    render(){        
+        const { tab } = this.state;
+        const blocks = this.createIngredientsBlocks();
         return(
-            <section className={`${styles.burgerIngredients} pt-25`}>
-                <ul className={styles.list}>
-                    {
-                        data.map((slice, i) => {   
-
-                            let { name, price, image } = slice;
-                            let type, isLocked;                            
-
-                            if(i === 0){
-                                type = 'top';
-                                name += ' (верх)';
-                                isLocked = true;
-                            }                
-                            else if(i === data.length - 1){
-                                type = 'bottom';
-                                name += ' (низ)';
-                                isLocked = true;
-                            }  
-
-                            const settings = (i !== 0 && i !== data.length - 1) && 
-                                    <DragIcon type={"primary"} />
-
-                            return (
-                                <li className={styles.listItem} key={i}>
-                                    <div className={styles.settings}>
-                                        { settings }
-                                    </div>
-                                    <ConstructorElement 
-                                        text={name}
-                                        type={type}
-                                        isLocked={isLocked}
-                                        price={price}
-                                        thumbnail={image} />
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+            <section className={styles.burgerIngredients}>
+                <h1 className={`mt-10 mb-5 text text_type_main-large`}>
+                    Соберите бургер
+                </h1>
+                <IngredientsNav 
+                    clickHandler={this.onTabClick}
+                    getTabs={this.getTabs}
+                    active={tab} />
+                { blocks.map((block, i) => {
+                    return (
+                        <section key={i}>
+                            <h2 className={`text text_type_main-medium`}>
+                                { this.dict[block.title] }
+                            </h2>
+                            <ul className={styles.ingredientsList}>
+                                { block.items.map((item, i) =>
+                                    ( <li key={i}>
+                                        <ItemCart 
+                                            name={item.name}
+                                            price={item.price}
+                                            image={item.image}/>
+                                    </li>)) }
+                            </ul>
+                        </section>
+                    )
+                }) }
             </section>
         )
     }
