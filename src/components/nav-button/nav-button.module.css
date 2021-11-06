@@ -5,7 +5,6 @@
     text-decoration: none;
 }
 .title{
-    font-family: 'JetBrainsMono', Arial, sans-serif;
     font-size: calc(var(--space) * 4);
     line-height: calc(var(--space) * 6);
     color: var(--text-dark-grey);
