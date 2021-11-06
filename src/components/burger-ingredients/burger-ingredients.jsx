@@ -9,22 +9,23 @@ class BurgerIngredients extends Component {
 
     render(){
         const { data } = this.props;
-        console.log(data)
         return(
             <section className={`${styles.burgerIngredients} pt-25`}>
                 <ul className={styles.list}>
                     {
-                        data.map((slice, i) => {    
+                        data.map((slice, i) => {   
 
-                            const { name, price, image } = slice;
+                            let { name, price, image } = slice;
                             let type, isLocked;                            
 
                             if(i === 0){
                                 type = 'top';
+                                name += ' (верх)';
                                 isLocked = true;
                             }                
                             else if(i === data.length - 1){
                                 type = 'bottom';
+                                name += ' (низ)';
                                 isLocked = true;
                             }  
 
