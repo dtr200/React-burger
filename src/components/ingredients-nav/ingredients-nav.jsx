@@ -9,21 +9,19 @@ class IngredientsNav extends Component {
     tabs = this.props.getTabs();
 
     render(){
-        const { active } = this.props;
+        const { active, clickHandler } = this.props;
 
         return(
             <nav>
-                <ul className={styles.list}>
-                    {
-                        this.tabs.map((tab, i) => (
-                            <li key={i}>
-                                <Tab value={tab} 
-                                    active={tab === active}
-                                    onClick={this.props.clickHandler}>
-                                    {tab}
-                                </Tab>
-                            </li>))
-                    }
+                <ul className={`${styles.list} mb-10`}>
+                    { this.tabs.map((tab, i) => (
+                        <li key={i}>
+                            <Tab value={tab} 
+                                active={tab === active}
+                                onClick={clickHandler}>
+                                {tab}
+                            </Tab>
+                        </li>)) }
                 </ul>
             </nav>
         )
