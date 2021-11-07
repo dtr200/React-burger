@@ -18,6 +18,9 @@
 .list::-webkit-scrollbar-thumb {
     background-color: var(--text-dark-grey);
 }
+.bun{
+    padding-left: calc(var(--space) * 8);
+}
 .listItem{
     display: flex;
     align-items: center;
