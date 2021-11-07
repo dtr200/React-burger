@@ -14,3 +14,6 @@
     height: calc(var(--space) * 12);
     text-align: center;
 }
+.image{
+    margin: 0 auto;
+}

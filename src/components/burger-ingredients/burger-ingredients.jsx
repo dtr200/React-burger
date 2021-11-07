@@ -63,7 +63,7 @@ class BurgerIngredients extends Component {
                                     id={block.title}>
                                     { this.dict[block.title] }
                                 </h2>
-                                <ul className={`${styles.ingredientsList} pl-4 pr-2`}>
+                                <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
                                     { block.items.map((item, i) => (
                                         <ItemCart 
                                             id={item._id}
