@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM  from "react-dom";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,40 +8,39 @@ import styles from './burger-constructor.module.css';
 
 class BurgerConstructor extends Component {
 
+    getBun = (item, position, descr) => {
+        return (
+            <li className={styles.listItem}>
+                <ConstructorElement 
+                    text={`${item.name} ${descr}`}
+                    type={position}
+                    isLocked={true}
+                    price={item.price}
+                    thumbnail={item.image} />
+            </li>
+        )
+    }
+
     render(){
         const { data } = this.props;
+        const bun = data.shift();
+        data.sort((a, b) => b._id - a._id)
         return(
-            <section className={`${styles.burgerConstructor} pt-25 pl-4 pr-4`}>
-                <ul className={styles.list}>
+            <section className={`${styles.burgerConstructor} pt-25 pl-4`}> 
+                <ul className={`mt-0 pr-4`}>
+                    {this.getBun(bun, 'top', '(верх)')}
+                </ul>               
+                <ul className={`${styles.list} pr-2`}>
                     {
-                        data.map((slice, i) => {   
-
-                            let { name, price, image } = slice;
-                            let type, isLocked;                            
-
-                            if(i === 0){
-                                type = 'top';
-                                name += ' (верх)';
-                                isLocked = true;
-                            }                
-                            else if(i === data.length - 1){
-                                type = 'bottom';
-                                name += ' (низ)';
-                                isLocked = true;
-                            }  
-
-                            const settings = (i !== 0 && i !== data.length - 1) && 
-                                    <DragIcon type={"primary"} />
-
+                        data.map((slice, i) => {
+                            let { name, price, image } = slice; 
                             return (
                                 <li className={styles.listItem} key={i}>
                                     <div className={styles.settings}>
-                                        { settings }
+                                        <DragIcon type={"primary"} />
                                     </div>
                                     <ConstructorElement 
                                         text={name}
-                                        type={type}
-                                        isLocked={isLocked}
                                         price={price}
                                         thumbnail={image} />
                                 </li>
@@ -48,9 +48,14 @@ class BurgerConstructor extends Component {
                         })
                     }
                 </ul>
+                <ul className={`pr-4`}>
+                    {this.getBun(bun, 'bottom', '(низ)')}
+                </ul>
                 <div className={`${styles.total} text text_type_digits-medium pt-10`}>
-                    <span className={styles.totalPrice}>610</span>
-                    <CurrencyIcon type="primary" />
+                    <div className={styles.totalPriceBlock}>
+                        <span className={styles.totalPrice}>610</span>
+                        <CurrencyIcon type="primary" />
+                    </div>
                     <Button type="primary" size="large">
                         Оформить заказ
                     </Button>
