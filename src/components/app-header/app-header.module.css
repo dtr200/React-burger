@@ -2,6 +2,7 @@
     max-width: var(--max-width-desktop);
     background-color: var(--header-background);
     margin: 0 auto;
+    margin-top:40px;
 }
 .appHeaderContainer{
     width: 100%;

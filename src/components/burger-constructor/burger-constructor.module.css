@@ -2,7 +2,7 @@
     width: 50%;
 }
 .list{
-    height: 368px;
+    max-height: 34.074vh;
     overflow: auto;
     display: grid;
     row-gap: calc(var(--space) * 4);
