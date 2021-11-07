@@ -2,10 +2,21 @@
     width: 50%;
 }
 .list{
+    height: 368px;
+    overflow: auto;
     display: grid;
     row-gap: calc(var(--space) * 4);
     list-style-type: none;
     padding-left: 0;
+}
+.list::-webkit-scrollbar {
+    width: calc(var(--space) * 2);
+}    
+.list::-webkit-scrollbar-track {
+    background-color: var(--input-color);
+}
+.list::-webkit-scrollbar-thumb {
+    background-color: var(--text-dark-grey);
 }
 .listItem{
     display: flex;
@@ -21,6 +32,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    column-gap: calc(var(--space) * 10);
 }
 .totalPrice{
     margin-right: 9.5px;
