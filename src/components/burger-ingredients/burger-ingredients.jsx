@@ -47,7 +47,7 @@ class BurgerIngredients extends Component {
         const { tab } = this.state;
         const blocks = this.createIngredientsBlocks();
         return(
-            <section className={`${styles.burgerIngredients} pr-4`}>
+            <section className={`${styles.burgerIngredients}`}>
                 <h1 className={`mt-10 mb-5 text text_type_main-large`}>
                     Соберите бургер
                 </h1>
@@ -63,7 +63,7 @@ class BurgerIngredients extends Component {
                                     id={block.title}>
                                     { this.dict[block.title] }
                                 </h2>
-                                <ul className={`${styles.ingredientsList} pl-4 pr-4`}>
+                                <ul className={`${styles.ingredientsList} pl-4 pr-2`}>
                                     { block.items.map((item, i) => (
                                         <ItemCart 
                                             id={item._id}

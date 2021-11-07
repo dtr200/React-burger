@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { ConstructorElement, DragIcon } from 
+import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-constructor.module.css';
@@ -48,6 +48,13 @@ class BurgerConstructor extends Component {
                         })
                     }
                 </ul>
+                <div className={`${styles.total} text text_type_digits-medium pt-10`}>
+                    <span className={styles.totalPrice}>610</span>
+                    <CurrencyIcon type="primary" />
+                    <Button type="primary" size="large">
+                        Оформить заказ
+                    </Button>
+                </div>
             </section>
         )
     }
