@@ -17,3 +17,11 @@
     display: flex;
     align-items: center;
 }
+.total{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.totalPrice{
+    margin-right: 9.5px;
+}
