@@ -2,7 +2,7 @@
     width: 50%;    
 }
 .ingredients{
-    max-height: calc(var(--space) * 179);
+    max-height: 66.2963vh;
     display: grid;
     row-gap: calc(var(--space) * 10);    
     overflow: auto;
