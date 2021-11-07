@@ -2,7 +2,7 @@
     width: 50%;
 }
 .list{
-    max-height: 34.074vh;
+    max-height: 48vh;
     overflow: auto;
     display: grid;
     row-gap: calc(var(--space) * 4);
@@ -21,6 +21,12 @@
 .bun{
     padding-left: calc(var(--space) * 8);
 }
+.bunTop{
+    margin-top: 0;
+}
+.bunBottom{
+    margin-bottom: 0;
+}
 .listItem{
     display: flex;
     align-items: center;
@@ -36,6 +42,10 @@
     justify-content: flex-end;
     align-items: center;
     column-gap: calc(var(--space) * 10);
+}
+.total svg{
+    width: 33px;
+    height: 33px;
 }
 .totalPrice{
     margin-right: 9.5px;

@@ -27,7 +27,7 @@ class BurgerConstructor extends Component {
         data.sort((a, b) => b._id - a._id)
         return(
             <section className={`${styles.burgerConstructor} pt-25 pl-4`}> 
-                <ul className={`${styles.bun} mt-0 pr-4`}>
+                <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
                     {this.getBun(bun, 'top', '(верх)')}
                 </ul>               
                 <ul className={`${styles.list} pr-2`}>
@@ -48,10 +48,10 @@ class BurgerConstructor extends Component {
                         })
                     }
                 </ul>
-                <ul className={`${styles.bun} pr-4`}>
+                <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
                     {this.getBun(bun, 'bottom', '(низ)')}
                 </ul>
-                <div className={`${styles.total} text text_type_digits-medium pt-10`}>
+                <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                     <div className={styles.totalPriceBlock}>
                         <span className={styles.totalPrice}>610</span>
                         <CurrencyIcon type="primary" />
