@@ -10,13 +10,13 @@ const Auth = (props) => {
     )
 }
 
-const authShapeProps = PropTypes.shape({
+const authShapeTypes = PropTypes.shape({
     title: PropTypes.string.isRequired, 
     logo: PropTypes.string.isRequired, 
     type: PropTypes.string.isRequired, 
     view: PropTypes.bool.isRequired 
 });
 
-Auth.propTypes = authShapeProps.isRequired;
+Auth.propTypes = authShapeTypes.isRequired;
 
 export default Auth;
