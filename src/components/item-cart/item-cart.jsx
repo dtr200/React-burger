@@ -1,9 +1,12 @@
 import React from "react";
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types';
+import { Counter, CurrencyIcon } from 
+    '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './item-cart.module.css';
 
-const ItemCart = ({ id, name, price, image, selectItem }) => {
+const ItemCart = ({ id, name, price, image }) => {
+    
     const dict = {
         "Флюоресцентная булка R2-D3": true,
         "Соус Spicy-X": true,
@@ -12,7 +15,7 @@ const ItemCart = ({ id, name, price, image, selectItem }) => {
     }
 
     return(
-        <li className={styles.itemCart} onClick={selectItem} data-id={id}>
+        <li className={styles.itemCart} data-id={id}>
             <img src={image} className={styles.image} alt={name} />
             { !dict[name] && <Counter count={1} size="default" />}
             <span className={`${styles.price} text text_type_digits-default mt-2 mb-2`}>
@@ -24,6 +27,13 @@ const ItemCart = ({ id, name, price, image, selectItem }) => {
             </span>
         </li>
     )
+}
+
+ItemCart.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired, 
+    image: PropTypes.string.isRequired
 }
 
 export default ItemCart;
