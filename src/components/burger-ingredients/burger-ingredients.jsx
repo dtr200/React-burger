@@ -15,7 +15,7 @@ const BurgerIngredients = ({ data }) => {
         main: 'Начинки'
     }
 
-    const createIngredientsBlocks = () => {
+    const createIngredientsBlocks = () => {        
         const blocks = [];
 
         for(let key in dict){
@@ -34,7 +34,7 @@ const BurgerIngredients = ({ data }) => {
         setTab(title);
        
     const blocks = createIngredientsBlocks();
-
+    
     return (
         <section className={`${styles.burgerIngredients}`}>
             <h1 className={`mt-10 mb-5 text text_type_main-large`}>
@@ -44,7 +44,7 @@ const BurgerIngredients = ({ data }) => {
                 clickHandler={onTabClick}
                 getTabs={getTabs}
                 active={tab} />
-            <section className={styles.ingredients}>
+                <section className={styles.ingredients}>
                 { blocks.map((block, i) => {
                     return (
                         <section key={block.items[0]._id + i}>
@@ -65,7 +65,7 @@ const BurgerIngredients = ({ data }) => {
                         </section>
                     )
                 }) }
-            </section>                
+            </section>            
         </section>
     )
 }

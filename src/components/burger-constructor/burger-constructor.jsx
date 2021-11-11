@@ -20,19 +20,21 @@ const BurgerConstructor = ({ data }) => {
             </li>
         )
     }
-
-    const bun = data.shift();
+    const bun = data.find(item => 
+        item.name === 'Краторная булка N-200i');
     data.sort((a, b) => b._id - a._id);
 
     return(
-        <section className={`${styles.burgerConstructor} pt-25 pl-4`}> 
+        <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
                 {getBun(bun, 'top', '(верх)')}
-            </ul>               
+            </ul>      
             <ul className={`${styles.list} pr-2`}>
                 {
                     data.map((slice, i) => {
-                        let { name, price, image } = slice; 
+                        let { name, price, image, type } = slice; 
+                        if(type === 'bun') return;
+                        
                         return (
                             <li className={styles.listItem} key={i}>
                                 <div className={styles.settings}>

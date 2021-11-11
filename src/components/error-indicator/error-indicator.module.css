@@ -1,0 +1,5 @@
+.errorIndicator{
+    height: calc(100vh - 88px);
+    display: flex;
+    align-items: center;
+}
