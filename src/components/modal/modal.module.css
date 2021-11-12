@@ -8,8 +8,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.modal svg{
-    position: absolute;
-    top: calc(var(--space) * 10);
-    right: calc(var(--space) * 10)
+.titleContainer{
+    display: flex;
+    align-items: center;
 }
