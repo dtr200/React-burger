@@ -1,0 +1,17 @@
+.modal{
+    background-color: var(--header-background);
+    border-radius: calc(var(--space) * 10);
+    height: fit-content;
+    position: relative;
+}
+.modal svg{
+    position: absolute;
+    top: calc(var(--space) * 10);
+    right: calc(var(--space) * 10)
+}
+.title{
+
+}
+.description{
+    
+}

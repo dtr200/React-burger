@@ -4,6 +4,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import ErrorIndicator from '../error-indicator/error-indicator';
 import Spinner from '../spinner/spinner';
+import Modal from '../modal/modal';
 
 import styles from './app.module.css';
 
@@ -41,6 +42,7 @@ const App = () => {
           <>
             <BurgerIngredients data={data} />
             <BurgerConstructor data={data}/>
+            <Modal />
           </>
         }
       </main>
