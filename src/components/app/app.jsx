@@ -42,7 +42,7 @@ const App = () => {
           <>
             <BurgerIngredients data={data} />
             <BurgerConstructor data={data}/>
-            <Modal />
+            <Modal title={'fdf'}>Алплп</Modal>
           </>
         }
       </main>

@@ -5,11 +5,12 @@ import { CloseIcon } from
 
 import styles from './modal.module.css';
 
-const Modal = (props) => {
+const Modal = ({ title, children }) => {
     return (
         <div className={`${styles.modal} p-10 pb-15`}>
+            <h3 className='text text_type_main-medium pr-15'>{ title }</h3>
             <CloseIcon type="primary" />
-            { props.children }
+            { children }
         </div>
     )
 }
