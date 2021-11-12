@@ -8,17 +8,23 @@ import styles from './modal.module.css';
 
 const root = document.getElementById('react-modals');
 
-const Modal = ({ title, children }) => {
+const Modal = ({ title, onClose, children }) => {
+
+    const handleKeyPress = (e) => {
+        if(e.key === 'Escape')
+            onClose();
+    }
+
     const content = (
         <>
-            <ModalOverlay />
-            <div className={`${styles.modal} p-10 pb-15`}>
-                
+            <ModalOverlay onClose={onClose} />
+            <div className={`${styles.modal} p-10 pb-15`} 
+                 onKeyDown={handleKeyPress} tabIndex='0'>                
                 <div className={styles.titleContainer}>
                     <h3 className='text text_type_main-medium pr-15'>
                         { title }
                     </h3>
-                    <CloseIcon type="primary" />
+                    <CloseIcon onClick={onClose} type="primary" />
                 </div>            
                 { children }
             </div>

@@ -15,6 +15,15 @@ const App = () => {
   const [ data, setData ] = useState([]);
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(true);
+  const [ modalVisible, setModal ] = useState(true);
+
+  const handleOpenModal = () => {
+    setModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setModal(false);
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -42,7 +51,9 @@ const App = () => {
           <>
             <BurgerIngredients data={data} />
             <BurgerConstructor data={data}/>
-            <Modal></Modal>
+            { modalVisible && <Modal title={'ghghhg'} onClose={handleCloseModal}>
+              Модал открыт
+            </Modal>}
           </>
         }
       </main>
