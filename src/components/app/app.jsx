@@ -5,6 +5,8 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import ErrorIndicator from '../error-indicator/error-indicator';
 import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 import styles from './app.module.css';
 
@@ -16,6 +18,8 @@ const App = () => {
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(true);
   const [ modalVisible, setModal ] = useState(true);
+  const [ modalData, setModalData ] = 
+    useState({ type: 'ingredient', data: null });
 
   const handleOpenModal = () => {
     setModal(true);
@@ -42,6 +46,9 @@ const App = () => {
     getData();
   }, []);
 
+  const modalChildren = modalData.type === 'ingredient' ? 
+    <IngredientDetails /> : <OrderDetails />;
+
   return (
     <div className="App">
       <AppHeader />
@@ -50,10 +57,11 @@ const App = () => {
           loading ? <Spinner /> : 
           <>
             <BurgerIngredients data={data} />
-            <BurgerConstructor data={data}/>
-            { modalVisible && <Modal title={'ghghhg'} onClose={handleCloseModal}>
-              Модал открыт
-            </Modal>}
+            <BurgerConstructor data={data} />
+            { modalVisible &&
+            <Modal title={'Детали ингредиента'} onClose={handleCloseModal}>
+              { modalChildren }
+            </Modal> }
           </>
         }
       </main>
