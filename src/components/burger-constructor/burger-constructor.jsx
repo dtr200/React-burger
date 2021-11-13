@@ -5,7 +5,10 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
 
 import styles from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ data }) => {
+const BurgerConstructor = ({ data, onOpen }) => {
+
+    const onTotalClick = () =>
+        onOpen({ type: 'order', id: null });
 
     const getBun = (item, position, descr) => {
 
@@ -57,7 +60,7 @@ const BurgerConstructor = ({ data }) => {
                     <span className={styles.totalPrice}>610</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={onTotalClick}>
                     Оформить заказ
                 </Button>
             </div>

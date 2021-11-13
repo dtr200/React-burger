@@ -11,18 +11,28 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import styles from './app.module.css';
 
 const url = 'https://norma.nomoreparties.space/api/ingredients';
+const orderData = {
+
+}
 
 const App = () => {
 
   const [ data, setData ] = useState([]);
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(true);
-  const [ modalVisible, setModal ] = useState(false);
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
+  const [ modalVisible, setModal ] = useState(false);
 
-  const handleOpenModal = ({ type, id }) => {
-    if(!id) return;
+  const handleOpenModal = ({ type, id }) => {    
+    if(type === 'ingredient' && id){
+      const currentItemData = data.find(item => item._id === id);
+      setModalData({ type, data: currentItemData });
+      console.log(modalData)
+    }
+    else{
+      console.log('else')
+    }
     setModal(true);
   }
 
@@ -48,7 +58,7 @@ const App = () => {
   }, []);
 
   const modalChildren = modalData.type === 'ingredient' ? 
-    <IngredientDetails /> : <OrderDetails />;
+    <IngredientDetails { ...modalData.data } /> : <OrderDetails />;
 
   return (
     <div className="App">
