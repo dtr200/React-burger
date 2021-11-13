@@ -1,12 +1,16 @@
 import React from "react";
-import { CloseIcon } from 
-    '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './order-details.module.css';
 
-const OrderDetails = (props) => {
+const OrderDetails = ({ num, image, description, extra }) => {
     return (
-        <div>Разметка заказа</div>
+        <>
+            <div className={styles.num}>{num}</div>
+            <p className={``}>идентификатор заказа</p>
+            <img src={image} alt={description} />
+            <div className={styles.description}>{description}</div>
+            <div className={styles.wait}>{extra}</div>
+        </>
     );
 }
 

@@ -12,7 +12,10 @@ import styles from './app.module.css';
 
 const url = 'https://norma.nomoreparties.space/api/ingredients';
 const orderData = {
-
+  num: '034536',
+  image: '../../images/done.png',
+  description: 'Ваш заказ начали готовить', 
+  extra: 'Дождитесь готовности на орбитальной станции'
 }
 
 const App = () => {
@@ -27,11 +30,10 @@ const App = () => {
   const handleOpenModal = ({ type, id }) => {    
     if(type === 'ingredient' && id){
       const currentItemData = data.find(item => item._id === id);
-      setModalData({ type, data: currentItemData });
-      console.log(modalData)
+      setModalData({ type, title: 'Детали ингредиента', data: currentItemData });
     }
     else{
-      console.log('else')
+      setModalData({ type, title: '', data: orderData });
     }
     setModal(true);
   }
@@ -58,7 +60,8 @@ const App = () => {
   }, []);
 
   const modalChildren = modalData.type === 'ingredient' ? 
-    <IngredientDetails { ...modalData.data } /> : <OrderDetails />;
+    <IngredientDetails { ...modalData.data } /> : 
+    <OrderDetails { ...modalData.data }/>;
 
   return (
     <div className="App">
@@ -70,7 +73,7 @@ const App = () => {
             <BurgerIngredients data={data} onOpen={handleOpenModal} />
             <BurgerConstructor data={data} onOpen={handleOpenModal} />
             { modalVisible &&
-            <Modal title={'Детали ингредиента'} onClose={handleCloseModal}>
+            <Modal title={modalData.title} onClose={handleCloseModal}>
               { modalChildren }
             </Modal> }
           </>
