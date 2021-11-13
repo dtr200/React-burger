@@ -5,7 +5,7 @@ import ItemCart from '../item-cart/item-cart';
 
 import styles from './burger-ingredients.module.css';
 
-const BurgerIngredients = ({ data }) => {
+const BurgerIngredients = ({ data, onOpen }) => {
 
     const [ tab, setTab ] = useState('Булки');
 
@@ -32,6 +32,12 @@ const BurgerIngredients = ({ data }) => {
 
     const onTabClick = (title) =>
         setTab(title);
+
+    const onItemClick = (e) => {
+        const li = e.target.closest('li'),
+              id = li ? li.dataset.id : null;
+        onOpen({ type: 'ingredient', id });
+    }
        
     const blocks = createIngredientsBlocks();
     
@@ -47,7 +53,7 @@ const BurgerIngredients = ({ data }) => {
                 <section className={styles.ingredients}>
                 { blocks.map((block, i) => {
                     return (
-                        <section key={block.items[0]._id + i}>
+                        <section key={block.items[0]._id + i} onClick={onItemClick}>
                             <h2 className={`text text_type_main-medium mb-6`} 
                                 id={block.title}>
                                 { dict[block.title] }

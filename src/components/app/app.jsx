@@ -17,11 +17,12 @@ const App = () => {
   const [ data, setData ] = useState([]);
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(true);
-  const [ modalVisible, setModal ] = useState(true);
+  const [ modalVisible, setModal ] = useState(false);
   const [ modalData, setModalData ] = 
-    useState({ type: 'ingredient', data: null });
+    useState({ type: null, data: null });
 
-  const handleOpenModal = () => {
+  const handleOpenModal = ({ type, id }) => {
+    if(!id) return;
     setModal(true);
   }
 
@@ -56,8 +57,8 @@ const App = () => {
         { hasError ? <ErrorIndicator /> :
           loading ? <Spinner /> : 
           <>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
+            <BurgerIngredients data={data} onOpen={handleOpenModal} />
+            <BurgerConstructor data={data} onOpen={handleOpenModal} />
             { modalVisible &&
             <Modal title={'Детали ингредиента'} onClose={handleCloseModal}>
               { modalChildren }
