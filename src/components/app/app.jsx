@@ -13,7 +13,6 @@ import styles from './app.module.css';
 const url = 'https://norma.nomoreparties.space/api/ingredients';
 const orderData = {
   num: '034536',
-  image: '../../images/done.png',
   description: 'Ваш заказ начали готовить', 
   extra: 'Дождитесь готовности на орбитальной станции'
 }
