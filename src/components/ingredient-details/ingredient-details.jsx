@@ -4,8 +4,8 @@ import Fact from '../fact/fact';
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = (props) => {
-    
-    const { name, image } = props;
+    console.log(props)
+    const { name, image_large: image } = props;
 
     const dict = {
         calories: 'Калории,ккал',
@@ -29,8 +29,10 @@ const IngredientDetails = (props) => {
             <img src={image} className={styles.image} alt={name} />
             <p className={`${styles.name}`}>{name}</p>
             <div className={styles.nutritionFacts}>
-                { createFactsArray().map(item => 
-                        <Fact { ...item} />) }
+                { createFactsArray().map((item, i) => {
+                    const num = i + Math.floor(Math.random() * 100);
+                    return <Fact { ...item} key={num} />
+                })}
             </div>
         </>
     );
