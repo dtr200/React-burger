@@ -1,5 +1,7 @@
 .modal{
+    width: 100%;
     max-width: calc(var(--space) * 180);
+    box-sizing: border-box;
     background-color: var(--header-background);
     border-radius: calc(var(--space) * 10);
     height: fit-content;
@@ -15,4 +17,5 @@
 .titleContainer{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
