@@ -14,14 +14,16 @@ const IngredientDetails = (props) => {
         carbohydrates: 'Углеводы, г'
     }
 
+    console.log(props)
+
     const createFactsArray = () => {
-        const result = [];
+        const items = [];
         for(let key in props){
             if(dict[key])
-                result.push({ title: dict[key],
+                items.push({ title: dict[key],
                               value: props[key] });
         }
-        return result;
+        return [ items.pop(), ...items.sort()];
     }
 
     return (
@@ -33,7 +35,8 @@ const IngredientDetails = (props) => {
             <div className={styles.nutritionFacts}>
                 { createFactsArray().map((item, i) => {
                     const num = i + Math.floor(Math.random() * 100);
-                    return <Fact { ...item} key={num} />
+                    const w = i === 0 ? 'wide' : 'normal';
+                    return <Fact { ...item} key={num} width={w} />
                 })}
             </div>
         </div>

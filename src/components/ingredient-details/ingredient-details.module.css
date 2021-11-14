@@ -1,6 +1,8 @@
 .ingredientDetails{
-    display: grid;
-    justify-content: center;
+    width: 100%;
+    max-width: calc(var(--space) * 129);
+    display: flex;
+    flex-direction: column;
 }
 .image{
     justify-self: center;
@@ -10,5 +12,5 @@
 }
 .nutritionFacts{
     display: flex;
-    justify-content: space-between;
+    column-gap: calc(var(--space) * 5);
 }
