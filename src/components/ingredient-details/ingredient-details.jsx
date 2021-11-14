@@ -27,7 +27,7 @@ const IngredientDetails = (props) => {
     return (
         <>
             <img src={image} className={styles.image} alt={name} />
-            <p className={`${styles.name}`}>{name}</p>
+            <p className={`${styles.name} text text_type_main-medium`}>{name}</p>
             <div className={styles.nutritionFacts}>
                 { createFactsArray().map((item, i) => {
                     const num = i + Math.floor(Math.random() * 100);

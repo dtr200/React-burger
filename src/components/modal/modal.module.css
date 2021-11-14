@@ -1,4 +1,5 @@
 .modal{
+    display: grid;
     width: 100%;
     max-width: calc(var(--space) * 180);
     box-sizing: border-box;
