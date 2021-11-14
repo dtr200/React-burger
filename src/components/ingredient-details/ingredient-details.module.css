@@ -1,6 +1,14 @@
+.ingredientDetails{
+    display: grid;
+    justify-content: center;
+}
 .image{
     justify-self: center;
 }
 .name{
     text-align: center;
+}
+.nutritionFacts{
+    display: flex;
+    justify-content: space-between;
 }
