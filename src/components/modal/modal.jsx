@@ -21,7 +21,7 @@ const Modal = ({ title, onClose, children }) => {
             <div className={`${styles.modal} p-10 pb-15`} 
                  onKeyDown={handleKeyPress} tabIndex='0'>                
                 <div className={styles.titleContainer}>
-                    <h3 className='text text_type_main-medium pr-15'>
+                    <h3 className='text text_type_main-large pr-15'>
                         { title }
                     </h3>
                     <CloseIcon onClick={onClose} type="primary" />
