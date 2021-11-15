@@ -22,6 +22,8 @@ const navShapeTypes = PropTypes.shape({
     view: PropTypes.bool.isRequired 
 });
 
-Nav.propTypes = navShapeTypes.isRequired;
+Nav.propTypes = {
+    items: PropTypes.arrayOf(navShapeTypes.isRequired)
+}
 
 export default Nav;
