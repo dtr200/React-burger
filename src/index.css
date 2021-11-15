@@ -34,6 +34,7 @@ body {
   --text-dark-grey: #8585AD;
   /* Other colors */
   --input-color: #2F2F37;
+  --blur: #4c4cff;
 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

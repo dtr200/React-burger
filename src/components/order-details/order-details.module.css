@@ -1,0 +1,16 @@
+.orderDetails{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: calc(var(--space) * 130);
+}
+.orderDetails * {
+    text-align: center;
+}
+.num{
+    text-shadow: 0 0 20px var(--blur);
+}
+.image{
+    max-width: calc(var(--space) * 30);
+    margin: calc(var(--space) * 15) auto calc(var(--space) * 15);
+}
