@@ -29,7 +29,7 @@ const IngredientDetails = (props) => {
     return (
         <div className={styles.ingredientDetails}>
             <img src={image} className={styles.image} alt={name} />
-            <p className={`${styles.name} text text_type_main-medium mt-2 mb-8`}>
+            <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
                 {name}
             </p>
             <div className={styles.nutritionFacts}>
