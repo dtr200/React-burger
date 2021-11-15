@@ -6,7 +6,6 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ data, onOpen }) => {
-
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 
@@ -83,7 +82,9 @@ const constructorShapeTypes = PropTypes.shape({
     __v: PropTypes.number.isRequired
 });
 
-BurgerConstructor.propTypes = 
-    PropTypes.arrayOf(constructorShapeTypes).isRequired;
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(constructorShapeTypes).isRequired,
+    onOpen: PropTypes.func.isRequired
+}    
 
 export default BurgerConstructor;
