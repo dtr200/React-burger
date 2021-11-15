@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import styles from './fact.module.css';
 
@@ -14,6 +15,12 @@ const Fact = ({ title, value, width }) => {
             </span>
         </div>
     );
+}
+
+Fact.propTypes = {
+    title: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    width: PropTypes.string.isRequired
 }
 
 export default Fact;
