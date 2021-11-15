@@ -1,10 +1,10 @@
 import React from "react";
 import Fact from '../fact/fact';
+import PropTypes from 'prop-types';
 
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = (props) => {
-    console.log(props)
     const { name, image_large: image } = props;
 
     const dict = {
@@ -13,8 +13,6 @@ const IngredientDetails = (props) => {
         fat: 'Жиры, г',
         carbohydrates: 'Углеводы, г'
     }
-
-    console.log(props)
 
     const createFactsArray = () => {
         const items = [];
@@ -34,13 +32,30 @@ const IngredientDetails = (props) => {
             </p>
             <div className={styles.nutritionFacts}>
                 { createFactsArray().map((item, i) => {
-                    const num = i + Math.floor(Math.random() * 100);
                     const w = i === 0 ? 'wide' : 'normal';
-                    return <Fact { ...item} key={num} width={w} />
+                    return <Fact { ...item} key={i + 'str'} width={w} />
                 })}
             </div>
         </div>
     );
 }
+
+const detailsShapeTypes = PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    calories: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    __v: PropTypes.number.isRequired
+});
+
+IngredientDetails.propTypes = detailsShapeTypes.isRequired;
+
 
 export default IngredientDetails;
