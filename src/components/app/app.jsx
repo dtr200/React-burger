@@ -26,20 +26,23 @@ const App = () => {
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
 
-  const handleOpenModal = ({ type, id }) => {    
+  const handleOpenModal = ({ type, id }) => {  
+    let title, currentData;
+
     if(type === 'ingredient' && id){
-      const currentItemData = data.find(item => item._id === id);
-      setModalData({ type, title: 'Детали ингредиента', data: currentItemData });
+      title = 'Детали ингредиента';
+      currentData = data.find(item => item._id === id);;
     }
     else{
-      setModalData({ type, title: '', data: orderData });
+      title = '';
+      currentData = orderData;
     }
+    setModalData({ type, title, data: currentData });
     setModal(true);
   }
 
-  const handleCloseModal = () => {
+  const handleCloseModal = () => 
     setModal(false);
-  }
 
   useEffect(() => {
     const getData = async () => {
