@@ -41,7 +41,7 @@ const App = () => {
     setModal(true);
   }
 
-  const handleCloseModal = () => 
+  const handleCloseModal = () =>
     setModal(false);
 
   useEffect(() => {

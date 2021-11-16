@@ -57,5 +57,4 @@ const detailsShapeTypes = PropTypes.shape({
 
 IngredientDetails.propTypes = detailsShapeTypes.isRequired;
 
-
 export default IngredientDetails;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import PropTypes from 'prop-types';
@@ -15,6 +15,12 @@ const Modal = ({ title, onClose, children }) => {
         if(e.key === 'Escape')
             onClose();
     }
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyPress);
+        return () => 
+            document.removeEventListener('keydown', handleKeyPress);
+    })
 
     const content = (
         <>
