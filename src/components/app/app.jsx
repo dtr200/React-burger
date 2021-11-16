@@ -31,7 +31,7 @@ const App = () => {
 
     if(type === 'ingredient' && id){
       title = 'Детали ингредиента';
-      currentData = data.find(item => item._id === id);;
+      currentData = data.find(item => item._id === id);
     }
     else{
       title = '';
@@ -61,10 +61,6 @@ const App = () => {
     getData();
   }, []);
 
-  const modalChildren = modalData.type === 'ingredient' ? 
-    <IngredientDetails { ...modalData.data } /> : 
-    <OrderDetails { ...modalData.data }/>;
-
   return (
     <div className="App">
       <AppHeader />
@@ -76,7 +72,11 @@ const App = () => {
             <BurgerConstructor data={data} onOpen={handleOpenModal} />
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
-              { modalChildren }
+              { 
+                modalData.type === 'ingredient' ? 
+                <IngredientDetails { ...modalData.data } /> : 
+                <OrderDetails { ...modalData.data }/> 
+              }
             </Modal> }
           </>
         }

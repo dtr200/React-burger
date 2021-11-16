@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import styles from './order-details.module.css';
 import done from '../../images/done.png';
 
-const OrderDetails = ({ num, description, extra }) => {
-
+const OrderDetails = (props) => {
+    console.log(props)
+    const { num, description, extra } = props;
     return (
         <div className={`${styles.orderDetails} text mt-4 mb-15`}>
             <div className={`${styles.num} text_type_digits-large`}>
