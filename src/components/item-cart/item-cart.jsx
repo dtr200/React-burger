@@ -8,20 +8,13 @@ import styles from './item-cart.module.css';
 const ItemCart = ({ id: itemId, name: itemName, 
                     price: itemPrice, image: itemImage,
                     pcs: pieces }) => {
-    
-    /* const dict = {
-        "Флюоресцентная булка R2-D3": true,
-        "Соус Spicy-X": true,
-        "Соус фирменный Space Sauce": true,
-        "Соус с шипами Антарианского плоскоходца": true
-    } */
 
     return(
         <li className={styles.itemCart} data-id={itemId}>
             <img src={itemImage} 
                  className={styles.image} 
                  alt={itemName} />
-            { pieces && <Counter count={pieces} size="default" /> }
+            { pieces !== 0 && <Counter count={pieces} size="default" /> }
             <span className={`${styles.price} text text_type_digits-default mt-2 mb-2`}>
                 { itemPrice }
                 <CurrencyIcon type="primary" />
