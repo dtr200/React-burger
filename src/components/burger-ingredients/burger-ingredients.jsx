@@ -40,7 +40,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
     }
        
     const blocks = createIngredientsBlocks();
-    
+
     return (
         <section className={`${styles.burgerIngredients}`}>
             <h1 className={`mt-10 mb-5 text text_type_main-large`}>
@@ -59,6 +59,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
                                 { dict[block.title] }
                             </h2>
                             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
+
                                 { block.items.map(item => {
                                     const productInCart = cart.find(product => 
                                         product.id === item._id);
@@ -96,6 +97,7 @@ const ingredientsShapeTypes = PropTypes.shape({
     type: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired
 });
+
 const cartShapeTypes = PropTypes.shape({
     id: PropTypes.string.isRequired,
     psc: PropTypes.number.isRequired

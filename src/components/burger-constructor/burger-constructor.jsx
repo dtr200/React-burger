@@ -22,6 +22,7 @@ const BurgerConstructor = ({ data, onOpen }) => {
             </li>
         )
     }
+
     const bun = data.find(item => 
         item.name === 'Краторная булка N-200i');
     data.sort((a, b) => b._id - a._id);
