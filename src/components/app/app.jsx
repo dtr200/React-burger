@@ -7,17 +7,19 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, ORDER_DATA } from '../../utils/constants';
+import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
+  '../../utils/constants';
 import styles from './app.module.css';
 
 const App = () => {
 
   const [ data, setData ] = useState([]);
+  const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(true);
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
-  const [ modalVisible, setModal ] = useState(false);
+  const [ modalVisible, setModal ] = useState(false);  
 
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
@@ -43,6 +45,7 @@ const App = () => {
         const res = await fetch(INGREDIENTS_URL);
         const json = await res.json();
         setData(json.data);
+        setCart(DEFAULT_CART);
         setLoading(false);
       }
       catch(err){
@@ -53,7 +56,7 @@ const App = () => {
 
     getData();
   }, []);
-
+  console.log(cart)
   return (
     <div className="App">
       <AppHeader />
@@ -61,8 +64,13 @@ const App = () => {
         { hasError ? <ErrorIndicator /> :
           loading ? <Spinner /> : 
           <>
-            <BurgerIngredients data={data} onOpen={handleOpenModal} />
-            <BurgerConstructor data={data} onOpen={handleOpenModal} />
+            <BurgerIngredients 
+              data={data} 
+              cart={cart} 
+              onOpen={handleOpenModal} />
+            <BurgerConstructor 
+              data={data} 
+              onOpen={handleOpenModal} />
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
               { 
