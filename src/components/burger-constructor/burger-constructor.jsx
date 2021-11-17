@@ -5,7 +5,9 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
 
 import styles from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ data }) => {
+const BurgerConstructor = ({ data, onOpen }) => {
+    const onTotalClick = () =>
+        onOpen({ type: 'order', id: null });
 
     const getBun = (item, position, descr) => {
 
@@ -21,18 +23,21 @@ const BurgerConstructor = ({ data }) => {
         )
     }
 
-    const bun = data.shift();
+    const bun = data.find(item => 
+        item.name === 'Краторная булка N-200i');
     data.sort((a, b) => b._id - a._id);
 
     return(
-        <section className={`${styles.burgerConstructor} pt-25 pl-4`}> 
+        <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
                 {getBun(bun, 'top', '(верх)')}
-            </ul>               
+            </ul>      
             <ul className={`${styles.list} pr-2`}>
                 {
                     data.map((slice, i) => {
-                        let { name, price, image } = slice; 
+                        let { name, price, image, type } = slice; 
+                        if(type === 'bun') return;
+                        
                         return (
                             <li className={styles.listItem} key={i}>
                                 <div className={styles.settings}>
@@ -55,7 +60,7 @@ const BurgerConstructor = ({ data }) => {
                     <span className={styles.totalPrice}>610</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={onTotalClick}>
                     Оформить заказ
                 </Button>
             </div>
@@ -78,7 +83,9 @@ const constructorShapeTypes = PropTypes.shape({
     __v: PropTypes.number.isRequired
 });
 
-BurgerConstructor.propTypes = 
-    PropTypes.arrayOf(constructorShapeTypes).isRequired;
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(constructorShapeTypes).isRequired,
+    onOpen: PropTypes.func.isRequired
+}    
 
 export default BurgerConstructor;

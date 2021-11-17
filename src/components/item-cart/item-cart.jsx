@@ -5,25 +5,22 @@ import { Counter, CurrencyIcon } from
 
 import styles from './item-cart.module.css';
 
-const ItemCart = ({ id, name, price, image }) => {
-    
-    const dict = {
-        "Флюоресцентная булка R2-D3": true,
-        "Соус Spicy-X": true,
-        "Соус фирменный Space Sauce": true,
-        "Соус с шипами Антарианского плоскоходца": true
-    }
+const ItemCart = ({ id: itemId, name: itemName, 
+                    price: itemPrice, image: itemImage,
+                    pcs: pieces }) => {
 
     return(
-        <li className={styles.itemCart} data-id={id}>
-            <img src={image} className={styles.image} alt={name} />
-            { !dict[name] && <Counter count={1} size="default" />}
+        <li className={styles.itemCart} data-id={itemId}>
+            <img src={itemImage} 
+                 className={styles.image} 
+                 alt={itemName} />
+            { pieces !== 0 && <Counter count={pieces} size="default" /> }
             <span className={`${styles.price} text text_type_digits-default mt-2 mb-2`}>
-                { price }
+                { itemPrice }
                 <CurrencyIcon type="primary" />
             </span>
             <span className={`${styles.name} text text_type_main-default`}>
-                { name }
+                { itemName }
             </span>
         </li>
     )
@@ -33,7 +30,8 @@ ItemCart.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired, 
-    image: PropTypes.string.isRequired
+    image: PropTypes.string.isRequired,
+    pcs: PropTypes.number.isRequired
 }
 
 export default ItemCart;

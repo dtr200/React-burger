@@ -2,6 +2,7 @@
     display: grid;
     justify-content: center;
     position: relative;
+    cursor: pointer;
 }
 .price{
     display: flex;

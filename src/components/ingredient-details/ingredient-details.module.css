@@ -1,0 +1,17 @@
+.ingredientDetails{
+    width: 100%;
+    max-width: calc(var(--space) * 129);
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    max-width: calc(var(--space) * 120);
+    margin: 0 auto;
+}
+.name{
+    text-align: center;
+}
+.nutritionFacts{
+    display: flex;
+    column-gap: calc(var(--space) * 5);
+}
