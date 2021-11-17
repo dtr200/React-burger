@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = (props) => {
-    const { name, image_large: image } = props;
+    const { name: ingredientName, 
+            image_large: ingredientImage } = props;
 
-    const dict = {
+    const keyToTabNameMap = {
         calories: 'Калории,ккал',
         proteins: 'Белки, г',
         fat: 'Жиры, г',
@@ -17,18 +18,22 @@ const IngredientDetails = (props) => {
     const createFactsArray = () => {
         const items = [];
         for(let key in props){
-            if(dict[key])
-                items.push({ title: dict[key],
-                              value: props[key] });
+            if(keyToTabNameMap[key])
+                items.push(
+                    { title: keyToTabNameMap[key],
+                      value: props[key] }
+                );
         }
         return [ items.pop(), ...items.sort()];
     }
 
     return (
         <div className={styles.ingredientDetails}>
-            <img src={image} className={styles.image} alt={name} />
+            <img src={ingredientImage} 
+                 className={styles.image} 
+                 alt={ingredientName} />
             <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
-                {name}
+                {ingredientName}
             </p>
             <div className={styles.nutritionFacts}>
                 { createFactsArray().map((item, i) => {
