@@ -7,15 +7,8 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-
+import { INGREDIENTS_URL, ORDER_DATA } from '../../utils/constants';
 import styles from './app.module.css';
-
-const url = 'https://norma.nomoreparties.space/api/ingredients';
-const orderData = {
-  num: '034536',
-  description: 'Ваш заказ начали готовить', 
-  extra: 'Дождитесь готовности на орбитальной станции'
-}
 
 const App = () => {
 
@@ -35,7 +28,7 @@ const App = () => {
     }
     else{
       title = '';
-      currentData = orderData;
+      currentData = ORDER_DATA;
     }
     setModalData({ type, title, data: currentData });
     setModal(true);
@@ -47,7 +40,7 @@ const App = () => {
   useEffect(() => {
     const getData = async () => {
       try{
-        const res = await fetch(url);
+        const res = await fetch(INGREDIENTS_URL);
         const json = await res.json();
         setData(json.data);
         setLoading(false);

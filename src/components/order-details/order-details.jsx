@@ -5,7 +5,6 @@ import styles from './order-details.module.css';
 import done from '../../images/done.png';
 
 const OrderDetails = (props) => {
-    console.log(props)
     const { num, description, extra } = props;
     return (
         <div className={`${styles.orderDetails} text mt-4 mb-15`}>
