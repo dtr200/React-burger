@@ -4,12 +4,14 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import { DataContext } from "../../services/data-context";
 import { BunContext } from "../../services/bun-context";
+import { TotalPriceContext } from "../../services/total-price-context";
 
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
     const data = useContext(DataContext);
     const currentBun = useContext(BunContext);
+    const { totalPrice } = useContext(TotalPriceContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
@@ -60,7 +62,9 @@ const BurgerConstructor = ({ onOpen }) => {
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
-                    <span className={styles.totalPrice}>610</span>
+                    <span className={styles.totalPrice}>
+                        {totalPrice}
+                    </span>
                     <CurrencyIcon type="primary" />
                 </div>
                 <Button type="primary" size="large" onClick={onTotalClick}>

@@ -11,6 +11,7 @@ import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from
   '../../utils/constants';
 import { DataContext } from '../../services/data-context';
 import { BunContext } from '../../services/bun-context';
+import { TotalPriceContext } from '../../services/total-price-context';
 import styles from './app.module.css';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
   const [ currentBun, setCurrentBun ] = useState({});
+  const [ totalPrice, setTotalPrice ] = useState(610);
 
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
@@ -79,7 +81,9 @@ const App = () => {
               onOpen={handleOpenModal} />
             <DataContext.Provider value={data}>
               <BunContext.Provider value={currentBun}>
-                <BurgerConstructor onOpen={handleOpenModal} />
+                <TotalPriceContext.Provider value={{totalPrice, setTotalPrice}}>
+                  <BurgerConstructor onOpen={handleOpenModal} />
+                </TotalPriceContext.Provider>
               </BunContext.Provider>
             </DataContext.Provider>
             { modalVisible &&
