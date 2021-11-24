@@ -10,7 +10,7 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = ({ onOpen }) => {
     const data = useContext(DataContext);
     const currentBun = useContext(BunContext);
-    console.log(currentBun)
+
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 
@@ -28,16 +28,12 @@ const BurgerConstructor = ({ onOpen }) => {
         )
     }
 
-    const buns = data.filter(item => item.type === 'bun');
-
-    const bun = buns.find(item => 
-        item.name === 'Краторная булка N-200i');
     data.sort((a, b) => b._id - a._id);
 
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
-                {getBun(bun, 'top', '(верх)')}
+                {getBun(currentBun, 'top', '(верх)')}
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
@@ -60,7 +56,7 @@ const BurgerConstructor = ({ onOpen }) => {
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
-                {getBun(bun, 'bottom', '(низ)')}
+                {getBun(currentBun, 'bottom', '(низ)')}
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
