@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import { DataContext } from "../../services/data-context";
+import { BunContext } from "../../services/bun-context";
 
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
     const data = useContext(DataContext);
-
+    const currentBun = useContext(BunContext);
+    console.log(currentBun)
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 

@@ -22,8 +22,8 @@ const App = () => {
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
-  const [ currentBun, setCurrentBun ] = useState('Краторная булка N-200i');
-  
+  const [ currentBun, setCurrentBun ] = useState({});
+
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
 
@@ -49,7 +49,7 @@ const App = () => {
         const json = await res.json();
         setData(json.data);
         setCart(DEFAULT_CART);
-        setLoading(false);
+        setLoading(false);        
       }
       catch(err){
         setError(true);
@@ -59,6 +59,12 @@ const App = () => {
 
     getData();
   }, []);
+
+  useEffect(() => {
+    const bun = data.find(item => 
+      item.name === 'Краторная булка N-200i');
+      setCurrentBun(bun);
+  }, [data])
   
   return (
     <div className="App">
