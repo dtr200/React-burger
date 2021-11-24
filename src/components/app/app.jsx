@@ -9,6 +9,8 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
   '../../utils/constants';
+import { DataContext } from '../../services/data-context';
+import { BunContext } from '../../services/bun-context';
 import styles from './app.module.css';
 
 const App = () => {
@@ -19,8 +21,9 @@ const App = () => {
   const [ loading, setLoading ] = useState(true);
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
-  const [ modalVisible, setModal ] = useState(false);  
-
+  const [ modalVisible, setModal ] = useState(false);
+  const [ currentBun, setCurrentBun ] = useState('Краторная булка N-200i');
+  
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
 
@@ -56,7 +59,7 @@ const App = () => {
 
     getData();
   }, []);
-  console.log(cart)
+  
   return (
     <div className="App">
       <AppHeader />
@@ -65,12 +68,14 @@ const App = () => {
           loading ? <Spinner /> : 
           <>
             <BurgerIngredients 
-              data={data} 
+              data={data}
               cart={cart} 
               onOpen={handleOpenModal} />
-            <BurgerConstructor 
-              data={data} 
-              onOpen={handleOpenModal} />
+            <DataContext.Provider value={data}>
+              <BunContext.Provider value={currentBun}>
+                <BurgerConstructor onOpen={handleOpenModal} />
+              </BunContext.Provider>
+            </DataContext.Provider>
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
               { 

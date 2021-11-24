@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import { DataContext } from "../../services/data-context";
 
 import styles from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ data, onOpen }) => {
+const BurgerConstructor = ({ onOpen }) => {
+    const data = useContext(DataContext);
+
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 
@@ -22,7 +25,10 @@ const BurgerConstructor = ({ data, onOpen }) => {
             </li>
         )
     }
-    const bun = data.find(item => 
+
+    const buns = data.filter(item => item.type === 'bun');
+
+    const bun = buns.find(item => 
         item.name === 'Краторная булка N-200i');
     data.sort((a, b) => b._id - a._id);
 
@@ -30,7 +36,7 @@ const BurgerConstructor = ({ data, onOpen }) => {
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
                 {getBun(bun, 'top', '(верх)')}
-            </ul>      
+            </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
                     data.map((slice, i) => {
@@ -67,23 +73,7 @@ const BurgerConstructor = ({ data, onOpen }) => {
     )
 }
 
-const constructorShapeTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
-});
-
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(constructorShapeTypes).isRequired,
     onOpen: PropTypes.func.isRequired
 }    
 

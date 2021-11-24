@@ -6,7 +6,6 @@ import ItemCart from '../item-cart/item-cart';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({ data, cart, onOpen }) => {
-
     const [ tab, setTab ] = useState('Булки');
 
     const dict = {
