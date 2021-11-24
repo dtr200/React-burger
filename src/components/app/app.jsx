@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -7,7 +7,7 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
+import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, DEFAULT_PRODUCTS_CART } from 
   '../../utils/constants';
 import { DataContext } from '../../services/data-context';
 import { BunContext } from '../../services/bun-context';
@@ -24,7 +24,8 @@ const App = () => {
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
   const [ currentBun, setCurrentBun ] = useState({});
-  const [ totalPrice, setTotalPrice ] = useState(610);
+  const [ currentItems, setCurrentItems ] = useState([]);
+  const [ totalPrice, dispatchTotalPrice ] = useReducer();
 
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
@@ -66,7 +67,16 @@ const App = () => {
     const bun = data.find(item => 
       item.name === 'Краторная булка N-200i');
       setCurrentBun(bun);
-  }, [data])
+
+    const products = [];
+    data.forEach(item => {
+      const amount = DEFAULT_PRODUCTS_CART[item.name];
+      if(amount)
+        products.push({ item, amount });
+    })
+
+    setCurrentItems(products);
+  }, [data]);
   
   return (
     <div className="App">
@@ -81,7 +91,7 @@ const App = () => {
               onOpen={handleOpenModal} />
             <DataContext.Provider value={data}>
               <BunContext.Provider value={currentBun}>
-                <TotalPriceContext.Provider value={{totalPrice, setTotalPrice}}>
+                <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
                   <BurgerConstructor onOpen={handleOpenModal} />
                 </TotalPriceContext.Provider>
               </BunContext.Provider>
