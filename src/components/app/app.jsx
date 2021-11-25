@@ -66,7 +66,7 @@ const App = () => {
         }      
       }
 
-      const num = await getOrderData();
+      const num = String(await getOrderData());
 
       currentData = num !== 'Error' ? 
         { ...ORDER_DATA, num } : 
