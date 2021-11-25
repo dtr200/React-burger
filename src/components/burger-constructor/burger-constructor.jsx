@@ -5,6 +5,7 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
 import { DataContext } from "../../services/data-context";
 import { BunContext } from "../../services/bun-context";
 import { TotalPriceContext } from "../../services/total-price-context";
+import { CurrentItemsContext } from "../../services/current-items-context";
 
 import styles from './burger-constructor.module.css';
 
@@ -12,6 +13,7 @@ const BurgerConstructor = ({ onOpen }) => {
     const data = useContext(DataContext);
     const currentBun = useContext(BunContext);
     const { totalPrice } = useContext(TotalPriceContext);
+    const currentItems = useContext(CurrentItemsContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
@@ -39,21 +41,27 @@ const BurgerConstructor = ({ onOpen }) => {
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    data.map((slice, i) => {
-                        let { name, price, image, type } = slice; 
+                    currentItems.map((slice, i) => {
+                        let { name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
-                        return (
-                            <li className={styles.listItem} key={i}>
-                                <div className={styles.settings}>
-                                    <DragIcon type={"primary"} />
-                                </div>
-                                <ConstructorElement 
-                                    text={name}
-                                    price={price}
-                                    thumbnail={image} />
-                            </li>
-                        )
+                        const elements = [];
+
+                        for(let j = 0; j < slice.amount; j++){
+                            elements.push(
+                                <li className={styles.listItem} key={`${i}${j}10`}>
+                                    <div className={styles.settings}>
+                                        <DragIcon type={"primary"} />
+                                    </div>
+                                    <ConstructorElement 
+                                        text={name}
+                                        price={price}
+                                        thumbnail={image} />
+                                </li>
+                            );
+                        }
+                        
+                        return [...elements]
                     })
                 }
             </ul>
