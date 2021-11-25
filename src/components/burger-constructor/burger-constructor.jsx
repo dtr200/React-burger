@@ -4,13 +4,14 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import { BunContext } from "../../services/bun-context";
 import { TotalPriceContext } from "../../services/total-price-context";
-import { CurrentItemsContext } from "../../services/current-items-context";
+import { CartContext } from '../../services/cart-context';
 
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
     const currentBun = useContext(BunContext);
-    const { totalPrice, dispatchTotalPrice } = useContext(TotalPriceContext);
+    const cart = useContext(CartContext);
+    const { totalPrice } = useContext(TotalPriceContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
@@ -35,13 +36,13 @@ const BurgerConstructor = ({ onOpen }) => {
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    /* .map((slice, i) => {
+                    cart.map((slice, i) => {
                         let { name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
                         const elements = [];
 
-                        for(let j = 0; j < slice.amount; j++){
+                        for(let j = 0; j < slice.pcs; j++){
                             elements.push(
                                 <li className={styles.listItem} key={`${i}${j}10`}>
                                     <div className={styles.settings}>
@@ -56,7 +57,7 @@ const BurgerConstructor = ({ onOpen }) => {
                         }
                         
                         return [...elements]
-                    }) */
+                    })
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>

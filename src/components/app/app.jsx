@@ -12,6 +12,7 @@ import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from
 import { DataContext } from '../../services/data-context';
 import { BunContext } from '../../services/bun-context';
 import { TotalPriceContext } from '../../services/total-price-context';
+import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
 
 const App = () => {
@@ -67,7 +68,7 @@ const App = () => {
             if(DEFAULT_CART[i].id === item._id)
               products.push(
                 { item, pcs: DEFAULT_CART[i].pcs }
-                );
+              );
           }
         })
         setData(json.data);
@@ -101,9 +102,11 @@ const App = () => {
               cart={cart} 
               onOpen={handleOpenModal} />
             <BunContext.Provider value={currentBun}>
-              <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
-                  <BurgerConstructor onOpen={handleOpenModal} />
-              </TotalPriceContext.Provider>
+              <CartContext.Provider value={cart}>
+                <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
+                    <BurgerConstructor onOpen={handleOpenModal} />
+                </TotalPriceContext.Provider>
+              </CartContext.Provider>
             </BunContext.Provider>
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
