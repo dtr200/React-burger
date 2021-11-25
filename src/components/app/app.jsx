@@ -7,7 +7,7 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
+import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
   '../../utils/constants';
 import { DataContext } from '../../services/data-context';
 import { TotalPriceContext } from '../../services/total-price-context';
@@ -47,6 +47,20 @@ const App = () => {
     }
     else{
       title = '';
+      const getOrderData = async () => {
+        try{
+          
+          const res = await fetch(ORDER_URL, {
+            method: 'POST'
+          });
+          const data = await res.json();
+          console.log(data);
+        }
+        catch{
+
+        }
+        getOrderData()
+      }
       currentData = ORDER_DATA;
     }
     setModalData({ type, title, data: currentData });

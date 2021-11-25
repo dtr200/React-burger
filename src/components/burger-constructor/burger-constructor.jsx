@@ -21,6 +21,8 @@ const BurgerConstructor = ({ onOpen }) => {
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
+        
+    cart.sort((a, b) => a.item.price > b.item.price ? 1 : -1);
 
     const getBun = (items, position, descr) => {
         const bun = items.find(product => 
