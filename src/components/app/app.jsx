@@ -16,7 +16,17 @@ import { CurrentItemsContext } from '../../services/current-items-context';
 import styles from './app.module.css';
 
 const App = () => {
-
+  const totalPriceInitialState = { price: 0 };
+  const totalPriceReducer = (state, action) => {
+    switch(action.type){
+      case 'INC':
+        return { price: state.price + action.payload}
+      case 'DEC':
+        return { price: state.price - action.payload};
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+    }
+  }
   const [ data, setData ] = useState([]);
   const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);
@@ -26,7 +36,8 @@ const App = () => {
   const [ modalVisible, setModal ] = useState(false);
   const [ currentBun, setCurrentBun ] = useState({});
   const [ currentItems, setCurrentItems ] = useState([]);
-  const [ totalPrice, dispatchTotalPrice ] = useReducer();
+  const [ totalPrice, dispatchTotalPrice ] = 
+    useReducer(totalPriceReducer, totalPriceInitialState);
 
   const handleOpenModal = ({ type, id }) => {  
     let title, currentData;
