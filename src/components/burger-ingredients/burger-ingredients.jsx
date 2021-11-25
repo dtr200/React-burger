@@ -6,6 +6,7 @@ import ItemCart from '../item-cart/item-cart';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({ data, cart, onOpen }) => {
+    console.log(cart)
     const [ tab, setTab ] = useState('Булки');
 
     const dict = {
@@ -96,10 +97,11 @@ const ingredientsShapeTypes = PropTypes.shape({
     type: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired
 });
+
 const cartShapeTypes = PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    psc: PropTypes.number.isRequired
-})
+    item: ingredientsShapeTypes.isRequired,
+    pcs: PropTypes.number.isRequired
+});
 
 BurgerIngredients.propTypes = {
     data: PropTypes.arrayOf(ingredientsShapeTypes).isRequired,
