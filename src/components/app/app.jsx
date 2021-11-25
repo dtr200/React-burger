@@ -90,15 +90,13 @@ const App = () => {
               data={data}
               cart={cart} 
               onOpen={handleOpenModal} />
-            <DataContext.Provider value={data}>
-              <BunContext.Provider value={currentBun}>
-                <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
-                  <CurrentItemsContext.Provider value={currentItems}>
-                    <BurgerConstructor onOpen={handleOpenModal} />
-                  </CurrentItemsContext.Provider>
-                </TotalPriceContext.Provider>
-              </BunContext.Provider>
-            </DataContext.Provider>
+            <BunContext.Provider value={currentBun}>
+              <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
+                <CurrentItemsContext.Provider value={currentItems}>
+                  <BurgerConstructor onOpen={handleOpenModal} />
+                </CurrentItemsContext.Provider>
+              </TotalPriceContext.Provider>
+            </BunContext.Provider>
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
               { 
