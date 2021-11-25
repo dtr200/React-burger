@@ -10,7 +10,6 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
   '../../utils/constants';
 import { DataContext } from '../../services/data-context';
-import { BunContext } from '../../services/bun-context';
 import { TotalPriceContext } from '../../services/total-price-context';
 import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
@@ -34,7 +33,6 @@ const App = () => {
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
-  const [ currentBun, setCurrentBun ] = useState({});
   const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);
 
@@ -83,12 +81,6 @@ const App = () => {
 
     getData();
   }, []);
-
-  useEffect(() => {
-    const bun = data.find(item => 
-      item.name === 'Краторная булка N-200i');
-      setCurrentBun(bun);
-  }, [data]);
   
   return (
     <div className="App">
@@ -101,13 +93,11 @@ const App = () => {
               data={data}
               cart={cart} 
               onOpen={handleOpenModal} />
-            <BunContext.Provider value={currentBun}>
-              <CartContext.Provider value={cart}>
-                <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
-                    <BurgerConstructor onOpen={handleOpenModal} />
-                </TotalPriceContext.Provider>
-              </CartContext.Provider>
-            </BunContext.Provider>
+            <CartContext.Provider value={cart}>
+              <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
+                  <BurgerConstructor onOpen={handleOpenModal} />
+              </TotalPriceContext.Provider>
+            </CartContext.Provider>
             { modalVisible &&
             <Modal title={modalData.title} onClose={handleCloseModal}>
               { 
