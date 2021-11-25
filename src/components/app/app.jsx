@@ -12,7 +12,6 @@ import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, DEFAULT_PRODUCTS_CART } from
 import { DataContext } from '../../services/data-context';
 import { BunContext } from '../../services/bun-context';
 import { TotalPriceContext } from '../../services/total-price-context';
-import { CurrentItemsContext } from '../../services/current-items-context';
 import styles from './app.module.css';
 
 const App = () => {
@@ -35,7 +34,6 @@ const App = () => {
     useState({ type: null, data: null });
   const [ modalVisible, setModal ] = useState(false);
   const [ currentBun, setCurrentBun ] = useState({});
-  const [ currentItems, setCurrentItems ] = useState([]);
   const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);
 
@@ -79,15 +77,6 @@ const App = () => {
     const bun = data.find(item => 
       item.name === 'Краторная булка N-200i');
       setCurrentBun(bun);
-
-    const products = [];
-    data.forEach(item => {
-      const amount = DEFAULT_PRODUCTS_CART[item.name];
-      if(amount)
-        products.push({ item, amount });
-    });
-
-    setCurrentItems(products);
   }, [data]);
   
   return (
@@ -103,9 +92,7 @@ const App = () => {
               onOpen={handleOpenModal} />
             <BunContext.Provider value={currentBun}>
               <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
-                <CurrentItemsContext.Provider value={currentItems}>
                   <BurgerConstructor onOpen={handleOpenModal} />
-                </CurrentItemsContext.Provider>
               </TotalPriceContext.Provider>
             </BunContext.Provider>
             { modalVisible &&

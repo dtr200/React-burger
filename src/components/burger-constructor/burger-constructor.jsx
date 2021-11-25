@@ -10,14 +10,13 @@ import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
     const currentBun = useContext(BunContext);
-    const { totalPrice } = useContext(TotalPriceContext);
+    const { totalPrice, dispatchTotalPrice } = useContext(TotalPriceContext);
     const currentItems = useContext(CurrentItemsContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 
     const getBun = (item, position, descr) => {
-
         return (
             <li className={styles.listItem}>
                 <ConstructorElement 
@@ -67,7 +66,7 @@ const BurgerConstructor = ({ onOpen }) => {
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
                     <span className={styles.totalPrice}>
-                        {totalPrice}
+                        {totalPrice.price}
                     </span>
                     <CurrencyIcon type="primary" />
                 </div>
