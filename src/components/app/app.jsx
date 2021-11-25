@@ -38,7 +38,7 @@ const App = () => {
   const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);
 
-  const handleOpenModal = ({ type, id }) => {  
+  const handleOpenModal = async ({ type, id }) => {  
     let title, currentData;
 
     if(type === 'ingredient' && id){
@@ -48,20 +48,28 @@ const App = () => {
     else{
       title = '';
       const getOrderData = async () => {
-        try{
-          
+        const orderBody = {
+          ingredients: cart.map(product => product.item._id)
+        };
+
+        try{          
           const res = await fetch(ORDER_URL, {
-            method: 'POST'
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(orderBody)
           });
           const data = await res.json();
-          console.log(data);
+          return data.success ? data.order.number : 0;
         }
         catch{
-
-        }
-        getOrderData()
+          return 'Error';
+        }      
       }
-      currentData = ORDER_DATA;
+
+      const num = await getOrderData();
+
+      currentData = num !== 'Error' ? 
+        { ...ORDER_DATA, num } : { num };
     }
     setModalData({ type, title, data: currentData });
     setModal(true);

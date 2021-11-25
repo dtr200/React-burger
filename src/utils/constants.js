@@ -2,12 +2,6 @@ export const INGREDIENTS_URL =
   'https://norma.nomoreparties.space/api/ingredients';
 export const ORDER_URL = 
   'https://norma.nomoreparties.space/api/orders';
-export const ORDER_BODY = { 
-  "ingredients": [
-    "609646e4dc916e00276b286e",
-    "609646e4dc916e00276b2870"
-  ]
-};
 export const ORDER_DATA = {
   num: '034536',
   description: 'Ваш заказ начали готовить', 
