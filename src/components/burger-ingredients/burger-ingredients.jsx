@@ -60,7 +60,8 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
                             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
                                 { block.items.map(item => {
                                     const productInCart = cart.find(product => 
-                                        product.id === item._id);
+                                        product.item._id === item._id);
+                                        
                                     const pcs = productInCart ? productInCart.pcs : 0;
                                     return (
                                         <ItemCart 
