@@ -2,29 +2,30 @@ import React, { useContext } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { BunContext } from "../../services/bun-context";
 import { TotalPriceContext } from "../../services/total-price-context";
 import { CartContext } from '../../services/cart-context';
 
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
-    const currentBun = useContext(BunContext);
+
     const cart = useContext(CartContext);
     const { totalPrice } = useContext(TotalPriceContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
 
-    const getBun = (item, position, descr) => {
+    const getBun = (items, position, descr) => {
+        const bun = items.find(product => 
+            product.item.type === 'bun').item;
         return (
             <li className={styles.listItem}>
                 <ConstructorElement 
-                    text={`${item.name} ${descr}`}
+                    text={`${bun.name} ${descr}`}
                     type={position}
                     isLocked={true}
-                    price={item.price}
-                    thumbnail={item.image} />
+                    price={bun.price}
+                    thumbnail={bun.image} />
             </li>
         )
     }
@@ -32,7 +33,7 @@ const BurgerConstructor = ({ onOpen }) => {
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
-                {getBun(currentBun, 'top', '(верх)')}
+                {getBun(cart, 'top', '(верх)')}
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
@@ -61,7 +62,7 @@ const BurgerConstructor = ({ onOpen }) => {
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
-                {getBun(currentBun, 'bottom', '(низ)')}
+                {getBun(cart, 'bottom', '(низ)')}
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
