@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { DataContext } from "../../services/data-context";
 import { BunContext } from "../../services/bun-context";
 import { TotalPriceContext } from "../../services/total-price-context";
 import { CurrentItemsContext } from "../../services/current-items-context";
@@ -10,7 +9,6 @@ import { CurrentItemsContext } from "../../services/current-items-context";
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
-    const data = useContext(DataContext);
     const currentBun = useContext(BunContext);
     const { totalPrice } = useContext(TotalPriceContext);
     const currentItems = useContext(CurrentItemsContext);
@@ -31,8 +29,6 @@ const BurgerConstructor = ({ onOpen }) => {
             </li>
         )
     }
-
-    data.sort((a, b) => b._id - a._id);
 
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
