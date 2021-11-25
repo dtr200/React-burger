@@ -29,10 +29,3 @@ export const DEFAULT_CART = [
  { id: "60d3b41abdacab0026a733d4", 
    pcs:1 },
 ];
-
-export const DEFAULT_PRODUCTS_CART = {
-  'Соус традиционный галактический': 1,
-  'Мясо бессмертных моллюсков Protostomia': 1,
-  'Плоды Фалленианского дерева': 1,
-  'Хрустящие минеральные кольца': 2
-}
