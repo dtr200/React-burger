@@ -11,7 +11,6 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = ({ onOpen }) => {
     const currentBun = useContext(BunContext);
     const { totalPrice, dispatchTotalPrice } = useContext(TotalPriceContext);
-    const currentItems = useContext(CurrentItemsContext);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
@@ -36,7 +35,7 @@ const BurgerConstructor = ({ onOpen }) => {
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    currentItems.map((slice, i) => {
+                    /* .map((slice, i) => {
                         let { name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
@@ -57,7 +56,7 @@ const BurgerConstructor = ({ onOpen }) => {
                         }
                         
                         return [...elements]
-                    })
+                    }) */
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>

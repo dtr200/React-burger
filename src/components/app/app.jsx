@@ -7,7 +7,7 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, DEFAULT_PRODUCTS_CART } from 
+import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART } from 
   '../../utils/constants';
 import { DataContext } from '../../services/data-context';
 import { BunContext } from '../../services/bun-context';
@@ -60,8 +60,18 @@ const App = () => {
       try{
         const res = await fetch(INGREDIENTS_URL);
         const json = await res.json();
+        
+        const products = [];
+        json.data.forEach(item => {
+          for(let i = 0; i < DEFAULT_CART.length; i++){
+            if(DEFAULT_CART[i].id === item._id)
+              products.push(
+                { item, pcs: DEFAULT_CART[i].pcs }
+                );
+          }
+        })
         setData(json.data);
-        setCart(DEFAULT_CART);
+        setCart(products);
         setLoading(false);        
       }
       catch(err){
