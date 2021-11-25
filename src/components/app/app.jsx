@@ -69,7 +69,8 @@ const App = () => {
       const num = await getOrderData();
 
       currentData = num !== 'Error' ? 
-        { ...ORDER_DATA, num } : { num };
+        { ...ORDER_DATA, num } : 
+        { num, description: '', extra: '' };
     }
     setModalData({ type, title, data: currentData });
     setModal(true);
