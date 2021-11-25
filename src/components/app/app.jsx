@@ -19,9 +19,11 @@ const App = () => {
   const totalPriceReducer = (state, action) => {
     switch(action.type){
       case 'INC':
-        return { price: state.price + action.payload}
+        return { price: state.price + action.payload};
       case 'DEC':
         return { price: state.price - action.payload};
+      case 'RES':
+        return totalPriceInitialState;
       default:
         throw new Error(`Wrong type of action: ${action.type}`);
     }
@@ -68,10 +70,11 @@ const App = () => {
                 { item, pcs: DEFAULT_CART[i].pcs }
               );
           }
-        })
+        });
+
         setData(json.data);
         setCart(products);
-        setLoading(false);        
+        setLoading(false); 
       }
       catch(err){
         setError(true);
@@ -81,7 +84,7 @@ const App = () => {
 
     getData();
   }, []);
-  
+
   return (
     <div className="App">
       <AppHeader />
