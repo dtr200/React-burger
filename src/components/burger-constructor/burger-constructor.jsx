@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { TotalPriceContext } from "../../services/total-price-context";
 import { CartContext } from '../../services/cart-context';
 
 import styles from './burger-constructor.module.css';
@@ -10,13 +9,11 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = ({ onOpen }) => {
 
     const cart = useContext(CartContext);
-    const { totalPrice, dispatchTotalPrice } = useContext(TotalPriceContext);
     const price = cart.reduce((accum, product) => 
           accum + product.item.price * product.pcs, 0);
 
     useEffect(() => {
-        dispatchTotalPrice({ type: 'RES'});
-        dispatchTotalPrice({ type: 'INC', payload: price }) 
+
     }, [cart]);
 
     const onTotalClick = () =>

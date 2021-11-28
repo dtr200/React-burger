@@ -14,19 +14,7 @@ import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
 
 const App = () => {
-  const totalPriceInitialState = { price: 0 };
-  const totalPriceReducer = (state, action) => {
-    switch(action.type){
-      case 'INC':
-        return { price: state.price + action.payload};
-      case 'DEC':
-        return { price: state.price - action.payload};
-      case 'RES':
-        return totalPriceInitialState;
-      default:
-        throw new Error(`Wrong type of action: ${action.type}`);
-    }
-  }
+
   const [ data, setData ] = useState([]);
   const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);
@@ -34,10 +22,7 @@ const App = () => {
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
   const [ hasModalError, setModalError ] = useState(false);
-  const [ modalVisible, setModal ] = useState(false);
-  const [ totalPrice, dispatchTotalPrice ] = 
-    useReducer(totalPriceReducer, totalPriceInitialState);
-  
+  const [ modalVisible, setModal ] = useState(false);  
 
   const handleOpenModal = async ({ type, id }) => {  
     let title, currentData;
@@ -118,9 +103,7 @@ const App = () => {
               cart={cart} 
               onOpen={handleOpenModal} />
             <CartContext.Provider value={cart}>
-              <TotalPriceContext.Provider value={{totalPrice, dispatchTotalPrice}}>
-                  <BurgerConstructor onOpen={handleOpenModal} />
-              </TotalPriceContext.Provider>
+              <BurgerConstructor onOpen={handleOpenModal} />
             </CartContext.Provider>
             { modalVisible &&
               <Modal title={modalData.title} onClose={handleCloseModal}>
