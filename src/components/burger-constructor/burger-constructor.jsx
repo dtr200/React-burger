@@ -47,14 +47,14 @@ const BurgerConstructor = ({ onOpen }) => {
             <ul className={`${styles.list} pr-2`}>
                 {
                     cart.map((slice, i) => {
-                        let { name, price, image, type } = slice.item; 
+                        let { _id, name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
                         const elements = [];
 
                         for(let j = 0; j < slice.pcs; j++){
                             elements.push(
-                                <li className={styles.listItem} key={`${i}${j}10`}>
+                                <li className={styles.listItem} key={_id}>
                                     <div className={styles.settings}>
                                         <DragIcon type={"primary"} />
                                     </div>
