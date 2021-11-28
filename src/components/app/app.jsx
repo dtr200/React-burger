@@ -9,7 +9,6 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
   '../../utils/constants';
-import { DataContext } from '../../services/data-context';
 import { TotalPriceContext } from '../../services/total-price-context';
 import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
