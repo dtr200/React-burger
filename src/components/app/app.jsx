@@ -64,14 +64,14 @@ const App = () => {
           throw new Error('');
 
         const data = String(await res.json());
-        currentData = { ...ORDER_DATA, data };      
-        setModalData({ type, title, data: currentData });  
+        currentData = { ...ORDER_DATA, data };
+        setModalData({ type, title, data: currentData });
       }
       catch(err){
         setModalError(true);
-        setModal(true);
       }  
-    }       
+    }    
+    setModal(true);   
   }
 
   const handleCloseModal = () =>
@@ -107,7 +107,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AppHeader />
       <main className={`${styles.main}`}>
         { hasError ? <ErrorIndicator /> :
@@ -125,9 +125,11 @@ const App = () => {
             { modalVisible &&
               <Modal title={modalData.title} onClose={handleCloseModal}>
                 { 
-                  modalData.type === 'ingredient' ? 
+                  hasModalError ?
+                  <ErrorIndicator /> :             
+                  (modalData.type === 'ingredient' ? 
                   <IngredientDetails { ...modalData.data } /> : 
-                  <OrderDetails { ...modalData.data }/> 
+                  <OrderDetails { ...modalData.data }/>)
                 }
               </Modal> }
           </>
