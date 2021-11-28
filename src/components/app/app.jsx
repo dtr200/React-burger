@@ -9,12 +9,11 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
   '../../utils/constants';
-import { TotalPriceContext } from '../../services/total-price-context';
 import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
 
 const App = () => {
-
+ 
   const [ data, setData ] = useState([]);
   const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);

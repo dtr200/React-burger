@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,12 +8,31 @@ import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
 
+    const totalPriceInitialState = { price: 0 };
+    const totalPriceReducer = (state, action) => {
+      switch(action.type){
+        case 'INC':
+          return { price: state.price + action.payload};
+        case 'DEC':
+          return { price: state.price - action.payload};
+        case 'SET': 
+          return { price: action.payload};
+        case 'RES':
+          return totalPriceInitialState;
+        default:
+          throw new Error(`Wrong type of action: ${action.type}`);
+      }
+    }
+
     const cart = useContext(CartContext);
-    const price = cart.reduce((accum, product) => 
-          accum + product.item.price * product.pcs, 0);
+    const [ totalPrice, dispatchTotalPrice ] = 
+    useReducer(totalPriceReducer, totalPriceInitialState);    
 
     useEffect(() => {
-
+        const price = cart.reduce((accum, product) => 
+          accum + product.item.price * product.pcs, 0);
+          
+        dispatchTotalPrice({ type: 'SET', payload: price });
     }, [cart]);
 
     const onTotalClick = () =>
