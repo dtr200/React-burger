@@ -33,9 +33,11 @@ const App = () => {
   const [ loading, setLoading ] = useState(true);
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
+  const [ hasModalError, setModalError ] = useState(false);
   const [ modalVisible, setModal ] = useState(false);
   const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);
+  
 
   const handleOpenModal = async ({ type, id }) => {  
     let title, currentData;
@@ -43,36 +45,33 @@ const App = () => {
     if(type === 'ingredient' && id){
       title = 'Детали ингредиента';
       currentData = data.find(item => item._id === id);
+      setModalData({ type, title, data: currentData });
     }
     else{
       title = '';
-      const getOrderData = async () => {
-        const orderBody = {
-          ingredients: cart.map(product => product.item._id)
-        };
+      const orderBody = {
+        ingredients: cart.map(product => product.item._id)
+      };
+      
+      try{
+        const res = await fetch(ORDER_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(orderBody)
+        });
+  
+        if(!res.ok)
+          throw new Error('');
 
-        try{          
-          const res = await fetch(ORDER_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(orderBody)
-          });
-          const data = await res.json();
-          return data.success ? data.order.number : 0;
-        }
-        catch{
-          return 'Error';
-        }      
+        const data = String(await res.json());
+        currentData = { ...ORDER_DATA, data };      
+        setModalData({ type, title, data: currentData });  
       }
-
-      const num = String(await getOrderData());
-
-      currentData = num !== 'Error' ? 
-        { ...ORDER_DATA, num } : 
-        { num, description: '', extra: '' };
-    }
-    setModalData({ type, title, data: currentData });
-    setModal(true);
+      catch(err){
+        setModalError(true);
+        setModal(true);
+      }  
+    }       
   }
 
   const handleCloseModal = () =>
@@ -124,13 +123,13 @@ const App = () => {
               </TotalPriceContext.Provider>
             </CartContext.Provider>
             { modalVisible &&
-            <Modal title={modalData.title} onClose={handleCloseModal}>
-              { 
-                modalData.type === 'ingredient' ? 
-                <IngredientDetails { ...modalData.data } /> : 
-                <OrderDetails { ...modalData.data }/> 
-              }
-            </Modal> }
+              <Modal title={modalData.title} onClose={handleCloseModal}>
+                { 
+                  modalData.type === 'ingredient' ? 
+                  <IngredientDetails { ...modalData.data } /> : 
+                  <OrderDetails { ...modalData.data }/> 
+                }
+              </Modal> }
           </>
         }
       </main>
