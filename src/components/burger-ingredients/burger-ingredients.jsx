@@ -9,7 +9,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
 
     const [ tab, setTab ] = useState('Булки');
 
-    const dict = {
+    const typeToTitle = {
         bun: 'Булки',        
         sauce: 'Соусы',
         main: 'Начинки'
@@ -18,7 +18,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
     const createIngredientsBlocks = () => {        
         const blocks = [];
 
-        for(let key in dict){
+        for(let key in typeToTitle){
             const item = { title: key };
             item.items = data.filter(elem => 
                 elem.type === key)
@@ -28,7 +28,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
     }
 
     const getTabs = () => 
-        Object.values(dict);
+        Object.values(typeToTitle);
 
     const onTabClick = (title) =>
         setTab(title);
@@ -56,13 +56,14 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
                         <section key={block.items[0]._id + i} onClick={onItemClick}>
                             <h2 className={`text text_type_main-medium mb-6`} 
                                 id={block.title}>
-                                { dict[block.title] }
+                                { typeToTitle[block.title] }
                             </h2>
                             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
 
                                 { block.items.map(item => {
                                     const productInCart = cart.find(product => 
-                                        product.id === item._id);
+                                        product.item._id === item._id);
+                                        
                                     const pcs = productInCart ? productInCart.pcs : 0;
                                     return (
                                         <ItemCart 
@@ -99,9 +100,9 @@ const ingredientsShapeTypes = PropTypes.shape({
 });
 
 const cartShapeTypes = PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    psc: PropTypes.number.isRequired
-})
+    item: ingredientsShapeTypes.isRequired,
+    pcs: PropTypes.number.isRequired
+});
 
 BurgerIngredients.propTypes = {
     data: PropTypes.arrayOf(ingredientsShapeTypes).isRequired,

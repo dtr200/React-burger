@@ -1,22 +1,5 @@
-@font-face{
-  font-family: 'JetBrainsMono';
-  font-weight: 500;
-  font-style: normal;
-  src: url('./fonts/JetBrainsMono-Regular.woff2') format('woff2');
-}
-
-@font-face{
-  font-family: 'JetBrainsMono';
-  font-weight: 700;
-  font-style: normal;
-  src: url('./fonts/JetBrainsMono-Bold.woff2') format('woff2');
-}
-
-@font-face{
-  font-family: 'Iceland';
-  font-weight: 500;
-  font-style: normal;
-  src: url('./fonts/Iceland.woff2') format('woff2');
+html{
+  height: 100%;
 }
 
 body {
@@ -36,6 +19,7 @@ body {
   --input-color: #2F2F37;
   --blur: #4c4cff;
 
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -43,7 +27,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+#root{
+  height: 100%;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

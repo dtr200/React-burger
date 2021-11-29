@@ -1,63 +1,99 @@
-import React from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import { CartContext } from '../../services/cart-context';
 
 import styles from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ data, onOpen }) => {
+const BurgerConstructor = ({ onOpen }) => {
+
+    const totalPriceInitialState = { price: 0 };
+    const totalPriceReducer = (state, action) => {
+      switch(action.type){
+        case 'INC':
+          return { price: state.price + action.payload};
+        case 'DEC':
+          return { price: state.price - action.payload};
+        case 'SET': 
+          return { price: action.payload};
+        case 'RES':
+          return totalPriceInitialState;
+        default:
+          throw new Error(`Wrong type of action: ${action.type}`);
+      }
+    }
+
+    const cart = useContext(CartContext);
+    const [ totalPrice, dispatchTotalPrice ] = 
+    useReducer(totalPriceReducer, totalPriceInitialState);    
+
+    useEffect(() => {
+        const price = cart.reduce((accum, product) => 
+          accum + product.item.price * product.pcs, 0);
+          
+        dispatchTotalPrice({ type: 'SET', payload: price });
+    }, [cart]);
+
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
+        
+    cart.sort((a, b) => a.item.price > b.item.price ? 1 : -1);
 
-    const getBun = (item, position, descr) => {
-
+    const getBun = (items, position, descr) => {
+        const bun = items.find(product => 
+            product.item.type === 'bun').item;
         return (
             <li className={styles.listItem}>
                 <ConstructorElement 
-                    text={`${item.name} ${descr}`}
+                    text={`${bun.name} ${descr}`}
                     type={position}
                     isLocked={true}
-                    price={item.price}
-                    thumbnail={item.image} />
+                    price={bun.price}
+                    thumbnail={bun.image} />
             </li>
         )
     }
 
-    const bun = data.find(item => 
-        item.name === 'Краторная булка N-200i');
-    data.sort((a, b) => b._id - a._id);
-
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
-                {getBun(bun, 'top', '(верх)')}
-            </ul>      
+                {getBun(cart, 'top', '(верх)')}
+            </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    data.map((slice, i) => {
-                        let { name, price, image, type } = slice; 
+                    cart.map((slice, i) => {
+                        let { _id, name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
-                        return (
-                            <li className={styles.listItem} key={i}>
-                                <div className={styles.settings}>
-                                    <DragIcon type={"primary"} />
-                                </div>
-                                <ConstructorElement 
-                                    text={name}
-                                    price={price}
-                                    thumbnail={image} />
-                            </li>
-                        )
+                        const elements = [];
+
+                        for(let j = 0; j < slice.pcs; j++){
+                            elements.push(
+                                <li className={styles.listItem} key={`${_id}${j}`}>
+                                    <div className={styles.settings}>
+                                        <DragIcon type={"primary"} />
+                                    </div>
+                                    <ConstructorElement 
+                                        text={name}
+                                        price={price}
+                                        thumbnail={image} />
+                                </li>
+                            );
+                        }
+                        
+                        return [...elements]
                     })
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
-                {getBun(bun, 'bottom', '(низ)')}
+                {getBun(cart, 'bottom', '(низ)')}
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
-                    <span className={styles.totalPrice}>610</span>
+                    <span className={styles.totalPrice}>
+                        {totalPrice.price}
+                    </span>
                     <CurrencyIcon type="primary" />
                 </div>
                 <Button type="primary" size="large" onClick={onTotalClick}>
@@ -68,23 +104,7 @@ const BurgerConstructor = ({ data, onOpen }) => {
     )
 }
 
-const constructorShapeTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
-});
-
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(constructorShapeTypes).isRequired,
     onOpen: PropTypes.func.isRequired
 }    
 
