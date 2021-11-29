@@ -70,7 +70,7 @@ const BurgerConstructor = ({ onOpen }) => {
 
                         for(let j = 0; j < slice.pcs; j++){
                             elements.push(
-                                <li className={styles.listItem} key={_id}>
+                                <li className={styles.listItem} key={`${_id}${j}`}>
                                     <div className={styles.settings}>
                                         <DragIcon type={"primary"} />
                                     </div>
