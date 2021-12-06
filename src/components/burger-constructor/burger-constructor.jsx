@@ -25,6 +25,7 @@ const BurgerConstructor = ({ onOpen }) => {
     }
 
     const cart = useContext(CartContext);
+
     const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);    
 

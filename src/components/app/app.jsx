@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -9,15 +10,24 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
   '../../utils/constants';
+import { getIngredients } from '../../services/reducers/reducer';
 import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
 
 const App = () => {
- 
+  const dispatch = useDispatch();
+  const { 
+    ingredientsData, 
+    ingredientsRequest, 
+    ingredientsFailed,
+    constructorIngredients 
+  } = useSelector(store => store.ingredients);
+  console.log(ingredientsData, ingredientsRequest, ingredientsFailed, constructorIngredients)
+
   const [ data, setData ] = useState([]);
   const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);
-  const [ loading, setLoading ] = useState(true);
+  const [ loading, setLoading ] = useState(false);
   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
   const [ hasModalError, setModalError ] = useState(false);
@@ -62,46 +72,21 @@ const App = () => {
     setModal(false);
 
   useEffect(() => {
-    const getData = async () => {
-      try{
-        const res = await fetch(INGREDIENTS_URL);
-        const json = await res.json();
-        
-        const products = [];
-        json.data.forEach(item => {
-          for(let i = 0; i < DEFAULT_CART.length; i++){
-            if(DEFAULT_CART[i].id === item._id)
-              products.push(
-                { item, pcs: DEFAULT_CART[i].pcs }
-              );
-          }
-        });
-
-        setData(json.data);
-        setCart(products);
-        setLoading(false); 
-      }
-      catch(err){
-        setError(true);
-        setLoading(false);
-      }      
-    }
-
-    getData();
+    dispatch(getIngredients(INGREDIENTS_URL, DEFAULT_CART));
   }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={`${styles.main}`}>
-        { hasError ? <ErrorIndicator /> :
-          loading ? <Spinner /> : 
+        { ingredientsFailed ? <ErrorIndicator /> :
+          ingredientsRequest ? <Spinner /> : 
           <>
             <BurgerIngredients 
-              data={data}
-              cart={cart} 
+              data={ingredientsData}
+              cart={constructorIngredients} 
               onOpen={handleOpenModal} />
-            <CartContext.Provider value={cart}>
+            <CartContext.Provider value={constructorIngredients}>
               <BurgerConstructor onOpen={handleOpenModal} />
             </CartContext.Provider>
             { modalVisible &&

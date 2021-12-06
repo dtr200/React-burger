@@ -1,8 +1,12 @@
 import { combineReducers } from "redux";
 import {
-    reducer
+    ingredients,
+    order
 } from './reducer';
 
-export const rootReducer = combineReducers({
-    reducer
-})
+const rootReducer = combineReducers({
+    ingredients,
+    order
+});
+
+export default rootReducer;
