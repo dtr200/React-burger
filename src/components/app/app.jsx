@@ -11,7 +11,6 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/reducers/reducer';
-import { CartContext } from '../../services/cart-context';
 import styles from './app.module.css';
 
 const App = () => {
@@ -22,10 +21,7 @@ const App = () => {
     ingredientsFailed,
     constructorIngredients 
   } = useSelector(store => store.ingredients);
-  console.log(ingredientsData, ingredientsRequest, ingredientsFailed, constructorIngredients)
 
-  const [ data, setData ] = useState([]);
-  const [ cart, setCart ] = useState([]);
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(false);
   const [ modalData, setModalData ] = 
@@ -38,13 +34,13 @@ const App = () => {
 
     if(type === 'ingredient' && id){
       title = 'Детали ингредиента';
-      currentData = data.find(item => item._id === id);
+      currentData = ingredientsData.find(item => item._id === id);
       setModalData({ type, title, data: currentData });
     }
     else{
       title = '';
       const orderBody = {
-        ingredients: cart.map(product => product.item._id)
+        ingredients: constructorIngredients.map(product => product.item._id)
       };
       
       try{
@@ -57,7 +53,7 @@ const App = () => {
         if(!res.ok)
           throw new Error('');
 
-        const data = String(await res.json());
+        const data = await res.json();
         currentData = { ...ORDER_DATA, data };
         setModalData({ type, title, data: currentData });
       }
@@ -82,13 +78,8 @@ const App = () => {
         { ingredientsFailed ? <ErrorIndicator /> :
           ingredientsRequest ? <Spinner /> : 
           <>
-            <BurgerIngredients 
-              data={ingredientsData}
-              cart={constructorIngredients} 
-              onOpen={handleOpenModal} />
-            <CartContext.Provider value={constructorIngredients}>
-              <BurgerConstructor onOpen={handleOpenModal} />
-            </CartContext.Provider>
+            <BurgerIngredients onOpen={handleOpenModal} />
+            <BurgerConstructor onOpen={handleOpenModal} />
             { modalVisible &&
               <Modal title={modalData.title} onClose={handleCloseModal}>
                 { 

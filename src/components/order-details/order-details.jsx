@@ -5,11 +5,15 @@ import styles from './order-details.module.css';
 import done from '../../images/done.png';
 
 const OrderDetails = (props) => {
-    const { num, description, extra } = props;
+    const { num, description, data, extra } = props;
+
+    const orderNum = data && data.order.number ? 
+        data.order.number : num;
+
     return (
         <div className={`${styles.orderDetails} text mt-4 mb-15`}>
             <div className={`${styles.num} text_type_digits-large`}>
-                {num}
+                {orderNum}
             </div>
             <p className={`${styles.text} text_type_main-medium mt-8`}>
                 идентификатор заказа

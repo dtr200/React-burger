@@ -6,7 +6,7 @@ import ItemCart from '../item-cart/item-cart';
 
 import styles from './burger-ingredients.module.css';
 
-const BurgerIngredients = ({ data, cart, onOpen }) => {
+const BurgerIngredients = ({ onOpen }) => {
     const { 
         ingredientsData,
         constructorIngredients 
@@ -25,7 +25,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
 
         for(let key in typeToTitle){
             const item = { title: key };
-            item.items = data.filter(elem => 
+            item.items = ingredientsData.filter(elem => 
                 elem.type === key)
             blocks.push(item);
         }
@@ -66,7 +66,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
                             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
 
                                 { block.items.map(item => {
-                                    const productInCart = cart.find(product => 
+                                    const productInCart = constructorIngredients.find(product => 
                                         product.item._id === item._id);
                                         
                                     const pcs = productInCart ? productInCart.pcs : 0;
@@ -89,29 +89,7 @@ const BurgerIngredients = ({ data, cart, onOpen }) => {
     )
 }
 
-const ingredientsShapeTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
-});
-
-const cartShapeTypes = PropTypes.shape({
-    item: ingredientsShapeTypes.isRequired,
-    pcs: PropTypes.number.isRequired
-});
-
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(ingredientsShapeTypes).isRequired,
-    cart: PropTypes.arrayOf(cartShapeTypes).isRequired,
     onOpen: PropTypes.func.isRequired
 }    
 
