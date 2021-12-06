@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,32 +12,8 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
-
-    const totalPriceInitialState = { price: 0 };
-    const totalPriceReducer = (state, action) => {
-      switch(action.type){
-        case 'INC':
-          return { price: state.price + action.payload};
-        case 'DEC':
-          return { price: state.price - action.payload};
-        case 'SET': 
-          return { price: action.payload};
-        case 'RES':
-          return totalPriceInitialState;
-        default:
-          throw new Error(`Wrong type of action: ${action.type}`);
-      }
-    }
-
-    const [ totalPrice, dispatchTotalPrice ] = 
-    useReducer(totalPriceReducer, totalPriceInitialState);    
-
-    useEffect(() => {
-        const price = constructorIngredients.reduce((accum, product) => 
-          accum + product.item.price * product.pcs, 0);
-          
-        dispatchTotalPrice({ type: 'SET', payload: price });
-    }, [constructorIngredients]);
+    const totalPrice = constructorIngredients.reduce((accum, product) => 
+        accum + product.item.price * product.pcs, 0);
 
     const onTotalClick = () =>
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
@@ -64,7 +40,7 @@ const BurgerConstructor = () => {
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    constructorIngredients.map((slice, i) => {
+                    constructorIngredients.map(slice => {
                         let { _id, name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
@@ -84,7 +60,7 @@ const BurgerConstructor = () => {
                             );
                         }
                         
-                        return [...elements]
+                        return [...elements];
                     })
                 }
             </ul>
@@ -94,7 +70,7 @@ const BurgerConstructor = () => {
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
                     <span className={styles.totalPrice}>
-                        {totalPrice.price}
+                        {totalPrice}
                     </span>
                     <CurrencyIcon type="primary" />
                 </div>

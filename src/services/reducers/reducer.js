@@ -163,9 +163,9 @@ export const sendOrder = (orderURL, constructorIngredients) => {
                 type: SEND_ORDER_REQUEST
             })
             const res = await fetch(orderURL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(orderBody)
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(orderBody)
             });
     
             if(!res.ok)
