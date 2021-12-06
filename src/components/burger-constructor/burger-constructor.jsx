@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,8 +12,7 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
-    const { orderData } = useSelector(store => store.order);
-    console.log('orderData in constructor', orderData)
+
     const totalPriceInitialState = { price: 0 };
     const totalPriceReducer = (state, action) => {
       switch(action.type){

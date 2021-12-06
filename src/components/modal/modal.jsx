@@ -37,7 +37,7 @@ const Modal = ({ children }) => {
 
     const content = (
         <>
-            <ModalOverlay onClose={onClose} />
+            <ModalOverlay />
             <div className={`${styles.modal} p-10 pb-15`} 
                  onKeyDown={handleKeyPress} tabIndex='0'>                
                 <div className={styles.titleContainer}>
