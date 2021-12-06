@@ -1,9 +1,11 @@
 import {    
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
-    GET_INGREDIENTS_FAILED,
-    SET_CONSTRUCTOR_INGREDIENTS
-} from '../../utils/action-types';
+    GET_INGREDIENTS_FAILED,  
+    SET_MODAL_DATA,
+    SET_MODAL_ERROR,
+    CLOSE_MODAL
+} from '../actions/action-types';
 
 const initialIngredientsState = {
     ingredientsRequest: true,
@@ -70,6 +72,45 @@ export const getIngredients = (ingredientsURL, defaultCart) => {
             }); 
         }
     }    
+}
+
+const initialModalState = {
+    modalType: null,
+    modalMode: null, 
+    modalTitle: null,
+    modalData: {},
+    hasModalError: false,
+    modalVisible: false
+}
+
+export const modal = (state = initialModalState, action) => {
+    switch(action.type){
+        case SET_MODAL_DATA: {
+            return {
+                ...state,
+                modalMode: action.mode,
+                modalTitle: action.title,
+                modalData: action.data,
+                modalVisible: true,
+                hasModalError: false
+            }
+        }
+        case SET_MODAL_ERROR: {
+            return {
+                ...state,
+                hasModalError: true
+            }
+        }
+        case CLOSE_MODAL: {
+            console.log('CLOSE')
+            return {
+                ...state,
+                modalVisible: false
+            }
+        }
+        default:
+            return state;
+    }
 }
 
 const initialOrderState = {

@@ -1,18 +1,24 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
+import {
+    CLOSE_MODAL
+} from '../../services/actions/action-types';
+
 
 import styles from './modal-overlay.module.css';
 
-const ModalOverlay = ({ onClose }) => {
+const ModalOverlay = () => {
+
+    const dispatch = useDispatch();
+    const onClose = () =>
+        dispatch({ type: CLOSE_MODAL });
+
     return (
-        <div className={styles.overlay} 
-             onClick={onClose}>
+        <div 
+            className={styles.overlay} 
+            onClick={onClose}>
         </div>
     )
-}
-
-ModalOverlay.propTypes = {
-    onClose: PropTypes.func.isRequired
 }
 
 export default ModalOverlay;

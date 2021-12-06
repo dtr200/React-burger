@@ -22,20 +22,29 @@ const App = () => {
     constructorIngredients 
   } = useSelector(store => store.ingredients);
 
+  const { modal } = useSelector(store => store);
+  console.log(modal)
+  const {
+    modalVisible,
+    modalMode,
+    modalTitle,
+    modalData,
+    hasModalError
+  } = useSelector(store => store.modal);
+
   const [ hasError, setError ] = useState(false);
   const [ loading, setLoading ] = useState(false);
-  const [ modalData, setModalData ] = 
+/*   const [ modalData, setModalData ] = 
     useState({ type: null, data: null });
   const [ hasModalError, setModalError ] = useState(false);
-  const [ modalVisible, setModal ] = useState(false);  
+  const [ modalVisible, setModal ] = useState(false);  */ 
 
-  const handleOpenModal = async ({ type, id }) => {  
+  /* const handleOpenModal = async ({ type, id }) => {  
     let title, currentData;
 
     if(type === 'ingredient' && id){
-      title = 'Детали ингредиента';
-      currentData = ingredientsData.find(item => item._id === id);
-      setModalData({ type, title, data: currentData });
+      
+      
     }
     else{
       title = '';
@@ -62,10 +71,10 @@ const App = () => {
       }  
     }    
     setModal(true);   
-  }
+  } */
 
-  const handleCloseModal = () =>
-    setModal(false);
+ /*  const handleCloseModal = () =>
+    setModal(false); */
 
   useEffect(() => {
     dispatch(getIngredients(INGREDIENTS_URL, DEFAULT_CART));
@@ -78,15 +87,15 @@ const App = () => {
         { ingredientsFailed ? <ErrorIndicator /> :
           ingredientsRequest ? <Spinner /> : 
           <>
-            <BurgerIngredients onOpen={handleOpenModal} />
-            <BurgerConstructor onOpen={handleOpenModal} />
+            <BurgerIngredients />
+            <BurgerConstructor /* onOpen={handleOpenModal} */ />
             { modalVisible &&
-              <Modal title={modalData.title} onClose={handleCloseModal}>
+              <Modal title={modalTitle}>
                 { 
                   hasModalError ?
                   <ErrorIndicator /> :             
-                  (modalData.type === 'ingredient' ? 
-                  <IngredientDetails { ...modalData.data } /> : 
+                  (modalMode === 'ingredient' ? 
+                  <IngredientDetails { ...modalData } /> : 
                   <OrderDetails { ...modalData.data }/>)
                 }
               </Modal> }

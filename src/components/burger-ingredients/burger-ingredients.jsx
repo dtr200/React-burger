@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import ItemCart from '../item-cart/item-cart';
+import {
+    SET_MODAL_DATA
+  } from '../../services/actions/action-types';
 
 import styles from './burger-ingredients.module.css';
 
-const BurgerIngredients = ({ onOpen }) => {
+const BurgerIngredients = () => {
+    const dispatch = useDispatch();
     const { 
         ingredientsData,
         constructorIngredients 
@@ -41,7 +44,13 @@ const BurgerIngredients = ({ onOpen }) => {
     const onItemClick = (e) => {
         const li = e.target.closest('li'),
               id = li ? li.dataset.id : null;
-        onOpen({ type: 'ingredient', id });
+
+        dispatch({ 
+            type: SET_MODAL_DATA,
+            mode: 'ingredient',
+            title: 'Детали ингредиента',
+            data: ingredientsData.find(item => item._id === id)
+        });
     }
        
     const blocks = createIngredientsBlocks();
@@ -87,10 +96,6 @@ const BurgerIngredients = ({ onOpen }) => {
             </section>            
         </section>
     )
-}
-
-BurgerIngredients.propTypes = {
-    onOpen: PropTypes.func.isRequired
-}    
+}   
 
 export default BurgerIngredients;
