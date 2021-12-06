@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import ItemCart from '../item-cart/item-cart';
@@ -6,6 +7,10 @@ import ItemCart from '../item-cart/item-cart';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({ data, cart, onOpen }) => {
+    const { 
+        ingredientsData,
+        constructorIngredients 
+      } = useSelector(store => store.ingredients);
 
     const [ tab, setTab ] = useState('Булки');
 

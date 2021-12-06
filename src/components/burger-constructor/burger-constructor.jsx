@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { CartContext } from '../../services/cart-context';
 
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ onOpen }) => {
+
+    const { constructorIngredients } = useSelector(store => store.ingredients);
 
     const totalPriceInitialState = { price: 0 };
     const totalPriceReducer = (state, action) => {
@@ -24,22 +26,18 @@ const BurgerConstructor = ({ onOpen }) => {
       }
     }
 
-    const cart = useContext(CartContext);
-
     const [ totalPrice, dispatchTotalPrice ] = 
     useReducer(totalPriceReducer, totalPriceInitialState);    
 
     useEffect(() => {
-        const price = cart.reduce((accum, product) => 
+        const price = constructorIngredients.reduce((accum, product) => 
           accum + product.item.price * product.pcs, 0);
           
         dispatchTotalPrice({ type: 'SET', payload: price });
-    }, [cart]);
+    }, [constructorIngredients]);
 
     const onTotalClick = () =>
         onOpen({ type: 'order', id: null });
-        
-    cart.sort((a, b) => a.item.price > b.item.price ? 1 : -1);
 
     const getBun = (items, position, descr) => {
         const bun = items.find(product => 
@@ -59,11 +57,11 @@ const BurgerConstructor = ({ onOpen }) => {
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
-                {getBun(cart, 'top', '(верх)')}
+                {getBun(constructorIngredients, 'top', '(верх)')}
             </ul>   
             <ul className={`${styles.list} pr-2`}>
                 {
-                    cart.map((slice, i) => {
+                    constructorIngredients.map((slice, i) => {
                         let { _id, name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
@@ -88,7 +86,7 @@ const BurgerConstructor = ({ onOpen }) => {
                 }
             </ul>
             <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
-                {getBun(cart, 'bottom', '(низ)')}
+                {getBun(constructorIngredients, 'bottom', '(низ)')}
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>
                 <div className={styles.totalPriceBlock}>
