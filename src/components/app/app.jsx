@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
@@ -8,72 +8,23 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, ORDER_DATA, DEFAULT_CART, ORDER_URL } from 
+import { INGREDIENTS_URL, DEFAULT_CART } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/reducers/reducer';
 import styles from './app.module.css';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { 
-    ingredientsData, 
+  const {
     ingredientsRequest, 
-    ingredientsFailed,
-    constructorIngredients 
+    ingredientsFailed
   } = useSelector(store => store.ingredients);
 
-  const { modal } = useSelector(store => store);
-  console.log(modal)
   const {
     modalVisible,
     modalMode,
-    modalData,
     hasModalError
   } = useSelector(store => store.modal);
-
-  const [ hasError, setError ] = useState(false);
-  const [ loading, setLoading ] = useState(false);
-/*   const [ modalData, setModalData ] = 
-    useState({ type: null, data: null });
-  const [ hasModalError, setModalError ] = useState(false);
-  const [ modalVisible, setModal ] = useState(false);  */ 
-
-  /* const handleOpenModal = async ({ type, id }) => {  
-    let title, currentData;
-
-    if(type === 'ingredient' && id){
-      
-      
-    }
-    else{
-      title = '';
-      const orderBody = {
-        ingredients: constructorIngredients.map(product => product.item._id)
-      };
-      
-      try{
-        const res = await fetch(ORDER_URL, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(orderBody)
-        });
-  
-        if(!res.ok)
-          throw new Error('');
-
-        const data = await res.json();
-        currentData = { ...ORDER_DATA, data };
-        setModalData({ type, title, data: currentData });
-      }
-      catch(err){
-        setModalError(true);
-      }  
-    }    
-    setModal(true);   
-  } */
-
- /*  const handleCloseModal = () =>
-    setModal(false); */
 
   useEffect(() => {
     dispatch(getIngredients(INGREDIENTS_URL, DEFAULT_CART));
@@ -87,15 +38,14 @@ const App = () => {
           ingredientsRequest ? <Spinner /> : 
           <>
             <BurgerIngredients />
-            <BurgerConstructor /* onOpen={handleOpenModal} */ />
+            <BurgerConstructor />
             { modalVisible &&
               <Modal>
                 { 
                   hasModalError ?
                   <ErrorIndicator /> :             
                   (modalMode === 'ingredient' ? 
-                  <IngredientDetails /> : 
-                  <OrderDetails { ...modalData }/>)
+                  <IngredientDetails /> : <OrderDetails />)
                 }
               </Modal> }
           </>
