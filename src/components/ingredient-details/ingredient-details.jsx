@@ -1,12 +1,14 @@
 import React from "react";
 import Fact from '../fact/fact';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import styles from './ingredient-details.module.css';
 
-const IngredientDetails = (props) => {
+const IngredientDetails = () => {
+    const { modalData } = useSelector(store => store.modal);
+
     const { name: ingredientName, 
-            image_large: ingredientImage } = props;
+            image_large: ingredientImage } = modalData;
 
     const keyToTabNameMap = {
         calories: 'Калории,ккал',
@@ -17,11 +19,11 @@ const IngredientDetails = (props) => {
 
     const createFactsArray = () => {
         const items = [];
-        for(let key in props){
+        for(let key in modalData){
             if(keyToTabNameMap[key])
                 items.push(
                     { title: keyToTabNameMap[key],
-                      value: props[key] }
+                      value: modalData[key] }
                 );
         }
         return [ items.pop(), ...items.sort()];
@@ -44,22 +46,5 @@ const IngredientDetails = (props) => {
         </div>
     );
 }
-
-const detailsShapeTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
-});
-
-IngredientDetails.propTypes = detailsShapeTypes.isRequired;
 
 export default IngredientDetails;

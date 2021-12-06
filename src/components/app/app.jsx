@@ -27,7 +27,6 @@ const App = () => {
   const {
     modalVisible,
     modalMode,
-    modalTitle,
     modalData,
     hasModalError
   } = useSelector(store => store.modal);
@@ -90,13 +89,13 @@ const App = () => {
             <BurgerIngredients />
             <BurgerConstructor /* onOpen={handleOpenModal} */ />
             { modalVisible &&
-              <Modal title={modalTitle}>
+              <Modal>
                 { 
                   hasModalError ?
                   <ErrorIndicator /> :             
                   (modalMode === 'ingredient' ? 
-                  <IngredientDetails { ...modalData } /> : 
-                  <OrderDetails { ...modalData.data }/>)
+                  <IngredientDetails /> : 
+                  <OrderDetails { ...modalData }/>)
                 }
               </Modal> }
           </>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import PropTypes from 'prop-types';
 import { CloseIcon } from 
@@ -13,7 +13,11 @@ import styles from './modal.module.css';
 
 const root = document.getElementById('react-modals');
 
-const Modal = ({ title, children }) => {
+const Modal = ({ children }) => {
+
+    const {
+        modalTitle
+      } = useSelector(store => store.modal);
 
     const dispatch = useDispatch();
 
@@ -38,7 +42,7 @@ const Modal = ({ title, children }) => {
                  onKeyDown={handleKeyPress} tabIndex='0'>                
                 <div className={styles.titleContainer}>
                     <h3 className='text text_type_main-large pr-15'>
-                        { title }
+                        { modalTitle }
                     </h3>
                     <CloseIcon onClick={onClose} type="primary" />
                 </div>            
@@ -50,7 +54,6 @@ const Modal = ({ title, children }) => {
 }
 
 Modal.propTypes = {
-    title: PropTypes.string,
     children: PropTypes.element.isRequired,
 }
 
