@@ -89,6 +89,7 @@ const initialModalState = {
 export const modal = (state = initialModalState, action) => {
     switch(action.type){
         case SET_MODAL_DATA: {
+            console.log(action.data)
             return {
                 ...state,
                 modalMode: action.mode,
@@ -134,7 +135,7 @@ export const order = (state = initialOrderState, action) => {
             return {
                 ...state,
                 orderRequest: false,
-                orderData: action.order,
+                orderData: action.data,
                 orderFailed: false,
             }
         }
@@ -168,15 +169,19 @@ export const sendOrder = (orderURL, constructorIngredients) => {
             });
     
             if(!res.ok)
-                dispatch({
-                    type: SEND_ORDER_FAILED
-                });
+                throw new Error('');
 
             const data = await res.json();
 
             dispatch({ 
                 type: SEND_ORDER_SUCCESS,
-                order: data
+                data
+            });
+            dispatch({ 
+                type: SET_MODAL_DATA,
+                mode: 'order',
+                title: '',
+                data
             });
         }
         catch(err){

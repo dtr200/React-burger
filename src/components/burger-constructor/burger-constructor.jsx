@@ -4,9 +4,7 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import { ORDER_URL } from 
     '../../utils/constants';
-import {
-    SET_MODAL_DATA
-    } from '../../services/actions/action-types';
+
 import { sendOrder } from '../../services/reducers/reducer';
 
 import styles from './burger-constructor.module.css';
@@ -14,8 +12,8 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
-    const { order } = useSelector(store => store)
-    
+    const { orderData } = useSelector(store => store.order);
+    console.log('orderData in constructor', orderData)
     const totalPriceInitialState = { price: 0 };
     const totalPriceReducer = (state, action) => {
       switch(action.type){
@@ -42,16 +40,8 @@ const BurgerConstructor = () => {
         dispatchTotalPrice({ type: 'SET', payload: price });
     }, [constructorIngredients]);
 
-    const onTotalClick = () => {
+    const onTotalClick = () =>
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
-        dispatch({ 
-            type: SET_MODAL_DATA,
-            mode: 'order',
-            title: '',
-        });
-        console.log(order)
-        // onOpen({ type: 'order', id: null });
-    }
 
     const getBun = (items, position, descr) => {
         const bun = items.find(product => 
