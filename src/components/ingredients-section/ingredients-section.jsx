@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useInView } from 'react-intersection-observer';
 import ItemCart from '../item-cart/item-cart';
+import PropTypes from 'prop-types';
 import {
     SET_MODAL_DATA,
     SET_CURRENT_INGREDIENT,
@@ -28,7 +29,7 @@ const IngredientsSection = ({ title, items }) => {
             id: title,
             ratio: entry ? entry.intersectionRatio : 0
           });
-    }, [inView, entry, dispatch])
+    }, [inView, entry, dispatch]);
 
     const typeToTitle = {
         bun: 'Булки',        
@@ -61,7 +62,6 @@ const IngredientsSection = ({ title, items }) => {
                 { typeToTitle[title] }
             </h2>
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
-
                 { items.map(item => {
                     const productInCart = constructorIngredients.find(product => 
                         product.item._id === item._id);
@@ -80,6 +80,26 @@ const IngredientsSection = ({ title, items }) => {
             </ul>
         </section>
     )
-}   
+}  
+
+const itemShapeTypes = PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    calories: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    __v: PropTypes.number.isRequired
+});
+
+IngredientsSection.propTypes = {
+    title: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(itemShapeTypes).isRequired
+}
 
 export default IngredientsSection;
