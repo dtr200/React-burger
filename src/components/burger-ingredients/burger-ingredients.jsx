@@ -1,12 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
-import ItemCart from '../item-cart/item-cart';
 import IngredientsSection from '../ingredients-section/ingredients-section';
-import {
-    SET_MODAL_DATA,
-    SET_CURRENT_INGREDIENT
-  } from '../../services/actions/action-types';
 
 import styles from './burger-ingredients.module.css';
 
@@ -59,35 +54,6 @@ const BurgerIngredients = () => {
                         key={block.items[0]._id + i}
                         {...block}
                     />
-                    /* return (
-                        <section 
-                            key={block.items[0]._id + i} 
-                            onClick={onItemClick}
-                            ref={containerRef}>
-                            <h2 className={`text text_type_main-medium mb-6`} 
-                                id={block.title}>
-                                { typeToTitle[block.title] }
-                            </h2>
-                            <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
-
-                                { block.items.map(item => {
-                                    const productInCart = constructorIngredients.find(product => 
-                                        product.item._id === item._id);
-                                        
-                                    const pcs = productInCart ? productInCart.pcs : 0;
-                                    return (
-                                        <ItemCart 
-                                            id={item._id}
-                                            name={item.name}
-                                            price={item.price}
-                                            image={item.image}
-                                            pcs={pcs}
-                                            key={item._id} /> 
-                                    )}) 
-                                }
-                            </ul>
-                        </section>
-                    ) */
                 ) }
             </section>            
         </section>
