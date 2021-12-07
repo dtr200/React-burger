@@ -3,6 +3,7 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
     SET_CURRENT_INGREDIENT,
+    RESET_CURRENT_INGREDIENT,
     SET_TAB_RATIO,
     SET_MODAL_DATA,
     SET_MODAL_ERROR,
@@ -47,6 +48,12 @@ export const ingredients = (state = initialIngredientsState, action) => {
             return {
                 ...state,
                 currentIngredient: action.data
+            }
+        }
+        case RESET_CURRENT_INGREDIENT: {
+            return {
+                ...state,
+                currentIngredient: {}
             }
         }
         default: return state;
