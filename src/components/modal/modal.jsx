@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { CloseIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import {
-    CLOSE_MODAL
+    CLOSE_MODAL,
+    RESET_CURRENT_INGREDIENT
 } from '../../services/actions/action-types';
 
 import styles from './modal.module.css';
@@ -23,6 +24,7 @@ const Modal = ({ children }) => {
 
     const onClose = () => {
         dispatch({ type: CLOSE_MODAL });
+        dispatch({ type: RESET_CURRENT_INGREDIENT });
     }
 
     const handleKeyPress = (e) => {
