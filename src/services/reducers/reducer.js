@@ -1,7 +1,8 @@
 import {    
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
-    GET_INGREDIENTS_FAILED,  
+    GET_INGREDIENTS_FAILED,
+    SET_CURRENT_INGREDIENT,
     SET_MODAL_DATA,
     SET_MODAL_ERROR,
     CLOSE_MODAL,
@@ -39,6 +40,12 @@ export const ingredients = (state = initialIngredientsState, action) => {
                 ...state,
                 ingredientsFailed: true,
                 ingredientsRequest: false
+            }
+        }
+        case SET_CURRENT_INGREDIENT: {
+            return {
+                ...state,
+                currentIngredient: action.data
             }
         }
         default: return state;
@@ -89,7 +96,6 @@ const initialModalState = {
 export const modal = (state = initialModalState, action) => {
     switch(action.type){
         case SET_MODAL_DATA: {
-            console.log(action.data)
             return {
                 ...state,
                 modalMode: action.mode,
@@ -106,7 +112,6 @@ export const modal = (state = initialModalState, action) => {
             }
         }
         case CLOSE_MODAL: {
-            console.log('CLOSE')
             return {
                 ...state,
                 modalVisible: false

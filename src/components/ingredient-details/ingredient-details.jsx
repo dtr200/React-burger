@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = () => {
-    const { modalData } = useSelector(store => store.modal);
+    const { currentIngredient } = useSelector(store => store.ingredients);
 
     const { name: ingredientName, 
-            image_large: ingredientImage } = modalData;
+            image_large: ingredientImage } = currentIngredient;
 
     const keyToTabNameMap = {
         calories: 'Калории,ккал',
@@ -19,11 +19,11 @@ const IngredientDetails = () => {
 
     const createFactsArray = () => {
         const items = [];
-        for(let key in modalData){
+        for(let key in currentIngredient){
             if(keyToTabNameMap[key])
                 items.push(
                     { title: keyToTabNameMap[key],
-                      value: modalData[key] }
+                      value: currentIngredient[key] }
                 );
         }
         return [ items.pop(), ...items.sort()];

@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import ItemCart from '../item-cart/item-cart';
 import {
-    SET_MODAL_DATA
+    SET_MODAL_DATA,
+    SET_CURRENT_INGREDIENT
   } from '../../services/actions/action-types';
 
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
     const dispatch = useDispatch();
+    
     const { 
         ingredientsData,
         constructorIngredients 
@@ -44,12 +46,14 @@ const BurgerIngredients = () => {
     const onItemClick = (e) => {
         const li = e.target.closest('li'),
               id = li ? li.dataset.id : null;
-
+        dispatch({
+            type: SET_CURRENT_INGREDIENT,
+            data: ingredientsData.find(item => item._id === id)
+        })
         dispatch({ 
             type: SET_MODAL_DATA,
             mode: 'ingredient',
-            title: 'Детали ингредиента',
-            data: ingredientsData.find(item => item._id === id)
+            title: 'Детали ингредиента'
         });
     }
        
