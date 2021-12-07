@@ -5,7 +5,7 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
 import { ORDER_URL } from 
     '../../utils/constants';
 
-import { sendOrder } from '../../services/reducers/reducer';
+import { sendOrder } from '../../services/middleware';
 
 import styles from './burger-constructor.module.css';
 

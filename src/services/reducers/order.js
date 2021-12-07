@@ -1,5 +1,4 @@
 import {
-    SET_MODAL_DATA,
     SEND_ORDER_REQUEST,
     SEND_ORDER_SUCCESS,
     SEND_ORDER_FAILED
@@ -36,46 +35,5 @@ export default (state = initialOrderState, action) => {
         }
         default:
             return state;
-    }
-}
-
-export const sendOrder = (orderURL, constructorIngredients) => {
-    return async (dispatch) => {       
-        
-        const orderBody = {
-            ingredients: constructorIngredients.map(product => product.item._id)
-        };
-        
-        try{
-            dispatch({
-                type: SEND_ORDER_REQUEST
-            })
-            const res = await fetch(orderURL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(orderBody)
-            });
-    
-            if(!res.ok)
-                throw new Error('');
-
-            const data = await res.json();
-
-            dispatch({ 
-                type: SEND_ORDER_SUCCESS,
-                data
-            });
-            dispatch({ 
-                type: SET_MODAL_DATA,
-                mode: 'order',
-                title: '',
-                data
-            });
-        }
-        catch(err){
-            dispatch({
-                type: SEND_ORDER_FAILED
-            });
-        }
     }
 }

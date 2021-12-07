@@ -10,7 +10,7 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL, DEFAULT_CART } from 
   '../../utils/constants';
-import { getIngredients } from '../../services/reducers/reducer';
+import { getIngredients } from '../../services/middleware';
 import styles from './app.module.css';
 
 const App = () => {

@@ -77,35 +77,3 @@ export default (state = initialIngredientsState, action) => {
         default: return state;
     }
 }
-
-export const getIngredients = (ingredientsURL, defaultCart) => {
-    return async (dispatch) => {
-        try{
-            dispatch({ 
-                type: GET_INGREDIENTS_REQUEST 
-            });
-            const res = await fetch(ingredientsURL);
-            const json = await res.json();
-            
-            const products = [];
-            json.data.forEach(item => {
-              for(let i = 0; i < defaultCart.length; i++){
-                if(defaultCart[i].id === item._id)
-                  products.push(
-                    { item, pcs: defaultCart[i].pcs }
-                  );
-              }
-            });
-            dispatch({ 
-                type: GET_INGREDIENTS_SUCCESS, 
-                ingredients: json.data,
-                constructorIngredients: products
-            });
-        }
-        catch(err){
-            dispatch({ 
-                type: GET_INGREDIENTS_FAILED
-            }); 
-        }
-    }    
-}
