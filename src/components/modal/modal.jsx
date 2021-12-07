@@ -21,8 +21,9 @@ const Modal = ({ children }) => {
 
     const dispatch = useDispatch();
 
-    const onClose = () =>
+    const onClose = () => {
         dispatch({ type: CLOSE_MODAL });
+    }
 
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')
@@ -37,7 +38,7 @@ const Modal = ({ children }) => {
 
     const content = (
         <>
-            <ModalOverlay />
+            <ModalOverlay onClose={onClose} />
             <div className={`${styles.modal} p-10 pb-15`} 
                  onKeyDown={handleKeyPress} tabIndex='0'>                
                 <div className={styles.titleContainer}>
