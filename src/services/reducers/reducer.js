@@ -196,3 +196,7 @@ export const sendOrder = (orderURL, constructorIngredients) => {
         }
     }
 }
+
+const initialIngredientsNavState = {
+    currentTab: ''
+}

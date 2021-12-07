@@ -15,7 +15,8 @@ const IngredientsNav = ({ active, getTabs,
             <ul className={`${styles.list} mb-10`}>
                 { tabs.map((tab, i) => (
                     <li key={i}>
-                        <Tab value={tab} 
+                        <Tab 
+                            value={tab} 
                             active={tab === active}
                             onClick={clickHandler}>
                             {tab}

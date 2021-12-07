@@ -17,11 +17,3 @@
 .ingredients::-webkit-scrollbar-thumb {
     background-color: var(--text-dark-grey);
 }
-.ingredientsList{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: calc(var(--space) * 6);
-    row-gap: calc(var(--space) * 8);
-    list-style-type: none;
-    margin: calc(var(--space) * 6) 0 0;
-}

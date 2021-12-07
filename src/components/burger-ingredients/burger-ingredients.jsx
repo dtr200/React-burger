@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import ItemCart from '../item-cart/item-cart';
+import IngredientsSection from '../ingredients-section/ingredients-section';
 import {
     SET_MODAL_DATA,
     SET_CURRENT_INGREDIENT
@@ -10,12 +11,8 @@ import {
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
     
-    const { 
-        ingredientsData,
-        constructorIngredients 
-      } = useSelector(store => store.ingredients);
+    const { ingredientsData } = useSelector(store => store.ingredients);
 
     const [ tab, setTab ] = useState('Булки');
 
@@ -31,7 +28,7 @@ const BurgerIngredients = () => {
         for(let key in typeToTitle){
             const item = { title: key };
             item.items = ingredientsData.filter(elem => 
-                elem.type === key)
+                elem.type === key);
             blocks.push(item);
         }
         return blocks;
@@ -40,24 +37,12 @@ const BurgerIngredients = () => {
     const getTabs = () => 
         Object.values(typeToTitle);
 
-    const onTabClick = (title) =>
-        setTab(title);
+    const onTabClick = (title) => {
 
-    const onItemClick = (e) => {
-        const li = e.target.closest('li'),
-              id = li ? li.dataset.id : null;
-        dispatch({
-            type: SET_CURRENT_INGREDIENT,
-            data: ingredientsData.find(item => item._id === id)
-        })
-        dispatch({ 
-            type: SET_MODAL_DATA,
-            mode: 'ingredient',
-            title: 'Детали ингредиента'
-        });
+        setTab(title);
     }
        
-    const blocks = createIngredientsBlocks();
+    const blocks = createIngredientsBlocks();    
 
     return (
         <section className={`${styles.burgerIngredients}`}>
@@ -69,9 +54,16 @@ const BurgerIngredients = () => {
                 getTabs={getTabs}
                 active={tab} />
                 <section className={styles.ingredients}>
-                { blocks.map((block, i) => {
-                    return (
-                        <section key={block.items[0]._id + i} onClick={onItemClick}>
+                { blocks.map((block, i) => 
+                    <IngredientsSection 
+                        key={block.items[0]._id + i}
+                        {...block}
+                    />
+                    /* return (
+                        <section 
+                            key={block.items[0]._id + i} 
+                            onClick={onItemClick}
+                            ref={containerRef}>
                             <h2 className={`text text_type_main-medium mb-6`} 
                                 id={block.title}>
                                 { typeToTitle[block.title] }
@@ -95,8 +87,8 @@ const BurgerIngredients = () => {
                                 }
                             </ul>
                         </section>
-                    )
-                }) }
+                    ) */
+                ) }
             </section>            
         </section>
     )
