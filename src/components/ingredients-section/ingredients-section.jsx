@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
     SET_MODAL_DATA,
     SET_CURRENT_INGREDIENT,
-    SET_TAB_RATIO
+    SET_INGREDIENTS_TAB
   } from '../../services/actions/action-types';
 
 import styles from './ingredients-section.module.css';
@@ -25,7 +25,7 @@ const IngredientsSection = ({ title, items }) => {
 
     useEffect(() => {
         dispatch({
-            type: SET_TAB_RATIO,
+            type: SET_INGREDIENTS_TAB,
             id: title,
             ratio: entry ? entry.intersectionRatio : 0
           });

@@ -6,13 +6,13 @@ import { Tab } from
 import styles from './ingredients-nav.module.css';
 
 const IngredientsNav = () => {
-    const { tabs } = useSelector(store => store.ingredientsNav);
+    const { tabs } = useSelector(store => store.ingredients);
 
     const current = useSelector(state => 
-        state.ingredientsNav.tabs.reduce((current, tab) => {
+        state.ingredients.tabs.reduce((current, tab) => {
             return current.ratio < tab.ratio ? 
                 tab : current;
-        }, state.ingredientsNav.tabs[0]).id);
+        }, state.ingredients.tabs[0]).id);
 
     return(
         <nav>

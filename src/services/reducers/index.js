@@ -1,14 +1,10 @@
 import { combineReducers } from "redux";
-import {
-    ingredients,
-    ingredientsNav,
-    modal,
-    order
-} from './reducer';
+import ingredients from './ingredients';
+import order from './order';
+import modal from './modal';
 
 const rootReducer = combineReducers({
     ingredients,
-    ingredientsNav,
     modal,
     order
 });

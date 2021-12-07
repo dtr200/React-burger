@@ -4,7 +4,7 @@ import {
     GET_INGREDIENTS_FAILED,
     SET_CURRENT_INGREDIENT,
     RESET_CURRENT_INGREDIENT,
-    SET_TAB_RATIO,
+    SET_INGREDIENTS_TAB,
     SET_MODAL_DATA,
     SET_MODAL_ERROR,
     CLOSE_MODAL,
@@ -18,7 +18,24 @@ const initialIngredientsState = {
     ingredientsFailed: false,
     ingredientsData: [],
     constructorIngredients: [],
-    currentIngredient: {}
+    currentIngredient: {},
+    tabs: [
+        {
+          id: 'bun',
+          title: 'Булки',
+          ratio: 0
+        },
+        {
+          id: 'sauce',
+          title: 'Соусы',
+          ratio: 0
+        },
+        {
+          id: 'main',
+          title: 'Начинки',
+          ratio: 0
+        },
+    ]
 }
 
 export const ingredients = (state = initialIngredientsState, action) => {
@@ -54,6 +71,13 @@ export const ingredients = (state = initialIngredientsState, action) => {
             return {
                 ...state,
                 currentIngredient: {}
+            }
+        }
+        case SET_INGREDIENTS_TAB: {
+            return {
+                ...state,
+                tabs: state.tabs.map(tab => 
+                    tab.id === action.id ? {...tab, ratio: action.ratio} : tab)         
             }
         }
         default: return state;
@@ -202,40 +226,5 @@ export const sendOrder = (orderURL, constructorIngredients) => {
                 type: SEND_ORDER_FAILED
             });
         }
-    }
-}
-
-const initialIngredientsNavState = {
-    tabs: [
-        {
-          id: 'bun',
-          title: 'Булки',
-          ratio: 0
-        },
-        {
-          id: 'sauce',
-          title: 'Соусы',
-          ratio: 0
-        },
-        {
-          id: 'main',
-          title: 'Начинки',
-          ratio: 0
-        },
-    ],
-    currentTab: 'bun'
-}
-
-export const ingredientsNav = (state = initialIngredientsNavState, action) => {
-    switch(action.type){
-        case SET_TAB_RATIO: {
-            return {
-                ...state,
-                tabs: state.tabs.map(tab => 
-                    tab.id === action.id ? {...tab, ratio: action.ratio} : tab)         
-            }
-        }
-        default: 
-            return state;
     }
 }
