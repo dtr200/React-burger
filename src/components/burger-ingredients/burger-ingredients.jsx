@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import IngredientsSection from '../ingredients-section/ingredients-section';
@@ -8,8 +8,6 @@ import styles from './burger-ingredients.module.css';
 const BurgerIngredients = () => {
     
     const { ingredientsData } = useSelector(store => store.ingredients);
-
-    const [ tab, setTab ] = useState('Булки');
 
     const typeToTitle = {
         bun: 'Булки',        
@@ -28,13 +26,6 @@ const BurgerIngredients = () => {
         }
         return blocks;
     }
-
-    const getTabs = () => 
-        Object.values(typeToTitle);
-
-    const onTabClick = (title) => {
-        setTab(title);
-    }
        
     const blocks = createIngredientsBlocks();    
 
@@ -43,10 +34,7 @@ const BurgerIngredients = () => {
             <h1 className={`mt-10 mb-5 text text_type_main-large`}>
                 Соберите бургер
             </h1>
-            <IngredientsNav 
-                clickHandler={onTabClick}
-                getTabs={getTabs}
-                active={tab} />
+            <IngredientsNav />
                 <section className={styles.ingredients}>
                 { blocks.map((block, i) => 
                     <IngredientsSection 
@@ -54,7 +42,7 @@ const BurgerIngredients = () => {
                         {...block}
                     />
                 ) }
-            </section>            
+                </section>            
         </section>
     )
 }   

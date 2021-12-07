@@ -36,7 +36,6 @@ const IngredientsSection = ({ title, items }) => {
         main: 'Начинки'
     }
 
-
     const onItemClick = (e) => {
         const li = e.target.closest('li'),
               id = li ? li.dataset.id : null;
