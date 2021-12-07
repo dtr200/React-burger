@@ -33,7 +33,6 @@ const BurgerIngredients = () => {
         Object.values(typeToTitle);
 
     const onTabClick = (title) => {
-
         setTab(title);
     }
        

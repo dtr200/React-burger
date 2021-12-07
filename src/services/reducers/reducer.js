@@ -3,6 +3,7 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
     SET_CURRENT_INGREDIENT,
+    SET_TAB_RATIO,
     SET_MODAL_DATA,
     SET_MODAL_ERROR,
     CLOSE_MODAL,
@@ -198,5 +199,36 @@ export const sendOrder = (orderURL, constructorIngredients) => {
 }
 
 const initialIngredientsNavState = {
-    currentTab: ''
+    tabs: [
+        {
+          id: 'bun',
+          title: 'Булки',
+          ratio: 0
+        },
+        {
+          id: 'sauce',
+          title: 'Соусы',
+          ratio: 0
+        },
+        {
+          id: 'main',
+          title: 'Начинки',
+          ratio: 0
+        },
+    ],
+    currentTab: 'bun'
+}
+
+export const ingredientsNav = (state = initialIngredientsNavState, action) => {
+    switch(action.type){
+        case SET_TAB_RATIO: {
+            return {
+                ...state,
+                tabs: state.tabs.map(tab => 
+                    tab.id === action.id ? {...tab, ratio: action.ratio} : tab)         
+            }
+        }
+        default: 
+            return state;
+    }
 }

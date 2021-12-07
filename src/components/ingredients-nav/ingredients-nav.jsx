@@ -1,36 +1,33 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 import { Tab } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredients-nav.module.css';
 
-const IngredientsNav = ({ active, getTabs, 
-                          clickHandler }) => {
+const IngredientsNav = () => {
+    const { tabs } = useSelector(store => store.ingredientsNav);
 
-    const tabs = getTabs();
-                        
+    const current = useSelector(state => 
+        state.ingredientsNav.tabs.reduce((current, tab) => {
+            return current.ratio < tab.ratio ? 
+                tab : current;
+        }, state.ingredientsNav.tabs[0]).id);
+
     return(
         <nav>
             <ul className={`${styles.list} mb-10`}>
-                { tabs.map((tab, i) => (
+                { tabs.map(({ title, id }, i) => (
                     <li key={i}>
                         <Tab 
-                            value={tab} 
-                            active={tab === active}
-                            onClick={clickHandler}>
-                            {tab}
+                            value={id} 
+                            active={id === current}>
+                            {title}
                         </Tab>
                     </li>)) }
             </ul>
         </nav>
     )
-}
-
-IngredientsNav.propTypes = {
-    active: PropTypes.string.isRequired,
-    getTabs: PropTypes.func.isRequired,
-    clickHandler: PropTypes.func.isRequired
 }
 
 export default IngredientsNav;

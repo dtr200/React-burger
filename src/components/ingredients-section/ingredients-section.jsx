@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useInView } from 'react-intersection-observer';
 import ItemCart from '../item-cart/item-cart';
 import {
     SET_MODAL_DATA,
-    SET_CURRENT_INGREDIENT
+    SET_CURRENT_INGREDIENT,
+    SET_TAB_RATIO
   } from '../../services/actions/action-types';
 
 import styles from './ingredients-section.module.css';
@@ -16,13 +18,17 @@ const IngredientsSection = ({ title, items }) => {
         constructorIngredients 
       } = useSelector(store => store.ingredients);
 
-    const containerRef = useRef(null);
+    const { ref, inView, entry } = useInView({
+        threshold: [0, 0.25, 0.5, 0.75, 1] });
 
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: .5
-    }
+
+    useEffect(() => {
+        dispatch({
+            type: SET_TAB_RATIO,
+            id: title,
+            ratio: entry ? entry.intersectionRatio : 0
+          });
+    }, [inView, entry, dispatch])
 
     const typeToTitle = {
         bun: 'Булки',        
@@ -30,29 +36,6 @@ const IngredientsSection = ({ title, items }) => {
         main: 'Начинки'
     }
 
-    const observe = entries => {
-        const [entry] = entries;
-        console.log(containerRef.current)
-        console.log(entry.isIntersecting)
-        //setTab(entry.isIntersecting);
-    }
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(observe, options);
-        if(containerRef.current)
-            observer.observe(containerRef.current);
-        return () => {
-            if(containerRef.current)
-                observer.unobserve(containerRef.current);
-        }
-    }, [containerRef, options]);
-
-    const getTabs = () => 
-        Object.values(typeToTitle);
-
-    const onTabClick = (title) => {
-
-    }
 
     const onItemClick = (e) => {
         const li = e.target.closest('li'),
@@ -71,7 +54,8 @@ const IngredientsSection = ({ title, items }) => {
     return (
         <section
             onClick={onItemClick}
-            ref={containerRef}>
+            id={title}
+            ref={ref}>
             <h2 
                 className={`text text_type_main-medium mb-6`} 
                 id={title}>
