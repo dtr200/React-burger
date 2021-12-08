@@ -2,6 +2,7 @@
     width: 50%;
 }
 .list{
+    min-height: calc(var(--space) * 20);
     max-height: 48vh;
     overflow: auto;
     display: grid;

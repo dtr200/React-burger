@@ -7,7 +7,8 @@ import { ORDER_URL } from
     '../../utils/constants';
 import {
     ADD_INGREDIENT,
-    DELETE_INGREDIENT
+    DELETE_INGREDIENT,
+    ADD_BUN
 } from '../../services/actions/action-types';
 import { sendOrder } from '../../services/middleware';
 
@@ -17,6 +18,12 @@ const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
 
+    const onDropBun = (item) => {
+        dispatch({
+            type: ADD_BUN,
+            id: item.itemId
+        })
+    }
     const onDropIngredient = (item) => {
         dispatch({
             type: ADD_INGREDIENT,
@@ -27,13 +34,13 @@ const BurgerConstructor = () => {
     const [, dropTargetTopBun] = useDrop({
         accept: 'bun',
         drop(itemId){
-            onDropIngredient(itemId);
+            onDropBun(itemId);
         }
     });
     const [, dropTargetBottomBun] = useDrop({
         accept: 'bun',
         drop(itemId){
-            onDropIngredient(itemId);
+            onDropBun(itemId);
         }
     });
 
@@ -43,6 +50,14 @@ const BurgerConstructor = () => {
             onDropIngredient(itemId);
         } 
     });
+
+    const onDelete = (e) => {
+        const id = e.target.closest('li').dataset.id;
+        dispatch({
+            type: DELETE_INGREDIENT,
+            id
+        })
+    }
 
     const totalPrice = constructorIngredients.reduce((accum, product) => 
         accum + product.item.price * product.amount, 0);
@@ -84,14 +99,18 @@ const BurgerConstructor = () => {
 
                         for(let j = 0; j < slice.amount; j++){
                             elements.push(
-                                <li className={styles.listItem} key={`${_id}${j}`}>
+                                <li 
+                                  className={styles.listItem} 
+                                  key={`${_id}${j}`}
+                                  data-id={_id}>
                                     <div className={styles.settings}>
                                         <DragIcon type={"primary"} />
                                     </div>
                                     <ConstructorElement 
                                         text={name}
                                         price={price}
-                                        thumbnail={image} />
+                                        thumbnail={image}
+                                        handleClose={onDelete} />
                                 </li>
                             );
                         }

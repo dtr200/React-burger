@@ -4,6 +4,7 @@ import {
     GET_INGREDIENTS_FAILED,
     SET_CURRENT_INGREDIENT,
     ADD_INGREDIENT,
+    ADD_BUN,
     DELETE_INGREDIENT,
     RESET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
@@ -71,25 +72,56 @@ export default (state = initialIngredientsState, action) => {
                 currentIngredient: {}
             }
         }
+        case ADD_BUN: {
+            const currentItem = state.ingredientsData.find(item => item._id === action.id);
+            const itemIndex = state.constructorIngredients.findIndex(product => 
+                product.item.type === 'bun');
+
+            const newConstructorIngredients = itemIndex === -1 ?
+                [...state.constructorIngredients, { item: currentItem, amount: 1}] :
+                (
+                    [...state.constructorIngredients.slice(0, itemIndex),
+                        { item: currentItem, amount: 1 },
+                     ...state.constructorIngredients.slice(itemIndex + 1)]
+                );
+
+            return {
+                ...state,
+                constructorIngredients: newConstructorIngredients
+            }
+        }
         case ADD_INGREDIENT: {
             const currentItem = state.ingredientsData.find(item => item._id === action.id);
             const itemIndex = state.constructorIngredients.findIndex(product => 
                 product.item._id === action.id);
-            
+
             const newConstructorIngredients = itemIndex === -1 ? 
                 [...state.constructorIngredients, { item: currentItem, amount: 1} ] :
-                state.constructorIngredients.map(product => 
-                    product.item._id === action.id ? 
-                    { ...product, amount: product.amount + 1 } : product);
-                    
+                ( state.constructorIngredients.map(product =>
+                    product.item._id === action.id ?
+                        { ...product, amount: product.amount + 1 } : product)
+                );
             return {
                 ...state,
                constructorIngredients: newConstructorIngredients
             }
         }
         case DELETE_INGREDIENT: {
+            const itemIndex = state.constructorIngredients.findIndex(product => 
+                product.item._id === action.id);
+            
+            const newConstructorIngredients = 
+                state.constructorIngredients[itemIndex].amount === 1 ? (
+                [...state.constructorIngredients.slice(0, itemIndex),
+                 ...state.constructorIngredients.slice(itemIndex + 1)] 
+                ) : (
+                state.constructorIngredients.map(product =>
+                    product.item._id === action.id ?
+                        { ...product, amount: product.amount - 1 } : product)
+                );
             return {
-                ...state
+                ...state,
+                constructorIngredients: newConstructorIngredients
             }
         }
         case SET_INGREDIENTS_TAB: {
