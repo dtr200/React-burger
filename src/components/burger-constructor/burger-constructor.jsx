@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useDrop } from 'react-dnd';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import { ORDER_URL } from 
@@ -12,6 +13,34 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
+
+    const onDropBun = (item) => {
+        console.log(item.itemId)
+    }
+
+    const onDropIngredient = (item) => {
+        console.log(item.itemId)
+    }
+
+    const [, dropTargetTopBun] = useDrop({
+        accept: 'bun',
+        drop(itemId){
+            onDropBun(itemId);
+        }
+    });
+    const [, dropTargetBottomBun] = useDrop({
+        accept: 'bun',
+        drop(itemId){
+            onDropBun(itemId);
+        }
+    });
+
+    const [, dropIngredientsTarget] = useDrop({
+        accept: ['sauce', 'main'],
+        drop(itemId){
+            onDropIngredient(itemId);
+        } 
+    });
 
     const totalPrice = constructorIngredients.reduce((accum, product) => 
         accum + product.item.price * product.amount, 0);
@@ -36,10 +65,14 @@ const BurgerConstructor = () => {
 
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
-            <ul className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}>
+            <ul 
+              className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}
+              ref={dropTargetTopBun}>
                 {getBun(constructorIngredients, 'top', '(верх)')}
             </ul>   
-            <ul className={`${styles.list} pr-2`}>
+            <ul 
+              className={`${styles.list} pr-2`}
+              ref={dropIngredientsTarget}>
                 {
                     constructorIngredients.map(slice => {
                         let { _id, name, price, image, type } = slice.item; 
@@ -65,7 +98,9 @@ const BurgerConstructor = () => {
                     })
                 }
             </ul>
-            <ul className={`${styles.bun} ${styles.bunBottom} pr-4`}>
+            <ul 
+              className={`${styles.bun} ${styles.bunBottom} pr-4`}
+              ref={dropTargetBottomBun}>
                 {getBun(constructorIngredients, 'bottom', '(низ)')}
             </ul>
             <div className={`${styles.total} text text_type_digits-medium pt-10 pr-4`}>

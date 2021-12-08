@@ -9,10 +9,10 @@ import styles from './item-cart.module.css';
 const ItemCart = ({ id: itemId, name: itemName, 
                     price: itemPrice, image: itemImage,
                     type, amount }) => {
-
+                  
     const [ , dragRef ] = useDrag({
         type,
-        item: itemId,
+        item: { itemId },
         collect: monitor => ({
             isDrag: monitor.isDragging()
         })
