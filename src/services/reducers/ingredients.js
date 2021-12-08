@@ -6,12 +6,15 @@ import {
     RESET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
+import {
+    DEFAULT_CART
+} from '../../utils/constants';
 
 const initialIngredientsState = {
     ingredientsRequest: true,
     ingredientsFailed: false,
     ingredientsData: [],
-    constructorIngredients: [],
+    constructorIngredients: DEFAULT_CART,
     currentIngredient: {},
     tabs: [
         {
@@ -44,7 +47,6 @@ export default (state = initialIngredientsState, action) => {
             return {
                 ...state,
                 ingredientsData: action.ingredients,
-                constructorIngredients: action.constructorIngredients,
                 ingredientsRequest: false
             }
         }

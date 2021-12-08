@@ -13,7 +13,7 @@ import styles from './ingredients-section.module.css';
 
 const IngredientsSection = ({ title, items }) => {
     const dispatch = useDispatch();
-    
+
     const { 
         ingredientsData,
         constructorIngredients 
@@ -62,18 +62,14 @@ const IngredientsSection = ({ title, items }) => {
                 { typeToTitle[title] }
             </h2>
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
-                { items.map(item => {
-                    const productInCart = constructorIngredients.find(product => 
-                        product.item._id === item._id);
-                        
-                    const pcs = productInCart ? productInCart.pcs : 0;
+                { items.map(({ item, amount }) => {
                     return (
                         <ItemCart 
                             id={item._id}
                             name={item.name}
                             price={item.price}
                             image={item.image}
-                            pcs={pcs}
+                            amount={amount}
                             key={item._id} /> 
                     )}) 
                 }
@@ -97,9 +93,14 @@ const itemShapeTypes = PropTypes.shape({
     __v: PropTypes.number.isRequired
 });
 
+const itemsShapeTypes = PropTypes.shape({
+    item: itemShapeTypes.isRequired,
+    amount: PropTypes.number.isRequired
+});
+
 IngredientsSection.propTypes = {
     title: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(itemShapeTypes).isRequired
+    items: PropTypes.arrayOf(itemsShapeTypes).isRequired
 }
 
 export default IngredientsSection;

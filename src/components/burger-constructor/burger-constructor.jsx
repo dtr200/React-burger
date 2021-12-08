@@ -12,8 +12,9 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
+
     const totalPrice = constructorIngredients.reduce((accum, product) => 
-        accum + product.item.price * product.pcs, 0);
+        accum + product.item.price * product.amount, 0);
 
     const onTotalClick = () =>
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
@@ -46,7 +47,7 @@ const BurgerConstructor = () => {
                         
                         const elements = [];
 
-                        for(let j = 0; j < slice.pcs; j++){
+                        for(let j = 0; j < slice.amount; j++){
                             elements.push(
                                 <li className={styles.listItem} key={`${_id}${j}`}>
                                     <div className={styles.settings}>

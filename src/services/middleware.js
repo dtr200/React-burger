@@ -8,7 +8,7 @@ import {
     SEND_ORDER_FAILED
 } from './actions/action-types';
 
-export const getIngredients = (ingredientsURL, defaultCart) => {
+export const getIngredients = (ingredientsURL) => {
     return async (dispatch) => {
         try{
             dispatch({ 
@@ -16,20 +16,9 @@ export const getIngredients = (ingredientsURL, defaultCart) => {
             });
             const res = await fetch(ingredientsURL);
             const json = await res.json();
-            
-            const products = [];
-            json.data.forEach(item => {
-              for(let i = 0; i < defaultCart.length; i++){
-                if(defaultCart[i].id === item._id)
-                  products.push(
-                    { item, pcs: defaultCart[i].pcs }
-                  );
-              }
-            });
             dispatch({ 
                 type: GET_INGREDIENTS_SUCCESS, 
-                ingredients: json.data,
-                constructorIngredients: products
+                ingredients: json.data
             });
         }
         catch(err){

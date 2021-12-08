@@ -8,7 +8,7 @@ import Spinner from '../spinner/spinner';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { INGREDIENTS_URL, DEFAULT_CART } from 
+import { INGREDIENTS_URL } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/middleware';
 import styles from './app.module.css';
@@ -27,7 +27,7 @@ const App = () => {
   } = useSelector(store => store.modal);
 
   useEffect(() => {
-    dispatch(getIngredients(INGREDIENTS_URL, DEFAULT_CART));
+    dispatch(getIngredients(INGREDIENTS_URL));
   }, []);
 
   return (
