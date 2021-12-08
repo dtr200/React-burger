@@ -1,4 +1,5 @@
 import React from "react";
+import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,10 +8,21 @@ import styles from './item-cart.module.css';
 
 const ItemCart = ({ id: itemId, name: itemName, 
                     price: itemPrice, image: itemImage,
-                    amount }) => {
+                    type, amount }) => {
+
+    const [ , dragRef ] = useDrag({
+        type,
+        item: itemId,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
 
     return(
-        <li className={styles.itemCart} data-id={itemId}>
+        <li 
+          className={styles.itemCart} 
+          data-id={itemId}
+          ref={dragRef}>
             <img src={itemImage} 
                  className={styles.image} 
                  alt={itemName} />
@@ -31,6 +43,7 @@ ItemCart.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired, 
     image: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired
 }
 

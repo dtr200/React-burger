@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ingredients from "../../services/reducers/ingredients";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import IngredientsSection from '../ingredients-section/ingredients-section';
 

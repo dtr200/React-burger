@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useInView } from 'react-intersection-observer';
+
 import ItemCart from '../item-cart/item-cart';
 import PropTypes from 'prop-types';
 import {
@@ -69,6 +70,7 @@ const IngredientsSection = ({ title, items }) => {
                             name={item.name}
                             price={item.price}
                             image={item.image}
+                            type={item.type}
                             amount={amount}
                             key={item._id} /> 
                     )}) 
