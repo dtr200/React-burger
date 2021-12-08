@@ -5,7 +5,10 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import { ORDER_URL } from 
     '../../utils/constants';
-
+import {
+    ADD_INGREDIENT,
+    DELETE_INGREDIENT
+} from '../../services/actions/action-types';
 import { sendOrder } from '../../services/middleware';
 
 import styles from './burger-constructor.module.css';
@@ -14,24 +17,23 @@ const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
 
-    const onDropBun = (item) => {
-        console.log(item.itemId)
-    }
-
     const onDropIngredient = (item) => {
-        console.log(item.itemId)
+        dispatch({
+            type: ADD_INGREDIENT,
+            id: item.itemId
+        })
     }
 
     const [, dropTargetTopBun] = useDrop({
         accept: 'bun',
         drop(itemId){
-            onDropBun(itemId);
+            onDropIngredient(itemId);
         }
     });
     const [, dropTargetBottomBun] = useDrop({
         accept: 'bun',
         drop(itemId){
-            onDropBun(itemId);
+            onDropIngredient(itemId);
         }
     });
 

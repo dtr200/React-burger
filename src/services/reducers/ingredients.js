@@ -3,6 +3,8 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
     SET_CURRENT_INGREDIENT,
+    ADD_INGREDIENT,
+    DELETE_INGREDIENT,
     RESET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
@@ -67,6 +69,27 @@ export default (state = initialIngredientsState, action) => {
             return {
                 ...state,
                 currentIngredient: {}
+            }
+        }
+        case ADD_INGREDIENT: {
+            const currentItem = state.ingredientsData.find(item => item._id === action.id);
+            const itemIndex = state.constructorIngredients.findIndex(product => 
+                product.item._id === action.id);
+            
+            const newConstructorIngredients = itemIndex === -1 ? 
+                [...state.constructorIngredients, { item: currentItem, amount: 1} ] :
+                state.constructorIngredients.map(product => 
+                    product.item._id === action.id ? 
+                    { ...product, amount: product.amount + 1 } : product);
+                    
+            return {
+                ...state,
+               constructorIngredients: newConstructorIngredients
+            }
+        }
+        case DELETE_INGREDIENT: {
+            return {
+                ...state
             }
         }
         case SET_INGREDIENTS_TAB: {
