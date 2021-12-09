@@ -20,7 +20,6 @@ const BurgerIngredients = () => {
 
     const createIngredientsBlocks = () => {        
         const blocks = [];
-
         for(let key in typeToTitle){
             const item = { 
                 title: key,

@@ -7,6 +7,7 @@ import {
     ADD_BUN,
     DELETE_INGREDIENT,
     RESET_CURRENT_INGREDIENT,
+    MOVE_INGREDIENT,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
 import {
@@ -119,6 +120,18 @@ export default (state = initialIngredientsState, action) => {
                     product.item._id === action.id ?
                         { ...product, amount: product.amount - 1 } : product)
                 );
+            return {
+                ...state,
+                constructorIngredients: newConstructorIngredients
+            }
+        }
+        case MOVE_INGREDIENT: {    
+            const dragCard = state.constructorIngredients[action.drag];
+            const hoverCard = state.constructorIngredients[action.hover];        
+            const newConstructorIngredients = [...state.constructorIngredients];
+            newConstructorIngredients[action.drag] = hoverCard;
+            newConstructorIngredients[action.hover] = dragCard;
+
             return {
                 ...state,
                 constructorIngredients: newConstructorIngredients

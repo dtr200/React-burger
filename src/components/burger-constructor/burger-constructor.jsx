@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
@@ -8,7 +8,8 @@ import { ORDER_URL } from
     '../../utils/constants';
 import {
     ADD_INGREDIENT,
-    ADD_BUN
+    ADD_BUN,
+    MOVE_INGREDIENT
 } from '../../services/actions/action-types';
 import { sendOrder } from '../../services/middleware';
 
@@ -25,7 +26,7 @@ const BurgerConstructor = () => {
         })
     }
     const onDropIngredient = (item) => {
-        dispatch({
+        item.itemId && dispatch({
             type: ADD_INGREDIENT,
             id: item.itemId
         })
@@ -45,10 +46,10 @@ const BurgerConstructor = () => {
     });
 
     const [, dropIngredientsTarget] = useDrop({
-        accept: ['sauce', 'main'],
+        accept: ['sauce', 'main', 'ingredient'],
         drop(itemId){
-            onDropIngredient(itemId);
-        } 
+            return onDropIngredient(itemId);
+        }
     });
 
     const totalPrice = constructorIngredients.reduce((accum, product) => 
@@ -71,6 +72,14 @@ const BurgerConstructor = () => {
         )
     }
 
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        dispatch({
+            type: MOVE_INGREDIENT,
+            drag: dragIndex,
+            hover: hoverIndex
+        });
+    }, [constructorIngredients]);
+
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul 
@@ -79,10 +88,10 @@ const BurgerConstructor = () => {
                 {getBun(constructorIngredients, 'top', '(верх)')}
             </ul>   
             <ul 
-              className={`${styles.list} pr-2`}
+              className={`${styles.list} pr-2`} 
               ref={dropIngredientsTarget}>
                 {
-                    constructorIngredients.map(slice => {
+                    constructorIngredients.map((slice, i) => {
                         let { _id, name, price, image, type } = slice.item; 
                         if(type === 'bun') return;
                         
@@ -95,7 +104,9 @@ const BurgerConstructor = () => {
                                     id={_id}
                                     text={name}
                                     price={price}
-                                    thumbnail={image}/>
+                                    thumbnail={image}
+                                    index={i}
+                                    moveCard={moveCard}/>
                             );
                         }
                         
