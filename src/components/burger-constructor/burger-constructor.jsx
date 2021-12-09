@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useDrop } from 'react-dnd';
-import { ConstructorElement, DragIcon, CurrencyIcon, Button } from 
+import { useDrag, useDrop } from 'react-dnd';
+import ConstructorItem from '../constructor-item/constructor-item';
+import { CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import { ORDER_URL } from 
     '../../utils/constants';
 import {
     ADD_INGREDIENT,
-    DELETE_INGREDIENT,
     ADD_BUN
 } from '../../services/actions/action-types';
 import { sendOrder } from '../../services/middleware';
@@ -51,14 +51,6 @@ const BurgerConstructor = () => {
         } 
     });
 
-    const onDelete = (e) => {
-        const id = e.target.closest('li').dataset.id;
-        dispatch({
-            type: DELETE_INGREDIENT,
-            id
-        })
-    }
-
     const totalPrice = constructorIngredients.reduce((accum, product) => 
         accum + product.item.price * product.amount, 0);
 
@@ -69,14 +61,13 @@ const BurgerConstructor = () => {
         const bun = items.find(product => 
             product.item.type === 'bun').item;
         return (
-            <li className={styles.listItem}>
-                <ConstructorElement 
-                    text={`${bun.name} ${descr}`}
-                    type={position}
-                    isLocked={true}
-                    price={bun.price}
-                    thumbnail={bun.image} />
-            </li>
+            <ConstructorItem 
+                text={`${bun.name} ${descr}`}
+                type={position}
+                isLocked={true}
+                price={bun.price}
+                thumbnail={bun.image}
+                isBun={true} />
         )
     }
 
@@ -99,19 +90,12 @@ const BurgerConstructor = () => {
 
                         for(let j = 0; j < slice.amount; j++){
                             elements.push(
-                                <li 
-                                  className={styles.listItem} 
-                                  key={`${_id}${j}`}
-                                  data-id={_id}>
-                                    <div className={styles.settings}>
-                                        <DragIcon type={"primary"} />
-                                    </div>
-                                    <ConstructorElement 
-                                        text={name}
-                                        price={price}
-                                        thumbnail={image}
-                                        handleClose={onDelete} />
-                                </li>
+                                <ConstructorItem 
+                                    key={`${_id}${j}`}
+                                    id={_id}
+                                    text={name}
+                                    price={price}
+                                    thumbnail={image}/>
                             );
                         }
                         

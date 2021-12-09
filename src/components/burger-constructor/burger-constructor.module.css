@@ -32,11 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: end;
-}
-.settings{
-    width: calc(var(--space) * 8);
-    display: flex;
-    align-items: center;
+    cursor: pointer;
 }
 .total{
     display: flex;
