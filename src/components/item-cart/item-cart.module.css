@@ -1,8 +1,12 @@
 .itemCart{
+    position: relative;
+    cursor: pointer;
+}
+.itemCartContainer{
     display: grid;
     justify-content: center;
     position: relative;
-    cursor: pointer;
+    z-index: 1;
 }
 .price{
     display: flex;

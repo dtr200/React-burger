@@ -21,19 +21,23 @@ const ItemCart = ({ id: itemId, name: itemName,
     return(
         <li 
           className={styles.itemCart} 
-          data-id={itemId}
-          ref={dragRef}>
-            <img src={itemImage} 
-                 className={styles.image} 
-                 alt={itemName} />
+          data-id={itemId}>
+            <div 
+              className={styles.itemCartContainer}
+              ref={dragRef}>
+                <img src={itemImage} 
+                    className={styles.image} 
+                    alt={itemName} />
+                
+                <span className={`${styles.price} text text_type_digits-default mt-2 mb-2`}>
+                    { itemPrice }
+                    <CurrencyIcon type="primary" />
+                </span>
+                <span className={`${styles.name} text text_type_main-default`}>
+                    { itemName }
+                </span>
+            </div>
             { amount !== 0 && <Counter count={amount} size="default" /> }
-            <span className={`${styles.price} text text_type_digits-default mt-2 mb-2`}>
-                { itemPrice }
-                <CurrencyIcon type="primary" />
-            </span>
-            <span className={`${styles.name} text text_type_main-default`}>
-                { itemName }
-            </span>
         </li>
     )
 }
