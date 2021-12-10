@@ -33,7 +33,7 @@ export const sendOrder = (orderURL, constructorIngredients) => {
     return async (dispatch) => {       
         
         const orderBody = {
-            ingredients: constructorIngredients.map(product => product.item._id)
+            ingredients: constructorIngredients.map(product => product._id)
         };
         
         try{
