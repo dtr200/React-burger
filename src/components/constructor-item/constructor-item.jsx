@@ -64,7 +64,7 @@ const ConstructorItem = (props) => {
     drag(drop(ref));
     return(  
         isBun ? (
-            <li className={styles.constructorItem}>
+            <li className={`${styles.constructorItem} ${styles.bun}`}>
                 <ConstructorElement {...props} />
             </li>
         ) : (      

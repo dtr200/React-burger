@@ -4,6 +4,9 @@
     justify-content: end;
     cursor: grab;
 }
+.bun{
+    cursor: pointer;
+}
 .settings{
     width: calc(var(--space) * 8);
     display: flex;
