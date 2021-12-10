@@ -7,7 +7,8 @@ import { CloseIcon } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import {
     CLOSE_MODAL,
-    RESET_CURRENT_INGREDIENT
+    RESET_CURRENT_INGREDIENT,
+    RESET_ORDER_REQUEST
 } from '../../services/actions/action-types';
 
 import styles from './modal.module.css';
@@ -23,8 +24,10 @@ const Modal = ({ children }) => {
     const dispatch = useDispatch();
 
     const onClose = () => {
+        console.log('close')
         dispatch({ type: CLOSE_MODAL });
         dispatch({ type: RESET_CURRENT_INGREDIENT });
+        dispatch({ type: RESET_ORDER_REQUEST });
     }
 
     const handleKeyPress = (e) => {

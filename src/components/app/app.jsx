@@ -27,6 +27,7 @@ const App = () => {
     modalMode,
     hasModalError
   } = useSelector(store => store.modal);
+  const { orderFailed } = useSelector(store => store.order);
 
   useEffect(() => {
     dispatch(getIngredients(INGREDIENTS_URL));
@@ -42,10 +43,10 @@ const App = () => {
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
               <BurgerConstructor />
-              { modalVisible &&
+              { (modalVisible || orderFailed) &&
                 <Modal>
                   { 
-                    hasModalError ?
+                    (hasModalError || orderFailed) ?
                     <ErrorIndicator /> :             
                     (modalMode === 'ingredient' ? 
                     <IngredientDetails /> : <OrderDetails />)

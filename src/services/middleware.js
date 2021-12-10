@@ -40,7 +40,7 @@ export const sendOrder = (orderURL, constructorIngredients) => {
             dispatch({
                 type: SEND_ORDER_REQUEST
             })
-            const res = await fetch(orderURL, {
+            const res = await fetch("orderURL", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(orderBody)
