@@ -17,7 +17,7 @@ const IngredientsSection = ({ title, items }) => {
 
     const { 
         ingredientsData,
-        constructorIngredients 
+        constructorIngredients
       } = useSelector(store => store.ingredients);
 
     const { ref, inView, entry } = useInView({
@@ -63,7 +63,13 @@ const IngredientsSection = ({ title, items }) => {
                 { typeToTitle[title] }
             </h2>
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
-                { items.map(({ item, amount }) => {
+                { items.map((item) => {
+                    let amount = 0;
+                    constructorIngredients.forEach((element) => {
+                        if(element._id === item._id)
+                            amount++;
+                    });
+
                     return (
                         <ItemCart 
                             id={item._id}
@@ -95,14 +101,9 @@ const itemShapeTypes = PropTypes.shape({
     __v: PropTypes.number.isRequired
 });
 
-const itemsShapeTypes = PropTypes.shape({
-    item: itemShapeTypes.isRequired,
-    amount: PropTypes.number.isRequired
-});
-
 IngredientsSection.propTypes = {
     title: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(itemsShapeTypes).isRequired
+    items: PropTypes.arrayOf(itemShapeTypes).isRequired
 }
 
 export default IngredientsSection;

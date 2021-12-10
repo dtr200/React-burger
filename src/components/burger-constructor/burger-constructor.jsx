@@ -52,15 +52,15 @@ const BurgerConstructor = () => {
         }
     });
 
-    const totalPrice = constructorIngredients.reduce((accum, product) => 
-        accum + product.item.price * product.amount, 0);
+    const totalPrice = constructorIngredients.reduce((accum, product) =>
+        accum + product.price, 0)
 
     const onTotalClick = () =>
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
 
     const getBun = (items, position, descr) => {
         const bun = items.find(product => 
-            product.item.type === 'bun').item;
+            product.type === 'bun');
         return (
             <ConstructorItem 
                 text={`${bun.name} ${descr}`}
@@ -92,25 +92,19 @@ const BurgerConstructor = () => {
               ref={dropIngredientsTarget}>
                 {
                     constructorIngredients.map((slice, i) => {
-                        let { _id, name, price, image, type } = slice.item; 
+                        let { _id, name, price, image, type } = slice; 
                         if(type === 'bun') return;
                         
-                        const elements = [];
-
-                        for(let j = 0; j < slice.amount; j++){
-                            elements.push(
-                                <ConstructorItem 
-                                    key={`${_id}${j}`}
-                                    id={_id}
-                                    text={name}
-                                    price={price}
-                                    thumbnail={image}
-                                    index={i}
-                                    moveCard={moveCard}/>
-                            );
-                        }
-                        
-                        return [...elements];
+                        return [
+                            <ConstructorItem 
+                                key={_id}
+                                id={_id}
+                                text={name}
+                                price={price}
+                                thumbnail={image}
+                                index={i}
+                                moveCard={moveCard}/>
+                        ];
                     })
                 }
             </ul>

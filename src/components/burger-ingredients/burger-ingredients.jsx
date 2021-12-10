@@ -9,7 +9,7 @@ const BurgerIngredients = () => {
     
     const { 
         ingredientsData, 
-        constructorIngredients 
+        constructorIngredientsAmount
     } = useSelector(store => store.ingredients);
 
     const typeToTitle = {
@@ -26,18 +26,8 @@ const BurgerIngredients = () => {
                 items: [] 
             };            
             ingredientsData.forEach(elem => {
-                const product = {
-                    item: {},
-                    amount: 0
-                };
-                if(elem.type === key){
-                    const ingredient = constructorIngredients.find(ingred => 
-                        ingred.item._id === elem._id);                        
-                    const numbers = ingredient && ingredient.amount;                
-                    product.item = elem;
-                    product.amount = numbers ? numbers : 0;
-                    item.items.push(product);
-                };                
+                if(elem.type === key)
+                    item.items.push(elem);            
             });
             blocks.push(item);
         }
@@ -55,7 +45,7 @@ const BurgerIngredients = () => {
                 <section className={styles.ingredients}>
                 { blocks.map((block, i) => 
                     <IngredientsSection 
-                        key={block.items[0].item._id + i}
+                        key={block.items[0]._id + i}
                         {...block}
                     />
                 ) }

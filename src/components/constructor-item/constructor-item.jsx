@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement, DragIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 import {
     DELETE_INGREDIENT
 } from '../../services/actions/action-types';
@@ -80,5 +81,17 @@ const ConstructorItem = (props) => {
         )                          
     )
 } 
+
+ConstructorItem.propTypes = {
+    id: PropTypes.string,
+    index: PropTypes.number,
+    isBun: PropTypes.bool,
+    isLocked: PropTypes.bool,
+    moveCard: PropTypes.func,
+    price: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    type: PropTypes.string
+}
 
 export default ConstructorItem;

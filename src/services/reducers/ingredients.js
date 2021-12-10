@@ -76,16 +76,16 @@ export default (state = initialIngredientsState, action) => {
         case ADD_BUN: {
             const currentItem = state.ingredientsData.find(item => item._id === action.id);
             const itemIndex = state.constructorIngredients.findIndex(product => 
-                product.item.type === 'bun');
+                product.type === 'bun');
 
             const newConstructorIngredients = itemIndex === -1 ?
-                [...state.constructorIngredients, { item: currentItem, amount: 1}] :
+                [...state.constructorIngredients, currentItem] :
                 (
                     [...state.constructorIngredients.slice(0, itemIndex),
-                        { item: currentItem, amount: 1 },
+                        currentItem,
                      ...state.constructorIngredients.slice(itemIndex + 1)]
                 );
-
+                
             return {
                 ...state,
                 constructorIngredients: newConstructorIngredients
@@ -93,33 +93,19 @@ export default (state = initialIngredientsState, action) => {
         }
         case ADD_INGREDIENT: {
             const currentItem = state.ingredientsData.find(item => item._id === action.id);
-            const itemIndex = state.constructorIngredients.findIndex(product => 
-                product.item._id === action.id);
-
-            const newConstructorIngredients = itemIndex === -1 ? 
-                [...state.constructorIngredients, { item: currentItem, amount: 1} ] :
-                ( state.constructorIngredients.map(product =>
-                    product.item._id === action.id ?
-                        { ...product, amount: product.amount + 1 } : product)
-                );
+                
             return {
                 ...state,
-               constructorIngredients: newConstructorIngredients
+               constructorIngredients: [...state.constructorIngredients, currentItem ] 
             }
         }
         case DELETE_INGREDIENT: {
             const itemIndex = state.constructorIngredients.findIndex(product => 
-                product.item._id === action.id);
+                product._id === action.id);
             
             const newConstructorIngredients = 
-                state.constructorIngredients[itemIndex].amount === 1 ? (
                 [...state.constructorIngredients.slice(0, itemIndex),
-                 ...state.constructorIngredients.slice(itemIndex + 1)] 
-                ) : (
-                state.constructorIngredients.map(product =>
-                    product.item._id === action.id ?
-                        { ...product, amount: product.amount - 1 } : product)
-                );
+                 ...state.constructorIngredients.slice(itemIndex + 1)]
             return {
                 ...state,
                 constructorIngredients: newConstructorIngredients
@@ -129,9 +115,10 @@ export default (state = initialIngredientsState, action) => {
             const dragCard = state.constructorIngredients[action.drag];
             const hoverCard = state.constructorIngredients[action.hover];        
             const newConstructorIngredients = [...state.constructorIngredients];
+
             newConstructorIngredients[action.drag] = hoverCard;
             newConstructorIngredients[action.hover] = dragCard;
-
+            
             return {
                 ...state,
                 constructorIngredients: newConstructorIngredients

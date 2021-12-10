@@ -9,24 +9,20 @@ export const DEFAULT_ORDER_DATA = {
 };
 export const DEFAULT_CART = [ 
   { 
-    item: {
-      calories: 420,
-      carbohydrates: 53,
-      fat: 24,
-      image: "https://code.s3.yandex.net/react/code/bun-02.png",
-      image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-      image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-      name: "Краторная булка N-200i",
-      price: 1255,
-      proteins: 80,
-      type: "bun",
-      __v: 0,
-      _id: "60d3b41abdacab0026a733c6"
-    },
-    amount: 1 
-  },
- { 
-    item: {
+    calories: 420,
+    carbohydrates: 53,
+    fat: 24,
+    image: "https://code.s3.yandex.net/react/code/bun-02.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+    name: "Краторная булка N-200i",
+    price: 1255,
+    proteins: 80,
+    type: "bun",
+    __v: 0,
+    _id: "60d3b41abdacab0026a733c6"
+  },    
+ {     
     calories: 99,
     carbohydrates: 42,
     fat: 24,
@@ -39,11 +35,8 @@ export const DEFAULT_CART = [
     type: "sauce",
     __v: 0,
     _id: "60d3b41abdacab0026a733ce"
-    },
-    amount: 1 
   },
  { 
-   item: {
     calories: 643,
     carbohydrates: 85,
     fat: 26,
@@ -56,11 +49,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733c8"
-   },
-   amount:1 
   },
- { 
-   item: {
+ {    
     calories: 420,
     carbohydrates: 33,
     fat: 244,
@@ -73,11 +63,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733c9"
-   },
-   amount:1 
   },
- { 
-   item: {
+ {    
     calories: 2674,
     carbohydrates: 300,
     fat: 800,
@@ -90,11 +77,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733ca"
-   },
-   amount:1 
   },
  { 
-   item: {
     calories: 4242,
     carbohydrates: 242,
     fat: 142,
@@ -107,11 +91,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733cb"
-   },
-   amount:1 
   },
  { 
-   item: {
     calories: 986,
     carbohydrates: 609,
     fat: 689,
@@ -124,11 +105,22 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733d0"
-   },
-   amount:2 
   },
  { 
-   item: {
+    calories: 986,
+    carbohydrates: 609,
+    fat: 689,
+    image: "https://code.s3.yandex.net/react/code/mineral_rings.png",
+    image_large: "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
+    name: "Хрустящие минеральные кольца",
+    price: 300,
+    proteins: 808,
+    type: "main",
+    __v: 0,
+    _id: "60d3b41abdacab0026a733d0"
+  },
+ { 
     calories: 77,
     carbohydrates: 55,
     fat: 5,
@@ -141,11 +133,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733d1"
-   },
-   amount:1 
   },
  { 
-   item: {
     calories: 189,
     carbohydrates: 111,
     fat: 432,
@@ -158,11 +147,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733d2"
-   },
-   amount:1 
   },
  { 
-   item: {
     calories: 6,
     carbohydrates: 3,
     fat: 2,
@@ -175,11 +161,8 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733d3"
-   },
-   amount:1 
   },
  { 
-   item: {
     calories: 3377,
     carbohydrates: 420,
     fat: 48,
@@ -192,7 +175,5 @@ export const DEFAULT_CART = [
     type: "main",
     __v: 0,
     _id: "60d3b41abdacab0026a733d4"
-   }, 
-   amount:1 
-  },
+  }
 ];
