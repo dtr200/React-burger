@@ -1,6 +1,6 @@
 .itemCart{
     position: relative;
-    cursor: pointer;
+    cursor: grab;
 }
 .itemCartContainer{
     display: grid;

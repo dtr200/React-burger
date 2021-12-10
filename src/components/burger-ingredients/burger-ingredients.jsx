@@ -7,10 +7,8 @@ import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
     
-    const { 
-        ingredientsData, 
-        constructorIngredientsAmount
-    } = useSelector(store => store.ingredients);
+    const { ingredientsData } = 
+        useSelector(store => store.ingredients);
 
     const typeToTitle = {
         bun: 'Булки',        
