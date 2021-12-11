@@ -52,8 +52,11 @@ const BurgerConstructor = () => {
         }
     });
 
-    const totalPrice = constructorIngredients.reduce((accum, product) =>
-        accum + product.price, 0)
+    const totalPrice = constructorIngredients.reduce((accum, product) => {
+        return product.type === 'bun' ? 
+            accum + product.price * 2 :
+            accum + product.price
+    }, 0)
 
     const onTotalClick = () =>
         dispatch(sendOrder(ORDER_URL, constructorIngredients));

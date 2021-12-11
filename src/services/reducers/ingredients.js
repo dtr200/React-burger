@@ -10,9 +10,6 @@ import {
     MOVE_INGREDIENT,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
-/* import {
-    DEFAULT_CART
-} from '../../utils/constants'; */
 
 const initialIngredientsState = {
     ingredientsRequest: true,
