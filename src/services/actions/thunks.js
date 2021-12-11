@@ -6,7 +6,7 @@ import {
     SEND_ORDER_REQUEST,
     SEND_ORDER_SUCCESS,
     SEND_ORDER_FAILED
-} from './actions/action-types';
+} from './action-types';
 
 export const getIngredients = (ingredientsURL) => {
     return async (dispatch) => {

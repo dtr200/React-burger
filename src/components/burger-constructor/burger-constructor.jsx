@@ -11,7 +11,7 @@ import {
     ADD_BUN,
     MOVE_INGREDIENT
 } from '../../services/actions/action-types';
-import { sendOrder } from '../../services/middleware';
+import { sendOrder } from '../../services/actions/thunks';
 
 import styles from './burger-constructor.module.css';
 

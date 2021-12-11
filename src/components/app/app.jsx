@@ -12,7 +12,7 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL } from 
   '../../utils/constants';
-import { getIngredients } from '../../services/middleware';
+import { getIngredients } from '../../services/actions/thunks';
 import styles from './app.module.css';
 
 const App = () => {
