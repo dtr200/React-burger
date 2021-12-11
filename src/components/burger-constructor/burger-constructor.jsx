@@ -60,6 +60,7 @@ const BurgerConstructor = () => {
     }, 0)
 
     const onTotalClick = () => {
+        if(!constructorIngredients.length) return;
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
         dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
     }

@@ -89,9 +89,9 @@ ConstructorItem.propTypes = {
     isBun: PropTypes.bool,
     isLocked: PropTypes.bool,
     moveCard: PropTypes.func,
-    price: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number,
+    text: PropTypes.string,
+    thumbnail: PropTypes.string,
     start: PropTypes.bool,
     type: PropTypes.string
 }
