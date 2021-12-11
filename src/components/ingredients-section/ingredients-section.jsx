@@ -9,6 +9,9 @@ import {
     SET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
   } from '../../services/actions/action-types';
+import {
+    ITEM_SHAPE_TYPES
+} from '../../utils/types';
 
 import styles from './ingredients-section.module.css';
 
@@ -84,26 +87,11 @@ const IngredientsSection = ({ title, items }) => {
             </ul>
         </section>
     )
-}  
-
-const itemShapeTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
-});
+}
 
 IngredientsSection.propTypes = {
     title: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(itemShapeTypes).isRequired
+    items: PropTypes.arrayOf(ITEM_SHAPE_TYPES).isRequired
 }
 
 export default IngredientsSection;
