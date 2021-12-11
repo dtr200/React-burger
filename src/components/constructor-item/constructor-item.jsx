@@ -11,7 +11,7 @@ import {
 import styles from './constructor-item.module.css';
 
 const ConstructorItem = (props) => {
-    const { id, isBun, index, moveCard } = props;
+    const { id, isBun, index, moveCard, start } = props;
     const ref = useRef(null);
     const dispatch = useDispatch();
 
@@ -62,12 +62,13 @@ const ConstructorItem = (props) => {
 
     const opacity = isDragging ? 0 : 1;
     drag(drop(ref));
+
     return(  
-        isBun ? (
+        isBun ? ( 
             <li className={`${styles.constructorItem} ${styles.bun}`}>
-                <ConstructorElement {...props} />
+                { !start && <ConstructorElement {...props} /> }
             </li>
-        ) : (      
+         ) : (      
             <li 
               className={`${styles.constructorItem} ${opacity}`} 
               data-id={id}
@@ -91,6 +92,7 @@ ConstructorItem.propTypes = {
     price: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    start: PropTypes.bool,
     type: PropTypes.string
 }
 

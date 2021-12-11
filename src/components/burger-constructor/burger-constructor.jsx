@@ -59,19 +59,22 @@ const BurgerConstructor = () => {
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
 
     const getBun = (items, position, descr) => {
-        const bun = items.find(product => 
+        const bun = items.length !== 0 && items.find(product => 
             product.type === 'bun');
-        return (
+        return !bun ? (
+            <ConstructorItem isBun={true} start={true}/>
+        ) : (
             <ConstructorItem 
                 text={`${bun.name} ${descr}`}
                 type={position}
                 isLocked={true}
                 price={bun.price}
                 thumbnail={bun.image}
+                start={false}
                 isBun={true} />
         )
     }
-
+    
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         dispatch({
             type: MOVE_INGREDIENT,

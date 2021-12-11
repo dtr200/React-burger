@@ -10,15 +10,15 @@ import {
     MOVE_INGREDIENT,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
-import {
+/* import {
     DEFAULT_CART
-} from '../../utils/constants';
+} from '../../utils/constants'; */
 
 const initialIngredientsState = {
     ingredientsRequest: true,
     ingredientsFailed: false,
     ingredientsData: [],
-    constructorIngredients: DEFAULT_CART,
+    constructorIngredients: [],
     currentIngredient: {},
     tabs: [
         {
