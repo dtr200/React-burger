@@ -1,7 +1,7 @@
-export const INGREDIENTS_URL = 
-  'https://norma.nomoreparties.space/api/ingredients';
-export const ORDER_URL = 
-  'https://norma.nomoreparties.space/api/orders';
+export const BASE_URL = 'https://norma.nomoreparties.space/api';
+export const ORDER_URL = '/orders';
+export const INGREDIENTS_URL =   '/ingredients';
+
 export const DEFAULT_ORDER_DATA = {
   num: '034536',
   description: 'Ваш заказ начали готовить', 

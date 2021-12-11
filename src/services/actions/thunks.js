@@ -8,13 +8,17 @@ import {
     SEND_ORDER_FAILED
 } from './action-types';
 
+import {
+    BASE_URL
+} from '../../utils/constants';
+
 export const getIngredients = (ingredientsURL) => {
     return async (dispatch) => {
         try{
             dispatch({ 
                 type: GET_INGREDIENTS_REQUEST 
             });
-            const res = await fetch(ingredientsURL);
+            const res = await fetch(`${BASE_URL}${ingredientsURL}`);
             const json = await res.json();
             dispatch({ 
                 type: GET_INGREDIENTS_SUCCESS, 
@@ -40,7 +44,7 @@ export const sendOrder = (orderURL, constructorIngredients) => {
             dispatch({
                 type: SEND_ORDER_REQUEST
             })
-            const res = await fetch(orderURL, {
+            const res = await fetch(`${BASE_URL}${orderURL}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(orderBody)

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
 import { CurrencyIcon, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
