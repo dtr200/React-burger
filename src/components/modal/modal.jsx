@@ -15,7 +15,6 @@ const Modal = ({ children, onClose }) => {
     const {
         modalTitle
       } = useSelector(store => store.modal);
-
     
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')

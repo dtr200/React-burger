@@ -8,6 +8,7 @@ import {
     DELETE_INGREDIENT,
     RESET_CURRENT_INGREDIENT,
     MOVE_INGREDIENT,
+    CLEAR_CONSTRUCTOR_INGREDIENTS,
     SET_INGREDIENTS_TAB
 } from '../actions/action-types';
 
@@ -127,6 +128,12 @@ export default (state = initialIngredientsState, action) => {
                 ...state,
                 tabs: state.tabs.map(tab => 
                     tab.id === action.id ? {...tab, ratio: action.ratio} : tab)         
+            }
+        }
+        case CLEAR_CONSTRUCTOR_INGREDIENTS: {
+            return {
+                ...state,
+                constructorIngredients: []
             }
         }
         default: return state;

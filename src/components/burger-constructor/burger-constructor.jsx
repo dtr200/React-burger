@@ -9,7 +9,8 @@ import { ORDER_URL } from
 import {
     ADD_INGREDIENT,
     ADD_BUN,
-    MOVE_INGREDIENT
+    MOVE_INGREDIENT,
+    CLEAR_CONSTRUCTOR_INGREDIENTS
 } from '../../services/actions/action-types';
 import { sendOrder } from '../../services/actions/thunks';
 
@@ -58,8 +59,10 @@ const BurgerConstructor = () => {
             accum + product.price
     }, 0)
 
-    const onTotalClick = () =>
+    const onTotalClick = () => {
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
+        dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
+    }
 
     const getBun = (items, position, descr) => {
         const bun = items.length !== 0 && items.find(product => 
