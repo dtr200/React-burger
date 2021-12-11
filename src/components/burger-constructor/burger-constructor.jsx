@@ -24,19 +24,28 @@ const BurgerConstructor = () => {
         dispatch({
             type: ADD_BUN,
             id: item.itemId
-        })
+        });
     }
     const onDropIngredient = (item) => {
         item.itemId && dispatch({
             type: ADD_INGREDIENT,
             id: item.itemId
-        })
+        });
     }
 
-    const [, dropTargetTopBun] = useDrop({
+    const isHoverNeeded = () => 
+        !constructorIngredients.length ||
+        (constructorIngredients.length === 1 && constructorIngredients[0].type !== 'bun' );
+
+    const [{isBunHover}, dropTargetTopBun] = useDrop({
         accept: 'bun',
         drop(itemId){
             onDropBun(itemId);
+        },
+        collect: monitor => {
+            return {
+                isBunHover: isHoverNeeded() && monitor.isOver(),
+            }
         }
     });
     const [, dropTargetBottomBun] = useDrop({
@@ -46,10 +55,15 @@ const BurgerConstructor = () => {
         }
     });
 
-    const [, dropIngredientsTarget] = useDrop({
+    const [{isIngredientHover}, dropIngredientsTarget] = useDrop({
         accept: ['sauce', 'main', 'ingredient'],
         drop(itemId){
             return onDropIngredient(itemId);
+        },
+        collect: monitor => {
+            return {
+                isIngredientHover: isHoverNeeded() && monitor.isOver(),
+            }
         }
     });
 
@@ -60,7 +74,9 @@ const BurgerConstructor = () => {
     }, 0)
 
     const onTotalClick = () => {
-        if(!constructorIngredients.length) return;
+        const isBunExist = constructorIngredients.findIndex(item => 
+            item.type === 'bun') !== -1;
+        if(!isBunExist) return;
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
         dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
     }
@@ -90,15 +106,17 @@ const BurgerConstructor = () => {
         });
     }, [constructorIngredients]);
 
+    const ingredientHover = isBunHover || isIngredientHover ? styles.listHover : '';
+
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
             <ul 
-              className={`${styles.bun} ${styles.bunTop} mt-0 pr-4`}
+              className={`${styles.bun} ${styles.bunTop} ${ingredientHover} mt-0 pr-4`}
               ref={dropTargetTopBun}>
                 {getBun(constructorIngredients, 'top', '(верх)')}
             </ul>   
             <ul 
-              className={`${styles.list} pr-2`} 
+              className={`${styles.list} ${ingredientHover} pr-2`} 
               ref={dropIngredientsTarget}>
                 {
                     constructorIngredients.map((slice, i) => {
@@ -119,7 +137,7 @@ const BurgerConstructor = () => {
                 }
             </ul>
             <ul 
-              className={`${styles.bun} ${styles.bunBottom} pr-4`}
+              className={`${styles.bun} ${styles.bunBottom} ${ingredientHover} pr-4`}
               ref={dropTargetBottomBun}>
                 {getBun(constructorIngredients, 'bottom', '(низ)')}
             </ul>
