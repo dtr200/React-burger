@@ -61,7 +61,7 @@ const IngredientsSection = ({ title, items }) => {
             id={title}
             ref={ref}>
             <h2 
-                className={`text text_type_main-medium mb-6`} 
+                className={`text text_type_main-medium mb-6`}
                 id={title}>
                 { typeToTitle[title] }
             </h2>
@@ -70,7 +70,7 @@ const IngredientsSection = ({ title, items }) => {
                     let amount = 0;
                     constructorIngredients.forEach((element) => {
                         if(element._id === item._id)
-                            amount++;
+                            amount = element.type === 'bun' ? 2 : amount + 1;
                     });
 
                     return (
