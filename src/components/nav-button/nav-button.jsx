@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { BurgerIcon, ListIcon, ProfileIcon } from 
 '@ya.praktikum/react-developer-burger-ui-components';
+import {
+    NAV_SHAPE_TYPES
+} from '../../utils/types';
 
 import styles from './nav-button.module.css';
 
@@ -23,13 +26,6 @@ const NavButton = ({ title, logo, type, view }) => {
     )
 }
 
-const navButtonShapeTypes = PropTypes.shape({
-    title: PropTypes.string.isRequired, 
-    logo: PropTypes.string.isRequired, 
-    type: PropTypes.string.isRequired, 
-    view: PropTypes.bool.isRequired 
-});
-
-NavButton.propTypes = navButtonShapeTypes.isRequired;
+NavButton.propTypes = NAV_SHAPE_TYPES.isRequired;
 
 export default NavButton;

@@ -13,6 +13,12 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { INGREDIENTS_URL } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/actions/thunks';
+import {
+  CLOSE_MODAL,
+  RESET_CURRENT_INGREDIENT,
+  RESET_ORDER_REQUEST
+} from '../../services/actions/action-types';
+
 import styles from './app.module.css';
 
 const App = () => {
@@ -33,6 +39,12 @@ const App = () => {
     dispatch(getIngredients(INGREDIENTS_URL));
   }, []);
 
+  const onModalClose = () => {
+    dispatch({ type: CLOSE_MODAL });
+    dispatch({ type: RESET_CURRENT_INGREDIENT });
+    dispatch({ type: RESET_ORDER_REQUEST });
+  }
+
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -44,7 +56,7 @@ const App = () => {
               <BurgerIngredients />
               <BurgerConstructor />
               { (modalVisible || orderFailed) &&
-                <Modal>
+                <Modal onClose={onModalClose}>
                   { 
                     (hasModalError || orderFailed) ?
                     <ErrorIndicator /> :             

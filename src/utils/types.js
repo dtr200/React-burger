@@ -14,3 +14,10 @@ export const ITEM_SHAPE_TYPES = PropTypes.shape({
     type: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired
 });
+
+export const NAV_SHAPE_TYPES = PropTypes.shape({
+    title: PropTypes.string.isRequired, 
+    logo: PropTypes.string.isRequired, 
+    type: PropTypes.string.isRequired, 
+    view: PropTypes.bool.isRequired 
+});

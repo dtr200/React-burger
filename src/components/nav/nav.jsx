@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import NavButton from "../nav-button/nav-button";
+import {
+    NAV_SHAPE_TYPES
+} from '../../utils/types';
 
 import styles from './nav.module.css';
 
@@ -15,15 +18,8 @@ const Nav = ({ items }) => {
     )
 }
 
-const navShapeTypes = PropTypes.shape({
-    title: PropTypes.string.isRequired, 
-    logo: PropTypes.string.isRequired, 
-    type: PropTypes.string.isRequired, 
-    view: PropTypes.bool.isRequired 
-});
-
 Nav.propTypes = {
-    items: PropTypes.arrayOf(navShapeTypes.isRequired)
+    items: PropTypes.arrayOf(NAV_SHAPE_TYPES).isRequired
 }
 
 export default Nav;

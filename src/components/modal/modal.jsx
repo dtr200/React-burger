@@ -1,35 +1,22 @@
 import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import PropTypes from 'prop-types';
 import { CloseIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import {
-    CLOSE_MODAL,
-    RESET_CURRENT_INGREDIENT,
-    RESET_ORDER_REQUEST
-} from '../../services/actions/action-types';
 
 import styles from './modal.module.css';
 
 const root = document.getElementById('react-modals');
 
-const Modal = ({ children }) => {
+const Modal = ({ children, onClose }) => {
 
     const {
         modalTitle
       } = useSelector(store => store.modal);
 
-    const dispatch = useDispatch();
-
-    const onClose = () => {
-        console.log('close')
-        dispatch({ type: CLOSE_MODAL });
-        dispatch({ type: RESET_CURRENT_INGREDIENT });
-        dispatch({ type: RESET_ORDER_REQUEST });
-    }
-
+    
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')
             onClose();
@@ -61,6 +48,7 @@ const Modal = ({ children }) => {
 
 Modal.propTypes = {
     children: PropTypes.element.isRequired,
+    onClose: PropTypes.func.isRequired
 }
 
 export default Modal;
