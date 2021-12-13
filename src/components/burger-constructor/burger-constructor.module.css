@@ -2,6 +2,7 @@
     width: 50%;
 }
 .list{
+    min-height: calc(var(--space) * 20);
     max-height: 48vh;
     overflow: auto;
     display: grid;
@@ -18,6 +19,11 @@
 .list::-webkit-scrollbar-thumb {
     background-color: var(--text-dark-grey);
 }
+.listHover{
+    background: #252525;
+    background-repeat: no-repeat;
+    mask-image: url(../../images/ingredient-mask.png);
+}
 .bun{
     padding-left: calc(var(--space) * 8);
 }
@@ -31,11 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: end;
-}
-.settings{
-    width: calc(var(--space) * 8);
-    display: flex;
-    align-items: center;
+    cursor: pointer;
 }
 .total{
     display: flex;

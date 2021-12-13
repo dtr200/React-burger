@@ -1,0 +1,15 @@
+.constructorItem{
+    min-height: calc(var(--space) * 20);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    cursor: grab;
+}
+.bun{
+    cursor: pointer;
+}
+.settings{
+    width: calc(var(--space) * 8);
+    display: flex;
+    align-items: center;
+}
