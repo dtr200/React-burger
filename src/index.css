@@ -8,6 +8,7 @@ body {
   --max-width-desktop: 1920px;
   --max-header-width-desktop: 1280px;
   --max-content-width-desktop: 1240px;
+  --max-auth-width-desktop: 480px;
   /* Background*/
   --main-background: #131316;
   --header-background: #1C1C21;
