@@ -13,14 +13,13 @@ import {
     GET_NEW_PASSWORD_SUCCESS,
     GET_NEW_PASSWORD_FAILED,
     SET_NEW_PASSWORD,
-    SET_ACCESS_TOKEN,
     SET_RESTORE_CODE
 } from '../actions/action-types';
 
 const initialAccessState = {
-    name: null,
-    email: null,
-    password: null,
+    name: '',
+    email: '',
+    password: '',
     changePasswordEmail: '',
     changePasswordRequest: false,
     changePasswordFailed: false,
@@ -30,7 +29,8 @@ const initialAccessState = {
     newPasswordFailed: false,
     newPasswordMessage: '',
     restoreCode: '',
-    accessToken: ''
+    accessToken: '',
+    refreshToken: ''
 }
 
 export default (state = initialAccessState, action) => {
@@ -67,6 +67,8 @@ export default (state = initialAccessState, action) => {
         case REGISTER_USER_SUCCESS: {
             return {
                 ...state,
+                accessToken: action.accessToken,
+                refreshToken: action.refreshToken
             }
         }
         case REGISTER_USER_FAILED: {
@@ -111,12 +113,7 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 restoreCode: action.payload
             }
-        }        
-        case SET_ACCESS_TOKEN: {
-            return {
-                ...state,
-            }
-        }        
+        }       
         case GET_NEW_PASSWORD_REQUEST: {
             return {
                 ...state,

@@ -41,6 +41,7 @@ const RegisterPage = () => {
                         placeholder={'Имя'}
                         name={'name'}            
                         size={'default'}
+                        value={name}
                         onChange={(e) => setValue(e)}
                         />
                 </div>
@@ -50,6 +51,7 @@ const RegisterPage = () => {
                         placeholder={'E-mail'}
                         name={'email'}            
                         size={'default'}
+                        value={email}
                         onChange={(e) => setValue(e)}
                         />
                 </div>
@@ -60,6 +62,7 @@ const RegisterPage = () => {
                         name={'password'}    
                         icon={'ShowIcon'}        
                         size={'default'}
+                        value={password}
                         onChange={(e) => setValue(e)}
                         />
                 </div>

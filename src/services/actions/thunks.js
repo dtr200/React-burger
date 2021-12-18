@@ -9,6 +9,8 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAILED,
+    SET_ACCESS_TOKEN,
+    SET_REFRESH_TOKEN,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,
@@ -99,7 +101,7 @@ export const restorePassword = (restoreUrl, email) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
+            
             dispatch({
                 type: RESTORE_PASSWORD_SUCCESS,
                 message: data.message
@@ -151,7 +153,7 @@ export const registerNewUser = (registerUrl, userData) => {
                 type: REGISTER_USER_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}${registerUrl}`,{
+            const res = await fetch(`${BASE_URL}${registerUrl}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(userData)
@@ -162,7 +164,9 @@ export const registerNewUser = (registerUrl, userData) => {
             const data = await res.json();
             console.log(data);
             dispatch({
-                type: REGISTER_USER_SUCCESS
+                type: REGISTER_USER_SUCCESS,
+                accessToken: data.accessToken,
+                refreshToken: data.refreshToken
             })
 
         }
