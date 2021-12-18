@@ -5,7 +5,10 @@ import {
     SET_MODAL_DATA,
     SEND_ORDER_REQUEST,
     SEND_ORDER_SUCCESS,
-    SEND_ORDER_FAILED
+    SEND_ORDER_FAILED,
+    RESTORE_PASSWORD_REQUEST,
+    RESTORE_PASSWORD_SUCCESS,
+    RESTORE_PASSWORD_FAILED
 } from './action-types';
 
 import {
@@ -69,6 +72,36 @@ export const sendOrder = (orderURL, constructorIngredients) => {
         catch(err){
             dispatch({
                 type: SEND_ORDER_FAILED
+            });
+        }
+    }
+}
+
+export const restorePassword = (restoreUrl, email) => {
+    return async (dispatch) => {
+        const emailBody = { email };
+
+        try{
+            dispatch({ 
+                type: RESTORE_PASSWORD_REQUEST 
+            });
+            const res = await fetch(restoreUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(emailBody)
+            })
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+
+            dispatch({
+                type: RESTORE_PASSWORD_SUCCESS,
+                message: data.message
+            });
+        }
+        catch(err){
+            dispatch({
+                type: RESTORE_PASSWORD_FAILED
             });
         }
     }
