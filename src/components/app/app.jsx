@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { HomePage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage } from '../../pages';
+import { HomePage, LoginPage, RegisterPage, 
+  ForgotPasswordPage, ResetPasswordPage } from '../../pages';
 import AppHeader from '../app-header/app-header';
 
 import styles from './app.module.css';

@@ -12,7 +12,7 @@ const initialAccessState = {
     name: null,
     email: null,
     password: null,
-    changePasswordEmail: null,
+    changePasswordEmail: '',
     changePasswordRequest: false,
     changePasswordFailed: false,
     changePasswordMessage: null
@@ -57,7 +57,8 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 changePasswordRequest: false,
-                changePasswordMessage: action.message
+                changePasswordMessage: action.message,
+                changePasswordEmail: ''
             }
         }
         case RESTORE_PASSWORD_FAILED: {
