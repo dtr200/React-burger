@@ -88,7 +88,7 @@ export const restorePassword = (restoreUrl, email) => {
             dispatch({ 
                 type: RESTORE_PASSWORD_REQUEST 
             });
-            const res = await fetch(restoreUrl, {
+            const res = await fetch(`${BASE_URL}${restoreUrl}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(emailBody)
@@ -118,7 +118,7 @@ export const getNewPassword = (restoreUrl, password, token) => {
                 type: GET_NEW_PASSWORD_REQUEST
             });
 
-            const res = await fetch(restoreUrl, {
+            const res = await fetch(`${BASE_URL}${restoreUrl}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(passwordBody)
@@ -137,6 +137,19 @@ export const getNewPassword = (restoreUrl, password, token) => {
             dispatch({
                 type: GET_NEW_PASSWORD_FAILED
             })
+        }
+    }
+}
+
+export const registerNewUser = (registerUrl, userData) => {
+    return async (dispatch) => {
+        const { name, email, password } = userData;
+        const userBody = { email, password, name };
+        try{
+
+        }
+        catch(err){
+
         }
     }
 }

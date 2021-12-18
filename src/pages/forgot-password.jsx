@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { restorePassword } from '../services/actions/thunks';
-import { RESTORE_PASSWORD_URL } from '../utils/constants';
 import { SET_EMAIL_PASSWORD_RESTORE } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -15,7 +14,7 @@ const ForgotPasswordPage = () => {
     const { changePasswordEmail } = useSelector(store => store.access);
 
     const reinstallPassword = () => 
-        dispatch(restorePassword(RESTORE_PASSWORD_URL, changePasswordEmail));
+        dispatch(restorePassword('/password-reset', changePasswordEmail));
 
     const setValue = (e) => {
         dispatch({
