@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
-import { SET_NEW_PASSWORD, SET_TOKEN } from '../services/actions/action-types';
+import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -16,6 +16,7 @@ const ResetPasswordPage = () => {
     const restorePassword = () => 
         dispatch(getNewPassword('password-reset/reset', newPassword));
 
+
     const setNewPassword = (e) => {
         dispatch({
             type: SET_NEW_PASSWORD,
@@ -23,9 +24,9 @@ const ResetPasswordPage = () => {
         });
     }
 
-    const setToken = (e) => {
+    const setCode = (e) => {
         dispatch({
-            type: SET_TOKEN,
+            type: SET_RESTORE_CODE,
             email: e.target.value
         });
     }
@@ -51,7 +52,7 @@ const ResetPasswordPage = () => {
                     <Input
                         type={'text'}
                         placeholder={'Введите код из письма'}
-                        onChange={(e) => setToken(e)}
+                        onChange={(e) => setCode(e)}
                         value={token}
                         name={'code'}         
                         size={'default'}
