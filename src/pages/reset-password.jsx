@@ -11,24 +11,21 @@ import styles from './page.module.css';
 const ResetPasswordPage = () => {
 
     const dispatch = useDispatch();
-    const { newPassword, token } = useSelector(store => store.access);
+    const { newPassword, restoreCode } = useSelector(store => store.access);
 
     const restorePassword = () => 
         dispatch(getNewPassword('password-reset/reset', newPassword));
 
+    const setValue = (e) => {
+        const dictNameToType = {
+            password: SET_NEW_PASSWORD,
+            code: SET_RESTORE_CODE
+        }
 
-    const setNewPassword = (e) => {
         dispatch({
-            type: SET_NEW_PASSWORD,
-            email: e.target.value
-        });
-    }
-
-    const setCode = (e) => {
-        dispatch({
-            type: SET_RESTORE_CODE,
-            email: e.target.value
-        });
+            type: dictNameToType[e.target.name],
+            payload: e.target.value
+        })
     }
 
     return (
@@ -41,7 +38,7 @@ const ResetPasswordPage = () => {
                     <Input
                         type={'password'}
                         placeholder={'Введите новый пароль'}
-                        onChange={(e) => setNewPassword(e)}
+                        onChange={(e) => setValue(e)}
                         value={newPassword}
                         name={'password'}    
                         icon={'ShowIcon'}            
@@ -52,8 +49,8 @@ const ResetPasswordPage = () => {
                     <Input
                         type={'text'}
                         placeholder={'Введите код из письма'}
-                        onChange={(e) => setCode(e)}
-                        value={token}
+                        onChange={(e) => setValue(e)}
+                        value={restoreCode}
                         name={'code'}         
                         size={'default'}
                         />

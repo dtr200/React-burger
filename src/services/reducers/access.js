@@ -103,6 +103,13 @@ export default (state = initialAccessState, action) => {
         case SET_NEW_PASSWORD: {
             return {
                 ...state,
+                newPassword: action.payload
+            }
+        }
+        case SET_RESTORE_CODE: {
+            return {
+                ...state,
+                restoreCode: action.payload
             }
         }        
         case SET_ACCESS_TOKEN: {
