@@ -8,7 +8,10 @@ import {
     SEND_ORDER_FAILED,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
-    RESTORE_PASSWORD_FAILED
+    RESTORE_PASSWORD_FAILED,
+    GET_NEW_PASSWORD_REQUEST,
+    GET_NEW_PASSWORD_SUCCESS,
+    GET_NEW_PASSWORD_FAILED
 } from './action-types';
 
 import {
@@ -103,6 +106,37 @@ export const restorePassword = (restoreUrl, email) => {
             dispatch({
                 type: RESTORE_PASSWORD_FAILED
             });
+        }
+    }
+}
+
+export const getNewPassword = (restoreUrl, password, token) => {
+    return async (dispatch) => {
+        const passwordBody = { password, token };
+        try{
+            dispatch({
+                type: GET_NEW_PASSWORD_REQUEST
+            });
+
+            const res = await fetch(restoreUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(passwordBody)
+            });
+
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+
+            dispatch({
+                type: GET_NEW_PASSWORD_SUCCESS,
+                message: data.message
+            });
+        }
+        catch(err){
+            dispatch({
+                type: GET_NEW_PASSWORD_FAILED
+            })
         }
     }
 }
