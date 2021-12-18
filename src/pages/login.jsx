@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from './login.module.css';
+import styles from './page.module.css';
 
 const LoginPage = () => {
   return (
