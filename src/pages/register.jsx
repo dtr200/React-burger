@@ -1,5 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getNewPassword } from '../services/actions/thunks';
+import { RESTORE_PASSWORD_URL } from '../utils/constants';
+import { SET_NEW_PASSWORD, SET_TOKEN } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
