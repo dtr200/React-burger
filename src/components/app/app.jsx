@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { HomePage, LoginPage } from '../../pages';
+import { HomePage, LoginPage, RegisterPage } from '../../pages';
 import AppHeader from '../app-header/app-header';
 
 import styles from './app.module.css';
@@ -17,6 +17,9 @@ const App = () => {
           </Route>
           <Route path="/login" exact>
             <LoginPage />
+          </Route>
+          <Route path="/register" exact>
+            <RegisterPage />
           </Route>
         </Switch>        
       </Router>      

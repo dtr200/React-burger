@@ -4,6 +4,8 @@
 }
 
 .main{
+    display: grid;
+    align-items: center;
     height: calc(100vh - calc(var(--space) * 22));
     max-width: var(--max-auth-width-desktop);
     margin: 0 auto;
