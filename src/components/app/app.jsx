@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { HomePage, LoginPage, RegisterPage } from '../../pages';
+import { HomePage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage } from '../../pages';
 import AppHeader from '../app-header/app-header';
 
 import styles from './app.module.css';
@@ -20,6 +20,12 @@ const App = () => {
           </Route>
           <Route path="/register" exact>
             <RegisterPage />
+          </Route>
+          <Route path="/forgot-password" exact>
+            <ForgotPasswordPage />
+          </Route>
+          <Route path="/reset-password" exact>
+            <ResetPasswordPage />
           </Route>
         </Switch>        
       </Router>      
