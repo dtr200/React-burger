@@ -3,6 +3,9 @@ import {
     SET_EMAIL,
     SET_PASSWORD,
     SET_EMAIL_PASSWORD_RESTORE,
+    REGISTER_USER_REQUEST,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_FAILED,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,    
@@ -10,7 +13,8 @@ import {
     GET_NEW_PASSWORD_SUCCESS,
     GET_NEW_PASSWORD_FAILED,
     SET_NEW_PASSWORD,
-    SET_TOKEN
+    SET_ACCESS_TOKEN,
+    SET_RESTORE_CODE
 } from '../actions/action-types';
 
 const initialAccessState = {
@@ -25,7 +29,8 @@ const initialAccessState = {
     newPasswordRequest: false,
     newPasswordFailed: false,
     newPasswordMessage: '',
-    token: ''
+    restoreCode: '',
+    accessToken: ''
 }
 
 export default (state = initialAccessState, action) => {
@@ -33,25 +38,40 @@ export default (state = initialAccessState, action) => {
         case SET_NAME: {
             return {
                 ...state,
-                name: action.name
+                name: action.payload
             }
         }
         case SET_EMAIL: {
             return {
                 ...state,
-                email: action.email
+                email: action.payload
             }
         }
         case SET_PASSWORD: {
             return {
                 ...state,
-                password: action.password
+                password: action.payload
             }
         }
         case SET_EMAIL_PASSWORD_RESTORE: {
             return {
                 ...state,                
                 changePasswordEmail: action.email
+            }
+        }
+        case REGISTER_USER_REQUEST: {
+            return {
+                ...state,
+            }
+        }
+        case REGISTER_USER_SUCCESS: {
+            return {
+                ...state,
+            }
+        }
+        case REGISTER_USER_FAILED: {
+            return {
+                ...state,
             }
         }
         case RESTORE_PASSWORD_REQUEST: {
@@ -85,7 +105,7 @@ export default (state = initialAccessState, action) => {
                 ...state,
             }
         }        
-        case SET_TOKEN: {
+        case SET_ACCESS_TOKEN: {
             return {
                 ...state,
             }
