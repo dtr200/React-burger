@@ -2,7 +2,7 @@ import {
     SET_NAME,
     SET_EMAIL,
     SET_PASSWORD,
-    SET_EMAIL_PASSWORD_RESTORE,
+    SET_RESTORE_EMAIL,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAILED,
@@ -53,7 +53,7 @@ export default (state = initialAccessState, action) => {
                 password: action.payload
             }
         }
-        case SET_EMAIL_PASSWORD_RESTORE: {
+        case SET_RESTORE_EMAIL: {
             return {
                 ...state,                
                 changePasswordEmail: action.email
