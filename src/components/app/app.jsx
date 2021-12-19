@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { HomePage, LoginPage, RegisterPage, 
-  ForgotPasswordPage, ResetPasswordPage } from '../../pages';
+  ForgotPasswordPage, ResetPasswordPage, ProfilePage } from '../../pages';
 import AppHeader from '../app-header/app-header';
 
 import styles from './app.module.css';
@@ -27,6 +27,9 @@ const App = () => {
           </Route>
           <Route path="/reset-password" exact>
             <ResetPasswordPage />
+          </Route>
+          <Route path="/profile" exact>
+            <ProfilePage />
           </Route>
         </Switch>        
       </Router>      
