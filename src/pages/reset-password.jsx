@@ -14,7 +14,7 @@ const ResetPasswordPage = () => {
     const { newPassword, restoreCode } = useSelector(store => store.access);
 
     const restorePassword = () => 
-        dispatch(getNewPassword('password-reset/reset', newPassword));
+        dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
 
     const setValue = (e) => {
         const dictNameToType = {

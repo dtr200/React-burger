@@ -116,6 +116,7 @@ export const restorePassword = (restoreUrl, email) => {
 export const getNewPassword = (restoreUrl, password, token) => {
     return async (dispatch) => {
         const passwordBody = { password, token };
+
         try{
             dispatch({
                 type: GET_NEW_PASSWORD_REQUEST
@@ -160,7 +161,7 @@ export const registerNewUser = (registerUrl, userData) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            console.log(data);
+
             dispatch({
                 type: REGISTER_USER_SUCCESS,
                 accessToken: data.accessToken,
