@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { restorePassword } from '../services/actions/thunks';
-import { SET_EMAIL_PASSWORD_RESTORE } from '../services/actions/action-types';
+import { SET_RESTORE_EMAIL } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -18,7 +18,7 @@ const ForgotPasswordPage = () => {
 
     const setValue = (e) => {
         dispatch({
-            type: SET_EMAIL_PASSWORD_RESTORE,
+            type: SET_RESTORE_EMAIL,
             email: e.target.value
         });
     }
