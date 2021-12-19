@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
 import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
-import { Input } from 
+import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile.module.css';
@@ -33,12 +33,20 @@ const ProfilePage = () => {
             <section className={styles.navBar}>
                 <nav className="mb-20">
                     <ul className={`${styles.profileList} text text_type_main-medium`}>
-                        <li className={`${styles.profileListItem}`}>Профиль</li>
-                        <li className={`${styles.profileListItem} text_color_inactive`}>
-                            История заказов
+                        <li className={`${styles.profileListItem}`}>
+                            <Link to="/profile">
+                                Профиль
+                            </Link>
                         </li>
                         <li className={`${styles.profileListItem} text_color_inactive`}>
-                            Выход
+                            <Link to="/profile/orders">
+                                История заказов
+                            </Link>
+                        </li>
+                        <li className={`${styles.profileListItem} text_color_inactive`}>
+                            <Link to="/profile">
+                                Выход
+                            </Link>
                         </li>
                     </ul>
                 </nav>                
@@ -48,36 +56,44 @@ const ProfilePage = () => {
             </section>
             <section className={`${styles.container} text`}>
                 <div className={styles.inputLarge}>
-                        <Input
-                            type={'text'}
-                            placeholder={'Имя'}
-                            name={'name'}
-                            icon={'EditIcon'}            
-                            size={'default'}
-                            />
-                    </div>
-                    <div className={styles.inputLarge}>
-                        <Input
-                            type={'text'}
-                            placeholder={'Логин'}
-                            name={'login'}
-                            icon={'EditIcon'}            
-                            size={'default'}
-                            value={''}
-                            onChange={(e) => setValue(e)}
-                            />
-                    </div>
-                    <div className={styles.inputLarge}>
-                        <Input
-                            type={'password'}
-                            placeholder={'Пароль'}
-                            name={'password'}    
-                            icon={'EditIcon'}        
-                            size={'default'}
-                            value={''}
-                            onChange={(e) => setValue(e)}
-                            />
+                    <Input
+                        type={'text'}
+                        placeholder={'Имя'}
+                        name={'name'}
+                        icon={'EditIcon'}            
+                        size={'default'}
+                        />
                 </div>
+                <div className={styles.inputLarge}>
+                    <Input
+                        type={'text'}
+                        placeholder={'Логин'}
+                        name={'login'}
+                        icon={'EditIcon'}            
+                        size={'default'}
+                        />
+                </div>
+                <div className={styles.inputLarge}>
+                    <Input
+                        type={'password'}
+                        placeholder={'Пароль'}
+                        name={'password'}    
+                        icon={'EditIcon'}        
+                        size={'default'}
+                        />
+                </div>
+                <section className={styles.buttons}>
+                    <Button 
+                        type="secondary" 
+                        size="medium">
+                        Отмена
+                    </Button>
+                    <Button 
+                        type="primary" 
+                        size="medium">
+                        Сохранить
+                    </Button>
+                </section>
             </section>                                
         </main>
   );
