@@ -18,6 +18,14 @@
     padding: 17px 0;
 }
 
+.profileListItem a{
+    text-decoration: none;
+}
+
+.profileListItem a:visited{
+    color: inherit;
+}
+
 .textExtra{
     color: var(--text-ultra-dark);
 }
@@ -29,10 +37,16 @@
     row-gap: calc(var(--space) * 6);
 }
 
-.inputLarge input{
+.inputLarge input:not(:focus){
     color: var(--text-inactive-color);
 }
 
 .inputLarge div:not([class="input__icon"]) {
     width: var(--max-auth-width-desktop);
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
