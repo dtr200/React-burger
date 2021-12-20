@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
 import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -34,19 +34,28 @@ const ProfilePage = () => {
                 <nav className="mb-20">
                     <ul className={`${styles.profileList} text text_type_main-medium`}>
                         <li className={`${styles.profileListItem}`}>
-                            <Link to="/profile">
+                            <NavLink 
+                                to="/profile" exact 
+                                className={styles.profileLink}
+                                activeClassName={styles.activeNavItem}>
                                 Профиль
-                            </Link>
+                            </NavLink>
                         </li>
-                        <li className={`${styles.profileListItem} text_color_inactive`}>
-                            <Link to="/profile/orders">
+                        <li className={`${styles.profileListItem}`}>
+                            <NavLink 
+                                to="/profile/orders" exact 
+                                className={styles.profileLink}
+                                activeClassName={styles.activeNavItem}>
                                 История заказов
-                            </Link>
+                            </NavLink>
                         </li>
-                        <li className={`${styles.profileListItem} text_color_inactive`}>
-                            <Link to="/profile">
+                        <li className={`${styles.profileListItem}`}>
+                            <NavLink 
+                                to="/" exact 
+                                className={styles.profileLink}
+                                activeClassName={styles.activeNavItem}>
                                 Выход
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>                

@@ -15,7 +15,11 @@
 }
 
 .profileListItem{
-    padding: 17px 0;
+    padding: 17px 0;    
+}
+
+.profileLink{
+    color: var(--text-dark-grey);
 }
 
 .profileListItem a{
@@ -24,6 +28,10 @@
 
 .profileListItem a:visited{
     color: inherit;
+}
+
+.activeNavItem{
+    color: var(--text-main-white);
 }
 
 .textExtra{
