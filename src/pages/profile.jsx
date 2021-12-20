@@ -70,7 +70,7 @@ const ProfilePage = () => {
                 <Route path={path} exact>
                     <ProfileInputsPage />
                 </Route>
-                <Route path={`${path}/orders`} exact>
+                <Route path={`${path}/orders/:id`} exact>
                     <OrderHistoryPage />
                 </Route>
             </Switch>
