@@ -1,6 +1,4 @@
 import React from 'react';
-import { Input, Button } from 
-    '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile.module.css';
 
