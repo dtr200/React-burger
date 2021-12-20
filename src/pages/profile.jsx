@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import ProfileInputsPage from './profile-inputs';
+import OrderHistoryPage from './order-history';
 import { getNewPassword } from '../services/actions/thunks';
 import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -9,8 +11,7 @@ import { Input, Button } from
 import styles from './profile.module.css';
 
 const ProfilePage = () => {
-
-    const dispatch = useDispatch();
+    /* const dispatch = useDispatch();
     const { newPassword, restoreCode } = useSelector(store => store.access);
 
     const restorePassword = () => 
@@ -26,7 +27,9 @@ const ProfilePage = () => {
             type: dictNameToType[e.target.name],
             payload: e.target.value
         })
-    }
+    } */
+
+    const { path, url } = useRouteMatch();
 
     return (
         <main className={styles.profile}>
@@ -35,7 +38,7 @@ const ProfilePage = () => {
                     <ul className={`${styles.profileList} text text_type_main-medium`}>
                         <li className={`${styles.profileListItem}`}>
                             <NavLink 
-                                to="/profile" exact 
+                                to={{pathname: '/profile'}} exact
                                 className={styles.profileLink}
                                 activeClassName={styles.activeNavItem}>
                                 Профиль
@@ -43,7 +46,7 @@ const ProfilePage = () => {
                         </li>
                         <li className={`${styles.profileListItem}`}>
                             <NavLink 
-                                to="/profile/orders" exact 
+                                to={{pathname: `${url}/orders`}} exact
                                 className={styles.profileLink}
                                 activeClassName={styles.activeNavItem}>
                                 История заказов
@@ -63,47 +66,14 @@ const ProfilePage = () => {
                     В этом разделе вы можете изменить свои персональные данные
                 </p>   
             </section>
-            <section className={`${styles.container} text`}>
-                <div className={styles.inputLarge}>
-                    <Input
-                        type={'text'}
-                        placeholder={'Имя'}
-                        name={'name'}
-                        icon={'EditIcon'}            
-                        size={'default'}
-                        />
-                </div>
-                <div className={styles.inputLarge}>
-                    <Input
-                        type={'text'}
-                        placeholder={'Логин'}
-                        name={'login'}
-                        icon={'EditIcon'}            
-                        size={'default'}
-                        />
-                </div>
-                <div className={styles.inputLarge}>
-                    <Input
-                        type={'password'}
-                        placeholder={'Пароль'}
-                        name={'password'}    
-                        icon={'EditIcon'}        
-                        size={'default'}
-                        />
-                </div>
-                <section className={styles.buttons}>
-                    <Button 
-                        type="secondary" 
-                        size="medium">
-                        Отмена
-                    </Button>
-                    <Button 
-                        type="primary" 
-                        size="medium">
-                        Сохранить
-                    </Button>
-                </section>
-            </section>                                
+            <Switch>
+                <Route path={path} exact>
+                    <ProfileInputsPage />
+                </Route>
+                <Route path={`${path}/orders`} exact>
+                    <OrderHistoryPage />
+                </Route>
+            </Switch>
         </main>
   );
 }
