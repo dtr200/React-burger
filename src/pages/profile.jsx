@@ -1,33 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
 import OrderHistoryPage from './order-history';
-import { getNewPassword } from '../services/actions/thunks';
-import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
-import { Input, Button } from 
-    '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile.module.css';
 
 const ProfilePage = () => {
-    /* const dispatch = useDispatch();
-    const { newPassword, restoreCode } = useSelector(store => store.access);
-
-    const restorePassword = () => 
-        dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
-
-    const setValue = (e) => {
-        const dictNameToType = {
-            password: SET_NEW_PASSWORD,
-            code: SET_RESTORE_CODE
-        }
-
-        dispatch({
-            type: dictNameToType[e.target.name],
-            payload: e.target.value
-        })
-    } */
 
     const { path, url } = useRouteMatch();
 
@@ -70,7 +48,7 @@ const ProfilePage = () => {
                 <Route path={path} exact>
                     <ProfileInputsPage />
                 </Route>
-                <Route path={`${path}/orders/:id`} exact>
+                <Route path={`${path}/orders`} exact>
                     <OrderHistoryPage />
                 </Route>
             </Switch>
