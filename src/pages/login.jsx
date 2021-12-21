@@ -11,7 +11,7 @@ import styles from './page.module.css';
 const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { email, password, isLogged } = useSelector(store => store.access);
+    const { email, password, isLoggedIn } = useSelector(store => store.access);
 
     const login = () => {
         const userData = { email, password };
@@ -31,7 +31,7 @@ const LoginPage = () => {
     }
 
     return (
-        isLogged ? (
+        isLoggedIn ? (
         <Redirect to={{ pathname: '/'}} />
         ) : (
         <main className={styles.main}>

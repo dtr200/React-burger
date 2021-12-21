@@ -17,7 +17,13 @@ import {
     RESTORE_PASSWORD_FAILED,
     GET_NEW_PASSWORD_REQUEST,
     GET_NEW_PASSWORD_SUCCESS,
-    GET_NEW_PASSWORD_FAILED
+    GET_NEW_PASSWORD_FAILED,
+    REFRESH_TOKEN_REQUEST,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_FAILED,
+    LOGOUT_USER_REQUEST,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILED
 } from './action-types';
 
 import {
@@ -195,9 +201,45 @@ export const loginUser = (loginUrl, userData) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
+            console.log(data)
             dispatch({
                 type: LOGIN_USER_SUCCESS,
+                accessToken: data.accessToken.split(' ')[1],
+                refreshToken: data.refreshToken,
+                user: data.user
+            })
+
+        }
+        catch(err){
+            dispatch({
+                type: LOGIN_USER_FAILED
+            })
+        }
+    }
+}
+
+export const refreshToken = (refreshTokenUrl, refreshToken) => {
+    return async (dispatch) => {
+        const tokenBody = {
+            token: `{{${refreshToken}}}`
+        }
+        try{
+            dispatch({
+                type: REFRESH_TOKEN_REQUEST
+            });
+
+            const res = await fetch(`${BASE_URL}${refreshTokenUrl}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(tokenBody)
+            })
+
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+
+            dispatch({
+                type: REFRESH_TOKEN_SUCCESS,
                 accessToken: data.accessToken.split(' ')[1],
                 refreshToken: data.refreshToken
             })
@@ -205,7 +247,39 @@ export const loginUser = (loginUrl, userData) => {
         }
         catch(err){
             dispatch({
-                type: LOGIN_USER_FAILED
+                type: REFRESH_TOKEN_FAILED
+            })
+        }
+    }
+}
+
+export const logoutUser = (logoutUrl, refreshToken) => {
+    return async (dispatch) => {
+        const tokenBody = { token: refreshToken };
+
+        try{
+            dispatch({
+                type: LOGOUT_USER_REQUEST
+            });
+
+            const res = await fetch(`${BASE_URL}${logoutUrl}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(tokenBody)
+            })
+            
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+
+            dispatch({
+                type: LOGOUT_USER_SUCCESS,
+                message: data.message
+            });
+        }
+        catch(err){
+            dispatch({
+                type: LOGOUT_USER_FAILED
             })
         }
     }
