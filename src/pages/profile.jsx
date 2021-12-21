@@ -1,13 +1,20 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
 import OrderHistoryPage from './order-history';
+import { logoutUser } from '../services/actions/thunks';
 
 import styles from './profile.module.css';
 
 const ProfilePage = () => {
 
+    const dispatch = useDispatch();
+    const { refreshToken } = useSelector(store => store.access);
     const { path, url } = useRouteMatch();
+
+    const onLogout = () => 
+        dispatch(logoutUser('/auth/logout', refreshToken));
 
     return (
         <main className={styles.profile}>
@@ -32,9 +39,10 @@ const ProfilePage = () => {
                         </li>
                         <li className={`${styles.profileListItem}`}>
                             <NavLink 
-                                to="/" exact 
+                                to="/profile" exact 
                                 className={styles.profileLink}
-                                activeClassName={styles.activeNavItem}>
+                                activeClassName={styles.activeNavItem}
+                                onClick={onLogout}>
                                 Выход
                             </NavLink>
                         </li>

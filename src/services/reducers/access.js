@@ -16,14 +16,20 @@ import {
     GET_NEW_PASSWORD_SUCCESS,
     GET_NEW_PASSWORD_FAILED,
     SET_NEW_PASSWORD,
-    SET_RESTORE_CODE
+    SET_RESTORE_CODE,
+    REFRESH_TOKEN_REQUEST,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_FAILED,
+    LOGOUT_USER_REQUEST,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILED
 } from '../actions/action-types';
 
 const initialAccessState = {
     name: '',
     email: '',
     password: '',
-    isLogged: false,
+    isLoggedIn: false,
     registerRequest: false,
     registerFailed: false,
     loginRequest: false,
@@ -35,10 +41,15 @@ const initialAccessState = {
     newPassword: '',
     newPasswordRequest: false,
     newPasswordFailed: false,
-    newPasswordMessage: '',
+    newPasswordMessage: null,
     restoreCode: '',
     accessToken: '',
-    refreshToken: ''
+    refreshToken: '',
+    refreshTokenRequest: false,
+    refreshTokenFailed: false,
+    logoutRequest: false,
+    logoutFailed: false,
+    logoutMessage: null
 }
 
 export default (state = initialAccessState, action) => {
@@ -101,11 +112,12 @@ export default (state = initialAccessState, action) => {
         case LOGIN_USER_SUCCESS: {
             return {
                 ...state,
-                email: '',
+                name: action.user.name,
+                email: action.user.email,
                 password: '',
                 loginRequest: false,
                 loginFailed: false,
-                isLogged: true,
+                isLoggedIn: true,
                 accessToken: action.accessToken,
                 refreshToken: action.refreshToken
             }
@@ -172,6 +184,51 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 newPasswordRequest: false,
                 newPasswordFailed: true
+            }
+        }
+        case REFRESH_TOKEN_REQUEST: {
+            return {
+                ...state,
+                refreshTokenRequest: true
+            }
+        }
+        case REFRESH_TOKEN_SUCCESS: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                refreshTokenFailed: false,             
+                accessToken: action.accessToken,
+                refreshToken: action.refreshToken
+            }
+        }
+        case REFRESH_TOKEN_FAILED: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                refreshTokenFailed: true
+            }
+        }
+        case LOGOUT_USER_REQUEST: {
+            return {
+                ...state,
+                logoutRequest: true
+            }
+        }
+        case LOGOUT_USER_SUCCESS: {
+            return {
+                ...state,
+                logoutRequest: false,
+                logoutFailed: false,             
+                accessToken: '',
+                refreshToken: '',
+                logoutMessage: action.message
+            }
+        }
+        case LOGOUT_USER_FAILED: {
+            return {
+                ...state,
+                logoutRequest: false,
+                logoutFailed: true
             }
         }
         default: return state;
