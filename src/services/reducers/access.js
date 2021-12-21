@@ -23,6 +23,7 @@ const initialAccessState = {
     name: '',
     email: '',
     password: '',
+    isLogged: false,
     registerRequest: false,
     registerFailed: false,
     loginRequest: false,
@@ -104,6 +105,7 @@ export default (state = initialAccessState, action) => {
                 password: '',
                 loginRequest: false,
                 loginFailed: false,
+                isLogged: true,
                 accessToken: action.accessToken,
                 refreshToken: action.refreshToken
             }

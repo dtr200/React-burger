@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { loginUser } from '../services/actions/thunks';
 import { SET_EMAIL, SET_PASSWORD } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -11,7 +11,7 @@ import styles from './page.module.css';
 const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { email, password } = useSelector(store => store.access);
+    const { email, password, isLogged } = useSelector(store => store.access);
 
     const login = () => {
         const userData = { email, password };
@@ -31,6 +31,9 @@ const LoginPage = () => {
     }
 
     return (
+        isLogged ? (
+        <Redirect to={{ pathname: '/'}} />
+        ) : (
         <main className={styles.main}>
             <section className={`${styles.container} text`}>
                 <h1 className={`${styles.title} text_type_main-medium`}>Вход</h1>
@@ -40,6 +43,7 @@ const LoginPage = () => {
                         placeholder={'E-mail'}
                         name={'email'}            
                         size={'default'}
+                        value={email}
                         onChange={setValue}
                         />
                 </div>
@@ -50,6 +54,7 @@ const LoginPage = () => {
                         name={'password'}    
                         icon={'ShowIcon'}        
                         size={'default'}
+                        value={password}
                         onChange={setValue}
                         />
                 </div>
@@ -73,6 +78,7 @@ const LoginPage = () => {
                 </section>
             </section>        
         </main>
+        )
     );
 }
 

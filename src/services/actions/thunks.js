@@ -169,8 +169,7 @@ export const registerNewUser = (registerUrl, userData) => {
                 type: REGISTER_USER_SUCCESS,
                 accessToken: data.accessToken.split(' ')[1],
                 refreshToken: data.refreshToken
-            })
-
+            });
         }
         catch(err){
             dispatch({
