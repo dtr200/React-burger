@@ -9,6 +9,9 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAILED,
+    LOGIN_USER_REQUEST,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAILED,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,
@@ -164,7 +167,7 @@ export const registerNewUser = (registerUrl, userData) => {
 
             dispatch({
                 type: REGISTER_USER_SUCCESS,
-                accessToken: data.accessToken,
+                accessToken: data.accessToken.split(' ')[1],
                 refreshToken: data.refreshToken
             })
 
@@ -172,6 +175,38 @@ export const registerNewUser = (registerUrl, userData) => {
         catch(err){
             dispatch({
                 type: REGISTER_USER_FAILED
+            })
+        }
+    }
+}
+
+export const loginUser = (loginUrl, userData) => {
+    return async (dispatch) => {
+        try{
+            dispatch({
+                type: LOGIN_USER_REQUEST
+            });
+
+            const res = await fetch(`${BASE_URL}${loginUrl}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(userData)
+            })
+
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+
+            dispatch({
+                type: LOGIN_USER_SUCCESS,
+                accessToken: data.accessToken.split(' ')[1],
+                refreshToken: data.refreshToken
+            })
+
+        }
+        catch(err){
+            dispatch({
+                type: LOGIN_USER_FAILED
             })
         }
     }
