@@ -32,6 +32,7 @@ import {
 
 const initialAccessState = {
     user: {
+        isLoggedIn: false,
         name: '',
         email: '',
         login: '',
@@ -116,7 +117,8 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    isLoggedIn: true
                 },
                 registerRequest: false,
                 registerFailed: false
@@ -142,7 +144,8 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: action.user.name,
                     email: action.user.email,
-                    password: ''
+                    password: '',
+                    isLoggedIn: true
                 },
                 loginRequest: false,
                 loginFailed: false
@@ -170,7 +173,8 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: action.user.name,
                     email: action.user.email,
-                    password: ''
+                    password: '',
+                    isLoggedIn: true
                 }
             }
         }
@@ -186,7 +190,8 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    login: ''
+                    login: '',
+                    isLoggedIn: true
                 }
             }
         }
@@ -284,14 +289,16 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 logoutRequest: false,
                 logoutFailed: false,
-                logoutMessage: action.message
+                logoutMessage: action.message,
+                isLoggedIn: false
             }
         }
         case LOGOUT_USER_FAILED: {
             return {
                 ...state,
                 logoutRequest: false,
-                logoutFailed: true
+                logoutFailed: true,
+                isLoggedIn: true
             }
         }
         default: return state;
