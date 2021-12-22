@@ -11,7 +11,8 @@ import styles from './page.module.css';
 const RegisterPage = () => {
 
     const dispatch = useDispatch();
-    const { name, email, password } = useSelector(store => store.access);
+    const { name, email, password } = 
+        useSelector(store => store.access.user);
 
     const registerUser = () => {
         const userData = { name, email, password };

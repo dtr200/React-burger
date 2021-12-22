@@ -11,8 +11,9 @@ import styles from './page.module.css';
 const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { email, password, isLoggedIn } = useSelector(store => store.access);
-
+    const { email, password, isLoggedIn } = 
+        useSelector(store => store.access.user);
+ 
     const login = () => {
         const userData = { email, password };
         dispatch(loginUser('/auth/login', userData));

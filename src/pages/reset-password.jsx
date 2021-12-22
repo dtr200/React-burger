@@ -11,7 +11,9 @@ import styles from './page.module.css';
 const ResetPasswordPage = () => {
 
     const dispatch = useDispatch();
-    const { newPassword, restoreCode } = useSelector(store => store.access);
+    const { user: {newPassword}, restoreCode } = 
+        useSelector(store => store.access);
+
 
     const restorePassword = () => 
         dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));

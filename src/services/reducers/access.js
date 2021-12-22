@@ -31,10 +31,13 @@ import {
 } from '../actions/action-types';
 
 const initialAccessState = {
-    name: '',
-    email: '',
-    login: '',
-    password: '',
+    user: {
+        name: '',
+        email: '',
+        login: '',
+        password: '',
+        newPassword: '',
+    },
     isLoggedIn: false,
     registerRequest: false,
     registerFailed: false,
@@ -45,8 +48,7 @@ const initialAccessState = {
     changePasswordEmail: '',
     changePasswordRequest: false,
     changePasswordFailed: false,
-    changePasswordMessage: null,
-    newPassword: '',
+    changePasswordMessage: null,    
     newPasswordRequest: false,
     newPasswordFailed: false,
     newPasswordMessage: null,
@@ -63,25 +65,37 @@ export default (state = initialAccessState, action) => {
         case SET_NAME: {
             return {
                 ...state,
-                name: action.payload
+                user: {
+                    ...state.user,
+                    name: action.payload
+                }
             }
         }
         case SET_EMAIL: {
             return {
                 ...state,
-                email: action.payload
+                user: {
+                    ...state.user,
+                    email: action.payload
+                }
             }
         }
         case SET_LOGIN: {
             return {
                 ...state,
-                login: action.payload
+                user: {
+                    ...state.user,
+                    login: action.payload
+                }
             }
         }
         case SET_PASSWORD: {
             return {
                 ...state,
-                password: action.payload
+                user: {
+                    ...state.user,
+                    password: action.payload
+                }
             }
         }
         case SET_RESTORE_EMAIL: {
@@ -99,9 +113,12 @@ export default (state = initialAccessState, action) => {
         case REGISTER_USER_SUCCESS: {
             return {
                 ...state,
-                name: '',
-                email: '',
-                password: '',
+                user: {
+                    ...state.user,
+                    name: '',
+                    email: '',
+                    password: ''
+                },
                 registerRequest: false,
                 registerFailed: false
             }
@@ -122,9 +139,12 @@ export default (state = initialAccessState, action) => {
         case LOGIN_USER_SUCCESS: {
             return {
                 ...state,
-                name: action.user.name,
-                email: action.user.email,
-                password: '',
+                user: {
+                    ...state.user,
+                    name: action.user.name,
+                    email: action.user.email,
+                    password: ''
+                },
                 loginRequest: false,
                 loginFailed: false,
                 isLoggedIn: true
@@ -148,9 +168,12 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 userDataRequest: false,
                 userDataFailed: false,
-                name: action.user.name,
-                email: action.user.email,
-                password: ''
+                user: {
+                    ...state.user,
+                    name: action.user.name,
+                    email: action.user.email,
+                    password: ''
+                }
             }
         }
         case UPDATE_USER_DATA_FAILED: {
@@ -163,7 +186,10 @@ export default (state = initialAccessState, action) => {
         case CANCEL_UPDATE_USER_DATA: {
             return {
                 ...state,
-                login: '',
+                user: {
+                    ...state.user,
+                    login: ''
+                }
             }
         }
         case RESTORE_PASSWORD_REQUEST: {
@@ -192,7 +218,10 @@ export default (state = initialAccessState, action) => {
         case SET_NEW_PASSWORD: {
             return {
                 ...state,
-                newPassword: action.payload
+                user: {
+                    ...state.user,
+                    newPassword: action.payload
+                }
             }
         }
         case SET_RESTORE_CODE: {
@@ -205,7 +234,10 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 newPasswordRequest: true,
-                newPassword: ''
+                user: {
+                    ...state.user,
+                    newPassword: ''
+                }
             }
         }
         case GET_NEW_PASSWORD_SUCCESS: {

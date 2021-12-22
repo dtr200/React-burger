@@ -12,7 +12,7 @@ const ProfileInputsPage = () => {
 
     const dispatch = useDispatch();
     const { name, login, password } = 
-        useSelector(store => store.access);
+        useSelector(store => store.access.user);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
