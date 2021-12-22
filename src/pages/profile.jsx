@@ -16,7 +16,7 @@ const ProfilePage = () => {
     const refreshToken = isAccessTokenExist ? 
         document.cookie.match(/(refreshToken=)(.+);/)[2] :
         document.cookie.match(/(refreshToken=)(.+)/)[2]; 
-        
+
     const { path, url } = useRouteMatch();
 
     const onLogout = () => 

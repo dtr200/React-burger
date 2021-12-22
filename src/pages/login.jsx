@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { loginUser } from '../services/actions/thunks';
 import { SET_EMAIL, SET_PASSWORD } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -11,14 +11,15 @@ import styles from './page.module.css';
 const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { email, password, name } = 
+    const { email, password, isLoggedIn } = 
         useSelector(store => store.access.user);
  
     const login = () => {
         const userData = { email, password };
         dispatch(loginUser('/auth/login', userData));
     }
-
+    const history = useHistory();
+    const { state } = history.location;
     const setValue = (e) => {
         const dictNameToType = {
             email: SET_EMAIL, 
@@ -32,8 +33,8 @@ const LoginPage = () => {
     }
 
     return (
-        name ? (
-        <Redirect to={{ pathname: '/'}} />
+        isLoggedIn ? (
+        <Redirect to={state?.from || '/'} />
         ) : (
         <main className={styles.main}>
             <section className={`${styles.container} text`}>

@@ -35,10 +35,7 @@ const ProfileInputsPage = () => {
             payload: e.target.value
         })
     }
-
-    console.log("ACCESS", accessToken)
-    console.log("REFRESH -", refreshToken);
-
+ 
     const onButtonClick = async (e) => {
         const url = '/auth/user';
         const dictNameToType = {

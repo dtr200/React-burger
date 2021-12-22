@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ProtectedRoute from '../protected-route/protected-route';
 import { HomePage, LoginPage, RegisterPage, 
   ForgotPasswordPage, ResetPasswordPage, ProfilePage } from '../../pages';
 import AppHeader from '../app-header/app-header';
@@ -28,9 +29,9 @@ const App = () => {
           <Route path="/reset-password" exact>
             <ResetPasswordPage />
           </Route>
-          <Route path="/profile">
+          <ProtectedRoute path="/profile">
             <ProfilePage />
-          </Route>
+          </ProtectedRoute>
         </Switch>        
       </Router>      
     </div>
