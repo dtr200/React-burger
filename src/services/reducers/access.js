@@ -287,18 +287,24 @@ export default (state = initialAccessState, action) => {
         case LOGOUT_USER_SUCCESS: {
             return {
                 ...state,
+                user: {
+                    ...state.user,
+                    isLoggedIn: false
+                },
                 logoutRequest: false,
                 logoutFailed: false,
-                logoutMessage: action.message,
-                isLoggedIn: false
+                logoutMessage: action.message                
             }
         }
         case LOGOUT_USER_FAILED: {
             return {
                 ...state,
+                user: {
+                    ...state.user,
+                    isLoggedIn: false
+                },
                 logoutRequest: false,
-                logoutFailed: true,
-                isLoggedIn: true
+                logoutFailed: true
             }
         }
         default: return state;

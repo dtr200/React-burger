@@ -283,7 +283,7 @@ export const logoutUser = (logoutUrl, refreshToken) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
+            console.log(data)
             deleteCookie('accessToken');
             dispatch({
                 type: LOGOUT_USER_SUCCESS,
