@@ -38,7 +38,6 @@ const initialAccessState = {
         password: '',
         newPassword: '',
     },
-    isLoggedIn: false,
     registerRequest: false,
     registerFailed: false,
     loginRequest: false,
@@ -146,8 +145,7 @@ export default (state = initialAccessState, action) => {
                     password: ''
                 },
                 loginRequest: false,
-                loginFailed: false,
-                isLoggedIn: true
+                loginFailed: false
             }
         }
         case LOGIN_USER_FAILED: {
