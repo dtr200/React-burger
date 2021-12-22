@@ -298,7 +298,7 @@ export const logoutUser = (logoutUrl, refreshToken) => {
     }
 }
 
-export const getUserData = (userDataUrl, accessToken, refreshToken, method = 'GET') => {
+export const getUserData = (userDataUrl, accessToken, method = 'GET') => {
     return async (dispatch) => {
         try{
             dispatch({
@@ -327,18 +327,18 @@ export const getUserData = (userDataUrl, accessToken, refreshToken, method = 'GE
     }
 }
 
-export const updateUserData = (userDataUrl, accessToken, refreshToken) => {
+export const updateUserData = (userDataUrl, accessToken) => {
     return async (dispatch) => {
         if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token', refreshToken));
-        dispatch(getUserData(userDataUrl, accessToken, refreshToken, 'PATCH'));
+            await dispatch(updateToken('/auth/token'));
+        dispatch(getUserData(userDataUrl, accessToken, 'PATCH'));
     }
 }
 
-export const restoreUserData = (userDataUrl, accessToken, refreshToken) => {
+export const restoreUserData = (userDataUrl, accessToken) => {
     return async (dispatch) => {
         if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token', refreshToken));
-        dispatch(getUserData(userDataUrl, accessToken, refreshToken, 'GET'));
+            await dispatch(updateToken('/auth/token'));
+        dispatch(getUserData(userDataUrl, accessToken, 'GET'));
     }    
 }
