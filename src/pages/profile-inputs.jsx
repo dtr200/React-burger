@@ -11,7 +11,7 @@ import styles from './profile.module.css';
 const ProfileInputsPage = () => {
 
     const dispatch = useDispatch();
-    const { name, login, password } = 
+    const { name, login, password, isLoggedIn } = 
         useSelector(store => store.access.user);
 
     const isAccessTokenExist = 
@@ -35,7 +35,7 @@ const ProfileInputsPage = () => {
             payload: e.target.value
         })
     }
- 
+    console.log(isLoggedIn)
     const onButtonClick = async (e) => {
         const url = '/auth/user';
         const dictNameToType = {
