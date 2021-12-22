@@ -185,7 +185,7 @@ export const registerNewUser = (registerUrl, userData) => {
             const data = await res.json();
 
             setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 1200);
+            setCookie('accessToken', data.accessToken, 1150);
             dispatch({
                 type: REGISTER_USER_SUCCESS
             });
@@ -214,9 +214,9 @@ export const loginUser = (loginUrl, userData) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            console.log(data)
+
             setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 30);
+            setCookie('accessToken', data.accessToken, 1150);
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 user: data.user
@@ -251,7 +251,7 @@ export const updateToken = (refreshTokenUrl, refreshToken) => {
             const data = await res.json();
 
             setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 1200);
+            setCookie('accessToken', data.accessToken, 1150);
             dispatch({
                 type: REFRESH_TOKEN_SUCCESS
             })
@@ -283,7 +283,7 @@ export const logoutUser = (logoutUrl, refreshToken) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            // deleteCookie('refreshToken');
+
             deleteCookie('accessToken');
             dispatch({
                 type: LOGOUT_USER_SUCCESS,
@@ -327,18 +327,18 @@ export const getUserData = (userDataUrl, accessToken, method = 'GET') => {
     }
 }
 
-export const updateUserData = (userDataUrl, accessToken) => {
+export const updateUserData = (userDataUrl, accessToken, refreshToken) => {
     return async (dispatch) => {
         if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token'));
+            await dispatch(updateToken('/auth/token', refreshToken));
         dispatch(getUserData(userDataUrl, accessToken, 'PATCH'));
     }
 }
 
-export const restoreUserData = (userDataUrl, accessToken) => {
+export const restoreUserData = (userDataUrl, accessToken, refreshToken) => {
     return async (dispatch) => {
         if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token'));
+            await dispatch(updateToken('/auth/token', refreshToken));
         dispatch(getUserData(userDataUrl, accessToken, 'GET'));
     }    
 }
