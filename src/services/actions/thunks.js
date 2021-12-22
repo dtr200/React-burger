@@ -214,7 +214,7 @@ export const loginUser = (loginUrl, userData) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
+            console.log(data)
             setCookie('refreshToken', data.refreshToken);
             setCookie('accessToken', data.accessToken, 30);
             dispatch({
