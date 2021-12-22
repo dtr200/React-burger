@@ -12,6 +12,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_FAILED,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,
@@ -296,3 +299,36 @@ export const logoutUser = (logoutUrl, refreshToken) => {
         }
     }
 }
+
+export const getUserData = (userDataUrl, token, method = 'GET') => {
+    return async (dispatch) => {
+        try{
+            dispatch({
+                type: UPDATE_USER_DATA_REQUEST
+            });
+            console.log(token)
+            const res = await fetch(`${BASE_URL}${userDataUrl}`, {
+                method,
+                headers: { 'authorization': token }
+            })
+            console.log(res)
+            if(!res.ok) throw new Error('');
+
+            const data = await res.json();
+            console.log(data)
+
+            dispatch({
+                type: UPDATE_USER_DATA_SUCCESS,
+                user: data.user
+            });
+        }
+        catch(err){
+            dispatch({
+                type: UPDATE_USER_DATA_FAILED
+            })
+        }
+    }
+}
+
+export const updateUserData = (userDataUrl, token) => 
+    getUserData(userDataUrl, token, 'PATCH');
