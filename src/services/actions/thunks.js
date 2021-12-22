@@ -157,9 +157,11 @@ export const getNewPassword = (restoreUrl, password, token) => {
     }
 }
 
-const setCookie = (name, value) => {
-    const expires = `Expires=${new Date(2022, 12, 22).toUTCString}`;
-    document.cookie = `${name}=${value}`;
+const setCookie = (name, value, time) => {
+    const data = time ? 
+        `${name}=${value}; max-age=${time}` : 
+        `${name}=${value}`;
+    document.cookie = data;
 }
 
 const deleteCookie = (name) =>
@@ -183,10 +185,9 @@ export const registerNewUser = (registerUrl, userData) => {
             const data = await res.json();
 
             setCookie('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken, 1200);
             dispatch({
-                type: REGISTER_USER_SUCCESS,
-                accessToken: data.accessToken.split(' ')[1],
-                refreshToken: data.refreshToken
+                type: REGISTER_USER_SUCCESS
             });
         }
         catch(err){
@@ -215,10 +216,9 @@ export const loginUser = (loginUrl, userData) => {
             const data = await res.json();
 
             setCookie('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken, 30);
             dispatch({
                 type: LOGIN_USER_SUCCESS,
-                accessToken: data.accessToken.split(' ')[1],
-                refreshToken: data.refreshToken,
                 user: data.user
             })
 
@@ -231,11 +231,11 @@ export const loginUser = (loginUrl, userData) => {
     }
 }
 
-export const refreshToken = (refreshTokenUrl, refreshToken) => {
+export const updateToken = (refreshTokenUrl, refreshToken) => {
     return async (dispatch) => {
-        const tokenBody = {
-            token: `{{${refreshToken}}}`
-        }
+        console.log('updating token...')
+        const tokenBody = { token: refreshToken };
+        console.log(JSON.stringify(tokenBody))
         try{
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -243,23 +243,25 @@ export const refreshToken = (refreshTokenUrl, refreshToken) => {
 
             const res = await fetch(`${BASE_URL}${refreshTokenUrl}`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(tokenBody)
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: refreshToken })
             })
-
+            console.log(res)
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
+            console.log(data)
             setCookie('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken, 20);
             dispatch({
-                type: REFRESH_TOKEN_SUCCESS,
-                accessToken: data.accessToken.split(' ')[1],
-                refreshToken: data.refreshToken
+                type: REFRESH_TOKEN_SUCCESS
             })
 
         }
         catch(err){
+            console.log('update failed')
             dispatch({
                 type: REFRESH_TOKEN_FAILED
             })
@@ -285,8 +287,10 @@ export const logoutUser = (logoutUrl, refreshToken) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
-            deleteCookie('refreshToken');
+            console.log(document.cookie)
+            // deleteCookie('refreshToken');
+            deleteCookie('accessToken');
+            console.log(document.cookie)
             dispatch({
                 type: LOGOUT_USER_SUCCESS,
                 message: data.message
@@ -300,29 +304,30 @@ export const logoutUser = (logoutUrl, refreshToken) => {
     }
 }
 
-export const getUserData = (userDataUrl, token, method = 'GET') => {
+export const getUserData = (userDataUrl, accessToken, refreshToken, method = 'GET') => {
     return async (dispatch) => {
+        console.log('getting user data...........')
         try{
             dispatch({
                 type: UPDATE_USER_DATA_REQUEST
             });
-            console.log(token)
+
             const res = await fetch(`${BASE_URL}${userDataUrl}`, {
                 method,
-                headers: { 'authorization': token }
-            })
-            console.log(res)
+                headers: { 'authorization': accessToken }
+            });
+            console.log(res)  
+
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            console.log(data)
 
             dispatch({
                 type: UPDATE_USER_DATA_SUCCESS,
                 user: data.user
             });
         }
-        catch(err){
+        catch(err){            
             dispatch({
                 type: UPDATE_USER_DATA_FAILED
             })
@@ -330,5 +335,22 @@ export const getUserData = (userDataUrl, token, method = 'GET') => {
     }
 }
 
-export const updateUserData = (userDataUrl, token) => 
-    getUserData(userDataUrl, token, 'PATCH');
+export const updateUserData = (userDataUrl, accessToken, refreshToken) => {
+    return async (dispatch) => {
+        if(!document.cookie.split('accessToken=')[1]){
+            console.log('token expired')
+            await dispatch(updateToken('/auth/token', refreshToken));
+        }
+        dispatch(getUserData(userDataUrl, accessToken, refreshToken, 'PATCH'));
+    }
+}
+
+export const restoreUserData = (userDataUrl, accessToken, refreshToken) => {
+    return async (dispatch) => {
+        if(!document.cookie.split('accessToken=')[1]){
+            console.log('token expired')
+            await dispatch(updateToken('/auth/token', refreshToken));
+        }
+        dispatch(getUserData(userDataUrl, accessToken, refreshToken, 'GET'));
+    }    
+}

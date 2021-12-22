@@ -13,6 +13,7 @@ import {
     UPDATE_USER_DATA_REQUEST,
     UPDATE_USER_DATA_SUCCESS,
     UPDATE_USER_DATA_FAILED,
+    CANCEL_UPDATE_USER_DATA,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,    
@@ -50,8 +51,6 @@ const initialAccessState = {
     newPasswordFailed: false,
     newPasswordMessage: null,
     restoreCode: '',
-    accessToken: '',
-    refreshToken: '',
     refreshTokenRequest: false,
     refreshTokenFailed: false,
     logoutRequest: false,
@@ -104,9 +103,7 @@ export default (state = initialAccessState, action) => {
                 email: '',
                 password: '',
                 registerRequest: false,
-                registerFailed: false,
-                accessToken: action.accessToken,
-                refreshToken: action.refreshToken
+                registerFailed: false
             }
         }
         case REGISTER_USER_FAILED: {
@@ -130,9 +127,7 @@ export default (state = initialAccessState, action) => {
                 password: '',
                 loginRequest: false,
                 loginFailed: false,
-                isLoggedIn: true,
-                accessToken: action.accessToken,
-                refreshToken: action.refreshToken
+                isLoggedIn: true
             }
         }
         case LOGIN_USER_FAILED: {
@@ -163,6 +158,12 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 userDataRequest: false,
                 userDataFailed: true
+            }
+        }
+        case CANCEL_UPDATE_USER_DATA: {
+            return {
+                ...state,
+                login: '',
             }
         }
         case RESTORE_PASSWORD_REQUEST: {
@@ -232,9 +233,7 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 refreshTokenRequest: false,
-                refreshTokenFailed: false,             
-                accessToken: action.accessToken,
-                refreshToken: action.refreshToken
+                refreshTokenFailed: false
             }
         }
         case REFRESH_TOKEN_FAILED: {
@@ -254,9 +253,7 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 logoutRequest: false,
-                logoutFailed: false,             
-                accessToken: '',
-                refreshToken: '',
+                logoutFailed: false,
                 logoutMessage: action.message
             }
         }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { SET_NAME, SET_PASSWORD, SET_LOGIN } from '../services/actions/action-types';
-import { getUserData, updateUserData } from '../services/actions/thunks';
+import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA } 
+    from '../services/actions/action-types';
+import { restoreUserData, updateUserData } from '../services/actions/thunks';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -10,8 +11,17 @@ import styles from './profile.module.css';
 const ProfileInputsPage = () => {
 
     const dispatch = useDispatch();
-    const { name, login, password, accessToken } = 
+    const { name, login, password } = 
         useSelector(store => store.access);
+
+    const isAccessTokenExist = 
+        document.cookie.indexOf('accessToken=') !== -1;
+
+    const refreshToken = isAccessTokenExist ? 
+        document.cookie.match(/(refreshToken=)(.+);/)[2] :
+        document.cookie.match(/(refreshToken=)(.+)/)[2];       
+    const accessToken = isAccessTokenExist ? 
+        document.cookie.match(/(accessToken=)(.+)/)[2] : '';
 
     const setValue = (e) => {
         const dictNameToType = {
@@ -26,15 +36,19 @@ const ProfileInputsPage = () => {
         })
     }
 
-    const onButtonClick = (e) => {
+    console.log("ACCESS", accessToken)
+    console.log("REFRESH -", refreshToken);
+
+    const onButtonClick = async (e) => {
         const url = '/auth/user';
-        const token = `Bearer ${accessToken}`
         const dictNameToType = {
-            save: updateUserData(url, token), 
-            cancel: getUserData(url, token)
+            save: updateUserData(url, accessToken, refreshToken), 
+            cancel: restoreUserData(url, accessToken, refreshToken)
         };
 
         dispatch(dictNameToType[e.target.name]);
+        e.target.name === 'cancel' && 
+        dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
 
     return (        
