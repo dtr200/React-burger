@@ -154,6 +154,14 @@ export const getNewPassword = (restoreUrl, password, token) => {
     }
 }
 
+const setCookie = (name, value) => {
+    const expires = `Expires=${new Date(2022, 12, 22).toUTCString}`;
+    document.cookie = `${name}=${value}`;
+}
+
+const deleteCookie = (name) =>
+    document.cookie = `${name}=;Expires=${new Date(0).toUTCString()}`;
+
 export const registerNewUser = (registerUrl, userData) => {
     return async (dispatch) => {
         try{
@@ -171,6 +179,7 @@ export const registerNewUser = (registerUrl, userData) => {
 
             const data = await res.json();
 
+            setCookie('refreshToken', data.refreshToken);
             dispatch({
                 type: REGISTER_USER_SUCCESS,
                 accessToken: data.accessToken.split(' ')[1],
@@ -201,7 +210,8 @@ export const loginUser = (loginUrl, userData) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            console.log(data)
+
+            setCookie('refreshToken', data.refreshToken);
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 accessToken: data.accessToken.split(' ')[1],
@@ -238,6 +248,7 @@ export const refreshToken = (refreshTokenUrl, refreshToken) => {
 
             const data = await res.json();
 
+            setCookie('refreshToken', data.refreshToken);
             dispatch({
                 type: REFRESH_TOKEN_SUCCESS,
                 accessToken: data.accessToken.split(' ')[1],
@@ -272,6 +283,7 @@ export const logoutUser = (logoutUrl, refreshToken) => {
 
             const data = await res.json();
 
+            deleteCookie('refreshToken');
             dispatch({
                 type: LOGOUT_USER_SUCCESS,
                 message: data.message
