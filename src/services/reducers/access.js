@@ -1,6 +1,7 @@
 import {
     SET_NAME,
     SET_EMAIL,
+    SET_LOGIN,
     SET_PASSWORD,
     SET_RESTORE_EMAIL,
     REGISTER_USER_REQUEST,
@@ -9,6 +10,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_FAILED,
     RESTORE_PASSWORD_REQUEST,
     RESTORE_PASSWORD_SUCCESS,
     RESTORE_PASSWORD_FAILED,    
@@ -28,12 +32,15 @@ import {
 const initialAccessState = {
     name: '',
     email: '',
+    login: '',
     password: '',
     isLoggedIn: false,
     registerRequest: false,
     registerFailed: false,
     loginRequest: false,
     loginFailed: false,
+    userDataRequest: false,
+    userDataFailed: false,
     changePasswordEmail: '',
     changePasswordRequest: false,
     changePasswordFailed: false,
@@ -64,6 +71,12 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 email: action.payload
+            }
+        }
+        case SET_LOGIN: {
+            return {
+                ...state,
+                login: action.payload
             }
         }
         case SET_PASSWORD: {
@@ -127,6 +140,29 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 loginRequest: false,
                 loginFailed: true
+            }
+        }
+        case UPDATE_USER_DATA_REQUEST: {
+            return {
+                ...state,
+                userDataRequest: true
+            }
+        }
+        case UPDATE_USER_DATA_SUCCESS: {
+            return {
+                ...state,
+                userDataRequest: false,
+                userDataFailed: false,
+                name: action.user.name,
+                email: action.user.email,
+                password: ''
+            }
+        }
+        case UPDATE_USER_DATA_FAILED: {
+            return {
+                ...state,
+                userDataRequest: false,
+                userDataFailed: true
             }
         }
         case RESTORE_PASSWORD_REQUEST: {
