@@ -42,8 +42,8 @@ const ProfileInputsPage = () => {
     const onButtonClick = async (e) => {
         const url = '/auth/user';
         const dictNameToType = {
-            save: updateUserData(url, accessToken, refreshToken), 
-            cancel: restoreUserData(url, accessToken, refreshToken)
+            save: updateUserData(url, accessToken), 
+            cancel: restoreUserData(url, accessToken)
         };
 
         dispatch(dictNameToType[e.target.name]);
