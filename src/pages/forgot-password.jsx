@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { restorePassword } from '../services/actions/thunks';
 import { SET_RESTORE_EMAIL } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -11,15 +11,16 @@ import styles from './page.module.css';
 const ForgotPasswordPage = () => {
 
     const dispatch = useDispatch();
-    const { changePasswordEmail } = useSelector(store => store.access);
+    const { changePasswordEmail, changePasswordMessage } = 
+        useSelector(store => store.access);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
-    const history = useHistory();
-    const { state } = history.location;
 
-    const reinstallPassword = () => 
-        dispatch(restorePassword('/password-reset', changePasswordEmail));
+    const reinstallPassword = () => {
+        if(changePasswordEmail.length)
+            dispatch(restorePassword('/password-reset', changePasswordEmail));
+    }
 
     const setValue = (e) => {
         dispatch({
@@ -30,7 +31,9 @@ const ForgotPasswordPage = () => {
 
     return (
         isAccessTokenExist ? (
-            <Redirect to={state?.from || '/'} />
+            <Redirect to={'/'} />
+            ) : ( changePasswordMessage ) ? (
+            <Redirect to={'/reset-password'} /> 
             ) : (
             <main className={styles.main}>
                 <section className={`${styles.container} text`}>

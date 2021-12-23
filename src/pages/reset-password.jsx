@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
 import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
 import { Input, Button } from 
@@ -11,12 +11,10 @@ import styles from './page.module.css';
 const ResetPasswordPage = () => {
 
     const dispatch = useDispatch();
-    const { user: {newPassword}, restoreCode } = 
+    const { user: {newPassword}, restoreCode, changePasswordMessage } = 
         useSelector(store => store.access);
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
-    const history = useHistory();
-    const { state } = history.location;
 
     const restorePassword = () => 
         dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
@@ -34,9 +32,9 @@ const ResetPasswordPage = () => {
     }
 
     return (
-        isAccessTokenExist ? (
-            <Redirect to={state?.from || '/'} />
-        ) : (
+        isAccessTokenExist || !changePasswordMessage ? (
+            <Redirect to={'/'} />
+            ) : (
             <main className={styles.main}>
                 <section className={`${styles.container} text`}>
                     <h1 className={`${styles.title} text_type_main-medium`}>
