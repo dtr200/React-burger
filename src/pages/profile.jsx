@@ -10,12 +10,8 @@ import styles from './profile.module.css';
 const ProfilePage = () => {
 
     const dispatch = useDispatch();
-    const isAccessTokenExist = 
-        document.cookie.indexOf('accessToken=') !== -1;
-
-    const refreshToken = isAccessTokenExist ? 
-        document.cookie.match(/(refreshToken=)(.+);/)[2] :
-        document.cookie.match(/(refreshToken=)(.+)/)[2]; 
+    const isAccessTokenExist = document.cookie.indexOf('accessToken=');
+    const refreshToken = localStorage['refreshToken='];
 
     const { path, url } = useRouteMatch();
 

@@ -1,15 +1,28 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { updateToken } from '../../services/actions/thunks';
 
 const ProtectedRoute = ({ children, ...rest }) => {
 
-    const { isLoggedIn } = useSelector(store => store.access.user);
+    const dispatch = useDispatch();
+
+    const isAccessTokenExist = 
+        document.cookie.indexOf('accessToken=') !== -1;
+    const isRefreshTokenExist = 
+        localStorage['refreshToken='] !== undefined;
+
+    if(!isAccessTokenExist && isRefreshTokenExist){
+        const refreshToken = localStorage['refreshToken='];
+        dispatch(updateToken('/auth/token', refreshToken));
+    }
+
+    console.log(isAccessTokenExist, isRefreshTokenExist)
 
     return (
         <Route
             {...rest}
-            render={({location}) => isLoggedIn ? (
+            render={({location}) => isAccessTokenExist ? (
                 children 
                 ) : (
                 <Redirect to={{
