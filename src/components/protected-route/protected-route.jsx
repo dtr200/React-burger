@@ -12,10 +12,8 @@ const ProtectedRoute = ({ children, ...rest }) => {
     const isRefreshTokenExist = 
         localStorage['refreshToken='] !== undefined;
 
-    if(!isAccessTokenExist && isRefreshTokenExist){
-        const refreshToken = localStorage['refreshToken='];
-        dispatch(updateToken('/auth/token', refreshToken));
-    }
+    if(!isAccessTokenExist && isRefreshTokenExist)
+        dispatch(updateToken());
 
     console.log(isAccessTokenExist, isRefreshTokenExist)
 

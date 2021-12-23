@@ -163,14 +163,14 @@ const setCookie = (name, value) =>
 const deleteCookie = (name) =>
     document.cookie = `${name}=;Expires=${new Date(0).toUTCString()}`;
 
-export const registerNewUser = (registerUrl, userData) => {
+export const registerNewUser = (userData) => {
     return async (dispatch) => {
         try{
             dispatch({
                 type: REGISTER_USER_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}${registerUrl}`, {
+            const res = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(userData)
@@ -194,14 +194,14 @@ export const registerNewUser = (registerUrl, userData) => {
     }
 }
 
-export const loginUser = (loginUrl, userData) => {
+export const loginUser = (userData) => {
     return async (dispatch) => {
         try{
             dispatch({
                 type: LOGIN_USER_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}${loginUrl}`, {
+            const res = await fetch(`${BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(userData)
@@ -227,19 +227,19 @@ export const loginUser = (loginUrl, userData) => {
     }
 }
 
-export const updateToken = (refreshTokenUrl, refreshToken) => {
+export const updateToken = () => {
     return async (dispatch) => {
         try{
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
             });
             console.log(`TOKEN UPDATING...`)
-            const res = await fetch(`${BASE_URL}${refreshTokenUrl}`, {
+            const res = await fetch(`${BASE_URL}/auth/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ token: refreshToken })
+                body: JSON.stringify({ token: localStorage['refreshToken'] })
             });
 
             if(!res.ok) throw new Error('');
@@ -262,16 +262,16 @@ export const updateToken = (refreshTokenUrl, refreshToken) => {
     }
 }
 
-export const logoutUser = (logoutUrl, refreshToken) => {
+export const logoutUser = () => {
     return async (dispatch) => {
-        const tokenBody = { token: refreshToken };
+        const tokenBody = { token: localStorage['refreshToken'] };
 
         try{
             dispatch({
                 type: LOGOUT_USER_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}${logoutUrl}`, {
+            const res = await fetch(`${BASE_URL}/auth/logout`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(tokenBody)
@@ -296,14 +296,17 @@ export const logoutUser = (logoutUrl, refreshToken) => {
     }
 }
 
-export const getUserData = (userDataUrl, accessToken, method = 'GET') => {
-    return async (dispatch) => {
+export const getUserData = (method = 'GET') => {
+    return async (dispatch) => {        
+        const accessToken = 
+            document.cookie.match(/(accessToken=)(.+)/)[2];
+
         try{
             dispatch({
                 type: UPDATE_USER_DATA_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}${userDataUrl}`, {
+            const res = await fetch(`${BASE_URL}/auth/user`, {
                 method,
                 headers: { 'authorization': accessToken }
             }); 
@@ -323,20 +326,4 @@ export const getUserData = (userDataUrl, accessToken, method = 'GET') => {
             })
         }
     }
-}
-
-export const updateUserData = (userDataUrl, accessToken, refreshToken) => {
-    return async (dispatch) => {
-        if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token', refreshToken));
-        dispatch(getUserData(userDataUrl, accessToken, 'PATCH'));
-    }
-}
-
-export const restoreUserData = (userDataUrl, accessToken, refreshToken) => {
-    return async (dispatch) => {
-        if(!document.cookie.split('accessToken=')[1])
-            await dispatch(updateToken('/auth/token', refreshToken));
-        dispatch(getUserData(userDataUrl, accessToken, 'GET'));
-    }    
 }
