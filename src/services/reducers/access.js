@@ -27,7 +27,8 @@ import {
     REFRESH_TOKEN_FAILED,
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
-    LOGOUT_USER_FAILED
+    LOGOUT_USER_FAILED,
+    CLEAR_LOGOUT_TRACK
 } from '../actions/action-types';
 
 const initialAccessState = {
@@ -299,6 +300,12 @@ export default (state = initialAccessState, action) => {
                 },
                 logoutRequest: false,
                 logoutFailed: true
+            }
+        }
+        case CLEAR_LOGOUT_TRACK: {
+            return {
+                ...state,
+                logoutMessage: null
             }
         }
         default: return state;
