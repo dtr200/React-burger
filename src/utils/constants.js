@@ -20,9 +20,17 @@ const checkResponse = (res) => {
       res.json().then((err) => Promise.reject(err));
 }
 
-export const updateToken = async (url, options) => {
-  const res = await fetch(url, options);
-  return await checkResponse(res);
+export const updateToken = () => {
+  return fetch(`${BASE_URL}/auth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      token: localStorage['refreshToken']
+    })
+  })
+  .then(checkResponse);
 }
 
 export const fetchWithRefresh = async (url, options) => {
