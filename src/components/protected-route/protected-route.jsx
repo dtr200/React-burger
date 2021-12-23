@@ -15,8 +15,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
     if(!isAccessTokenExist && isRefreshTokenExist)
         dispatch(updateToken());
 
-    console.log(isAccessTokenExist, isRefreshTokenExist)
-
     return (
         <Route
             {...rest}
