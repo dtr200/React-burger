@@ -12,9 +12,6 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    CHECK_TOKEN_REQUEST,
-    CHECK_TOKEN_SUCCESS,
-    CHECK_TOKEN_FAILED,
     UPDATE_USER_DATA_REQUEST,
     UPDATE_USER_DATA_SUCCESS,
     UPDATE_USER_DATA_FAILED,
@@ -230,7 +227,6 @@ export const updateToken = () => {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
             });
-            console.log(`TOKEN UPDATING...`)
 
             const data = await fetchWithRefresh(`${BASE_URL}/auth/token`, {
                 method: 'POST',
@@ -242,10 +238,8 @@ export const updateToken = () => {
                 })
             });
 
-            console.log('UPDATED!')
             localStorage.setItem('refreshToken', data.refreshToken);
             setCookie('accessToken', data.accessToken);
-            console.log('Cookie setted')
             dispatch({
                 type: REFRESH_TOKEN_SUCCESS
             })
@@ -303,14 +297,12 @@ export const getUserData = (method = 'GET') => {
                 type: UPDATE_USER_DATA_REQUEST
             });
 
-            const res = await fetch(`${BASE_URL}/auth/user`, {
+            const data = await fetchWithRefresh(`${BASE_URL}/auth/user`, {
                 method,
                 headers: { 'authorization': accessToken }
-            }); 
+            });
 
-            if(!res.ok) throw new Error('');
-
-            const data = await res.json();
+            if(!data.success) throw new Error('');
 
             dispatch({
                 type: UPDATE_USER_DATA_SUCCESS,
@@ -324,33 +316,3 @@ export const getUserData = (method = 'GET') => {
         }
     }
 }
-
-export const checkToken = () => {
-    return async (dispatch) => {
-        const accessToken = 
-            document.cookie.match(/(accessToken=)(.+)/)[2];
-
-        try{
-            dispatch({
-                type: CHECK_TOKEN_REQUEST
-            });
-
-            const res = await fetch(`${BASE_URL}/auth/user`, {
-                method: 'GET',
-                headers: { 'authorization': accessToken }
-            }); 
-
-            if(!res.ok) throw new Error('');
-
-            dispatch({
-                type: CHECK_TOKEN_SUCCESS
-            });
-        }
-        catch(err){
-            fetchWithRefresh()
-            dispatch({
-                type: CHECK_TOKEN_FAILED
-            })
-        }
-    }
-} 

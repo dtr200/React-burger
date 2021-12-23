@@ -10,9 +10,6 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    CHECK_TOKEN_REQUEST,
-    CHECK_TOKEN_SUCCESS,
-    CHECK_TOKEN_FAILED,
     UPDATE_USER_DATA_REQUEST,
     UPDATE_USER_DATA_SUCCESS,
     UPDATE_USER_DATA_FAILED,
@@ -45,8 +42,6 @@ const initialAccessState = {
     registerFailed: false,
     loginRequest: false,
     loginFailed: false,
-    checkTokenRequest: false,
-    checkTokenFailed: false,
     userDataRequest: false,
     userDataFailed: false,
     changePasswordEmail: '',
@@ -160,26 +155,6 @@ export default (state = initialAccessState, action) => {
                 loginFailed: true
             }
         }
-        case CHECK_TOKEN_REQUEST: {
-            return {
-                ...state,
-                checkTokenRequest: true
-            }
-        }
-        case CHECK_TOKEN_SUCCESS: {
-            return {
-                ...state,
-                checkTokenRequest: false,
-                checkTokenFailed: false
-            }
-        }
-        case CHECK_TOKEN_FAILED: {
-            return {
-                ...state,
-                checkTokenRequest: false,
-                checkTokenFailed: true
-            }
-        }
         case UPDATE_USER_DATA_REQUEST: {
             return {
                 ...state,
@@ -211,7 +186,8 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    login: ''
+                    login: '',
+                    password: ''
                 }
             }
         }
