@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { loginUser, updateToken } from '../services/actions/thunks';
+import { loginUser } from '../services/actions/thunks';
 import { SET_EMAIL, SET_PASSWORD } from '../services/actions/action-types';
+import Spinner from '../components/spinner/spinner';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './page.module.css';
 
 const LoginPage = () => {
-
+    
     const dispatch = useDispatch();
-    const { email, password } = 
-        useSelector(store => store.access.user);
+    const { user:{email, password}, loginRequest } = useSelector(store => store.access);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
-    const refreshToken = localStorage['refreshToken'];
-
-    if(!isAccessTokenExist && refreshToken){
-        console.log('refresh exist, access expired')
-        dispatch(updateToken());
-    }
-
-    console.log(isAccessTokenExist, refreshToken)
  
     const login = () => {
         const userData = { email, password };
@@ -44,7 +36,9 @@ const LoginPage = () => {
     }
 
     return (
-        isAccessTokenExist ? (
+        loginRequest ? (
+        <Spinner /> 
+        ) : ( isAccessTokenExist ) ? (
         <Redirect to={state?.from || '/'} />
         ) : (
         <main className={styles.main}>

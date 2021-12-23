@@ -12,6 +12,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
+    CHECK_TOKEN_REQUEST,
+    CHECK_TOKEN_SUCCESS,
+    CHECK_TOKEN_FAILED,
     UPDATE_USER_DATA_REQUEST,
     UPDATE_USER_DATA_SUCCESS,
     UPDATE_USER_DATA_FAILED,
@@ -254,7 +257,7 @@ export const updateToken = () => {
             })
         }
     }
-} 
+}
 
 export const logoutUser = () => {
     return async (dispatch) => {
@@ -321,3 +324,33 @@ export const getUserData = (method = 'GET') => {
         }
     }
 }
+
+export const checkToken = () => {
+    return async (dispatch) => {
+        const accessToken = 
+            document.cookie.match(/(accessToken=)(.+)/)[2];
+
+        try{
+            dispatch({
+                type: CHECK_TOKEN_REQUEST
+            });
+
+            const res = await fetch(`${BASE_URL}/auth/user`, {
+                method: 'GET',
+                headers: { 'authorization': accessToken }
+            }); 
+
+            if(!res.ok) throw new Error('');
+
+            dispatch({
+                type: CHECK_TOKEN_SUCCESS
+            });
+        }
+        catch(err){
+            fetchWithRefresh()
+            dispatch({
+                type: CHECK_TOKEN_FAILED
+            })
+        }
+    }
+} 
