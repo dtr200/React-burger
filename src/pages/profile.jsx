@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
 import OrderHistoryPage from './order-history';
@@ -10,13 +10,10 @@ import styles from './profile.module.css';
 const ProfilePage = () => {
 
     const dispatch = useDispatch();
-    const isAccessTokenExist = document.cookie.indexOf('accessToken=');
-    const refreshToken = localStorage['refreshToken='];
-
     const { path, url } = useRouteMatch();
 
     const onLogout = () => 
-        dispatch(logoutUser('/auth/logout', refreshToken));
+        dispatch(logoutUser());
 
     return (
         <main className={styles.profile}>

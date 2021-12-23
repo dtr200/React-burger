@@ -20,14 +20,14 @@ const LoginPage = () => {
 
     if(!isAccessTokenExist && refreshToken){
         console.log('refresh exist, access expired')
-        dispatch(updateToken('/auth/token', refreshToken));
+        dispatch(updateToken());
     }
 
     console.log(isAccessTokenExist, refreshToken)
  
     const login = () => {
         const userData = { email, password };
-        dispatch(loginUser('/auth/login', userData));
+        dispatch(loginUser(userData));
     }
     const history = useHistory();
     const { state } = history.location;

@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
     const registerUser = () => {
         const userData = { name, email, password };
-        dispatch(registerNewUser('/auth/register', userData));
+        dispatch(registerNewUser(userData));
     }
 
     const setValue = (e) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA } 
     from '../services/actions/action-types';
-import { restoreUserData, updateUserData } from '../services/actions/thunks';
+import { getUserData } from '../services/actions/thunks';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -14,12 +14,7 @@ const ProfileInputsPage = () => {
     const { name, login, password } = 
         useSelector(store => store.access.user);
 
-    const isAccessTokenExist = document.cookie.indexOf('accessToken=') !== -1;
-    const refreshToken = localStorage['refreshToken='];
-     
-    const accessToken = isAccessTokenExist ? 
-        document.cookie.match(/(accessToken=)(.+)/)[2] : '';
-
+    
     const setValue = (e) => {
         const dictNameToType = {
             name: SET_NAME, 
@@ -34,10 +29,9 @@ const ProfileInputsPage = () => {
     }
 
     const onButtonClick = async (e) => {
-        const url = '/auth/user';
         const dictNameToType = {
-            save: updateUserData(url, accessToken, refreshToken), 
-            cancel: restoreUserData(url, accessToken, refreshToken)
+            save: getUserData('PATCH'), 
+            cancel: getUserData('GET')
         };
 
         dispatch(dictNameToType[e.target.name]);
