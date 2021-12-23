@@ -30,7 +30,7 @@ import {
 } from './action-types';
 
 import {
-    BASE_URL
+    BASE_URL, fetchWithRefresh, setCookie, deleteCookie
 } from '../../utils/constants';
 
 export const getIngredients = (ingredientsURL) => {
@@ -157,12 +157,6 @@ export const getNewPassword = (restoreUrl, password, token) => {
     }
 }
 
-const setCookie = (name, value) => 
-    document.cookie = `${name}=${value}`;
-
-const deleteCookie = (name) =>
-    document.cookie = `${name}=;Expires=${new Date(0).toUTCString()}`;
-
 export const registerNewUser = (userData) => {
     return async (dispatch) => {
         try{
@@ -234,17 +228,17 @@ export const updateToken = () => {
                 type: REFRESH_TOKEN_REQUEST
             });
             console.log(`TOKEN UPDATING...`)
-            const res = await fetch(`${BASE_URL}/auth/token`, {
+
+            const data = await fetchWithRefresh(`${BASE_URL}/auth/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ token: localStorage['refreshToken'] })
+                body: JSON.stringify({ 
+                    token: localStorage['refreshToken'] 
+                })
             });
 
-            if(!res.ok) throw new Error('');
-
-            const data = await res.json();
             console.log('UPDATED!')
             localStorage.setItem('refreshToken', data.refreshToken);
             setCookie('accessToken', data.accessToken);
@@ -260,7 +254,7 @@ export const updateToken = () => {
             })
         }
     }
-}
+} 
 
 export const logoutUser = () => {
     return async (dispatch) => {

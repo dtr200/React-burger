@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
     const isRefreshTokenExist = 
-        localStorage['refreshToken='] !== undefined;
+        localStorage['refreshToken'] !== undefined;
 
     if(!isAccessTokenExist && isRefreshTokenExist)
         dispatch(updateToken());

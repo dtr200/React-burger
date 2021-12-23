@@ -16,7 +16,7 @@ const LoginPage = () => {
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
-    const refreshToken = localStorage['refreshToken='];
+    const refreshToken = localStorage['refreshToken'];
 
     if(!isAccessTokenExist && refreshToken){
         console.log('refresh exist, access expired')
