@@ -32,7 +32,6 @@ import {
 
 const initialAccessState = {
     user: {
-        isLoggedIn: false,
         name: '',
         email: '',
         login: '',
@@ -117,8 +116,7 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: '',
                     email: '',
-                    password: '',
-                    isLoggedIn: true
+                    password: ''
                 },
                 registerRequest: false,
                 registerFailed: false
@@ -144,8 +142,7 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: action.user.name,
                     email: action.user.email,
-                    password: '',
-                    isLoggedIn: true
+                    password: ''
                 },
                 loginRequest: false,
                 loginFailed: false
@@ -173,8 +170,7 @@ export default (state = initialAccessState, action) => {
                     ...state.user,
                     name: action.user.name,
                     email: action.user.email,
-                    password: '',
-                    isLoggedIn: true
+                    password: ''
                 }
             }
         }
@@ -190,8 +186,7 @@ export default (state = initialAccessState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    login: '',
-                    isLoggedIn: true
+                    login: ''
                 }
             }
         }
@@ -288,8 +283,7 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 user: {
-                    ...state.user,
-                    isLoggedIn: false
+                    ...state.user
                 },
                 logoutRequest: false,
                 logoutFailed: false,
@@ -300,8 +294,7 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 user: {
-                    ...state.user,
-                    isLoggedIn: false
+                    ...state.user
                 },
                 logoutRequest: false,
                 logoutFailed: true

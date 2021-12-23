@@ -157,12 +157,8 @@ export const getNewPassword = (restoreUrl, password, token) => {
     }
 }
 
-const setCookie = (name, value, time) => {
-    const data = time ? 
-        `${name}=${value}; max-age=${time}` : 
-        `${name}=${value}`;
-    document.cookie = data;
-}
+const setCookie = (name, value) => 
+    document.cookie = `${name}=${value}`;
 
 const deleteCookie = (name) =>
     document.cookie = `${name}=;Expires=${new Date(0).toUTCString()}`;
@@ -184,8 +180,8 @@ export const registerNewUser = (registerUrl, userData) => {
 
             const data = await res.json();
 
-            setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 1150);
+            localStorage.setItem('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken);
             dispatch({
                 type: REGISTER_USER_SUCCESS
             });
@@ -215,8 +211,8 @@ export const loginUser = (loginUrl, userData) => {
 
             const data = await res.json();
 
-            setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 1150);
+            localStorage.setItem('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken);
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 user: data.user
@@ -237,7 +233,7 @@ export const updateToken = (refreshTokenUrl, refreshToken) => {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
             });
-
+            console.log(`TOKEN UPDATING...`)
             const res = await fetch(`${BASE_URL}${refreshTokenUrl}`, {
                 method: 'POST',
                 headers: {
@@ -249,9 +245,10 @@ export const updateToken = (refreshTokenUrl, refreshToken) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-
-            setCookie('refreshToken', data.refreshToken);
-            setCookie('accessToken', data.accessToken, 1150);
+            console.log('UPDATED!')
+            localStorage.setItem('refreshToken', data.refreshToken);
+            setCookie('accessToken', data.accessToken);
+            console.log('Cookie setted')
             dispatch({
                 type: REFRESH_TOKEN_SUCCESS
             })
@@ -283,8 +280,9 @@ export const logoutUser = (logoutUrl, refreshToken) => {
             if(!res.ok) throw new Error('');
 
             const data = await res.json();
-            console.log(data)
+
             deleteCookie('accessToken');
+            localStorage.removeItem('refreshToken');
             dispatch({
                 type: LOGOUT_USER_SUCCESS,
                 message: data.message
