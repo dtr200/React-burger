@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
 import { CurrencyIcon, Button } from 
