@@ -12,9 +12,7 @@ const Auth = (props) => {
 
 const authShapeTypes = PropTypes.shape({
     title: PropTypes.string.isRequired, 
-    logo: PropTypes.string.isRequired, 
-    type: PropTypes.string.isRequired, 
-    view: PropTypes.bool.isRequired 
+    logo: PropTypes.string.isRequired
 });
 
 Auth.propTypes = authShapeTypes.isRequired;
