@@ -11,7 +11,7 @@ const OrderDetails = () => {
     const { modalData } = useSelector(store => store.modal);
     const { orderRequest } = useSelector(store => store.order);
     const { num, description, extra } = DEFAULT_ORDER_DATA;
-    
+
     const orderNum = modalData && modalData.order?.number ? 
         modalData.order.number : num;
 
