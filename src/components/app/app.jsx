@@ -19,6 +19,7 @@ import {
 } from '../../pages';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 import { useDispatch } from 'react-redux';
 import {
@@ -41,10 +42,11 @@ const App = () => {
       dispatch({ type: RESET_ORDER_REQUEST });
       history.goBack();
     }
-
+    console.log('APP', background)
     return (
       <div className={styles.app}>
         <AppHeader />
+
         <Switch location={background || location}>
           <Route path="/" exact>
             <HomePage onModalClose={onModalClose}/>
@@ -57,6 +59,9 @@ const App = () => {
           <Route path='/ingredients/:ingredientId' exact>
             <IngredientDetails />
           </Route>
+          <Route path='/order' exact>
+            <OrderDetails />           
+          </Route>     
           <Route path="/login" exact>
             <LoginPage />
           </Route>
@@ -76,7 +81,16 @@ const App = () => {
             <NotFound404 />
           </Route>          
         </Switch>
-
+        {background && (
+          <Route 
+            path='/order'            
+            children={
+              <Modal onClose={onModalClose}>
+                <OrderDetails />
+              </Modal>
+            }>            
+          </Route>
+        )}
         {background && (
           <Route
             path='/ingredients/:ingredientId'
@@ -84,19 +98,20 @@ const App = () => {
               <Modal onClose={onModalClose}>
                 <IngredientDetails />
               </Modal>
-            }
-          />
+            }>
+          </Route>
         )}
-        {background && (
+        {/* {background && (
           <ProtectedRoute
             path='/profile/orders/:orderNumber'
             children={
               <Modal onClose={onModalClose}>
+                {console.log('modalalll')}
                 <OrderHistoryPage />
               </Modal>
             }
           />
-        )}
+        )} */}
       </div>
     );
   };

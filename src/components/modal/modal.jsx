@@ -15,7 +15,7 @@ const Modal = ({ children, onClose }) => {
     const {
         modalTitle
       } = useSelector(store => store.modal);
-    
+    console.log(modalTitle)
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')
             onClose();
@@ -31,13 +31,10 @@ const Modal = ({ children, onClose }) => {
         <>
             <ModalOverlay onClose={onClose} />
             <div className={`${styles.modal} p-10 pb-15`} 
-                 onKeyDown={handleKeyPress} tabIndex='0'>                
-                <div className={styles.titleContainer}>
-                    <h3 className='text text_type_main-large pr-15'>
-                        { modalTitle }
-                    </h3>
-                    <CloseIcon onClick={onClose} type="primary" />
-                </div>            
+                 onKeyDown={handleKeyPress} tabIndex='0'>
+                <div className={styles.close}>
+                    <CloseIcon onClick={onClose} type="primary" />       
+                </div>               
                 { children }
             </div>
         </>

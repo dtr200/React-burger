@@ -5,6 +5,23 @@
     flex-direction: column;
     margin: 0 auto;
 }
+.titleContainer{
+    width: 100%;
+    height: calc(var(--space) * 16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.box{
+    margin-top: calc(var(--space) * 30);
+}
+.title{
+    width: 100%;    
+}
+.center{
+    text-align: center;
+    padding-right: 0;
+}
 .image{
     max-width: calc(var(--space) * 120);
     margin: 0 auto;

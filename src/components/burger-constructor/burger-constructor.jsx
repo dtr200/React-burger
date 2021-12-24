@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useLocation } from 'react-router-dom';
 import { useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
 import { CurrencyIcon, Button } from 
@@ -19,6 +20,7 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
+    const location = useLocation();
 
     const onDropBun = (item) => {
         dispatch({
@@ -148,9 +150,14 @@ const BurgerConstructor = () => {
                     </span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={onTotalClick}>
-                    Оформить заказ
-                </Button>
+                <Link to={{
+                    pathname: '/order',
+                    state: { background: location}
+                    }}>
+                    <Button type="primary" size="large" onClick={onTotalClick}>
+                        Оформить заказ
+                    </Button>
+                </Link>                
             </div>
         </section>
     )
