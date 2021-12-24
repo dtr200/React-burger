@@ -81,12 +81,25 @@ const BurgerConstructor = () => {
             item.type === 'bun') !== -1;
 
         if(!isBunExist) return;
-        dispatch(sendOrder(ORDER_URL, constructorIngredients));
-        dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
-        history.replace({
-            pathname: '/order',
-            state: { background: location}
-        });
+        const accessToken = document.cookie.match(/(accessToken=)(.+)/);
+        console.log(accessToken)
+        if(!accessToken){
+            console.log('redirect')
+            history.replace({
+                pathname: '/login',
+                state: { background: location}
+            });
+            history.push('/login');
+        }            
+        else{
+            dispatch(sendOrder(ORDER_URL, constructorIngredients));
+            dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
+            history.replace({
+                pathname: '/order',
+                state: { background: location}
+            });
+        }
+        
     }
 
     const getBun = (items, position, descr) => {
