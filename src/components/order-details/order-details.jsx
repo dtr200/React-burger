@@ -10,8 +10,9 @@ const OrderDetails = () => {
     const { modalData } = useSelector(store => store.modal);
     const { num, description, extra } = DEFAULT_ORDER_DATA;
 
-    const orderNum = modalData && modalData.order.number ? 
-        modalData.order.number : num;
+    const orderNum = 1111;
+    /* const orderNum = modalData && modalData.order.number ? 
+        modalData.order.number : num; */
 
     return (
         <div className={`${styles.orderDetails} text mt-4 mb-15`}>

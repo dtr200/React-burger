@@ -43,7 +43,7 @@ const HomePage = ({ onModalClose }) => {
             <DndProvider backend={HTML5Backend}>
             <BurgerIngredients />
             <BurgerConstructor />
-            { (modalVisible || orderFailed) &&
+            {/* { (modalVisible || orderFailed) &&
                 <Modal onClose={onModalClose}>
                 { 
                     (hasModalError || orderFailed) ?
@@ -51,7 +51,7 @@ const HomePage = ({ onModalClose }) => {
                     (modalMode === 'ingredient' ? 
                     <IngredientDetails /> : <OrderDetails />)
                 }
-                </Modal> }
+                </Modal> } */}
             </DndProvider>
         </>
         }
