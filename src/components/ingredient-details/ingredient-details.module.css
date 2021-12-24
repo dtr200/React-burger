@@ -3,6 +3,7 @@
     max-width: calc(var(--space) * 129);
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }
 .image{
     max-width: calc(var(--space) * 120);

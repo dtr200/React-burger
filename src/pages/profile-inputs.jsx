@@ -38,8 +38,7 @@ const ProfileInputsPage = () => {
         e.target.name === 'cancel' && 
         dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
-    console.log('accessToken - ', document.cookie.match(/(accessToken=)(.+)/)[2])
-    console.log('refreshToken - ', localStorage['refreshToken'])
+
     return (        
             <section className={`${styles.container} text`}>
                 <div className={styles.inputLarge}>

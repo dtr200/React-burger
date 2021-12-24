@@ -41,6 +41,7 @@ export const getIngredients = (ingredientsURL) => {
             });
             const res = await fetch(`${BASE_URL}${ingredientsURL}`);
             const json = await res.json();
+
             dispatch({ 
                 type: GET_INGREDIENTS_SUCCESS, 
                 ingredients: json.data
