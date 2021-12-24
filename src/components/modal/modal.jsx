@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import { useSelector } from "react-redux";
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import PropTypes from 'prop-types';
 import { CloseIcon } from 
@@ -11,10 +10,6 @@ import styles from './modal.module.css';
 const root = document.getElementById('react-modals');
 
 const Modal = ({ children, onClose }) => {
-
-    const {
-        modalTitle
-      } = useSelector(store => store.modal);
   
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')
@@ -26,7 +21,7 @@ const Modal = ({ children, onClose }) => {
         return () => 
             document.removeEventListener('keydown', handleKeyPress);
     })
-    console.log('modal')
+
     const content = (
         <>
             <ModalOverlay onClose={onClose} />
