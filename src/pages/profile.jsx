@@ -24,7 +24,7 @@ const ProfilePage = () => {
         <main className={styles.profile}>
             <section className={styles.navBar}>
                 <nav className="mb-20">
-                    <ul className={`${styles.profileList} text text_type_main-medium`}>
+                    <ul className={`${styles.profileList} text text_type_main-medium text_color_inactive`}>
                         <li className={`${styles.profileListItem}`}>
                             <NavLink 
                                 to={{pathname: '/profile'}} exact

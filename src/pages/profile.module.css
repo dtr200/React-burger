@@ -26,10 +26,6 @@
     text-decoration: none;
 }
 
-.profileListItem a:visited{
-    color: inherit;
-}
-
 .activeNavItem{
     color: var(--text-main-white);
 }
