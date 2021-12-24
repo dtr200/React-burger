@@ -42,7 +42,7 @@ const App = () => {
       dispatch({ type: RESET_ORDER_REQUEST });
       history.goBack();
     }
-    console.log('APP', background)
+
     return (
       <div className={styles.app}>
         <AppHeader />
@@ -101,17 +101,16 @@ const App = () => {
             }>
           </Route>
         )}
-        {/* {background && (
+        {background && (
           <ProtectedRoute
             path='/profile/orders/:orderNumber'
             children={
               <Modal onClose={onModalClose}>
-                {console.log('modalalll')}
                 <OrderHistoryPage />
               </Modal>
             }
           />
-        )} */}
+        )}
       </div>
     );
   };

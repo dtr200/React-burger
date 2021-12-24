@@ -61,7 +61,7 @@ export const sendOrder = (orderURL, constructorIngredients) => {
         const orderBody = {
             ingredients: constructorIngredients.map(product => product._id)
         };
-        
+
         try{
             dispatch({
                 type: SEND_ORDER_REQUEST
