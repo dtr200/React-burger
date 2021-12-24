@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
 import { CurrencyIcon, Button } from 
@@ -21,6 +21,7 @@ const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { constructorIngredients } = useSelector(store => store.ingredients);
     const location = useLocation();
+    const history = useHistory();
 
     const onDropBun = (item) => {
         dispatch({
@@ -78,9 +79,14 @@ const BurgerConstructor = () => {
     const onTotalClick = () => {
         const isBunExist = constructorIngredients.findIndex(item => 
             item.type === 'bun') !== -1;
+
         if(!isBunExist) return;
         dispatch(sendOrder(ORDER_URL, constructorIngredients));
         dispatch({ type: CLEAR_CONSTRUCTOR_INGREDIENTS });
+        history.replace({
+            pathname: '/order',
+            state: { background: location}
+        });
     }
 
     const getBun = (items, position, descr) => {
@@ -150,14 +156,9 @@ const BurgerConstructor = () => {
                     </span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Link to={{
-                    pathname: '/order',
-                    state: { background: location}
-                    }}>
-                    <Button type="primary" size="large" onClick={onTotalClick}>
-                        Оформить заказ
-                    </Button>
-                </Link>                
+                <Button type="primary" size="large" onClick={onTotalClick}>
+                    Оформить заказ
+                </Button>               
             </div>
         </section>
     )

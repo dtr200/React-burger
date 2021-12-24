@@ -40,7 +40,7 @@ const App = () => {
       dispatch({ type: CLOSE_MODAL });
       dispatch({ type: RESET_CURRENT_INGREDIENT });
       dispatch({ type: RESET_ORDER_REQUEST });
-      history.goBack();
+      history.replace({ pathname: '/'})
     }
 
     return (
@@ -61,7 +61,7 @@ const App = () => {
           </Route>
           <Route path='/order' exact>
             <OrderDetails />           
-          </Route>     
+          </Route>    
           <Route path="/login" exact>
             <LoginPage />
           </Route>

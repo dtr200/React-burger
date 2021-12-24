@@ -15,7 +15,7 @@ const Modal = ({ children, onClose }) => {
     const {
         modalTitle
       } = useSelector(store => store.modal);
-    console.log(modalTitle)
+  
     const handleKeyPress = (e) => {
         if(e.key === 'Escape')
             onClose();
@@ -26,7 +26,7 @@ const Modal = ({ children, onClose }) => {
         return () => 
             document.removeEventListener('keydown', handleKeyPress);
     })
-
+    console.log('modal')
     const content = (
         <>
             <ModalOverlay onClose={onClose} />
