@@ -82,9 +82,8 @@ const BurgerConstructor = () => {
 
         if(!isBunExist) return;
         const accessToken = document.cookie.match(/(accessToken=)(.+)/);
-        console.log(accessToken)
+
         if(!accessToken){
-            console.log('redirect')
             history.replace({
                 pathname: '/login',
                 state: { background: location}
