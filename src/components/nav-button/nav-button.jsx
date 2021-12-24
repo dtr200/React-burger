@@ -10,7 +10,7 @@ import {
 
 import styles from './nav-button.module.css';
 
-const NavButton = ({ title, logo, type, view }) => {
+const NavButton = ({ title, logo }) => {
     const dictLogoToImg = {
         burger: () => <BurgerIcon type={getType(title)} />,
         list: () => <ListIcon type={getType(title)} />,
