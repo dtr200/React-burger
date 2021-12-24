@@ -11,7 +11,7 @@ import styles from './profile.module.css';
 const ProfileInputsPage = () => {
 
     const dispatch = useDispatch();
-    const { name, login, password } = 
+    const { name, login, email, password } = 
         useSelector(store => store.access.user);
 
     
@@ -29,8 +29,9 @@ const ProfileInputsPage = () => {
     }
 
     const onButtonClick = async (e) => {
+        const userData = { name, email };
         const dictNameToType = {
-            save: getUserData('PATCH'), 
+            save: getUserData('PATCH', userData), 
             cancel: getUserData('GET')
         };
 

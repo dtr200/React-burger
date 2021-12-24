@@ -288,7 +288,7 @@ export const logoutUser = () => {
     }
 }
 
-export const getUserData = (method = 'GET') => {
+export const getUserData = (methodType, userData) => {
     return async (dispatch) => {        
         const accessToken = 
             document.cookie.match(/(accessToken=)(.+)/)[2];
@@ -299,12 +299,16 @@ export const getUserData = (method = 'GET') => {
             });
 
             const data = await fetchWithRefresh(`${BASE_URL}/auth/user`, {
-                method,
-                headers: { 'authorization': accessToken }
+                method: methodType,
+                headers: { 
+                    'authorization': accessToken,
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(userData)
             });
 
             if(!data.success) throw new Error('');
-
+            console.log(data)
             dispatch({
                 type: UPDATE_USER_DATA_SUCCESS,
                 user: data.user
