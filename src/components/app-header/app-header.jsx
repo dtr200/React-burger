@@ -8,11 +8,11 @@ import styles from './app-header.module.css';
 const AppHeader = () => {
     
     const navButtonsData = [
-        { title: 'Конструктор', logo: 'burger', type: 'primary', view: true },
-        { title: 'Лента заказов', logo: 'list', type: 'secondary', view: false }
+        { title: 'Конструктор', logo: 'burger' },
+        { title: 'Лента заказов', logo: 'list' }
     ]
     const authButtonData = 
-        { title: 'Личный кабинет', logo: 'profile', type: 'secondary', view: false };
+        { title: 'Личный кабинет', logo: 'profile' };
 
     return (
         <header className={`${styles.appHeader} pt-4 pb-4`}>
