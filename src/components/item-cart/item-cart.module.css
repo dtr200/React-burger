@@ -22,3 +22,7 @@
 .image{
     margin: 0 auto;
 }
+.link{
+    text-decoration: none;
+    color: inherit;
+}

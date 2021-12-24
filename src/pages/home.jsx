@@ -12,15 +12,10 @@ import IngredientDetails from '../components/ingredient-details/ingredient-detai
 import { INGREDIENTS_URL } from 
   '../utils/constants';
 import { getIngredients } from '../services/actions/thunks';
-import {
-  CLOSE_MODAL,
-  RESET_CURRENT_INGREDIENT,
-  RESET_ORDER_REQUEST
-} from '../services/actions/action-types';
 
 import styles from './home.module.css';
 
-const HomePage = () => {
+const HomePage = ({ onModalClose }) => {
   const dispatch = useDispatch();
   const {
     ingredientsRequest, 
@@ -38,11 +33,7 @@ const HomePage = () => {
     dispatch(getIngredients(INGREDIENTS_URL));
   }, []);
 
-  const onModalClose = () => {
-    dispatch({ type: CLOSE_MODAL });
-    dispatch({ type: RESET_CURRENT_INGREDIENT });
-    dispatch({ type: RESET_ORDER_REQUEST });
-  }
+  
 
   return (
     <main className={`${styles.main}`}>

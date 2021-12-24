@@ -18,8 +18,8 @@ const Fact = ({ title, value, width }) => {
 }
 
 Fact.propTypes = {
-    title: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.number,
     width: PropTypes.string.isRequired
 }
 
