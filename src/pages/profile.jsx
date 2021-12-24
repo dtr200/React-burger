@@ -43,7 +43,7 @@ const ProfilePage = () => {
                         </li>
                         <li className={`${styles.profileListItem}`}>
                             <NavLink 
-                                to="/" exact 
+                                to="/login" exact 
                                 className={styles.profileLink}
                                 activeClassName={styles.activeNavItem}
                                 onClick={onLogout}>

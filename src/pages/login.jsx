@@ -12,7 +12,11 @@ import styles from './page.module.css';
 const LoginPage = () => {
     
     const dispatch = useDispatch();
-    const { user:{email, password}, loginRequest } = useSelector(store => store.access);
+    const { 
+        user:{email, password}, 
+        loginRequest, 
+        logoutRequest 
+    } = useSelector(store => store.access);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
@@ -36,7 +40,7 @@ const LoginPage = () => {
     }
 
     return (
-        loginRequest ? (
+        loginRequest || logoutRequest ? (
         <Spinner /> 
         ) : ( isAccessTokenExist ) ? (
         <Redirect to={state?.from || '/'} />
