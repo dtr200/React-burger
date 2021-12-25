@@ -30,7 +30,7 @@ import {
 } from './action-types';
 
 import {
-    BASE_URL, fetchWithRefresh, setCookie, deleteCookie
+    BASE_URL, fetchWithRefresh, checkResponse, setCookie, deleteCookie
 } from '../../utils/constants';
 
 export const getIngredients = (ingredientsURL) => {
@@ -40,7 +40,7 @@ export const getIngredients = (ingredientsURL) => {
                 type: GET_INGREDIENTS_REQUEST 
             });
             const res = await fetch(`${BASE_URL}${ingredientsURL}`);
-            const json = await res.json();
+            const json = await checkResponse(res);
 
             dispatch({ 
                 type: GET_INGREDIENTS_SUCCESS, 
@@ -61,7 +61,6 @@ export const sendOrder = (orderURL, constructorIngredients) => {
         const orderBody = {
             ingredients: constructorIngredients.map(product => product._id)
         };
-
         try{
             dispatch({
                 type: SEND_ORDER_REQUEST
@@ -71,11 +70,8 @@ export const sendOrder = (orderURL, constructorIngredients) => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(orderBody)
             });
-    
-            if(!res.ok)
-                throw new Error('');
 
-            const data = await res.json();
+            const data = await checkResponse(res);
 
             dispatch({ 
                 type: SEND_ORDER_SUCCESS,
@@ -109,9 +105,8 @@ export const restorePassword = (restoreUrl, email) => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(emailBody)
             })
-            if(!res.ok) throw new Error('');
 
-            const data = await res.json();
+            const data = await checkResponse(res);
             
             dispatch({
                 type: RESTORE_PASSWORD_SUCCESS,
@@ -141,9 +136,7 @@ export const getNewPassword = (restoreUrl, password, token) => {
                 body: JSON.stringify(passwordBody)
             });
 
-            if(!res.ok) throw new Error('');
-
-            const data = await res.json();
+            const data = await checkResponse(res);
 
             dispatch({
                 type: GET_NEW_PASSWORD_SUCCESS,
@@ -171,9 +164,7 @@ export const registerNewUser = (userData) => {
                 body: JSON.stringify(userData)
             })
 
-            if(!res.ok) throw new Error('');
-
-            const data = await res.json();
+            const data = await checkResponse(res);
 
             localStorage.setItem('refreshToken', data.refreshToken);
             setCookie('accessToken', data.accessToken);
@@ -202,9 +193,7 @@ export const loginUser = (userData) => {
                 body: JSON.stringify(userData)
             })
 
-            if(!res.ok) throw new Error('');
-
-            const data = await res.json();
+            const data = await checkResponse(res);
 
             localStorage.setItem('refreshToken', data.refreshToken);
             setCookie('accessToken', data.accessToken);
@@ -257,7 +246,7 @@ export const updateToken = () => {
 export const logoutUser = () => {
     return async (dispatch) => {
         const tokenBody = { token: localStorage['refreshToken'] };
-        console.log(tokenBody)
+ 
         try{
             dispatch({
                 type: LOGOUT_USER_REQUEST
@@ -268,10 +257,8 @@ export const logoutUser = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(tokenBody)
             })
-            
-            if(!res.ok) throw new Error('');
 
-            const data = await res.json();
+            const data = await checkResponse(res);
 
             deleteCookie('accessToken');
             localStorage.removeItem('refreshToken');
