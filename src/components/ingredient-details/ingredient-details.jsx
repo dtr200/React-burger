@@ -9,7 +9,7 @@ import Spinner from "../spinner/spinner";
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = () => {
-    let { currentIngredient } = useSelector(store => store.ingredients);
+    const { currentIngredient } = useSelector(store => store.ingredients);
     const { ingredientsData, ingredientsRequest } = 
         useSelector(store => store.ingredients);
     const { ingredientId } = useParams();
@@ -17,15 +17,15 @@ const IngredientDetails = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if(!currentIngredient)
+        if(!currentIngredient._id)
             dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
 
-    if(!currentIngredient._id){
-        currentIngredient = ingredientsData.find(item => 
+    const ingredient = location.state?.background ? 
+        currentIngredient : 
+        ingredientsData.find(item => 
             item._id === ingredientId);
-    }
-    
+
     const keyToTabNameMap = {
         calories: 'Калории,ккал',
         proteins: 'Белки, г',
@@ -35,18 +35,18 @@ const IngredientDetails = () => {
 
     const createFactsArray = () => {
         const items = [];
-        for(let key in currentIngredient){
+        for(let key in ingredient){
             if(keyToTabNameMap[key])
                 items.push(
                     { title: keyToTabNameMap[key],
-                      value: currentIngredient[key] }
+                      value: ingredient[key] }
                 );
         }
         return [ items.pop(), ...items.sort()];
     }
     const center = !location.state?.background ? styles.center : '';
     const box = !location.state?.background ? styles.box : '';
-    
+
     return (
         ingredientsRequest ? (
             <Spinner />
@@ -58,11 +58,11 @@ const IngredientDetails = () => {
                 </h3>
             </div>
             <div className={styles.ingredientDetails}>            
-                <img src={currentIngredient.image_large} 
+                <img src={ingredient.image_large} 
                     className={styles.image} 
-                    alt={currentIngredient.name} />
+                    alt={ingredient.name} />
                 <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
-                    {currentIngredient.name}
+                    {ingredient.name}
                 </p>
                 <div className={styles.nutritionFacts}>
                     { createFactsArray().map((item, i) => {
