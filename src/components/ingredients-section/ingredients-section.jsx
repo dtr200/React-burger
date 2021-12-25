@@ -15,7 +15,7 @@ import {
 
 import styles from './ingredients-section.module.css';
 
-const IngredientsSection = ({ title, items }) => {
+const IngredientsSection = React.forwardRef(({ title, items }, ref) => {
     const dispatch = useDispatch();
 
     const { 
@@ -23,7 +23,7 @@ const IngredientsSection = ({ title, items }) => {
         constructorIngredients
       } = useSelector(store => store.ingredients);
 
-    const { ref, inView, entry } = useInView({
+    const { ref: refDnd, inView, entry } = useInView({
         threshold: [0, 0.25, 0.5, 0.75, 1] });
 
 
@@ -59,10 +59,11 @@ const IngredientsSection = ({ title, items }) => {
         <section
             onClick={onItemClick}
             id={title}
-            ref={ref}>
+            ref={refDnd}>
             <h2 
                 className={`text text_type_main-medium mb-6`}
-                id={title}>
+                id={title}
+                ref={ref}>
                 { typeToTitle[title] }
             </h2>
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
@@ -87,7 +88,7 @@ const IngredientsSection = ({ title, items }) => {
             </ul>
         </section>
     )
-}
+})
 
 IngredientsSection.propTypes = {
     title: PropTypes.string.isRequired,

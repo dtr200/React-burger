@@ -5,7 +5,7 @@ import { Tab } from
 
 import styles from './ingredients-nav.module.css';
 
-const IngredientsNav = () => {
+const IngredientsNav = ({ onTabClick }) => {
     const { tabs } = useSelector(store => store.ingredients);
 
     const current = useSelector(state => 
@@ -21,7 +21,8 @@ const IngredientsNav = () => {
                     <li key={i}>
                         <Tab 
                             value={id} 
-                            active={id === current}>
+                            active={id === current}
+                            onClick={onTabClick}>
                             {title}
                         </Tab>
                     </li>)) }
