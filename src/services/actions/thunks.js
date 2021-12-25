@@ -257,7 +257,7 @@ export const updateToken = () => {
 export const logoutUser = () => {
     return async (dispatch) => {
         const tokenBody = { token: localStorage['refreshToken'] };
-
+        console.log(tokenBody)
         try{
             dispatch({
                 type: LOGOUT_USER_REQUEST
@@ -308,7 +308,7 @@ export const getUserData = (methodType, userData) => {
             });
 
             if(!data.success) throw new Error('');
-            console.log(data)
+
             dispatch({
                 type: UPDATE_USER_DATA_SUCCESS,
                 user: data.user
