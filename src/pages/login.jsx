@@ -45,7 +45,7 @@ const LoginPage = () => {
         ) : ( isAccessTokenExist ) ? (
         <Redirect to={state?.from || '/'} />
         ) : (
-        <main className={styles.main}>
+        <form className={styles.main} onSubmit={login}>
             <section className={`${styles.container} text`}>
                 <h1 className={`${styles.title} text_type_main-medium`}>Вход</h1>
                 <div className={styles.inputLarge}>
@@ -70,10 +70,7 @@ const LoginPage = () => {
                         />
                 </div>
                 <div className='mt-6 mb-20'>
-                    <Button 
-                        type="primary" 
-                        size="medium"
-                        onClick={login}>
+                    <Button type="primary" size="medium">
                         Войти
                     </Button>
                 </div>
@@ -88,7 +85,7 @@ const LoginPage = () => {
                     </p>   
                 </section>
             </section>        
-        </main>
+        </form>
         )
     );
 }
