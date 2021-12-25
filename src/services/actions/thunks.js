@@ -29,9 +29,10 @@ import {
     LOGOUT_USER_FAILED
 } from './action-types';
 
+import { BASE_URL } from '../../utils/constants';
 import {
-    BASE_URL, fetchWithRefresh, checkResponse, setCookie, deleteCookie
-} from '../../utils/constants';
+    fetchWithRefresh, checkResponse, setCookie, deleteCookie
+} from '../../utils/utils';
 
 export const getIngredients = (ingredientsURL) => {
     return async (dispatch) => {
