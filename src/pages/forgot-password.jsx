@@ -21,7 +21,9 @@ const ForgotPasswordPage = () => {
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
 
-    const reinstallPassword = () => {
+    const reinstallPassword = (e) => {
+        e.preventDefault()
+        console.log(e.nativeEvent.submitter.name)
         if(changePasswordEmail.length)
             dispatch(restorePassword('/password-reset', changePasswordEmail));
     }
