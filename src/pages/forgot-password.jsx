@@ -41,7 +41,7 @@ const ForgotPasswordPage = () => {
         ) : ( changePasswordMessage ) ? (
         <Redirect to={'/reset-password'} /> 
         ) : (
-        <main className={styles.main}>
+        <form className={styles.main} onSubmit={reinstallPassword}>
             <section className={`${styles.container} text`}>
                 <h1 className={`${styles.title} text_type_main-medium`}>
                     Восстановление пароля
@@ -59,8 +59,7 @@ const ForgotPasswordPage = () => {
                 <div className='mt-6 mb-20'>
                     <Button 
                         type="primary" 
-                        size="medium"
-                        onClick={reinstallPassword}>
+                        size="medium">
                         Восстановить
                     </Button>
                 </div>
@@ -71,7 +70,7 @@ const ForgotPasswordPage = () => {
                     </p>   
                 </section>
             </section>        
-        </main>
+        </form>
         )
   );
 }

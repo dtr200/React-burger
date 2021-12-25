@@ -35,7 +35,7 @@ const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
-    let background = location.state && location.state.background;
+    const background = location.state && location.state.background;
     const onModalClose = () => {
       dispatch({ type: CLOSE_MODAL });
       dispatch({ type: RESET_CURRENT_INGREDIENT });
