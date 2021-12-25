@@ -14,7 +14,6 @@ const ProfileInputsPage = () => {
     const dispatch = useDispatch();
     const { name, login, email, password } = 
         useSelector(store => store.access.user);
-    console.log(name)
     
     const setValue = (e) => {
         const dictNameToType = {
@@ -29,20 +28,22 @@ const ProfileInputsPage = () => {
         })
     }
 
-    const onButtonClick = async (e) => {
+    const onFormClick = async (e) => {
+        e.preventDefault();
+        const clickName = e.nativeEvent.submitter.name;
         const userData = { name, email };
         const dictNameToType = {
             save: getUserData('PATCH', userData), 
             cancel: getUserData('GET')
         };
 
-        dispatch(dictNameToType[e.target.name]);
-        e.target.name === 'cancel' && 
+        dispatch(dictNameToType[clickName]);
+        clickName === 'cancel' && 
         dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
 
     return (
-            <form className={`${styles.container} text`}>
+            <form className={`${styles.container} text`} onSubmit={onFormClick}>
                 <div className={styles.inputLarge}>
                     <Input
                         type={'text'}
@@ -80,15 +81,13 @@ const ProfileInputsPage = () => {
                     <Button 
                         type="secondary" 
                         size="medium"
-                        name="cancel"
-                        onClick={onButtonClick}>
+                        name="cancel">
                         Отмена
                     </Button>
                     <Button 
                         type="primary" 
                         size="medium"
-                        name="save"
-                        onClick={onButtonClick}>
+                        name="save">
                         Сохранить
                     </Button>
                 </section>
