@@ -68,7 +68,11 @@ const ForgotPasswordPage = () => {
                 <section className={styles.questions}>
                     <p className={`${styles.question} text_type_main-default`}>
                         <span>Вспомнили пароль? </span>
-                        <Link to='/login'>Войти</Link>
+                        <Link 
+                            to='/login'
+                            className={styles.link}>
+                            Войти
+                        </Link>
                     </p>   
                 </section>
             </section>        

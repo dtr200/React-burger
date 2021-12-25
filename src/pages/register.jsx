@@ -86,7 +86,11 @@ const RegisterPage = () => {
                 <section className={styles.questions}>
                     <p className={`${styles.question} text_type_main-default`}>
                         <span>Уже зарегистрированы? </span>
-                        <Link to='/login'>Войти</Link>
+                        <Link 
+                            to='/login'
+                            className={styles.link}>
+                            Войти
+                        </Link>
                     </p>   
                 </section>
             </section>        
