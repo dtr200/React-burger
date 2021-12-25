@@ -14,7 +14,7 @@ export const setCookie = (name, value) =>
 export const deleteCookie = (name) =>
     document.cookie = `${name}=;Expires=${new Date(0).toUTCString()}`;
 
-const checkResponse = (res) => {
+export const checkResponse = (res) => {
   return res.ok ? 
       res.json() :
       res.json().then((err) => Promise.reject(err));
