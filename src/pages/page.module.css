@@ -29,5 +29,8 @@
 }
 .question{
     margin: 0;
-    text-align: center;
+    text-align: center;    
+}
+.link{
+    text-decoration: none;
 }

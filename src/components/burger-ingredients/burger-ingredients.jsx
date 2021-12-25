@@ -48,7 +48,7 @@ const BurgerIngredients = () => {
     }
        
     const blocks = createIngredientsBlocks();    
-    console.log(blocks)
+ 
     return (
         <section className={`${styles.burgerIngredients}`}>
             <h1 className={`mt-10 mb-5 text text_type_main-large`}>

@@ -77,11 +77,19 @@ const LoginPage = () => {
                 <section className={styles.questions}>
                     <p className={`${styles.question} text_type_main-default mb-4`}>
                         <span>Вы — новый пользователь? </span> 
-                        <Link to='/register'>Зарегистрироваться</Link>
+                        <Link 
+                            to='/register'
+                            className={styles.link}>
+                            Зарегистрироваться
+                        </Link>
                     </p>
                     <p className={`${styles.question} text_type_main-default`}>
                         <span>Забыли пароль? </span>
-                        <Link to='/forgot-password'>Восстановить пароль</Link>
+                        <Link 
+                            to='/forgot-password' 
+                            className={styles.link}>
+                            Восстановить пароль
+                        </Link>
                     </p>   
                 </section>
             </section>        
