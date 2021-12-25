@@ -7,13 +7,14 @@ import { Input, Button } from
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile.module.css';
+import Spinner from '../components/spinner/spinner';
 
 const ProfileInputsPage = () => {
 
     const dispatch = useDispatch();
     const { name, login, email, password } = 
         useSelector(store => store.access.user);
-
+    console.log(name)
     
     const setValue = (e) => {
         const dictNameToType = {
@@ -40,8 +41,8 @@ const ProfileInputsPage = () => {
         dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
 
-    return (        
-            <section className={`${styles.container} text`}>
+    return (
+            <form className={`${styles.container} text`}>
                 <div className={styles.inputLarge}>
                     <Input
                         type={'text'}
@@ -91,7 +92,7 @@ const ProfileInputsPage = () => {
                         Сохранить
                     </Button>
                 </section>
-            </section>
+            </form>
   );
 }
 
