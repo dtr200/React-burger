@@ -42,7 +42,7 @@ const ResetPasswordPage = () => {
         ) : ( isAccessTokenExist || !changePasswordMessage ) ? (
         <Redirect to={'/'} />
         ) : (
-        <main className={styles.main}>
+        <form className={styles.main} onSubmit={restorePassword}>
             <section className={`${styles.container} text`}>
                 <h1 className={`${styles.title} text_type_main-medium`}>
                     Восстановление пароля
@@ -69,10 +69,7 @@ const ResetPasswordPage = () => {
                         />
                 </div>
                 <div className='mt-6 mb-20'>
-                    <Button 
-                        type="primary" 
-                        size="medium"
-                        onClick={restorePassword}>
+                    <Button type="primary" size="medium">
                         Сохранить
                     </Button>
                 </div>
@@ -83,7 +80,7 @@ const ResetPasswordPage = () => {
                     </p>   
                 </section>
             </section>        
-        </main>
+        </form>
         )
   );
 }
