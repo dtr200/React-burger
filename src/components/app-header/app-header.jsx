@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../nav/nav';
 import Auth from '../auth/auth';
+import { Link } from 'react-router-dom';
 import { Logo } from 
 '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
@@ -19,7 +20,9 @@ const AppHeader = () => {
             <div className={styles.appHeaderContainer}>
                 <Nav items={navButtonsData} />
                 <div className={styles.logo}>
-                    <Logo/>
+                    <Link to={'/'}>
+                        <Logo/>
+                    </Link>
                 </div>
                 <Auth {...authButtonData} />
             </div>
