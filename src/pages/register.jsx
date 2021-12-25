@@ -44,7 +44,7 @@ const RegisterPage = () => {
         ) : ( isAccessTokenExist ) ? (
         <Redirect to={state?.from || '/'} />
         ) : (
-        <main className={styles.main}>
+        <form className={styles.main} onSubmit={registerUser}>
             <section className={`${styles.container} text`}>
                 <h1 className={`${styles.title} text_type_main-medium`}>Регистрация</h1>
                 <div className={styles.inputLarge}>
@@ -79,10 +79,7 @@ const RegisterPage = () => {
                         />
                 </div>
                 <div className='mt-6 mb-20'>
-                    <Button 
-                        type="primary" 
-                        size="medium"
-                        onClick={registerUser}>
+                    <Button type="primary" size="medium">
                         Зарегистрироваться
                     </Button>
                 </div>
@@ -93,7 +90,7 @@ const RegisterPage = () => {
                     </p>   
                 </section>
             </section>        
-        </main>
+        </form>
         )
     );
 }
