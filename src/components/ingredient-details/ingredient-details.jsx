@@ -21,9 +21,7 @@ const IngredientDetails = () => {
             dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
 
-    const ingredient = location.state?.background ? 
-        currentIngredient : 
-        ingredientsData.find(item => 
+    const ingredient = ingredientsData.find(item => 
             item._id === ingredientId);
 
     const keyToTabNameMap = {
