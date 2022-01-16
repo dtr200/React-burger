@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, FunctionComponent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from 'react-router-dom';
 import { useDrop } from 'react-dnd';
@@ -14,35 +14,42 @@ import {
     CLEAR_CONSTRUCTOR_INGREDIENTS
 } from '../../services/actions/action-types';
 import { sendOrder } from '../../services/actions/thunks';
-
+import { TProductItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';
 
-const BurgerConstructor = () => {
+type TOnDrop = {
+    itemId: string;
+};
+type TAccessToken = Array<string> | null;
+
+type TBun = TProductItem | boolean | undefined;
+
+const BurgerConstructor: FunctionComponent = () => {
     const dispatch = useDispatch();
-    const { constructorIngredients } = useSelector(store => store.ingredients);
+    const { constructorIngredients } = useSelector((store: any) => store.ingredients);
     const location = useLocation();
     const history = useHistory();
 
-    const onDropBun = (item) => {
+    const onDropBun: (item: TOnDrop) => void = (item) => {
         dispatch({
             type: ADD_BUN,
             id: item.itemId
         });
     }
-    const onDropIngredient = (item) => {
+    const onDropIngredient: (item: TOnDrop) => void = (item) => {
         item.itemId && dispatch({
             type: ADD_INGREDIENT,
             id: item.itemId
         });
     }
 
-    const isHoverNeeded = () => 
+    const isHoverNeeded: () => boolean = () => 
         !constructorIngredients.length ||
         (constructorIngredients.length === 1 && constructorIngredients[0].type !== 'bun' );
 
     const [{isBunHover}, dropTargetTopBun] = useDrop({
         accept: 'bun',
-        drop(itemId){
+        drop(itemId: TOnDrop){
             onDropBun(itemId);
         },
         collect: monitor => {
@@ -53,14 +60,14 @@ const BurgerConstructor = () => {
     });
     const [, dropTargetBottomBun] = useDrop({
         accept: 'bun',
-        drop(itemId){
+        drop(itemId: TOnDrop){
             onDropBun(itemId);
         }
     });
 
     const [{isIngredientHover}, dropIngredientsTarget] = useDrop({
         accept: ['sauce', 'main', 'ingredient'],
-        drop(itemId){
+        drop(itemId: TOnDrop){
             return onDropIngredient(itemId);
         },
         collect: monitor => {
@@ -70,19 +77,20 @@ const BurgerConstructor = () => {
         }
     });
 
-    const totalPrice = constructorIngredients.reduce((accum, product) => {
+    const totalPrice = constructorIngredients.reduce(
+        (accum: number, product: TProductItem): number => {
         return product.type === 'bun' ? 
             accum + product.price * 2 :
             accum + product.price
     }, 0)
 
-    const onTotalClick = () => {
-        const isBunExist = constructorIngredients.findIndex(item => 
+    const onTotalClick: () => void = () => {
+        const isBunExist: boolean = constructorIngredients.findIndex((item: TProductItem) => 
             item.type === 'bun') !== -1;
 
         if(!isBunExist) return;
-        const accessToken = document.cookie.match(/(accessToken=)(.+)/);
-
+        const accessToken: TAccessToken = document.cookie.match(/(accessToken=)(.+)/);
+        
         if(!accessToken){
             history.replace({
                 pathname: '/login',
@@ -97,13 +105,14 @@ const BurgerConstructor = () => {
                 pathname: '/order',
                 state: { background: location}
             });
-        }
-        
+        }        
     }
 
-    const getBun = (items, position, descr) => {
-        const bun = items.length !== 0 && items.find(product => 
+    const getBun: (items: Array<TProductItem>, position: string, descr: string) => ReactElement = 
+        (items, position, descr) => {
+        const bun: TBun = items.length !== 0 && items.find((product: TProductItem) => 
             product.type === 'bun');
+
         return !bun ? (
             <ConstructorItem isBun={true} start={true}/>
         ) : (
@@ -117,8 +126,8 @@ const BurgerConstructor = () => {
                 isBun={true} />
         )
     }
-    
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
+
+    const moveCard = useCallback((dragIndex: number, hoverIndex: number): void => {
         dispatch({
             type: MOVE_INGREDIENT,
             drag: dragIndex,
@@ -126,7 +135,7 @@ const BurgerConstructor = () => {
         });
     }, [constructorIngredients]);
 
-    const ingredientHover = isBunHover || isIngredientHover ? styles.listHover : '';
+    const ingredientHover: string = isBunHover || isIngredientHover ? styles.listHover : '';
 
     return(
         <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
@@ -139,7 +148,7 @@ const BurgerConstructor = () => {
               className={`${styles.list} ${ingredientHover} pr-2`} 
               ref={dropIngredientsTarget}>
                 {
-                    constructorIngredients.map((slice, i) => {
+                    constructorIngredients.map((slice: any, i: number) => {
                         let { _id, name, price, image, type } = slice; 
                         if(type === 'bun') return;
                         
