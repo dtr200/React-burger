@@ -151,7 +151,7 @@ const BurgerConstructor: FunctionComponent = () => {
                     constructorIngredients.map((slice: any, i: number) => {
                         let { _id, name, price, image, type } = slice; 
                         if(type === 'bun') return;
-                        
+                        console.log(i)
                         return [
                             <ConstructorItem 
                                 key={_id}
