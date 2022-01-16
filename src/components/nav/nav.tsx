@@ -1,13 +1,14 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from "react";
 import NavButton from "../nav-button/nav-button";
-import {
-    NAV_SHAPE_TYPES
-} from '../../utils/types';
+import { THeaderButtonsData } from '../../utils/types';
 
 import styles from './nav.module.css';
 
-const Nav = ({ items }) => {
+type TNavProps = {
+    items: Array<THeaderButtonsData>
+}
+
+const Nav: FunctionComponent<TNavProps> = ({ items }) => {
     return (
         <nav className={styles.nav}>
             { 
@@ -16,10 +17,6 @@ const Nav = ({ items }) => {
             } 
         </nav> 
     )
-}
-
-Nav.propTypes = {
-    items: PropTypes.arrayOf(NAV_SHAPE_TYPES).isRequired
 }
 
 export default Nav;
