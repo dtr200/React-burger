@@ -108,13 +108,20 @@ const BurgerConstructor: FunctionComponent = () => {
         }        
     }
 
-    const getBun: (items: Array<TProductItem>, position: string, descr: string) => ReactElement = 
+    const getBun: (items: Array<TProductItem>, position: 'top' | 'bottom', descr: string) => ReactElement = 
         (items, position, descr) => {
         const bun: TBun = items.length !== 0 && items.find((product: TProductItem) => 
             product.type === 'bun');
 
         return !bun ? (
-            <ConstructorItem isBun={true} start={true}/>
+            <ConstructorItem 
+                isBun={true} 
+                start={true}
+                index={0}
+                isLocked={true}
+                price={0}
+                thumbnail={''}
+                text={''} />
         ) : (
             <ConstructorItem 
                 text={`${bun.name} ${descr}`}
@@ -123,7 +130,8 @@ const BurgerConstructor: FunctionComponent = () => {
                 price={bun.price}
                 thumbnail={bun.image}
                 start={false}
-                isBun={true} />
+                isBun={true}
+                index={0} />
         )
     }
 
@@ -151,11 +159,12 @@ const BurgerConstructor: FunctionComponent = () => {
                     constructorIngredients.map((slice: any, i: number) => {
                         let { _id, name, price, image, type } = slice; 
                         if(type === 'bun') return;
-                        console.log(i)
                         return [
                             <ConstructorItem 
                                 key={_id}
                                 id={_id}
+                                isBun={false}
+                                isLocked={false}
                                 text={name}
                                 price={price}
                                 thumbnail={image}
