@@ -14,7 +14,7 @@ import { TTypeToTitle } from '../burger-ingredients/burger-ingredients';
 import styles from './ingredients-section.module.css';
 
 type TIngredientsSectionProps = {
-    title: 'bun' | 'sauce' | 'main';
+    title: keyof TTypeToTitle;
     items: Array<TProductItem>;
     ref: RefObject<HTMLElement>
 }
@@ -51,7 +51,7 @@ const IngredientsSection = React.forwardRef<HTMLHeadingElement, TIngredientsSect
               id = li ? li.dataset.id : null;
         dispatch({
             type: SET_CURRENT_INGREDIENT,
-            data: ingredientsData.find((item: any) => item._id === id)
+            data: ingredientsData.find((item: TProductItem) => item._id === id)
         })
         dispatch({ 
             type: SET_MODAL_DATA,
@@ -72,9 +72,9 @@ const IngredientsSection = React.forwardRef<HTMLHeadingElement, TIngredientsSect
                 { typeToTitle[title] }
             </h2>
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
-                { items.map((item) => {
-                    let amount = 0;
-                    constructorIngredients.forEach((element: any) => {
+                { items.map((item: TProductItem) => {
+                    let amount: number = 0;
+                    constructorIngredients.forEach((element: TProductItem) => {
                         if(element._id === item._id)
                             amount = element.type === 'bun' ? 2 : amount + 1;
                     });
