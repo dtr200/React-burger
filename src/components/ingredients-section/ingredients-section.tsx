@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent, RefObject, SyntheticEvent } from "react";
+import React, { useEffect, RefObject, SyntheticEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useInView } from 'react-intersection-observer';
 
