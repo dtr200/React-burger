@@ -1,27 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, FunctionComponent, RefObject, SyntheticEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useInView } from 'react-intersection-observer';
 
 import ItemCart from '../item-cart/item-cart';
-import PropTypes from 'prop-types';
 import {
     SET_MODAL_DATA,
     SET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
   } from '../../services/actions/action-types';
-import {
-    ITEM_SHAPE_TYPES
-} from '../../utils/types';
+import { TProductItem } from '../../utils/types';
+import { TTypeToTitle } from '../burger-ingredients/burger-ingredients';
 
 import styles from './ingredients-section.module.css';
 
-const IngredientsSection = React.forwardRef(({ title, items }, ref) => {
+type TIngredientsSectionProps = {
+    title: 'bun' | 'sauce' | 'main';
+    items: Array<TProductItem>;
+    ref: RefObject<HTMLElement>
+}
+
+const IngredientsSection = React.forwardRef<HTMLHeadingElement, TIngredientsSectionProps>(
+    ({ title, items }, ref) => {
     const dispatch = useDispatch();
 
     const { 
         ingredientsData,
         constructorIngredients
-      } = useSelector(store => store.ingredients);
+      } = useSelector((store: any) => store.ingredients);
 
     const { ref: refDnd, inView, entry } = useInView({
         threshold: [0, 0.25, 0.5, 0.75, 1] });
@@ -35,18 +40,18 @@ const IngredientsSection = React.forwardRef(({ title, items }, ref) => {
           });
     }, [inView, entry, dispatch]);
 
-    const typeToTitle = {
+    const typeToTitle: TTypeToTitle = {
         bun: 'Булки',        
         sauce: 'Соусы',
         main: 'Начинки'
     }
 
-    const onItemClick = (e) => {
-        const li = e.target.closest('li'),
+    const onItemClick = (e: SyntheticEvent) => {
+        const li = (e.target as HTMLElement).closest('li'),
               id = li ? li.dataset.id : null;
         dispatch({
             type: SET_CURRENT_INGREDIENT,
-            data: ingredientsData.find(item => item._id === id)
+            data: ingredientsData.find((item: any) => item._id === id)
         })
         dispatch({ 
             type: SET_MODAL_DATA,
@@ -69,7 +74,7 @@ const IngredientsSection = React.forwardRef(({ title, items }, ref) => {
             <ul className={`${styles.ingredientsList} mt-6 mb-0 pl-4 pr-2`}>
                 { items.map((item) => {
                     let amount = 0;
-                    constructorIngredients.forEach((element) => {
+                    constructorIngredients.forEach((element: any) => {
                         if(element._id === item._id)
                             amount = element.type === 'bun' ? 2 : amount + 1;
                     });
@@ -89,10 +94,5 @@ const IngredientsSection = React.forwardRef(({ title, items }, ref) => {
         </section>
     )
 })
-
-IngredientsSection.propTypes = {
-    title: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(ITEM_SHAPE_TYPES).isRequired
-}
 
 export default IngredientsSection;

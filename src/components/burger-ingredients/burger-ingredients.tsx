@@ -1,49 +1,67 @@
-import React, { useRef } from "react";
+import React, { useRef, FunctionComponent, RefObject } from "react";
 import { useSelector } from "react-redux";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import IngredientsSection from '../ingredients-section/ingredients-section';
+import { TProductItem } from '../../utils/types';
 
 import styles from './burger-ingredients.module.css';
 
-const BurgerIngredients = () => {
+type TTitleToRef = {
+    bun: RefObject<HTMLHeadingElement>;
+    sauce: RefObject<HTMLHeadingElement>;
+    main: RefObject<HTMLHeadingElement>;
+};
+
+export type TTypeToTitle = {
+    bun: 'Булки';    
+    sauce: 'Соусы';
+    main: 'Начинки';
+};
+
+type TIngredientsBlockItem = {
+    title: keyof TTypeToTitle;
+    items: Array<TProductItem>;
+};
+
+const BurgerIngredients: FunctionComponent = () => {
     
     const { ingredientsData } = 
-        useSelector(store => store.ingredients);
+        useSelector((store: any) => store.ingredients);
         
-    const bunRef = useRef(null);
-    const sauceRef = useRef(null);
-    const mainRef = useRef(null);
+    const bunRef = useRef<HTMLHeadingElement>(null);
+    const sauceRef = useRef<HTMLHeadingElement>(null);
+    const mainRef = useRef<HTMLHeadingElement>(null);
         
-    const typeToTitle = {
+    const typeToTitle: TTypeToTitle = {
         bun: 'Булки',        
         sauce: 'Соусы',
         main: 'Начинки'
     }
 
-    const titleToRef = {
+    const titleToRef: TTitleToRef = {
         bun: bunRef,
         sauce: sauceRef,
         main: mainRef
     }
 
-    const onTabClick = (e) => {
+    const onTabClick = (e: keyof TTypeToTitle) => {
         const element = titleToRef[e].current;
-        element.scrollIntoView({ behavior: "smooth" });
+        element?.scrollIntoView({ behavior: "smooth" });
     }
 
     const createIngredientsBlocks = () => {        
-        const blocks = [];
-        for(let key in typeToTitle){
-            const item = { 
+        const blocks: Array<TIngredientsBlockItem> = [];
+        (Object.keys(typeToTitle) as (keyof TTypeToTitle)[]).forEach(key => {
+            const item: TIngredientsBlockItem = { 
                 title: key,
                 items: [] 
             };            
-            ingredientsData.forEach(elem => {
+            ingredientsData.forEach((elem: TProductItem) => {
                 if(elem.type === key)
                     item.items.push(elem);            
             });
             blocks.push(item);
-        }
+        });
         return blocks;
     }
        
@@ -56,7 +74,7 @@ const BurgerIngredients = () => {
             </h1>
             <IngredientsNav onTabClick={onTabClick} />
                 <section className={styles.ingredients}>
-                { blocks.map((block, i) => 
+                { blocks.map((block: TIngredientsBlockItem, i: number) => 
                     <IngredientsSection 
                         key={block.items[0]._id + i}   
                         ref={titleToRef[block.title]}                     
