@@ -7,9 +7,7 @@ import { TProductItem } from '../../utils/types';
 import styles from './burger-ingredients.module.css';
 
 type TTitleToRef = {
-    bun: RefObject<HTMLHeadingElement>;
-    sauce: RefObject<HTMLHeadingElement>;
-    main: RefObject<HTMLHeadingElement>;
+    [name: string]: RefObject<HTMLHeadingElement>;
 };
 
 export type TTypeToTitle = {
@@ -44,8 +42,8 @@ const BurgerIngredients: FunctionComponent = () => {
         main: mainRef
     }
 
-    const onTabClick = (e: keyof TTypeToTitle) => {
-        const element = titleToRef[e].current;
+    const onTabClick = (value: string) => {
+        const element = titleToRef[value].current;
         element?.scrollIntoView({ behavior: "smooth" });
     }
 
