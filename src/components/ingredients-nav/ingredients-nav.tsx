@@ -8,18 +8,17 @@ type TIngredientsNavProps = {
     onTabClick: (value: string) => void;
 };
 
-type TCurrent = {
+type TTub = {
     id: string;
     title: string;
-    ration: number;
+    ratio: number;
 };
 
 const IngredientsNav: FunctionComponent<TIngredientsNavProps> = ({ onTabClick }) => {
     const { tabs } = useSelector((store: any) => store.ingredients);
 
     const current = useSelector((state: any) => 
-        state.ingredients.tabs.reduce((current: any, tab: any) => {
-            console.log(current)
+        state.ingredients.tabs.reduce((current: TTub, tab: TTub) => {
             return current.ratio < tab.ratio ? 
                 tab : current;
         }, state.ingredients.tabs[0]).id);
@@ -27,8 +26,7 @@ const IngredientsNav: FunctionComponent<TIngredientsNavProps> = ({ onTabClick })
     return(
         <nav>
             <ul className={`${styles.list} mb-10`}>
-                { tabs.map((tab: any, i: number) => {
-                    console.log(tab)
+                { tabs.map((tab: TTub, i: number) => {
                     const { title, id } = tab;
                     return <li key={i}>
                         <Tab 
