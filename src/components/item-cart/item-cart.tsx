@@ -1,15 +1,22 @@
-import React from "react";
+import React, { FunctionComponent} from "react";
 import { Link, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
-import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './item-cart.module.css';
 
-const ItemCart = ({ id: itemId, name: itemName, 
-                    price: itemPrice, image: itemImage,
-                    type, amount }) => {
+type TItemCartProps = {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    type: string;
+    amount: number;
+};
+
+const ItemCart: FunctionComponent<TItemCartProps> = 
+    ({ id: itemId, name: itemName, price: itemPrice, image: itemImage, type, amount }) => {
     const location = useLocation();
 
     const [ , dragRef ] = useDrag({
@@ -50,15 +57,6 @@ const ItemCart = ({ id: itemId, name: itemName,
             </li>
         </Link>        
     )
-}
-
-ItemCart.propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired, 
-    image: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired
 }
 
 export default ItemCart;
