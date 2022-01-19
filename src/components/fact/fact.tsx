@@ -1,9 +1,14 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from "react";
 
 import styles from './fact.module.css';
 
-const Fact = ({ title, value, width }) => {
+type TFactProps = {
+    title: string;
+    value: number;
+    width: string;
+};
+
+const Fact: FunctionComponent<TFactProps> = ({ title, value, width }) => {
     const w = width === 'wide' ? styles.wide : '';
     return (
         <div className={`${styles.fact} ${w} text text_color_inactive`}>
@@ -15,12 +20,6 @@ const Fact = ({ title, value, width }) => {
             </span>
         </div>
     );
-}
-
-Fact.propTypes = {
-    title: PropTypes.string,
-    value: PropTypes.number,
-    width: PropTypes.string.isRequired
 }
 
 export default Fact;
