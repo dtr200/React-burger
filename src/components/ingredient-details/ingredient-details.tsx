@@ -5,6 +5,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getIngredients } from '../../services/actions/thunks';
 import { INGREDIENTS_URL } from '../../utils/constants';
 import Spinner from "../spinner/spinner";
+import { TProductItem } from '../../utils/types';
 
 import styles from './ingredient-details.module.css';
 
@@ -29,6 +30,13 @@ type TLocation = {
     state: TLocationState;
 };
 
+type TIngredientData = {
+    title: string;
+    value: number;
+}
+
+type TItem = TIngredientData | undefined;
+
 const IngredientDetails: FunctionComponent = () => {
     const { currentIngredient } = useSelector((store: any) => store.ingredients);
     const { ingredientsData, ingredientsRequest } = 
@@ -42,7 +50,7 @@ const IngredientDetails: FunctionComponent = () => {
             dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
 
-    const ingredient = ingredientsData.find((item: any) => 
+    const ingredient = ingredientsData.find((item: TProductItem) => 
             item._id === ingredientId);
 
     const keyToTabNameMap: TKeyToTabNameMap = {
@@ -52,8 +60,8 @@ const IngredientDetails: FunctionComponent = () => {
         carbohydrates: 'Углеводы, г'
     }
 
-    const createFactsArray = () => {
-        const items = [];
+    const createFactsArray: () => Array<TItem> = () => {
+        const items: Array<TItem> = [];
         for(let key in ingredient){
             if(keyToTabNameMap[key])
                 items.push(
@@ -64,8 +72,8 @@ const IngredientDetails: FunctionComponent = () => {
         return [ items.pop(), ...items.sort()];
     }
 
-    const center = !location.state?.background ? styles.center : '';
-    const box = !location.state?.background ? styles.box : '';
+    const center: string = !location.state?.background ? styles.center : '';
+    const box: string = !location.state?.background ? styles.box : '';
 
     return (
         ingredientsRequest ? (
@@ -85,7 +93,7 @@ const IngredientDetails: FunctionComponent = () => {
                     {ingredient.name}
                 </p>
                 <div className={styles.nutritionFacts}>
-                    { createFactsArray().map((item, i) => {
+                    { createFactsArray().map((item: TItem, i: number) => {
                         const w = i === 0 ? 'wide' : 'normal';
                         return <Fact { ...item} key={i + 'str'} width={w} />
                     })}
