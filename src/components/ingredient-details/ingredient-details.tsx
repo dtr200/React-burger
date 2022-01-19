@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import Fact from '../fact/fact';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
@@ -8,23 +8,44 @@ import Spinner from "../spinner/spinner";
 
 import styles from './ingredient-details.module.css';
 
-const IngredientDetails = () => {
-    const { currentIngredient } = useSelector(store => store.ingredients);
+type TIngredientId = { 
+    ingredientId: string;
+};
+
+type TKeyToTabNameMap = {
+    [name: string]: string;
+}
+
+type TLocationState = {
+    from?: string;
+    background?: TLocation;
+}
+
+type TLocation = {
+    hash: string;
+    key?: string;
+    pathname: string;
+    search: string;
+    state: TLocationState;
+};
+
+const IngredientDetails: FunctionComponent = () => {
+    const { currentIngredient } = useSelector((store: any) => store.ingredients);
     const { ingredientsData, ingredientsRequest } = 
-        useSelector(store => store.ingredients);
-    const { ingredientId } = useParams();
+        useSelector((store: any) => store.ingredients);
+    const { ingredientId }: TIngredientId = useParams();
     const dispatch = useDispatch();
-    const location = useLocation();
+    const location: TLocation = useLocation();
 
     useEffect(() => {
         if(!currentIngredient._id)
             dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
 
-    const ingredient = ingredientsData.find(item => 
+    const ingredient = ingredientsData.find((item: any) => 
             item._id === ingredientId);
 
-    const keyToTabNameMap = {
+    const keyToTabNameMap: TKeyToTabNameMap = {
         calories: 'Калории,ккал',
         proteins: 'Белки, г',
         fat: 'Жиры, г',
@@ -42,6 +63,7 @@ const IngredientDetails = () => {
         }
         return [ items.pop(), ...items.sort()];
     }
+
     const center = !location.state?.background ? styles.center : '';
     const box = !location.state?.background ? styles.box : '';
 

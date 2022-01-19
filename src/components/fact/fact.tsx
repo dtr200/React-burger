@@ -3,9 +3,10 @@ import React, { FunctionComponent } from "react";
 import styles from './fact.module.css';
 
 type TFactProps = {
-    title: string;
-    value: number;
+    title?: string;
+    value?: number;
     width: string;
+    key: string;
 };
 
 const Fact: FunctionComponent<TFactProps> = ({ title, value, width }) => {
