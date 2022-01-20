@@ -1,17 +1,28 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ReactElement } from "react";
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { BurgerIcon, ListIcon, ProfileIcon } from 
 '@ya.praktikum/react-developer-burger-ui-components';
-import {
-    NAV_SHAPE_TYPES
-} from '../../utils/types';
 
 import styles from './nav-button.module.css';
 
-const NavButton = ({ title, logo }) => {
-    const dictLogoToImg = {
+type TNavButtonProps = {
+    title: string;
+    logo: string;
+};
+
+type TDictTitleToLink = {
+    [name: string]: string;
+};
+
+type TDictLogoToImg = {
+    [name: string]: () => ReactElement;
+}
+
+type TType = 'secondary' | 'primary' | 'error' | 'success';
+
+const NavButton: FunctionComponent<TNavButtonProps> = ({ title, logo }) => {
+    const dictLogoToImg: TDictLogoToImg = {
         burger: () => <BurgerIcon type={getType(title)} />,
         list: () => <ListIcon type={getType(title)} />,
         profile: () => <ProfileIcon type={getType(title)} />
@@ -20,15 +31,15 @@ const NavButton = ({ title, logo }) => {
     const location = useLocation();
 
     const { currentIngredient: {_id} } = 
-        useSelector(store => store.ingredients);
+        useSelector((store: any) => store.ingredients);
 
-    const dictTitleToLink = {
+    const dictTitleToLink: TDictTitleToLink = {
         'Конструктор': '/',
         'Лента заказов': '/feed',
         'Личный кабинет': '/profile'
     }
 
-    const getType = (title) =>
+    const getType: (title: string) => TType = (title) =>
         title === 'Конструктор' && location.pathname === '/' || 
         title === 'Конструктор' && location.pathname === `/ingredients/${_id}` ||
         title === 'Конструктор' && location.pathname === `/order` ||
@@ -37,8 +48,8 @@ const NavButton = ({ title, logo }) => {
         title === 'Личный кабинет' && location.pathname === `/profile/orders` ?
         'primary' : 'secondary';
 
-    const titleStyle = `text text_type_main-default pl-2`;
-    const isExact = 
+    const titleStyle: string = `text text_type_main-default pl-2`;
+    const isExact: boolean = 
         location.pathname === '/' || 
         location.pathname === `/ingredients/${_id}` ||
         location.pathname === `/order`;
@@ -55,7 +66,5 @@ const NavButton = ({ title, logo }) => {
         </NavLink>
     )
 }
-
-NavButton.propTypes = NAV_SHAPE_TYPES.isRequired;
 
 export default NavButton;
