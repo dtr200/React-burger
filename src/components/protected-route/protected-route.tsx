@@ -1,15 +1,14 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Redirect } from 'react-router-dom';
 import { updateToken } from '../../services/actions/thunks';
-import PropTypes from 'prop-types';
 
-const ProtectedRoute = ({ children, ...rest }) => {
+const ProtectedRoute: FunctionComponent = ({ children, ...rest }) => {
     const dispatch = useDispatch();
 
-    const isAccessTokenExist = 
+    const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
-    const isRefreshTokenExist = 
+    const isRefreshTokenExist: boolean = 
         localStorage['refreshToken'] !== undefined;
 
     if(!isAccessTokenExist && isRefreshTokenExist)
@@ -29,17 +28,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
             }
         />
     );
-}
-
-const routeShapeTypes = PropTypes.shape({
-    path: PropTypes.object.isRequired, 
-    location: PropTypes.object.isRequired, 
-    computedMatch: PropTypes.object.isRequired
-})
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.element.isRequired,
-    rest: routeShapeTypes
 }
 
 export default ProtectedRoute;
