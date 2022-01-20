@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { DEFAULT_ORDER_DATA } from 
     '../../utils/constants';
@@ -7,12 +7,12 @@ import Spinner from "../spinner/spinner";
 import styles from './order-details.module.css';
 import done from '../../images/done.png';
 
-const OrderDetails = () => {
-    const { modalData } = useSelector(store => store.modal);
-    const { orderRequest } = useSelector(store => store.order);
+const OrderDetails: FunctionComponent = () => {
+    const { modalData } = useSelector((store: any) => store.modal);
+    const { orderRequest } = useSelector((store: any) => store.order);
     const { num, description, extra } = DEFAULT_ORDER_DATA;
 
-    const orderNum = modalData && modalData.order?.number ? 
+    const orderNum: number = modalData && modalData.order?.number ? 
         modalData.order.number : num;
 
     return (
