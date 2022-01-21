@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { restorePassword } from '../services/actions/thunks';
@@ -9,29 +9,28 @@ import Spinner from '../components/spinner/spinner';
 
 import styles from './page.module.css';
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage: FunctionComponent = () => {
 
     const dispatch = useDispatch();
     const { 
         changePasswordRequest, 
         changePasswordEmail, 
         changePasswordMessage 
-    } = useSelector(store => store.access);
+    } = useSelector((store: any) => store.access);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
 
-    const reinstallPassword = (e) => {
-        e.preventDefault()
-        console.log(e.nativeEvent.submitter.name)
+    const reinstallPassword = (e: SyntheticEvent) => {
+        e.preventDefault();
         if(changePasswordEmail.length)
             dispatch(restorePassword('/password-reset', changePasswordEmail));
     }
 
-    const setValue = (e) => {
+    const setValue = (e: SyntheticEvent) => {
         dispatch({
             type: SET_RESTORE_EMAIL,
-            email: e.target.value
+            email: (e.target as HTMLInputElement).value
         });
     }
 
