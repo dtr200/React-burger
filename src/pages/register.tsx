@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { registerNewUser } from '../services/actions/thunks';
@@ -9,13 +9,17 @@ import Spinner from '../components/spinner/spinner';
 
 import styles from './page.module.css';
 
-const RegisterPage = () => {
+type TDict = {
+    [ name: string ]: string;
+}
+
+const RegisterPage: FunctionComponent = () => {
 
     const dispatch = useDispatch();
     const { user: {name, email, password}, registerRequest } = 
-        useSelector(store => store.access);
+        useSelector((store: any) => store.access);
     const history = useHistory();
-    const { state } = history.location;
+    const { state }: any = history.location;
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
@@ -25,16 +29,16 @@ const RegisterPage = () => {
         dispatch(registerNewUser(userData));
     }
 
-    const setValue = (e) => {
-        const dictNameToType = {
+    const setValue = (e: SyntheticEvent) => {
+        const dictNameToType: TDict = {
             name: SET_NAME, 
             email: SET_EMAIL, 
             password: SET_PASSWORD
         };
 
         dispatch({
-            type: dictNameToType[e.target.name],
-            payload: e.target.value
+            type: dictNameToType[(e.target as HTMLInputElement).name],
+            payload: (e.target as HTMLInputElement).value
         });
     }
 
