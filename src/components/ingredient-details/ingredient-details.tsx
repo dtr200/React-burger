@@ -6,7 +6,8 @@ import { getIngredients } from '../../services/actions/thunks';
 import { INGREDIENTS_URL } from '../../utils/constants';
 import Spinner from "../spinner/spinner";
 import { TProductItem } from '../../utils/types';
-
+import { TLocation } from '../app/app';
+ 
 import styles from './ingredient-details.module.css';
 
 type TIngredientId = { 
@@ -16,19 +17,6 @@ type TIngredientId = {
 type TKeyToTabNameMap = {
     [name: string]: string;
 }
-
-type TLocationState = {
-    from?: string;
-    background?: TLocation;
-}
-
-type TLocation = {
-    hash: string;
-    key?: string;
-    pathname: string;
-    search: string;
-    state: TLocationState;
-};
 
 type TIngredientData = {
     title: string;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -30,13 +30,26 @@ import {
 
 import styles from './app.module.css';
 
-const App = () => {
+export type TLocationState = {
+  from?: string;
+  background?: TLocation;
+}
+
+export type TLocation = {
+  hash: string;
+  key?: string;
+  pathname: string;
+  search: string;
+  state: TLocationState;
+};
+
+const App: FunctionComponent = () => {
   const ModalSwitch = () => {
     const dispatch = useDispatch();
-    const location = useLocation();
+    const location: TLocation = useLocation();
     const history = useHistory();
     const background = location.state && location.state.background;
-    const onModalClose = () => {
+    const onModalClose: () => void = () => {
       dispatch({ type: CLOSE_MODAL });
       dispatch({ type: RESET_CURRENT_INGREDIENT });
       dispatch({ type: RESET_ORDER_REQUEST });
@@ -49,7 +62,7 @@ const App = () => {
 
         <Switch location={background || location}>
           <Route path="/" exact>
-            <HomePage onModalClose={onModalClose}/>
+            <HomePage /* onModalClose={onModalClose} *//>
           </Route>
           <ProtectedRoute
             path='/profile/orders/:orderNumber'

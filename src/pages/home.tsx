@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -12,12 +12,12 @@ import { getIngredients } from '../services/actions/thunks';
 
 import styles from './home.module.css';
 
-const HomePage = () => {
+const HomePage: FunctionComponent = () => {
   const dispatch = useDispatch();
   const {
     ingredientsRequest, 
     ingredientsFailed
-  } = useSelector(store => store.ingredients);
+  } = useSelector((store: any) => store.ingredients);
 
   useEffect(() => {
     dispatch(getIngredients(INGREDIENTS_URL));
