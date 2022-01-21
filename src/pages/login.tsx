@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { loginUser } from '../services/actions/thunks';
@@ -9,14 +9,30 @@ import { Input, Button } from
 
 import styles from './page.module.css';
 
-const LoginPage = () => {
+type TDictNameToType = {
+    [name: string]: string;
+}
+
+type TLocation = {
+    hash?: string;
+    key?: string;
+    pathname?: string;
+    search?: string;
+    state?: TState;
+}
+
+type TState = {
+    from?: TLocation;
+}
+
+const LoginPage: FunctionComponent = () => {
     
     const dispatch = useDispatch();
     const { 
         user:{email, password}, 
         loginRequest, 
         logoutRequest 
-    } = useSelector(store => store.access);
+    } = useSelector((store: any) => store.access);
 
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
@@ -26,16 +42,16 @@ const LoginPage = () => {
         dispatch(loginUser(userData));
     }
     const history = useHistory();
-    const { state } = history.location;
-    const setValue = (e) => {
-        const dictNameToType = {
+    const { state }: any  = history.location;
+    const setValue = (e: SyntheticEvent) => {
+        const dictNameToType: TDictNameToType = {
             email: SET_EMAIL, 
             password: SET_PASSWORD
         };
 
         dispatch({
-            type: dictNameToType[e.target.name],
-            payload: e.target.value
+            type: dictNameToType[(e.target as HTMLInputElement).name],
+            payload: (e.target as HTMLInputElement).value
         });
     }
 
@@ -43,7 +59,7 @@ const LoginPage = () => {
         loginRequest || logoutRequest ? (
         <Spinner /> 
         ) : ( isAccessTokenExist ) ? (
-        <Redirect to={state?.from || '/'} />
+        <Redirect to={state?.from  || '/'} />
         ) : (
         <form className={styles.main} onSubmit={login}>
             <section className={`${styles.container} text`}>
