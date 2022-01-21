@@ -22,8 +22,7 @@ type TState = {
     from?: TLocation;
 }
 
-const LoginPage: FunctionComponent = () => {
-    
+const LoginPage: FunctionComponent = () => {    
     const dispatch = useDispatch();
     const { 
         user:{email, password}, 
@@ -31,17 +30,17 @@ const LoginPage: FunctionComponent = () => {
         logoutRequest 
     } = useSelector((store: any) => store.access);
 
-    const isAccessTokenExist = 
+    const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
  
-    const login = () => {
+    const login: () => void = () => {
         const userData = { email, password };
         dispatch(loginUser(userData));
     }
     const history = useHistory();
     const { state }: any  = history.location;
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict = {
+        const dictNameToType: TDict<string> = {
             email: SET_EMAIL, 
             password: SET_PASSWORD
         };

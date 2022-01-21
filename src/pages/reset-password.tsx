@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
 import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import { TDict } from '../utils/types';
 
 import styles from './page.module.css';
 import Spinner from '../components/spinner/spinner';
 
 const ResetPasswordPage: FunctionComponent = () => {
-
     const dispatch = useDispatch();
     const { 
         user: {newPassword}, 
@@ -18,21 +18,21 @@ const ResetPasswordPage: FunctionComponent = () => {
         newPasswordRequest, 
         changePasswordMessage 
     } = useSelector((store: any) => store.access);
-    const isAccessTokenExist = 
+    const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
 
-    const restorePassword = () => 
+    const restorePassword: () => void = () => 
         dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
 
-    const setValue = (e) => {
-        const dictNameToType = {
+    const setValue = (e: SyntheticEvent) => {
+        const dictNameToType: TDict<string> = {
             password: SET_NEW_PASSWORD,
             code: SET_RESTORE_CODE
         }
 
         dispatch({
-            type: dictNameToType[e.target.name],
-            payload: e.target.value
+            type: dictNameToType[(e.target as HTMLInputElement).name],
+            payload: (e.target as HTMLInputElement).value
         })
     }
 

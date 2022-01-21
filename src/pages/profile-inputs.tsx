@@ -10,22 +10,19 @@ import { TDict } from '../utils/types';
 import styles from './profile.module.css';
 import Spinner from '../components/spinner/spinner';
 
-type TFormDictNameToType = {
-    [name: string]: () => Promise<void>;
-};
+type TDictFunction = () => Promise<void>;
 
 interface SubmitEvent extends Event {
     readonly submitter: HTMLElement;
 }
 
 const ProfileInputsPage: FunctionComponent = () => {
-
     const dispatch = useDispatch();
     const { name, login, email, password } = 
         useSelector((store: any) => store.access.user);
     
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict = {
+        const dictNameToType: TDict<string> = {
             name: SET_NAME, 
             login: SET_LOGIN,
             password: SET_PASSWORD
@@ -41,7 +38,7 @@ const ProfileInputsPage: FunctionComponent = () => {
         e.preventDefault();
         const clickName = (e.nativeEvent as SubmitEvent).submitter.innerText;
         const userData = { name, email };
-        const dictNameToType: TFormDictNameToType = {
+        const dictNameToType: TDict<TDictFunction> = {
             'Сохранить': getUserData('PATCH', userData), 
             'Отмена': getUserData('GET')
         };

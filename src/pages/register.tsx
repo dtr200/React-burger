@@ -27,7 +27,7 @@ const RegisterPage: FunctionComponent = () => {
     }
 
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict = {
+        const dictNameToType: TDict<string> = {
             name: SET_NAME, 
             email: SET_EMAIL, 
             password: SET_PASSWORD

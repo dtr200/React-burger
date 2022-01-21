@@ -18,6 +18,6 @@ export type TProductItem = {
     __v: number;
 }
 
-export type TDict = {
-    [name: string]: string;
+export type TDict<T> = {
+    [name: string]: T;
 }

@@ -14,7 +14,7 @@ const ProfilePage: FunctionComponent = () => {
     const { path, url } = useRouteMatch();
     const { logoutRequest } = useSelector((store: any) => store.access);
 
-    const onLogout = () =>
+    const onLogout: () => void = () =>
         dispatch(logoutUser());
 
     return (
