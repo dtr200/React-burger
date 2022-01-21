@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
@@ -8,11 +8,11 @@ import Spinner from '../components/spinner/spinner';
 
 import styles from './profile.module.css';
 
-const ProfilePage = () => {
+const ProfilePage: FunctionComponent = () => {
 
     const dispatch = useDispatch();
     const { path, url } = useRouteMatch();
-    const { logoutRequest } = useSelector(store => store.access);
+    const { logoutRequest } = useSelector((store: any) => store.access);
 
     const onLogout = () =>
         dispatch(logoutUser());
