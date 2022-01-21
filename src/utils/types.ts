@@ -17,3 +17,7 @@ export type TProductItem = {
     type: string;
     __v: number;
 }
+
+export type TDict = {
+    [name: string]: string;
+}

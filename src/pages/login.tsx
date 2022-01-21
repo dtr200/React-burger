@@ -6,12 +6,9 @@ import { SET_EMAIL, SET_PASSWORD } from '../services/actions/action-types';
 import Spinner from '../components/spinner/spinner';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import { TDict } from '../utils/types';
 
 import styles from './page.module.css';
-
-type TDictNameToType = {
-    [name: string]: string;
-}
 
 type TLocation = {
     hash?: string;
@@ -44,7 +41,7 @@ const LoginPage: FunctionComponent = () => {
     const history = useHistory();
     const { state }: any  = history.location;
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDictNameToType = {
+        const dictNameToType: TDict = {
             email: SET_EMAIL, 
             password: SET_PASSWORD
         };

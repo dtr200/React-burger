@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/thunks';
@@ -9,7 +9,7 @@ import { Input, Button } from
 import styles from './page.module.css';
 import Spinner from '../components/spinner/spinner';
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: FunctionComponent = () => {
 
     const dispatch = useDispatch();
     const { 
@@ -17,7 +17,7 @@ const ResetPasswordPage = () => {
         restoreCode,
         newPasswordRequest, 
         changePasswordMessage 
-    } = useSelector(store => store.access);
+    } = useSelector((store: any) => store.access);
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
 
