@@ -16,8 +16,8 @@ export type TProductItem = {
     proteins: number;
     type: string;
     __v: number;
-}
+};
 
 export type TDict<T> = {
     [name: string]: T;
-}
+};
