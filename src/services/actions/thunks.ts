@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux';
 import {    
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
@@ -33,9 +34,10 @@ import { BASE_URL } from '../../utils/constants';
 import {
     fetchWithRefresh, checkResponse, setCookie, deleteCookie
 } from '../../utils/utils';
+import { TProductItem, TDict } from '../../utils/types';
 
-export const getIngredients = (ingredientsURL) => {
-    return async (dispatch) => {
+export const getIngredients = (ingredientsURL: string) => {
+    return async (dispatch: Dispatch) => {
         try{
             dispatch({ 
                 type: GET_INGREDIENTS_REQUEST 
@@ -56,11 +58,10 @@ export const getIngredients = (ingredientsURL) => {
     }    
 }
 
-export const sendOrder = (orderURL, constructorIngredients) => {
-    return async (dispatch) => {       
-        
+export const sendOrder = (orderURL: string, constructorIngredients: Array<TProductItem>) => {
+    return async (dispatch: Dispatch) => {
         const orderBody = {
-            ingredients: constructorIngredients.map(product => product._id)
+            ingredients: constructorIngredients.map((product: TProductItem) => product._id)
         };
         try{
             dispatch({
@@ -93,8 +94,8 @@ export const sendOrder = (orderURL, constructorIngredients) => {
     }
 }
 
-export const restorePassword = (restoreUrl, email) => {
-    return async (dispatch) => {
+export const restorePassword = (restoreUrl: string, email: string) => {
+    return async (dispatch: Dispatch) => {
         const emailBody = { email };
 
         try{
@@ -122,8 +123,8 @@ export const restorePassword = (restoreUrl, email) => {
     }
 }
 
-export const getNewPassword = (restoreUrl, password, token) => {
-    return async (dispatch) => {
+export const getNewPassword = (restoreUrl: string, password: string, token: string) => {
+    return async (dispatch: Dispatch) => {
         const passwordBody = { password, token };
 
         try{
@@ -152,8 +153,8 @@ export const getNewPassword = (restoreUrl, password, token) => {
     }
 }
 
-export const registerNewUser = (userData) => {
-    return async (dispatch) => {
+export const registerNewUser = (userData: TDict<string>) => {
+    return async (dispatch: Dispatch) => {
         try{
             dispatch({
                 type: REGISTER_USER_REQUEST
@@ -181,8 +182,8 @@ export const registerNewUser = (userData) => {
     }
 }
 
-export const loginUser = (userData) => {
-    return async (dispatch) => {
+export const loginUser = (userData: TDict<string>) => {
+    return async (dispatch: Dispatch) => {
         try{
             dispatch({
                 type: LOGIN_USER_REQUEST
@@ -213,7 +214,7 @@ export const loginUser = (userData) => {
 }
 
 export const updateToken = () => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch) => {
         try{
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -245,7 +246,7 @@ export const updateToken = () => {
 }
 
 export const logoutUser = () => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch) => {
         const tokenBody = { token: localStorage['refreshToken'] };
  
         try{
@@ -276,10 +277,10 @@ export const logoutUser = () => {
     }
 }
 
-export const getUserData = (methodType, userData) => {
-    return async (dispatch) => {        
-        const accessToken = 
-            document.cookie.match(/(accessToken=)(.+)/)[2];
+export const getUserData = (methodType: string, userData?: TDict<string> | string) => {
+    return async (dispatch: Dispatch) => {        
+        const accessToken: string = 
+            document.cookie.match(/(accessToken=)(.+)/)![2];
 
         try{
             dispatch({

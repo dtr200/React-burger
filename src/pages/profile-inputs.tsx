@@ -8,9 +8,6 @@ import { Input, Button } from
 import { TDict } from '../utils/types';
 
 import styles from './profile.module.css';
-import Spinner from '../components/spinner/spinner';
-
-type TDictFunction = () => Promise<void>;
 
 interface SubmitEvent extends Event {
     readonly submitter: HTMLElement;
@@ -38,12 +35,10 @@ const ProfileInputsPage: FunctionComponent = () => {
         e.preventDefault();
         const clickName = (e.nativeEvent as SubmitEvent).submitter.innerText;
         const userData = { name, email };
-        const dictNameToType: TDict<TDictFunction> = {
-            'Сохранить': getUserData('PATCH', userData), 
-            'Отмена': getUserData('GET')
-        };
-
-        dispatch(dictNameToType[clickName]);
+        clickName === 'Сохранить' ? 
+            dispatch(getUserData('PATCH', userData)) : 
+            dispatch(getUserData('GET'));
+            
         clickName === 'Отмена' && 
         dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
