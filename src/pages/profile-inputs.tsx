@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, SyntheticEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA } 
     from '../services/actions/action-types';
@@ -9,36 +9,48 @@ import { Input, Button } from
 import styles from './profile.module.css';
 import Spinner from '../components/spinner/spinner';
 
-const ProfileInputsPage = () => {
+type TDictNameToType = {
+    [name: string]: string;
+};
+
+type TFormDictNameToType = {
+    [name: string]: () => Promise<void>;
+};
+
+interface SubmitEvent extends Event {
+    readonly submitter: HTMLElement;
+}
+
+const ProfileInputsPage: FunctionComponent = () => {
 
     const dispatch = useDispatch();
     const { name, login, email, password } = 
-        useSelector(store => store.access.user);
+        useSelector((store: any) => store.access.user);
     
-    const setValue = (e) => {
-        const dictNameToType = {
+    const setValue = (e: SyntheticEvent) => {
+        const dictNameToType: TDictNameToType = {
             name: SET_NAME, 
             login: SET_LOGIN,
             password: SET_PASSWORD
         };
 
         dispatch({
-            type: dictNameToType[e.target.name],
-            payload: e.target.value
+            type: dictNameToType[(e.target as HTMLInputElement).name],
+            payload: (e.target as HTMLInputElement).value
         })
     }
 
-    const onFormClick = async (e) => {
+    const onFormClick = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const clickName = e.nativeEvent.submitter.name;
+        const clickName = (e.nativeEvent as SubmitEvent).submitter.innerText;
         const userData = { name, email };
-        const dictNameToType = {
-            save: getUserData('PATCH', userData), 
-            cancel: getUserData('GET')
+        const dictNameToType: TFormDictNameToType = {
+            'Сохранить': getUserData('PATCH', userData), 
+            'Отмена': getUserData('GET')
         };
 
         dispatch(dictNameToType[clickName]);
-        clickName === 'cancel' && 
+        clickName === 'Отмена' && 
         dispatch({ type: CANCEL_UPDATE_USER_DATA });
     }
 
@@ -80,14 +92,12 @@ const ProfileInputsPage = () => {
                 <section className={styles.buttons}>
                     <Button 
                         type="secondary" 
-                        size="medium"
-                        name="cancel">
+                        size="medium">
                         Отмена
                     </Button>
                     <Button 
                         type="primary" 
-                        size="medium"
-                        name="save">
+                        size="medium">
                         Сохранить
                     </Button>
                 </section>
