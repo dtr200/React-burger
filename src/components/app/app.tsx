@@ -62,7 +62,7 @@ const App: FunctionComponent = () => {
 
         <Switch location={background || location}>
           <Route path="/" exact>
-            <HomePage /* onModalClose={onModalClose} *//>
+            <HomePage />
           </Route>
           <ProtectedRoute
             path='/profile/orders/:orderNumber'
@@ -95,23 +95,17 @@ const App: FunctionComponent = () => {
           </Route>          
         </Switch>
         {background && (
-          <Route 
-            path='/order'            
-            children={
-              <Modal onClose={onModalClose}>
-                <OrderDetails />
-              </Modal>
-            }>            
+          <Route path='/order'>
+            <Modal onClose={onModalClose}>
+              <OrderDetails />
+            </Modal>           
           </Route>
         )}
         {background && (
-          <Route
-            path='/ingredients/:ingredientId'
-            children={
-              <Modal onClose={onModalClose}>
-                <IngredientDetails />
-              </Modal>
-            }>
+          <Route path='/ingredients/:ingredientId'>
+            <Modal onClose={onModalClose}>
+              <IngredientDetails />
+            </Modal>
           </Route>
         )}
         {background && (

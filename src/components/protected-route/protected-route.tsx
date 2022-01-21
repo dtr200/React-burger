@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { Route, Redirect } from 'react-router-dom';
 import { updateToken } from '../../services/actions/thunks';
 
-const ProtectedRoute: FunctionComponent = ({ children, ...rest }) => {
+type TProtectedRouteProps = {
+    path: string;
+    exact?: boolean;
+};
+
+const ProtectedRoute: FunctionComponent<TProtectedRouteProps> = ({ children, ...rest }) => {
     const dispatch = useDispatch();
 
     const isAccessTokenExist: boolean = 
