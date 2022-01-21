@@ -5,13 +5,10 @@ import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA }
 import { getUserData } from '../services/actions/thunks';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
+import { TDict } from '../utils/types';
 
 import styles from './profile.module.css';
 import Spinner from '../components/spinner/spinner';
-
-type TDictNameToType = {
-    [name: string]: string;
-};
 
 type TFormDictNameToType = {
     [name: string]: () => Promise<void>;
@@ -28,7 +25,7 @@ const ProfileInputsPage: FunctionComponent = () => {
         useSelector((store: any) => store.access.user);
     
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDictNameToType = {
+        const dictNameToType: TDict = {
             name: SET_NAME, 
             login: SET_LOGIN,
             password: SET_PASSWORD
