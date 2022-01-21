@@ -6,12 +6,9 @@ import { SET_NAME, SET_EMAIL, SET_PASSWORD } from '../services/actions/action-ty
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import Spinner from '../components/spinner/spinner';
+import { TDict } from '../utils/types';
 
 import styles from './page.module.css';
-
-type TDict = {
-    [ name: string ]: string;
-}
 
 const RegisterPage: FunctionComponent = () => {
 
