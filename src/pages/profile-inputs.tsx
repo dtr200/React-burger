@@ -1,11 +1,11 @@
 import React, { FunctionComponent, SyntheticEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA } 
+import { CANCEL_UPDATE_USER_DATA } 
     from '../services/actions/access';
 import { getUserData } from '../services/thunks/access';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { TDict } from '../utils/types';
+import { dispatchData } from '../services/action-creators';
 
 import styles from './profile.module.css';
 
@@ -19,16 +19,10 @@ const ProfileInputsPage: FunctionComponent = () => {
         useSelector((store: any) => store.access.user);
     
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict<string> = {
-            name: SET_NAME, 
-            login: SET_LOGIN,
-            password: SET_PASSWORD
-        };
-
-        dispatch({
-            type: dictNameToType[(e.target as HTMLInputElement).name],
-            payload: (e.target as HTMLInputElement).value
-        })
+        dispatch(dispatchData(
+            (e.target as HTMLInputElement).name,
+            (e.target as HTMLInputElement).value
+        ));
     }
 
     const onFormClick = async (e: FormEvent<HTMLFormElement>) => {

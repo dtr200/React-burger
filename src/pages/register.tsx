@@ -2,11 +2,10 @@ import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { registerNewUser } from '../services/thunks/access';
-import { SET_NAME, SET_EMAIL, SET_PASSWORD } from '../services/actions/access';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import Spinner from '../components/spinner/spinner';
-import { TDict } from '../utils/types';
+import { dispatchData } from '../services/action-creators';
 
 import styles from './page.module.css';
 
@@ -27,16 +26,10 @@ const RegisterPage: FunctionComponent = () => {
     }
 
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict<string> = {
-            name: SET_NAME, 
-            email: SET_EMAIL, 
-            password: SET_PASSWORD
-        };
-
-        dispatch({
-            type: dictNameToType[(e.target as HTMLInputElement).name],
-            payload: (e.target as HTMLInputElement).value
-        });
+        dispatch(dispatchData(
+            (e.target as HTMLInputElement).name,
+            (e.target as HTMLInputElement).value
+        ));
     }
 
     return (

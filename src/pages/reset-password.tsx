@@ -2,10 +2,9 @@ import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/thunks/access';
-import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/access';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { TDict } from '../utils/types';
+import { dispatchData } from '../services/action-creators';
 
 import styles from './page.module.css';
 import Spinner from '../components/spinner/spinner';
@@ -25,15 +24,10 @@ const ResetPasswordPage: FunctionComponent = () => {
         dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
 
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict<string> = {
-            password: SET_NEW_PASSWORD,
-            code: SET_RESTORE_CODE
-        }
-
-        dispatch({
-            type: dictNameToType[(e.target as HTMLInputElement).name],
-            payload: (e.target as HTMLInputElement).value
-        })
+        dispatch(dispatchData(
+            (e.target as HTMLInputElement).name,
+            (e.target as HTMLInputElement).value
+        ));
     }
 
     return (

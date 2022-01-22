@@ -2,11 +2,10 @@ import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { loginUser } from '../services/thunks/access';
-import { SET_EMAIL, SET_PASSWORD } from '../services/actions/access';
 import Spinner from '../components/spinner/spinner';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
-import { TDict } from '../utils/types';
+import { dispatchData } from '../services/action-creators';
 
 import styles from './page.module.css';
 
@@ -40,15 +39,10 @@ const LoginPage: FunctionComponent = () => {
     const history = useHistory();
     const { state }: any  = history.location;
     const setValue = (e: SyntheticEvent) => {
-        const dictNameToType: TDict<string> = {
-            email: SET_EMAIL, 
-            password: SET_PASSWORD
-        };
-
-        dispatch({
-            type: dictNameToType[(e.target as HTMLInputElement).name],
-            payload: (e.target as HTMLInputElement).value
-        });
+        dispatch(dispatchData(
+            (e.target as HTMLInputElement).name,
+            (e.target as HTMLInputElement).value
+        ));
     }
 
     return (
