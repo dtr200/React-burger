@@ -1,9 +1,7 @@
-import React, { useEffect, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import Fact from '../fact/fact';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
-import { getIngredients } from '../../services/actions/thunks';
-import { INGREDIENTS_URL } from '../../utils/constants';
 import Spinner from "../spinner/spinner";
 import { TProductItem } from '../../utils/types';
 import { TLocation } from '../app/app';
@@ -26,17 +24,10 @@ type TIngredientData = {
 type TItem = TIngredientData | undefined;
 
 const IngredientDetails: FunctionComponent = () => {
-    const { currentIngredient } = useSelector((store: any) => store.ingredients);
     const { ingredientsData, ingredientsRequest } = 
         useSelector((store: any) => store.ingredients);
     const { ingredientId }: TIngredientId = useParams();
-    const dispatch = useDispatch();
     const location: TLocation = useLocation();
-
-    /* useEffect(() => {
-        if(!currentIngredient._id)
-            dispatch(getIngredients(INGREDIENTS_URL));
-    }, []); */
 
     const ingredient = ingredientsData.find((item: TProductItem) => 
             item._id === ingredientId);
