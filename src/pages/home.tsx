@@ -1,27 +1,19 @@
-import React, { useEffect, FunctionComponent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
 import ErrorIndicator from '../components/error-indicator/error-indicator';
 import Spinner from '../components/spinner/spinner';
-/* import { INGREDIENTS_URL } from 
-  '../utils/constants';
-import { getIngredients } from '../services/actions/thunks'; */
 
 import styles from './home.module.css';
 
 const HomePage: FunctionComponent = () => {
-  const dispatch = useDispatch();
   const {
     ingredientsRequest, 
     ingredientsFailed
   } = useSelector((store: any) => store.ingredients);
-
-  /* useEffect(() => {
-    dispatch(getIngredients(INGREDIENTS_URL));
-  }, []);  */ 
 
   return (
     <main className={`${styles.main}`}>
