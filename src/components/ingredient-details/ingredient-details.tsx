@@ -33,10 +33,10 @@ const IngredientDetails: FunctionComponent = () => {
     const dispatch = useDispatch();
     const location: TLocation = useLocation();
 
-    useEffect(() => {
+    /* useEffect(() => {
         if(!currentIngredient._id)
             dispatch(getIngredients(INGREDIENTS_URL));
-    }, []);
+    }, []); */
 
     const ingredient = ingredientsData.find((item: TProductItem) => 
             item._id === ingredientId);

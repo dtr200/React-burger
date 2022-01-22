@@ -6,9 +6,9 @@ import BurgerConstructor from "../components/burger-constructor/burger-construct
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
 import ErrorIndicator from '../components/error-indicator/error-indicator';
 import Spinner from '../components/spinner/spinner';
-import { INGREDIENTS_URL } from 
+/* import { INGREDIENTS_URL } from 
   '../utils/constants';
-import { getIngredients } from '../services/actions/thunks';
+import { getIngredients } from '../services/actions/thunks'; */
 
 import styles from './home.module.css';
 
@@ -19,9 +19,9 @@ const HomePage: FunctionComponent = () => {
     ingredientsFailed
   } = useSelector((store: any) => store.ingredients);
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(getIngredients(INGREDIENTS_URL));
-  }, []);  
+  }, []);  */ 
 
   return (
     <main className={`${styles.main}`}>

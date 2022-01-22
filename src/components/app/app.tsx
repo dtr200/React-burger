@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -27,6 +27,9 @@ import {
   RESET_CURRENT_INGREDIENT,
   RESET_ORDER_REQUEST
 } from '../../services/actions/action-types';
+import { INGREDIENTS_URL } from 
+  '../../utils/constants';
+import { getIngredients } from '../../services/actions/thunks';
 
 import styles from './app.module.css';
 
@@ -55,6 +58,10 @@ const App: FunctionComponent = () => {
       dispatch({ type: RESET_ORDER_REQUEST });
       history.replace({ pathname: '/'})
     }
+
+    useEffect(() => {
+      dispatch(getIngredients(INGREDIENTS_URL));
+    }, []);
 
     return (
       <div className={styles.app}>
