@@ -2,7 +2,7 @@ import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/thunks/access';
-import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/action-types';
+import { SET_NEW_PASSWORD, SET_RESTORE_CODE } from '../services/actions/access';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import { TDict } from '../utils/types';

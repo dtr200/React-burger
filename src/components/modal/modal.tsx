@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent, KeyboardEventHandler } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from 
@@ -28,8 +28,7 @@ const Modal: FunctionComponent<TModalProps> = ({ children, onClose }) => {
     const content = (
         <>
             <ModalOverlay onClose={onClose} />
-            <div className={`${styles.modal} p-10 pb-15`} 
-                 /* onKeyDown={handleKeyPress} */ tabIndex={0}>
+            <div className={`${styles.modal} p-10 pb-15`} tabIndex={0}>
                 <div className={styles.close}>
                     <CloseIcon onClick={onClose} type="primary" />       
                 </div>               

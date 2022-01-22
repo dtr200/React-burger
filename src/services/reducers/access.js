@@ -28,7 +28,7 @@ import {
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAILED
-} from '../actions/action-types';
+} from '../actions/access';
 
 const initialAccessState = {
     user: {

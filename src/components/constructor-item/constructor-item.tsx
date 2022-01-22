@@ -5,7 +5,7 @@ import { ConstructorElement, DragIcon } from
     '@ya.praktikum/react-developer-burger-ui-components';
 import {
     DELETE_INGREDIENT
-} from '../../services/actions/action-types';
+} from '../../services/actions/ingredients';
 
 import styles from './constructor-item.module.css';
 

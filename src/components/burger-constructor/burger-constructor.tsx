@@ -12,7 +12,7 @@ import {
     ADD_BUN,
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR_INGREDIENTS
-} from '../../services/actions/action-types';
+} from '../../services/actions/ingredients';
 import { sendOrder } from '../../services/thunks/order';
 import { TProductItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';

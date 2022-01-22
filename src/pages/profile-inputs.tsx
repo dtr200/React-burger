@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SET_NAME, SET_PASSWORD, SET_LOGIN, CANCEL_UPDATE_USER_DATA } 
-    from '../services/actions/action-types';
+    from '../services/actions/access';
 import { getUserData } from '../services/thunks/access';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
