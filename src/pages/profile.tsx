@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
 import OrderHistoryPage from './order-history';
-import { logoutUser } from '../services/actions/thunks';
+import { logoutUser } from '../services/thunks/access';
 import Spinner from '../components/spinner/spinner';
 
 import styles from './profile.module.css';

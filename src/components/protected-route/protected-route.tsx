@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Redirect } from 'react-router-dom';
-import { updateToken } from '../../services/actions/thunks';
+import { updateToken } from '../../services/thunks/access';
 
 type TProtectedRouteProps = {
     path: string;

@@ -29,7 +29,7 @@ import {
 } from '../../services/actions/action-types';
 import { INGREDIENTS_URL } from 
   '../../utils/constants';
-import { getIngredients } from '../../services/actions/thunks';
+import { getIngredients } from '../../services/thunks/ingredients';
 
 import styles from './app.module.css';
 

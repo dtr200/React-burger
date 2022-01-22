@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { loginUser } from '../services/actions/thunks';
+import { loginUser } from '../services/thunks/access';
 import { SET_EMAIL, SET_PASSWORD } from '../services/actions/action-types';
 import Spinner from '../components/spinner/spinner';
 import { Input, Button } from 

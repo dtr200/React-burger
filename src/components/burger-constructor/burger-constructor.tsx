@@ -13,7 +13,7 @@ import {
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR_INGREDIENTS
 } from '../../services/actions/action-types';
-import { sendOrder } from '../../services/actions/thunks';
+import { sendOrder } from '../../services/thunks/order';
 import { TProductItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';
 

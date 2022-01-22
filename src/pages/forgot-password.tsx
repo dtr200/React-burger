@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { restorePassword } from '../services/actions/thunks';
+import { restorePassword } from '../services/thunks/access';
 import { SET_RESTORE_EMAIL } from '../services/actions/action-types';
 import { Input, Button } from 
     '@ya.praktikum/react-developer-burger-ui-components';
