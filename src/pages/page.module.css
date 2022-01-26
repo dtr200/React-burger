@@ -1,0 +1,36 @@
+.title{
+    text-align: center;
+    margin: 0;
+}
+
+.main{
+    height: calc(100vh - calc(var(--space) * 22));
+    max-width: var(--max-auth-width-desktop);
+    margin: calc(var(--space) * 45) auto 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputLarge{
+    margin-top: calc(var(--space) * 6);
+}
+
+.inputLarge div:not([class="input__icon"]) {
+    width: var(--max-auth-width-desktop);
+}
+
+.questions{
+    display: grid;
+    row-gap: calc(var(--space) * 4);
+}
+.question{
+    margin: 0;
+    text-align: center;    
+}
+.link{
+    text-decoration: none;
+}

@@ -8,6 +8,7 @@ body {
   --max-width-desktop: 1920px;
   --max-header-width-desktop: 1280px;
   --max-content-width-desktop: 1240px;
+  --max-auth-width-desktop: 480px;
   /* Background*/
   --main-background: #131316;
   --header-background: #1C1C21;
@@ -15,6 +16,7 @@ body {
   --text-main-white: #ffffff;
   --text-primary-light : #f2f2f3;
   --text-dark-grey: #8585AD;
+  --text-ultra-dark: #404052;
   /* Other colors */
   --input-color: #2F2F37;
   --blur: #4c4cff;

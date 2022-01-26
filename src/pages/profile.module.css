@@ -1,0 +1,56 @@
+.profile{
+    display: flex;
+    max-width: var(--max-content-width-desktop);
+    margin: calc(var(--space) * 30) auto 0;
+    column-gap: calc(var(--space) * 15);
+}
+
+.navBar{
+    max-width: 320px;
+}
+
+.profileList{
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.profileListItem{
+    padding: 17px 0;    
+}
+
+.profileLink{
+    color: var(--text-dark-grey);
+}
+
+.profileListItem a{
+    text-decoration: none;
+}
+
+.activeNavItem{
+    color: var(--text-main-white);
+}
+
+.textExtra{
+    color: var(--text-ultra-dark);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: calc(var(--space) * 6);
+}
+
+.inputLarge input:not(:focus){
+    color: var(--text-inactive-color);
+}
+
+.inputLarge div:not([class="input__icon"]) {
+    width: var(--max-auth-width-desktop);
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
