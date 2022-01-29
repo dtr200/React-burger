@@ -9,9 +9,10 @@ import { SET_MODAL_DATA } from '../action-constants/modal';
 import { BASE_URL } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 import { TProductItem } from '../../utils/types';
+import { AppThunk, AppDispatch } from '../types';
 
-export const sendOrder = (orderURL: string, constructorIngredients: Array<TProductItem>) => {
-    return async (dispatch: Dispatch) => {
+export const sendOrder: AppThunk = (orderURL, constructorIngredients) => {
+    return async (dispatch: AppDispatch) => {
         const orderBody = {
             ingredients: constructorIngredients.map((product: TProductItem) => product._id)
         };
