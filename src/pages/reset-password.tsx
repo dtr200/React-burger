@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../services/types/hooks';
 import { Link, Redirect } from 'react-router-dom';
 import { getNewPassword } from '../services/thunks/access';
 import { Input, Button } from 

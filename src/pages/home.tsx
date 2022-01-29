@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../services/types/hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";

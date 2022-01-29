@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Fact from '../fact/fact';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import Spinner from "../spinner/spinner";
 import { TProductItem } from '../../utils/types';
@@ -24,7 +24,7 @@ type TIngredientData = {
 type TItem = TIngredientData | undefined;
 
 const IngredientDetails: FunctionComponent = () => {
-    const { ingredientsData, ingredientsRequest } = 
+    const { ingredientsData, ingredientsRequest }/* : { ingredientsData: TProductItem[], ingredientsRequest: boolean} */ = 
         useSelector((store: any) => store.ingredients);
     const { ingredientId }: TIngredientId = useParams();
     const location: TLocation = useLocation();
@@ -41,13 +41,22 @@ const IngredientDetails: FunctionComponent = () => {
 
     const createFactsArray: () => Array<TItem> = () => {
         const items: Array<TItem> = [];
-        for(let key in ingredient){
-            if(keyToTabNameMap[key])
+        if(ingredient){
+            /* for(let key in ingredient){
+                if(keyToTabNameMap[key])
+                    items.push(
+                        { title: keyToTabNameMap[key],
+                          value: ingredient[key] }
+                    );
+            } */
+            Object.keys(ingredient).forEach((item) => {
+                if(keyToTabNameMap[item])
                 items.push(
-                    { title: keyToTabNameMap[key],
-                      value: ingredient[key] }
+                    { title: keyToTabNameMap[item],
+                      value: ingredient[item] }
                 );
-        }
+            })
+        }        
         return [ items.pop(), ...items.sort()];
     }
 
@@ -65,11 +74,11 @@ const IngredientDetails: FunctionComponent = () => {
                 </h3>
             </div>
             <div className={styles.ingredientDetails}>            
-                <img src={ingredient.image_large} 
+                <img src={ingredient?.image_large} 
                     className={styles.image} 
-                    alt={ingredient.name} />
+                    alt={ingredient?.name} />
                 <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
-                    {ingredient.name}
+                    {ingredient?.name}
                 </p>
                 <div className={styles.nutritionFacts}>
                     { createFactsArray().map((item: TItem, i: number) => {

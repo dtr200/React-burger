@@ -1,5 +1,5 @@
 import React, { useRef, FunctionComponent, RefObject } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import IngredientsNav from "../ingredients-nav/ingredients-nav";
 import IngredientsSection from '../ingredients-section/ingredients-section';
 import { TProductItem } from '../../utils/types';
@@ -23,8 +23,8 @@ type TIngredientsBlockItem = {
 
 const BurgerIngredients: FunctionComponent = () => {
     
-    const { ingredientsData } = 
-        useSelector((store: any) => store.ingredients);
+    const { ingredientsData }: { ingredientsData: TProductItem[] } = 
+        useSelector(store => store.ingredients);
         
     const bunRef = useRef<HTMLHeadingElement>(null);
     const sauceRef = useRef<HTMLHeadingElement>(null);

@@ -13,13 +13,8 @@ import {
 } from '../action-constants/ingredients';
 
 import { TIngredientsAction } from '../actions/ingredients';
-import { TProductItem } from '../../utils/types';
+import { TProductItem, TTabs } from '../../utils/types';
 
-type TTabs = {
-    id: string;
-    title: string;
-    ratio: number;
-}
 type TIngredientsState = {
     ingredientsRequest: boolean;
     ingredientsFailed: boolean;
