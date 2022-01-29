@@ -22,9 +22,9 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 import { useDispatch } from 'react-redux';
-import { RESET_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
-import { CLOSE_MODAL } from '../../services/actions/modal';
-import { RESET_ORDER_REQUEST } from '../../services/actions/order';
+import { RESET_CURRENT_INGREDIENT } from '../../services/action-constants/ingredients';
+import { CLOSE_MODAL } from '../../services/action-constants/modal';
+import { RESET_ORDER_REQUEST } from '../../services/action-constants/order';
 import { INGREDIENTS_URL } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/thunks/ingredients';

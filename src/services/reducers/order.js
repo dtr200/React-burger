@@ -3,7 +3,7 @@ import {
     SEND_ORDER_SUCCESS,
     SEND_ORDER_FAILED,
     RESET_ORDER_REQUEST
-} from '../actions/order';
+} from '../action-constants/order';
 
 const initialOrderState = {
     orderRequest: false,

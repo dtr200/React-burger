@@ -3,7 +3,7 @@ import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
-} from '../actions/ingredients';
+} from '../action-constants/ingredients';
 
 import { BASE_URL } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
