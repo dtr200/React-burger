@@ -8,7 +8,6 @@ export interface ISetModalDataAction {
     readonly type: typeof SET_MODAL_DATA;
     readonly mode: string;
     readonly title: string;
-    readonly data: undefined;
 }
 export interface ISetModalErrorAction {
     readonly type: typeof SET_MODAL_ERROR;

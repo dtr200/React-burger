@@ -4,23 +4,29 @@ import {
     CLOSE_MODAL
 } from '../action-constants/modal';
 
+import { TModalAction } from '../actions/modal';
+
+type TModalState = {
+    modalMode: string | null, 
+    modalTitle: string | null,
+    hasModalError: boolean;
+    modalVisible: boolean;
+}
+
 const initialModalState = {
-    modalType: null,
     modalMode: null, 
     modalTitle: null,
-    modalData: {},
     hasModalError: false,
     modalVisible: false
 }
 
-export default (state = initialModalState, action) => {
+export default (state = initialModalState, action: TModalAction): TModalState => {
     switch(action.type){
         case SET_MODAL_DATA: {
             return {
                 ...state,
                 modalMode: action.mode,
                 modalTitle: action.title,
-                modalData: action.data,
                 modalVisible: true,
                 hasModalError: false
             }
