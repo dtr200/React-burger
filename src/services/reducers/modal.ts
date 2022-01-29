@@ -5,10 +5,12 @@ import {
 } from '../action-constants/modal';
 
 import { TModalAction } from '../actions/modal';
+import { TOrderResponseData } from '../../utils/types';
 
 type TModalState = {
     modalMode: string | null, 
     modalTitle: string | null,
+    modalData: TOrderResponseData | null,
     hasModalError: boolean;
     modalVisible: boolean;
 }
@@ -16,6 +18,7 @@ type TModalState = {
 const initialModalState = {
     modalMode: null, 
     modalTitle: null,
+    modalData: null,
     hasModalError: false,
     modalVisible: false
 }
@@ -27,6 +30,7 @@ export default (state = initialModalState, action: TModalAction): TModalState =>
                 ...state,
                 modalMode: action.mode,
                 modalTitle: action.title,
+                modalData: action.data,
                 modalVisible: true,
                 hasModalError: false
             }
