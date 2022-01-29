@@ -12,6 +12,23 @@ import {
     SET_INGREDIENTS_TAB
 } from '../action-constants/ingredients';
 
+import { TIngredientsAction } from '../actions/ingredients';
+import { TProductItem } from '../../utils/types';
+
+type TTabs = {
+    id: string;
+    title: string;
+    ratio: number;
+}
+type TIngredientsState = {
+    ingredientsRequest: boolean;
+    ingredientsFailed: boolean;
+    ingredientsData: TProductItem[];
+    constructorIngredients: TProductItem[] | undefined[];
+    currentIngredient: TProductItem | {};
+    tabs: TTabs[];
+}
+
 const initialIngredientsState = {
     ingredientsRequest: true,
     ingredientsFailed: false,
@@ -37,7 +54,7 @@ const initialIngredientsState = {
     ]
 }
 
-export default (state = initialIngredientsState, action) => {
+export default (state = initialIngredientsState, action: TIngredientsAction): TIngredientsState => {
     switch(action.type){
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -73,8 +90,8 @@ export default (state = initialIngredientsState, action) => {
             }
         }
         case ADD_BUN: {
-            const currentItem = state.ingredientsData.find(item => item._id === action.id);
-            const itemIndex = state.constructorIngredients.findIndex(product => 
+            const currentItem = state.ingredientsData.find((item: TProductItem) => item._id === action.id);
+            const itemIndex = state.constructorIngredients.findIndex((product: TProductItem) => 
                 product.type === 'bun');
 
             const newConstructorIngredients = itemIndex === -1 ?
@@ -84,22 +101,22 @@ export default (state = initialIngredientsState, action) => {
                         currentItem,
                      ...state.constructorIngredients.slice(itemIndex + 1)]
                 );
-                
+    
             return {
                 ...state,
                 constructorIngredients: newConstructorIngredients
             }
         }
-        case ADD_INGREDIENT: {
-            const currentItem = state.ingredientsData.find(item => item._id === action.id);
-                
+        case ADD_INGREDIENT: {            
+            const currentItem = state.ingredientsData.find((item: TProductItem) => item._id === action.id);
+ 
             return {
                 ...state,
                constructorIngredients: [...state.constructorIngredients, currentItem ] 
             }
         }
         case DELETE_INGREDIENT: {
-            const itemIndex = state.constructorIngredients.findIndex(product => 
+            const itemIndex = state.constructorIngredients.findIndex((product: TProductItem) => 
                 product._id === action.id);
             
             const newConstructorIngredients = 
