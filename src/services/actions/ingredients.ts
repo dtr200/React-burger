@@ -19,14 +19,14 @@ export interface IGetIngredientsRequestAction {
 }
 export interface IGetIngredientsSuccessAction {
     readonly type: typeof GET_INGREDIENTS_SUCCESS;
-    readonly ingredientsData: TProductItem[];
+    readonly ingredients: TProductItem[];
 }
 export interface IGetIngredientsFailedAction {
     readonly type: typeof GET_INGREDIENTS_FAILED;
 }
 export interface ISetCurrentIngredientAction {
     readonly type: typeof SET_CURRENT_INGREDIENT;
-    readonly currentIngredient: TProductItem;
+    readonly data: TProductItem;
 }
 export interface IAddIngredientAction {
     readonly type: typeof ADD_INGREDIENT;
