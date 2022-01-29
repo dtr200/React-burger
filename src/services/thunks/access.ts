@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
@@ -27,10 +26,10 @@ import { BASE_URL } from '../../utils/constants';
 import {
     fetchWithRefresh, checkResponse, setCookie, deleteCookie
 } from '../../utils/utils';
-import { TDict } from '../../utils/types';
+import { AppThunk, AppDispatch } from '../types';
 
-export const restorePassword = (restoreUrl: string, email: string) => {
-    return async (dispatch: Dispatch) => {
+export const restorePassword: AppThunk = (restoreUrl, email) => {
+    return async (dispatch: AppDispatch) => {
         const emailBody = { email };
 
         try{
@@ -58,8 +57,8 @@ export const restorePassword = (restoreUrl: string, email: string) => {
     }
 }
 
-export const getNewPassword = (restoreUrl: string, password: string, token: string) => {
-    return async (dispatch: Dispatch) => {
+export const getNewPassword: AppThunk = (restoreUrl, password, token) => {
+    return async (dispatch: AppDispatch) => {
         const passwordBody = { password, token };
 
         try{
@@ -88,8 +87,8 @@ export const getNewPassword = (restoreUrl: string, password: string, token: stri
     }
 }
 
-export const registerNewUser = (userData: TDict<string>) => {
-    return async (dispatch: Dispatch) => {
+export const registerNewUser: AppThunk = (userData) => {
+    return async (dispatch: AppDispatch) => {
         try{
             dispatch({
                 type: REGISTER_USER_REQUEST
@@ -117,8 +116,8 @@ export const registerNewUser = (userData: TDict<string>) => {
     }
 }
 
-export const loginUser = (userData: TDict<string>) => {
-    return async (dispatch: Dispatch) => {
+export const loginUser: AppThunk = (userData) => {
+    return async (dispatch: AppDispatch) => {
         try{
             dispatch({
                 type: LOGIN_USER_REQUEST
@@ -148,8 +147,8 @@ export const loginUser = (userData: TDict<string>) => {
     }
 }
 
-export const updateToken = () => {
-    return async (dispatch: Dispatch) => {
+export const updateToken: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
         try{
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -180,8 +179,8 @@ export const updateToken = () => {
     }
 }
 
-export const logoutUser = () => {
-    return async (dispatch: Dispatch) => {
+export const logoutUser: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
         const tokenBody = { token: localStorage['refreshToken'] };
  
         try{
@@ -212,8 +211,8 @@ export const logoutUser = () => {
     }
 }
 
-export const getUserData = (methodType: string, userData?: TDict<string> | string) => {
-    return async (dispatch: Dispatch) => {        
+export const getUserData: AppThunk = (methodType, userData) => {
+    return async (dispatch: AppDispatch) => {        
         const accessToken: string = 
             document.cookie.match(/(accessToken=)(.+)/)![2];
 
