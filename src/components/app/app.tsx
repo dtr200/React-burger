@@ -21,7 +21,7 @@ import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import { RESET_CURRENT_INGREDIENT } from '../../services/action-constants/ingredients';
 import { CLOSE_MODAL } from '../../services/action-constants/modal';
 import { RESET_ORDER_REQUEST } from '../../services/action-constants/order';

@@ -1,18 +1,19 @@
 import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import { DEFAULT_ORDER_DATA } from 
     '../../utils/constants';
 import Spinner from "../spinner/spinner";
+import { TOrderResponseData } from '../../utils/types';
 
 import styles from './order-details.module.css';
 import done from '../../images/done.png';
 
 const OrderDetails: FunctionComponent = () => {
-    const { modalData } = useSelector((store: any) => store.modal);
-    const { orderRequest } = useSelector((store: any) => store.order);
+    const { modalData }: { modalData: TOrderResponseData } = useSelector(store => store.modal);
+    const { orderRequest }: { orderRequest: boolean } = useSelector(store => store.order);
     const { num, description, extra } = DEFAULT_ORDER_DATA;
 
-    const orderNum: number = modalData && modalData.order?.number ? 
+    const orderNum = modalData && modalData.order?.number ? 
         modalData.order.number : num;
 
     return (

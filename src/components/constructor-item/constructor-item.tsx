@@ -1,5 +1,5 @@
 import React, { useRef, FunctionComponent, SyntheticEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/types/hooks";
 import { useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement, DragIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';

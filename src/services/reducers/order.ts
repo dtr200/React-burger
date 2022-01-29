@@ -29,7 +29,6 @@ export default (state = initialOrderState, action: TOrderAction): TOrderState =>
             }
         }
         case SEND_ORDER_SUCCESS: {
-            console.log(action.data)
             return {
                 ...state,
                 orderRequest: false,

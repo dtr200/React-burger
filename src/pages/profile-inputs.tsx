@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent, FormEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../services/types/hooks';
 import { CANCEL_UPDATE_USER_DATA } 
     from '../services/action-constants/access';
 import { getUserData } from '../services/thunks/access';

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../services/types/hooks';
 import { NavLink, Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProfileInputsPage from './profile-inputs';
 import OrderHistoryPage from './order-history';

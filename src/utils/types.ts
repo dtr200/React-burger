@@ -18,6 +18,12 @@ export type TProductItem = {
     __v: number;
 };
 
+export type TTabs = {
+    id: string;
+    title: string;
+    ratio: number;
+}
+
 export type TDict<T> = {
     [name: string]: T;
 };
