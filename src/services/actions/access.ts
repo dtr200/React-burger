@@ -1,12 +1,4 @@
-import { 
-    TRegisterUserData,
-    TUserName,
-    TUserEmail,
-    TUserLogin,
-    TUserPassword,
-    TUserNewPassword,
-    TUpdateUserData
-} from '../../utils/types';
+import { TRegisterUserData } from '../../utils/types';
 import {
     SET_NAME, 
     SET_EMAIL,
@@ -64,7 +56,6 @@ export interface IRegisterUserRequestAction {
 }
 export interface IRegisterUserSuccessAction {
     readonly type: typeof REGISTER_USER_SUCCESS;
-    readonly user: TRegisterUserData;
 }
 export interface IRegisterUserFailedAction {
     readonly type: typeof REGISTER_USER_FAILED;
@@ -91,7 +82,6 @@ export interface IUpdateUserDataFailedAction {
 }
 export interface ICancelUpdateUserDataAction {
     readonly type: typeof CANCEL_UPDATE_USER_DATA;
-    readonly user: TUpdateUserData;
 }
 export interface IRestorePasswordRequestAction {
     readonly type: typeof RESTORE_PASSWORD_REQUEST;
