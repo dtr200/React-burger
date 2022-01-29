@@ -41,23 +41,23 @@ import {
 
 export interface ISetNameAction {
     readonly type: typeof SET_NAME;
-    readonly user: TUserName;
+    readonly payload: string
 }
 export interface ISetEmailAction {
     readonly type: typeof SET_EMAIL;
-    readonly user: TUserEmail;
+    readonly payload: string;
 }
 export interface ISetLoginAction {
     readonly type: typeof SET_LOGIN;
-    readonly user: TUserLogin;
+    readonly payload: string;
 }
 export interface ISetPasswordAction {
     readonly type: typeof SET_PASSWORD;
-    readonly user: TUserPassword;
+    readonly payload: string;
 }
 export interface ISetRestoreEmailAction {
     readonly type: typeof SET_RESTORE_EMAIL;
-    readonly changePasswordEmail: string;
+    readonly email: string;
 }
 export interface IRegisterUserRequestAction {
     readonly type: typeof REGISTER_USER_REQUEST;
@@ -98,7 +98,7 @@ export interface IRestorePasswordRequestAction {
 }
 export interface IRestorePasswordSuccessAction {
     readonly type: typeof RESTORE_PASSWORD_SUCCESS;
-    readonly changePasswordMessage: string;
+    readonly message: string;
 }
 export interface IRestorePasswordFailedAction {
     readonly type: typeof RESTORE_PASSWORD_FAILED;
@@ -108,18 +108,17 @@ export interface IGetNewPasswordRequestAction {
 }
 export interface IGetNewPasswordSuccessAction {
     readonly type: typeof GET_NEW_PASSWORD_SUCCESS;
-    readonly newPasswordMessage: string;
 }
 export interface IGetNewPasswordFailedAction {
     readonly type: typeof GET_NEW_PASSWORD_FAILED;
 }
 export interface ISetNewPasswordAction {
     readonly type: typeof SET_NEW_PASSWORD;
-    readonly user: TUserNewPassword;
+    readonly payload: string;
 }
 export interface ISetRestoreCodeAction {
     readonly type: typeof SET_RESTORE_CODE;
-    readonly restoreCode: string;
+    readonly payload: string;
 }
 export interface IRefreshTokenRequestAction {
     readonly type: typeof REFRESH_TOKEN_REQUEST;
@@ -135,6 +134,7 @@ export interface ILogoutUserRequestAction {
 }
 export interface ILogoutUserSuccessAction {
     readonly type: typeof LOGOUT_USER_SUCCESS;
+    readonly message: string;
 }
 export interface ILogoutUserFailedAction {
     readonly type: typeof LOGOUT_USER_FAILED;
