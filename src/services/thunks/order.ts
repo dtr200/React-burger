@@ -3,8 +3,8 @@ import {
     SEND_ORDER_REQUEST,
     SEND_ORDER_SUCCESS,
     SEND_ORDER_FAILED,
-} from '../actions/order';
-import { SET_MODAL_DATA } from '../actions/modal';
+} from '../action-constants/order';
+import { SET_MODAL_DATA } from '../action-constants/modal';
 
 import { BASE_URL } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';

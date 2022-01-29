@@ -4,7 +4,7 @@ import {
     SET_PASSWORD, 
     SET_LOGIN,
     SET_RESTORE_CODE
-} from '../services/actions/access';
+} from '../services/action-constants/access';
 import { TDict } from '../utils/types';
 
 type TDispatchData = {

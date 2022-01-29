@@ -10,7 +10,7 @@ import {
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR_INGREDIENTS,
     SET_INGREDIENTS_TAB
-} from '../actions/ingredients';
+} from '../action-constants/ingredients';
 
 const initialIngredientsState = {
     ingredientsRequest: true,

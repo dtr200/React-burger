@@ -1,4 +1,28 @@
-export const SEND_ORDER_REQUEST: 'SEND_ORDER_REQUEST' = 'SEND_ORDER_REQUEST';
-export const SEND_ORDER_SUCCESS: 'SEND_ORDER_SUCCESS' = 'SEND_ORDER_SUCCESS';
-export const SEND_ORDER_FAILED: 'SEND_ORDER_FAILED' = 'SEND_ORDER_FAILED';
-export const RESET_ORDER_REQUEST: 'RESET_ORDER_REQUEST' = 'RESET_ORDER_REQUEST';
+import { TOrderResponseData } from '../../utils/types';
+
+import {
+    SEND_ORDER_REQUEST,
+    SEND_ORDER_SUCCESS,
+    SEND_ORDER_FAILED,
+    RESET_ORDER_REQUEST
+} from '../action-constants/order';
+
+export interface ISendOrderRequestAction {
+    readonly type: typeof SEND_ORDER_REQUEST;
+}
+export interface ISendOrderSuccessAction {
+    readonly type: typeof SEND_ORDER_SUCCESS;
+    readonly data: TOrderResponseData;
+}
+export interface ISendOrderFailedAction {
+    readonly type: typeof SEND_ORDER_FAILED;
+}
+export interface IResetOrderRequestAction {
+    readonly type: typeof RESET_ORDER_REQUEST;
+}
+
+export type TOrderAction = 
+    ISendOrderRequestAction |
+    ISendOrderSuccessAction |
+    ISendOrderFailedAction |
+    IResetOrderRequestAction;

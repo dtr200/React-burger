@@ -2,7 +2,7 @@ import {
     SET_MODAL_DATA,
     SET_MODAL_ERROR,
     CLOSE_MODAL
-} from '../actions/modal';
+} from '../action-constants/modal';
 
 const initialModalState = {
     modalType: null,
