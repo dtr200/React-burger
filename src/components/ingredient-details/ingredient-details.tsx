@@ -21,15 +21,19 @@ type TIngredientData = {
     value: number;
 }
 
+type TIngredient = { [key: string]: any } | undefined;
+
 type TItem = TIngredientData | undefined;
 
 const IngredientDetails: FunctionComponent = () => {
-    const { ingredientsData, ingredientsRequest }/* : { ingredientsData: TProductItem[], ingredientsRequest: boolean} */ = 
+    const { ingredientsData, ingredientsRequest } :
+    { ingredientsData: TProductItem[], ingredientsRequest: boolean} = 
         useSelector((store: any) => store.ingredients);
+
     const { ingredientId }: TIngredientId = useParams();
     const location: TLocation = useLocation();
 
-    const ingredient = ingredientsData.find((item: TProductItem) => 
+    const ingredient: TIngredient = ingredientsData.find((item: TProductItem) => 
             item._id === ingredientId);
 
     const keyToTabNameMap: TKeyToTabNameMap = {
@@ -41,22 +45,13 @@ const IngredientDetails: FunctionComponent = () => {
 
     const createFactsArray: () => Array<TItem> = () => {
         const items: Array<TItem> = [];
-        if(ingredient){
-            /* for(let key in ingredient){
-                if(keyToTabNameMap[key])
-                    items.push(
-                        { title: keyToTabNameMap[key],
-                          value: ingredient[key] }
-                    );
-            } */
-            Object.keys(ingredient).forEach((item) => {
-                if(keyToTabNameMap[item])
+        for(let key in ingredient){
+            if(keyToTabNameMap[key])
                 items.push(
-                    { title: keyToTabNameMap[item],
-                      value: ingredient[item] }
+                    { title: keyToTabNameMap[key],
+                        value: ingredient[key] }
                 );
-            })
-        }        
+        }      
         return [ items.pop(), ...items.sort()];
     }
 
