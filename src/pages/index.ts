@@ -6,6 +6,7 @@ import ResetPasswordPage from './reset-password';
 import ProfilePage from './profile';
 import OrderHistoryPage from './order-history';
 import NotFound404 from './not-found-404';
+import FeedPage from './feed';
 
 export {
     HomePage,
@@ -15,5 +16,6 @@ export {
     ResetPasswordPage,
     ProfilePage,
     OrderHistoryPage,
-    NotFound404
+    NotFound404,
+    FeedPage
 };

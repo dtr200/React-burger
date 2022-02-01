@@ -15,7 +15,8 @@ import {
   ForgotPasswordPage, 
   ResetPasswordPage, 
   ProfilePage, 
-  NotFound404 
+  NotFound404,
+  FeedPage
 } from '../../pages';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -91,6 +92,9 @@ const App: FunctionComponent = () => {
           </Route>
           <Route path="/reset-password" exact>
             <ResetPasswordPage />
+          </Route>
+          <Route path="/feed" exact>
+            <FeedPage />
           </Route>
           <ProtectedRoute path="/profile">
             <ProfilePage />

@@ -1,0 +1,14 @@
+.orderBlock {
+    border-radius: 8px;
+    background-color: var(--header-background);
+}
+.meta {
+    display: flex;
+    justify-content: space-between;
+}
+.title {
+
+}
+.status {
+    
+}

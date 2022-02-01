@@ -1,6 +1,7 @@
 export const BASE_URL: string = 'https://norma.nomoreparties.space/api';
 export const ORDER_URL: string = '/orders';
 export const INGREDIENTS_URL: string = '/ingredients';
+export const WS_ORDERS: string = 'wss://norma.nomoreparties.space/orders';
 
 type TOrderData = {
   num: string;
