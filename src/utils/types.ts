@@ -42,3 +42,28 @@ export type TOrderResponseData = {
     name: string;
     order: TOrderField;
 }
+
+export type TWSOrder = {
+    "ingredients": string[];
+    "_id": string;
+    "status": string;
+    "number": number;
+    "createdAt": string;
+    "updatedAt": string;
+    "name": string;
+};
+
+export type TWSActions = {
+    wsInit: string;
+    wsSendOrder: string;
+    onOpen: string;
+    onClose: string;
+    onError: string;
+    onMessage: string;
+}
+
+export type TWSOrdersResponse = {
+    "orders": TWSOrder[],
+    "total": number;
+    "totalToday": number;
+}; 

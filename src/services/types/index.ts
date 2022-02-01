@@ -5,10 +5,12 @@ import { TAccessAction } from '../actions/access';
 import { TIngredientsAction } from '../actions/ingredients';
 import { TModalAction } from '../actions/modal';
 import { TOrderAction } from '../actions/order';
+import { TWSOrdersActions } from '../actions/ws';
 
 export type RootState = ReturnType<typeof store.getState>;
 
-type TApplicationActions = 
+export type TApplicationActions = 
+    TWSOrdersActions |
     TAccessAction |
     TIngredientsAction |
     TModalAction |
