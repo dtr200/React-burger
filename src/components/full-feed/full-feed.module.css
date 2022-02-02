@@ -1,7 +1,18 @@
 .list {
     width: calc(var(--space) * 150);
-    max-height: 1134px;
+    max-height: 812px;
     padding-left: 0;
     display: grid;
     row-gap: calc(var(--space) * 4);
+    overflow: auto;
+    scrollbar-width: thin;
+    padding-right: calc(var(--space) * 2);
+    box-sizing: border-box;
+}
+.list::-webkit-scrollbar{
+    width: 8px;
+    background: var(--input-color);
+}
+.list::-webkit-scrollbar-thumb{
+    background: var(--text-dark-grey);
 }
