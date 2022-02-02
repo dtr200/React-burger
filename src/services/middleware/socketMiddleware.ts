@@ -6,7 +6,7 @@ import { TWSOrdersActions } from "../actions/ws";
 import { TApplicationActions } from '../types';
 import { parse } from "path";
 
-export const socketMiddleware = (wsUrl: string, wsActions: TWSActions): Middleware => {
+export const socketMiddleware = (wsActions: TWSActions): Middleware => {
     return ((store: MiddlewareAPI) => {
         let socket: WebSocket | null = null;
 
@@ -18,7 +18,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions): Middlewa
             const { type, payload } = action;
 
             if(type === wsInit){
-                socket = new WebSocket(wsUrl);
+                socket = new WebSocket(payload);
             }
             if(socket){
                 socket.onopen = e => {
@@ -37,7 +37,6 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions): Middlewa
                     const { data } = e;
                     const parsedData = JSON.parse(data);
                     const { success, ...rest } = parsedData;
-
                     dispatch({
                         type: onMessage,
                         payload: rest

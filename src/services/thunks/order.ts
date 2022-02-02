@@ -20,9 +20,15 @@ export const sendOrder: AppThunk = (orderURL, constructorIngredients) => {
             dispatch({
                 type: SEND_ORDER_REQUEST
             })
+            const accessToken: string = 
+            document.cookie.match(/(accessToken=)(.+)/)![2];
+
             const res = await fetch(`${BASE_URL}${orderURL}`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': accessToken 
+                },
                 body: JSON.stringify(orderBody)
             });
 

@@ -1,12 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
+import FullFeed from '../components/full-feed/full-feed';
+
+import { useDispatch, useSelector } from "react-redux";
+import { WS_CONNECTION_START } from '../services/action-constants/ws';
 
 import styles from './profile.module.css';
 
 const OrderHistoryPage: FunctionComponent = () => {
+
     return (        
-            <section className={`${styles.container} text`}>
-                История заказов
-            </section>
+        <FullFeed />
   );
 }
 
