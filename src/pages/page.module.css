@@ -9,6 +9,11 @@
     margin: calc(var(--space) * 45) auto 0;
 }
 
+.feed{
+    width: calc(var(--space) * 310);
+    margin: 40px auto 0;
+}
+
 .container{
     display: flex;
     flex-direction: column;
