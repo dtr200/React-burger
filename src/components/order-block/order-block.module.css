@@ -23,6 +23,9 @@
     display: flex;
     column-gap: 9px;
 }
+.priceBlock svg {
+    fill: white;
+}
 .icons{
     display: flex;
     padding-left: 0;
