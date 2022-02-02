@@ -32,7 +32,9 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
     
     const getTime = () => {
         const created = new Date(createdAt);
-        const time = created.toTimeString().split(' ')[0];
+        const time = `${created.getHours()}:${
+            created.getMinutes() < 10 ? "0" + created.getMinutes() : created.getMinutes()
+        }`;
 
         const todayDate = new Date();
         const msInDay = 24 * 3600 * 1000;
