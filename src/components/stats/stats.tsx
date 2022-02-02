@@ -1,37 +1,49 @@
 import React, { FunctionComponent } from "react";
+import { useSelector } from "react-redux";
 
-import styles from './fullfeed.module.css';
+import styles from './stats.module.css';
 
-type TStatsProps = {
-    
-}
+const Stats: FunctionComponent = () => {
 
-const Stats: FunctionComponent<TStatsProps> = () => {
+    const { orders, total, totalToday } = useSelector((store: any) => store.ws);
+
+    const doneOrders = orders.filter((order: any) => order.status === 'done');
+    const inProgressOrders = orders.filter((order: any) => order.status === 'created');
+
+    const getTotalSection = (title: string, total: number) => {
+        return (
+            <section className={`${styles.ready} mb-15`}>
+                <h3 className={`${styles.totalTitle} text_type_main-medium`}>{title}</h3>
+                <p className={`${styles.total} text_type_digits-large`}>{total}</p>
+            </section>
+        )
+    }
+
+    const getNumberSection = (title: string, orders: any) => {
+        return (
+            <div className={styles.numbers}>
+                    <h3 className={`text_type_main-medium mb-6 mt-1`}>{title}</h3>
+                    <ul className={styles.allNumbers}>
+                        {
+                            orders.map((order: any, i: number) => (                               
+                                <li className={`${styles.num} ${title === 'В работе:' ? 
+                                    styles.inProgress : styles.done} text_type_digits-default`} key={i}>
+                                    {order.number}
+                                </li>))
+                        }
+                    </ul>
+            </div>
+        )
+    }
 
     return (
-        <article className={styles.stats}>
-            <section className={styles.works}>
-                <div className={styles.done}>
-                    <p></p>
-                    <ul>
-
-                    </ul>
-                </div>
-                <div className={styles.inProgress}>
-                    <p></p>
-                    <ul>
-                        
-                    </ul>
-                </div>
+        <article className={`${styles.stats} text`}>
+            <section className={`${styles.orders} mb-15`}>
+                { getNumberSection('Готовы:', doneOrders) }
+                { getNumberSection('В работе:', inProgressOrders) }
             </section>
-            <section className={styles.ready}>
-                <p className={``}></p>
-                <p className={``}></p>
-            </section>
-            <section className={styles.ready}>
-                <p className={``}></p>
-                <p className={``}></p>
-            </section>
+            { getTotalSection('Выполнено за все время:', total) }
+            { getTotalSection('Выполнено за сегодня:', totalToday) }
         </article>
     )
 }
