@@ -1,0 +1,7 @@
+.list {
+    width: calc(var(--space) * 150);
+    max-height: 1134px;
+    padding-left: 0;
+    display: grid;
+    row-gap: calc(var(--space) * 4);
+}
