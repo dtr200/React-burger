@@ -28,7 +28,7 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
             ingredients.map((id: string) =>
                 ingredientsData.find((item: any) => item._id === id).image_mobile)
             )
-        );
+        ).sort();
     
     const getTime = () => {
         const created = new Date(createdAt);
