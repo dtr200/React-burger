@@ -4,10 +4,6 @@
     background-color: var(--header-background);
     padding: calc(var(--space) * 6);
 }
-.link{
-    text-decoration: none;
-    color: white;
-}
 .meta {
     display: flex;
     justify-content: space-between;

@@ -1,9 +1,9 @@
 import React, { useEffect, FunctionComponent } from "react";
 import OrderBlock from '../order-block/order-block';
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { WS_CONNECTION_START } from '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
 import Spinner from '../spinner/spinner';
 
@@ -11,6 +11,7 @@ import styles from './full-feed.module.css';
 
 const FullFeed: FunctionComponent = () => {
     const location = useLocation();
+    const { url } = useRouteMatch();
 
     const wsUrl = `${WS_ORDERS}/all`;
     const isTokenExist = document.cookie.match(/(accessToken=)(.+)/);
@@ -34,8 +35,15 @@ const FullFeed: FunctionComponent = () => {
         <article className={styles.fullFeed}>
             <ul className={styles.list}>
                 {
-                    orders.map((order: any, i: number) => 
-                        <OrderBlock {...order} nostatus key={i}/>
+                    orders.map((order: any, i: number) => (
+                        <Link to={{ 
+                                pathname: `${url}/${order.number}`, 
+                                state: { background: location }
+                                }}
+                                className={styles.link}>
+                            <OrderBlock {...order} nostatus key={i}/>
+                        </Link>
+                        )
                     )
                 }
             </ul>
