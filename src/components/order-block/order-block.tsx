@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import IngredientIcon from '../ingredient-icon/ingredient-icon';
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
 import { CurrencyIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,13 +13,17 @@ type TOrderBlockProps = {
     name: string;
     status: string;
     ingredients: string[];
-    nostatus: boolean;
+}
+type TDict = {
+    [key: string]: string;
 }
 
 const OrderBlock: FunctionComponent<TOrderBlockProps> = 
-    ({ number, name, createdAt, status, ingredients, nostatus }) => {
+    ({ number, name, createdAt, status, ingredients }) => {
 
     const { ingredientsData } = useSelector((store: any) => store.ingredients);
+    const location = useLocation();
+    const { url } = useRouteMatch();
 
     const price = ingredients.reduce((accum: number, id: string) => 
         accum + ingredientsData.find((item: any) => item._id === id).price, 0);
@@ -56,36 +61,51 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
 
         return `${getDay()} ${time} i-GMT+3`;
     }
+
+    const engToRusStatusDict: TDict = {
+        done: 'Выполнен',
+        pending: 'Готовится',
+        created: 'Готов'
+    }
     
     return (
-        <li className={`${styles.orderBlock} text text_type_digits-default`}>
-            <div className={styles.meta}>
-                <span className={``}>{`#${number}`}</span>
-                <span className={`${styles.date} text_type_main-default`}>{getTime()}</span>
-            </div>
-            <h2 className={`${styles.title} text_type_main-medium`}>{name}</h2>
-            <p className={styles.status}>{!nostatus && status}</p>
-            <div className={styles.info}>
-                <ul className={styles.icons}>
-                    {
-                        images.map((image: string, i: number) => {
-                            if(i >= 6) return;
-                            return (
-                                <IngredientIcon 
-                                    image={image} 
-                                    key={i} 
-                                    shiftRatio={i} 
-                                    rest={i === 5 && images.length - 6} />
-                            )
-                        })
-                    }
-                </ul>
-                <div className={styles.priceBlock}>
-                    <span className={styles.price}>{price}</span>
-                    <CurrencyIcon type="secondary" />
+        <Link 
+            to={{ 
+                pathname: `${url}/${number}`, 
+                state: { background: location }
+                }}
+                className={styles.link}>
+            <li className={`${styles.orderBlock} text text_type_digits-default`}>
+                <div className={styles.meta}>
+                    <span className={``}>{`#${number}`}</span>
+                    <span className={`${styles.date} text_type_main-default`}>{getTime()}</span>
                 </div>
-            </div>
-        </li>
+                <h2 className={`${styles.title} text_type_main-medium ${location.pathname === '/feed' ? 'mb-6' : 'mb-2'}`}>{name}</h2>
+                <p className={`${styles.status} text_type_main-default mt-2 mb-6 ${status === 'done' && styles.statusDone}`}>
+                    { !(location.pathname === '/feed') && engToRusStatusDict[status]}
+                    </p>
+                <div className={styles.info}>
+                    <ul className={styles.icons}>
+                        {
+                            images.map((image: string, i: number) => {
+                                if(i >= 6) return;
+                                return (
+                                    <IngredientIcon 
+                                        image={image} 
+                                        key={i} 
+                                        shiftRatio={i} 
+                                        rest={i === 5 && images.length - 6} />
+                                )
+                            })
+                        }
+                    </ul>
+                    <div className={styles.priceBlock}>
+                        <span className={styles.price}>{price}</span>
+                        <CurrencyIcon type="secondary" />
+                    </div>
+                </div>
+            </li>
+        </Link>
     )
 }
 

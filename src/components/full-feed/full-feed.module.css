@@ -1,6 +1,6 @@
 .list {
     width: calc(var(--space) * 150);
-    max-height: 812px;
+    max-height: 74.3vh;
     padding-left: 0;
     display: grid;
     row-gap: calc(var(--space) * 4);
