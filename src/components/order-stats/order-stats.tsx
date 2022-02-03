@@ -29,7 +29,7 @@ interface MatchParams {
 }
 
 const OrderStats: FunctionComponent = () => {
-    const { orders, wsConnected } = useSelector((store: any) => store.ws);
+    const { orders } = useSelector((store: any) => store.ws);
     const { params } = useRouteMatch<MatchParams>();
     const { ingredientsData, ingredientsRequest } = 
         useSelector((store: any) => store.ingredients);
