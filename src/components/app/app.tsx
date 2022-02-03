@@ -59,7 +59,7 @@ const App: FunctionComponent = () => {
       dispatch({ type: RESET_ORDER_REQUEST });
       const url = location.pathname.split('/');
       let path = '';
-      if(url[1] === 'ingredients') {
+      if(url[1] === 'ingredients' || url[1] === 'order') {
         path = '/';
       }
       else{      
