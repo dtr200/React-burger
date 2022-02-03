@@ -20,11 +20,13 @@ const IngredientsLine: FunctionComponent<TIngredientsLineProps> =
 
 
     return (
-        <li className={`${styles.orderBlock} text text_type_digits-default`}>            
-            <IngredientIcon image={image} />
-            <h2 className={`${styles.title} text_type_main-medium`}>
-                {name}
-            </h2>
+        <li className={`${styles.ingredientsLine} text text_type_digits-default`}>
+            <div className={styles.itemData}>
+                <IngredientIcon image={image} />
+                <h2 className={`${styles.title} text_type_main-default mr-4`}>
+                    {name}
+                </h2>
+            </div>
             <div className={styles.priceBlock}>
                 <span className={styles.price}>{`${numbers} x ${price}`}</span>
                 <CurrencyIcon type="secondary" />
