@@ -16,3 +16,7 @@
 .list::-webkit-scrollbar-thumb{
     background: var(--text-dark-grey);
 }
+.link{
+    text-decoration: none;
+    color: white;
+}
