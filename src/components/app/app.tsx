@@ -57,9 +57,18 @@ const App: FunctionComponent = () => {
       dispatch({ type: CLOSE_MODAL });
       dispatch({ type: RESET_CURRENT_INGREDIENT });
       dispatch({ type: RESET_ORDER_REQUEST });
-      history.replace({ pathname: '/'})
+      const url = location.pathname.split('/');
+      let path = '';
+      if(url[1] === 'ingredients') {
+        path = '/';
+      }
+      else{      
+        for(let i = 1; i < url.length - 1; i++)
+          path += `/${url[i]}`;
+      }
+        
+      history.replace({ pathname: path})
     }
-
     useEffect(() => {
       dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
