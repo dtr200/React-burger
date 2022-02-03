@@ -4,8 +4,8 @@ import styles from './ingredient-icon.module.css';
 
 type TIngredientIconProps = {
     image: string;
-    shiftRatio: number;
-    rest: number | boolean;
+    shiftRatio?: number;
+    rest?: number | boolean;
 }
 
 const IngredientIcon: FunctionComponent<TIngredientIconProps> = ({ image, shiftRatio, rest }) => {
