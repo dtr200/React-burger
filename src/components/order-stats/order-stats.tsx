@@ -62,16 +62,17 @@ const OrderStats: FunctionComponent = () => {
         accum + ingredientsData.find((item: any) => item._id === id).price, 0);
 
     return (
-        <section className={`${styles.orderBlock} text text_type_digits-default`}>
+        <section className={`${styles.orderStats} text text_type_digits-default`}>
             <div className={styles.number}>{`#${number}`}</div>
-            <h2 className={`${styles.title} text_type_main-medium ${location.pathname === '/feed' ? 'mb-6' : 'mb-2'}`}>
+            <h2 className={`text_type_main-medium mt-10 mb-3`}>
                 {name}
             </h2>
-            <p className={`${styles.status} text_type_main-default mt-2 mb-6 ${status === 'done' && styles.statusDone}`}>
+            <p className={`text_type_main-default mb-10 ${status === 'done' && styles.statusDone}`}>
                 { engToRusStatusDict[status] }
             </p>
             <div className={styles.ingredients}>
-                <ul className={styles.ingredientsList}>
+                <h3 className="text_type_main-medium">Состав:</h3>
+                <ul className={`${styles.ingredientsList} pr-6`}>
                     {
                         collapseList(ingredients).map((ingredientData: TIngredient, i: number) => {
                             return (
@@ -83,7 +84,7 @@ const OrderStats: FunctionComponent = () => {
                     }
                 </ul>                
             </div>
-            <div className={styles.data}>
+            <div className={`${styles.data} mt-10`}>
                 <span className={`${styles.date} text_type_main-default`}>
                     {getTime(createdAt)}
                 </span>

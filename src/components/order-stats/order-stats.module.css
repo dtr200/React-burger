@@ -1,38 +1,41 @@
-.orderBlock {
-    list-style-type: none;
-    border-radius: calc(var(--space) * 10);
-    background-color: var(--header-background);
-    padding: calc(var(--space) * 6);
+.orderStats{
+    width: 100%;
 }
-.meta {
+.number{
+    text-align: center;    
+}
+.ingredientsList{
+    display: flex;
+    flex-direction: column;
+    max-height: 28.89vh;
+    overflow: auto;
+    list-style-type: none;
+    padding-left: 0;
+    scrollbar-width: thin;    
+    row-gap: calc(var(--space) * 4);;
+}
+.ingredientsList::-webkit-scrollbar{
+    width: 8px;
+    background: var(--input-color);
+}
+.ingredientsList::-webkit-scrollbar-thumb{
+    background: var(--text-dark-grey);
+}
+.statusDone{
+    color: var(--light-green)
+}
+.data{
     display: flex;
     justify-content: space-between;
 }
 .date{
     color: var(--text-dark-grey);
 }
-.title {
-    font-weight: lighter;
-}
-.info{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.status{
-
-}
-.statusDone{
-    color: var(--light-green)
-}
 .priceBlock{
     display: flex;
+    align-items: center;
     column-gap: 9px;
 }
-.priceBlock svg {
+.priceBlock svg{
     fill: white;
-}
-.icons{
-    display: flex;
-    padding-left: 0;
 }
