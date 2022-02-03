@@ -18,7 +18,9 @@ const OrderDetails: FunctionComponent = () => {
 
     return (
         orderRequest ? (
+        <div className={`${styles.loading}`}>
             <Spinner />
+        </div>
         ) : (
         <div className={`${styles.orderDetails} text mt-4 mb-15`}>
             <div className={`${styles.num} text_type_digits-large`}>
