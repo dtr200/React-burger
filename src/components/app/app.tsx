@@ -72,11 +72,9 @@ const App: FunctionComponent = () => {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <ProtectedRoute
-            path='/profile/orders/:orderNumber'
-            children={<OrderHistoryPage />}
-            exact
-          />
+          <ProtectedRoute path='/profile/orders/:id' exact>
+            <OrderStatsPage />
+          </ProtectedRoute>
           <Route path='/ingredients/:ingredientId' exact>
             <IngredientDetails />
           </Route>
@@ -116,6 +114,13 @@ const App: FunctionComponent = () => {
           </Route>
         )}
         {background && (
+          <ProtectedRoute path='/profile/orders/:id' exact>
+              <Modal onClose={onModalClose}>
+                <OrderStats />
+              </Modal>
+          </ ProtectedRoute>
+        )}
+        {background && (
           <Route path='/order'>
             <Modal onClose={onModalClose}>
               <OrderDetails />
@@ -128,17 +133,7 @@ const App: FunctionComponent = () => {
               <IngredientDetails />
             </Modal>
           </Route>
-        )}
-        {background && (
-          <ProtectedRoute
-            path='/profile/orders/:orderNumber'
-            children={
-              <Modal onClose={onModalClose}>
-                <OrderHistoryPage />
-              </Modal>
-            }
-          />
-        )}
+        )}        
       </div>
     );
   };

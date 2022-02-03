@@ -40,8 +40,8 @@ const FullFeed: FunctionComponent = () => {
                                 pathname: `${url}/${order.number}`, 
                                 state: { background: location }
                                 }}
-                                className={styles.link}>
-                            <OrderBlock {...order} nostatus key={i}/>
+                                className={styles.link} key={i}>
+                            <OrderBlock {...order} nostatus />
                         </Link>
                         )
                     )
