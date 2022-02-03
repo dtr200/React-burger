@@ -16,7 +16,8 @@ import {
   ResetPasswordPage, 
   ProfilePage, 
   NotFound404,
-  FeedPage
+  FeedPage,
+  OrderStatsPage
 } from '../../pages';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -98,7 +99,7 @@ const App: FunctionComponent = () => {
             <FeedPage />
           </Route>
           <Route path='/feed/:id' exact>
-            <OrderStats />
+            <OrderStatsPage />
           </Route>
           <ProtectedRoute path="/profile">
             <ProfilePage />

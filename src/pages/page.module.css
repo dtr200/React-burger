@@ -37,10 +37,17 @@
     display: grid;
     row-gap: calc(var(--space) * 4);
 }
+
 .question{
     margin: 0;
     text-align: center;    
 }
+
 .link{
     text-decoration: none;
+}
+
+.orderStatsPage{
+    max-width: 640px;
+    margin: 122px auto 0;
 }
