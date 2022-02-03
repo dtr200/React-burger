@@ -21,6 +21,7 @@ import {
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import OrderStats from '../order-stats/order-stats';
 import Modal from '../modal/modal';
 import { useDispatch } from '../../services/types/hooks';
 import { RESET_CURRENT_INGREDIENT } from '../../services/action-constants/ingredients';
@@ -96,6 +97,9 @@ const App: FunctionComponent = () => {
           <Route path="/feed" exact>
             <FeedPage />
           </Route>
+          <Route path='/feed/:id' exact>
+            <OrderStats />
+          </Route>
           <ProtectedRoute path="/profile">
             <ProfilePage />
           </ProtectedRoute>
@@ -103,6 +107,13 @@ const App: FunctionComponent = () => {
             <NotFound404 />
           </Route>          
         </Switch>
+        {background && (
+          <Route path='/feed/:id' exact>
+            <Modal onClose={onModalClose}>
+              <OrderStats />
+            </Modal>
+          </Route>
+        )}
         {background && (
           <Route path='/order'>
             <Modal onClose={onModalClose}>
