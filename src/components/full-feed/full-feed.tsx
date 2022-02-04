@@ -1,11 +1,10 @@
 import React, { useEffect, FunctionComponent } from "react";
 import OrderBlock from '../order-block/order-block';
 import { useDispatch, useSelector } from "react-redux";
-import { WS_CONNECTION_START } from '../../services/action-constants/ws';
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from 
+    '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
-
-import Spinner from '../spinner/spinner';
 
 import styles from './full-feed.module.css';
 
@@ -29,6 +28,9 @@ const FullFeed: FunctionComponent = () => {
             type: WS_CONNECTION_START,
             payload: location.pathname === '/feed' ? wsUrl : wsUrlToken
         });
+        return () => {
+            dispatch({ type: WS_CONNECTION_CLOSED });
+        }
     }, [])
 
     return (
