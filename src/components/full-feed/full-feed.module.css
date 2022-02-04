@@ -17,6 +17,7 @@
     background: var(--text-dark-grey);
 }
 .link{
+    width: 584px;
     text-decoration: none;
     color: white;
 }
