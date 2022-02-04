@@ -57,13 +57,17 @@ export const getTime = (createdTime: string) => {
     const time = `${created.getHours()}:${
         created.getMinutes() < 10 ? "0" + created.getMinutes() : created.getMinutes()
     }`;
+    const msInMinute = 60 * 1000;
+    const msInDay = msInMinute * 60 * 24;
 
     const todayDate = new Date();
-    const msInDay = 24 * 3600 * 1000;
+    const todayLeft = todayDate.getHours() * msInMinute * 60 + todayDate.getMinutes() * msInMinute;
+    const yesterdayLeft = todayLeft + msInDay;
 
-    const digitsToWords = ['Сегодня', 'Вчера'];
+    const left = todayDate.getTime() - created.getTime();
+
     const daysBefore = Math.floor((todayDate.getTime() - created.getTime())/msInDay);
-
+    
     const getDayForm = (day: number): string => {
         return day % 10 === 1 ? 'день' :
             day % 10 >= 2 && day % 10 <= 4 && day !== 12 && day !== 13 && day !== 14 ? 
@@ -71,9 +75,9 @@ export const getTime = (createdTime: string) => {
     }
 
     const getDay = () => {
-        return daysBefore < 2 ? 
-            digitsToWords[daysBefore] : 
-            `${daysBefore} ${getDayForm(daysBefore)} назад`;
+        return left < todayLeft ? 'Сегодня' : 
+               left < yesterdayLeft ? 'Вчера' : 
+               `${daysBefore} ${getDayForm(daysBefore)} назад`;
     }
 
     return `${getDay()} ${time} i-GMT+3`;
