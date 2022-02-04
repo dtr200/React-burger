@@ -15,8 +15,9 @@ type TIngredientsLineProps = {
 const IngredientsLine: FunctionComponent<TIngredientsLineProps> = 
     ({ ingredientId, ingredients, numbers }) => {
     
-    const { image_mobile: image, price, name } = ingredients.find((item: TProductItem) => 
-        item._id === ingredientId)!;
+    const { image_mobile: image, price, name, type } = 
+        ingredients.find((item: TProductItem) => 
+            item._id === ingredientId)!;
 
     return (
         <li className={`${styles.ingredientsLine} text text_type_digits-default`}>
@@ -27,7 +28,11 @@ const IngredientsLine: FunctionComponent<TIngredientsLineProps> =
                 </h2>
             </div>
             <div className={styles.priceBlock}>
-                <span className={styles.price}>{`${numbers} x ${price}`}</span>
+                <span className={styles.price}>
+                    { 
+                        type === 'bun' ? `2 x ${price}` : `${numbers} x ${price}`
+                    }
+                </span>
                 <CurrencyIcon type="secondary" />
             </div>
         </li>
