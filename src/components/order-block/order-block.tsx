@@ -26,7 +26,7 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
     const { ingredientsData }: { ingredientsData: TProductItem[] } = 
         useSelector(store => store.ingredients);
     const location = useLocation();    
-    console.log(ingredientsData)
+
     const price = ingredients.reduce((accum: number, id: string) => 
             accum + (ingredientsData.length ? 
                 ingredientsData.find((item: TProductItem) => item._id === id)!.price : 0), 0);

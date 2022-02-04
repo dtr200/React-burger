@@ -1,5 +1,5 @@
-import React, { useEffect, FunctionComponent } from "react";
-import FullFeed from "../components/full-feed/full-feed";
+import React, { FunctionComponent } from "react";
+import OrdersList from "../components/orders-list/orders-list";
 import Stats from '../components/stats/stats';
 
 import styles from './page.module.css';
@@ -10,7 +10,7 @@ const FeedPage: FunctionComponent = () => {
         <main className={styles.feed}>
             <h1 className={`text text_type_main-large mb-5`}>Лента заказов</h1>
             <article className={styles.content}>
-                <FullFeed />
+                <OrdersList />
                 <Stats />
             </article>            
         </main>

@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import FullFeed from '../components/full-feed/full-feed';
+import OrdersList from '../components/orders-list/orders-list';
 
 import styles from './profile.module.css';
 
 const OrderHistoryPage: FunctionComponent = () => {
 
     return (        
-        <FullFeed />
+        <OrdersList />
   );
 }
 

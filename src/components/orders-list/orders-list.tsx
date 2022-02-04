@@ -7,9 +7,9 @@ import { WS_ORDERS } from '../../utils/constants';
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
 import { TWSOrder } from '../../utils/types';
 
-import styles from './full-feed.module.css';
+import styles from './orders-list.module.css';
 
-const FullFeed: FunctionComponent = () => {
+const OrdersList: FunctionComponent = () => {
     const location = useLocation();
     const { url } = useRouteMatch();
 
@@ -54,4 +54,4 @@ const FullFeed: FunctionComponent = () => {
     )
 }
 
-export default FullFeed;
+export default OrdersList;
