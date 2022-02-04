@@ -20,6 +20,9 @@ export const socketMiddleware = (wsActions: TWSActions): Middleware => {
             if(type === wsInit){
                 socket = new WebSocket(payload);
             }
+            if(type === onClose && socket){
+                socket.close();
+            }
             if(socket){
                 socket.onopen = e => {
                     dispatch({
