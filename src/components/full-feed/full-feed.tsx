@@ -5,7 +5,7 @@ import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from
     '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
-import { TWSOrder } from '../../utils/types'
+import { TWSOrder } from '../../utils/types';
 
 import styles from './full-feed.module.css';
 
