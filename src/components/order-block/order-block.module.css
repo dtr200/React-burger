@@ -13,6 +13,9 @@
 }
 .title {
     font-weight: lighter;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .info{
     display: flex;
