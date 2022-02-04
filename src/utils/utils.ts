@@ -80,5 +80,5 @@ export const getTime = (createdTime: string) => {
                `${daysBefore} ${getDayForm(daysBefore)} назад`;
     }
 
-    return `${getDay()} ${time} i-GMT+3`;
+    return `${getDay()}, ${time} i-GMT+3`;
 }
