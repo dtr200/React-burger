@@ -44,13 +44,13 @@ export type TOrderResponseData = {
 }
 
 export type TWSOrder = {
-    "ingredients": string[];
-    "_id": string;
-    "status": string;
-    "number": number;
-    "createdAt": string;
-    "updatedAt": string;
-    "name": string;
+    ingredients: string[];
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    name: string;
 };
 
 export type TWSActions = {
