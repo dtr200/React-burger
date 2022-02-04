@@ -1,5 +1,5 @@
 import React, { useEffect, FunctionComponent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/types/hooks";
 import { useLocation, useRouteMatch } from "react-router-dom";
 import { getTime } from '../../utils/utils';
 import IngredientsLine from '../ingredients-line/ingredients-line';
@@ -7,6 +7,7 @@ import Spinner from "../spinner/spinner";
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from 
     '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
+import { TWSOrder, TProductItem } from '../../utils/types';
 
 import { CurrencyIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -30,10 +31,12 @@ interface MatchParams {
 }
 
 const OrderStats: FunctionComponent = () => {
-    const { orders } = useSelector((store: any) => store.ws);
+    const { orders }: { orders: TWSOrder[] } = useSelector(store => store.ws);
     const { params } = useRouteMatch<MatchParams>();
-    const { ingredientsData, ingredientsRequest } = 
-        useSelector((store: any) => store.ingredients);
+    const { ingredientsData, ingredientsRequest }:
+    { ingredientsData: TProductItem[], ingredientsRequest: boolean } = 
+        useSelector(store => store.ingredients);
+
     const dispatch = useDispatch();
     const location = useLocation();
     const engToRusStatusDict: TDict = {
@@ -79,9 +82,9 @@ const OrderStats: FunctionComponent = () => {
     let order, price;
     
     if(orders.length){
-        order = orders.find((order: any) => order.number === Number(params.id));
-        price = order.ingredients.reduce((accum: number, id: string) => 
-            accum + ingredientsData.find((item: any) => item._id === id).price, 0);
+        order = orders.find((order: TWSOrder) => order.number === Number(params.id));
+        price = order!.ingredients.reduce((accum: number, id: string) => 
+            accum + ingredientsData.find((item: TProductItem) => item._id === id)!.price, 0);
     }
  
     return (
