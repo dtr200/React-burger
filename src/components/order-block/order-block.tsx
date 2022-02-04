@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import IngredientIcon from '../ingredient-icon/ingredient-icon';
 import { useLocation } from "react-router-dom";
 import { getTime } from '../../utils/utils';
+import { TProductItem } from '../../utils/types';
 
 import { CurrencyIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
@@ -22,16 +23,19 @@ type TDict = {
 const OrderBlock: FunctionComponent<TOrderBlockProps> = 
     ({ number, name, createdAt, status, ingredients }) => {
 
-    const { ingredientsData } = useSelector((store: any) => store.ingredients);
+    const { ingredientsData }: { ingredientsData: TProductItem[] } = 
+        useSelector(store => store.ingredients);
     const location = useLocation();    
-
+    console.log(ingredientsData)
     const price = ingredients.reduce((accum: number, id: string) => 
-        accum + ingredientsData.find((item: any) => item._id === id).price, 0);
+            accum + (ingredientsData.length ? 
+                ingredientsData.find((item: TProductItem) => item._id === id)!.price : 0), 0);
+
 
     const images = Array.from(
         new Set(
             ingredients.map((id: string) =>
-                ingredientsData.find((item: any) => item._id === id).image_mobile)
+                ingredientsData.find((item: TProductItem) => item._id === id)!.image_mobile)
             )
         ).sort();
 
