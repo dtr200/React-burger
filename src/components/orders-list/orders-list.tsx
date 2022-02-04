@@ -34,16 +34,18 @@ const OrdersList: FunctionComponent = () => {
         }
     }, [])
 
+    const isProfile = location.pathname.split('/')[1] === 'profile';
+
     return (
         <article className={styles.fullFeed}>
-            <ul className={styles.list}>
+            <ul className={`${styles.list} ${isProfile && styles.wide}`}>
                 {
                     orders.map((order: TWSOrder, i: number) => (
                         <Link to={{ 
                                 pathname: `${url}/${order.number}`, 
                                 state: { background: location }
                                 }}
-                                className={styles.link} key={i}>
+                                className={`${styles.link} ${isProfile && styles.wideLink}`} key={i}>
                             <OrderBlock {...order} />
                         </Link>
                         )
