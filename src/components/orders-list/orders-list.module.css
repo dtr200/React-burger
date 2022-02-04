@@ -21,3 +21,9 @@
     text-decoration: none;
     color: white;
 }
+.wide{
+    width: calc(var(--space) * 215);
+}
+.wideLink{
+    width: calc(var(--space) * 211);
+}
