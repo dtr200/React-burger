@@ -61,11 +61,12 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
                         images.map((image: string, i: number) => {
                             if(i >= 6) return;
                             return (
-                                <IngredientIcon 
-                                    image={image} 
-                                    key={i} 
-                                    shiftRatio={i} 
-                                    rest={i === 5 && images.length - 6} />
+                                <li key={i}>
+                                    <IngredientIcon 
+                                        image={image}                                          
+                                        shiftRatio={i} 
+                                        rest={i === 5 && images.length - 6} />
+                                </li>
                             )
                         })
                     }

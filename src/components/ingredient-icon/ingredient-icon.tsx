@@ -13,7 +13,7 @@ const IngredientIcon: FunctionComponent<TIngredientIconProps> = ({ image, shiftR
     const shift = shiftRatio && styles[`shift-${shiftRatio}`];
 
     return (
-        <li className={`${styles.icon} ${shift}`}>
+        <div className={`${styles.icon} ${shift}`}>
             <div className={`${styles.overlay}`}>
                 { 
                     rest && (
@@ -24,7 +24,7 @@ const IngredientIcon: FunctionComponent<TIngredientIconProps> = ({ image, shiftR
                 }
                 <img src={image} alt="ingredient" width="112" height="56"/>
             </div>        
-        </li>
+        </div>
     )
 }
 
