@@ -83,8 +83,16 @@ const OrderStats: FunctionComponent = () => {
     
     if(orders.length){
         order = orders.find((order: TWSOrder) => order.number === Number(params.id));
-        price = order!.ingredients.reduce((accum: number, id: string) => 
-            accum + ingredientsData.find((item: TProductItem) => item._id === id)!.price, 0);
+        let bunFlag = false;
+        price = order!.ingredients.reduce((accum: number, id: string) => {
+            const item = ingredientsData.find((item: TProductItem) => item._id === id);
+            if(item!.type === 'bun'){
+                if(bunFlag) return accum;
+                bunFlag = true; 
+            }
+
+            return accum + (item!.type === 'bun' ? item!.price * 2 : item!.price);
+            }, 0);
     }
  
     return (
