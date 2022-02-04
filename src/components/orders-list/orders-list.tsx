@@ -32,7 +32,7 @@ const OrdersList: FunctionComponent = () => {
         return () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
-    }, [])
+    }, [dispatch])
 
     const isProfile = location.pathname.split('/')[1] === 'profile';
 

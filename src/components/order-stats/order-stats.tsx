@@ -77,7 +77,7 @@ const OrderStats: FunctionComponent = () => {
         return () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
-    }, [])
+    }, [dispatch])
 
     let order, price;
     
