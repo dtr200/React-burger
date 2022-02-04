@@ -4,7 +4,8 @@ import { useLocation, useRouteMatch } from "react-router-dom";
 import { getTime } from '../../utils/utils';
 import IngredientsLine from '../ingredients-line/ingredients-line';
 import Spinner from "../spinner/spinner";
-import { WS_CONNECTION_START } from '../../services/action-constants/ws';
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from 
+    '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
 
 import { CurrencyIcon } from 
@@ -70,6 +71,9 @@ const OrderStats: FunctionComponent = () => {
             type: WS_CONNECTION_START,
             payload: location.pathname === `/feed/${params.id}` ? wsUrl : wsUrlToken
         });
+        return () => {
+            dispatch({ type: WS_CONNECTION_CLOSED });
+        }
     }, [])
 
     let order, price;
