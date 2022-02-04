@@ -1,10 +1,11 @@
 import React, { useEffect, FunctionComponent } from "react";
 import OrderBlock from '../order-block/order-block';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/types/hooks";
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from 
     '../../services/action-constants/ws';
 import { WS_ORDERS } from '../../utils/constants';
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import { TWSOrder } from '../../utils/types'
 
 import styles from './full-feed.module.css';
 
@@ -21,7 +22,7 @@ const FullFeed: FunctionComponent = () => {
 
     const dispatch = useDispatch();
 
-    const { orders } = useSelector((store: any) => store.ws);
+    const { orders }: { orders: TWSOrder[] } = useSelector(store => store.ws);
 
     useEffect(() => {
         dispatch({ 
@@ -37,13 +38,13 @@ const FullFeed: FunctionComponent = () => {
         <article className={styles.fullFeed}>
             <ul className={styles.list}>
                 {
-                    orders.map((order: any, i: number) => (
+                    orders.map((order: TWSOrder, i: number) => (
                         <Link to={{ 
                                 pathname: `${url}/${order.number}`, 
                                 state: { background: location }
                                 }}
                                 className={styles.link} key={i}>
-                            <OrderBlock {...order} nostatus />
+                            <OrderBlock {...order} />
                         </Link>
                         )
                     )

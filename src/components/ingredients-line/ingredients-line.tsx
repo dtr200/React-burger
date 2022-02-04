@@ -18,7 +18,6 @@ const IngredientsLine: FunctionComponent<TIngredientsLineProps> =
     const { image_mobile: image, price, name } = ingredients.find((item: TProductItem) => 
         item._id === ingredientId)!;
 
-
     return (
         <li className={`${styles.ingredientsLine} text text_type_digits-default`}>
             <div className={styles.itemData}>
