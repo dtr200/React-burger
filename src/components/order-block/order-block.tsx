@@ -47,7 +47,7 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
                 <span className={``}>{`#${number}`}</span>
                 <span className={`${styles.date} text_type_main-default`}>{getTime(createdAt)}</span>
             </div>
-            <h2 className={`${styles.title} text_type_main-medium ${location.pathname === '/feed' ? 'mb-6' : 'mb-2'}`}>{name}</h2>
+            <h2 className={`${styles.title} text_type_main-medium mt-6 ${location.pathname === '/feed' ? 'mb-6' : 'mb-2'}`}>{name}</h2>
             <p className={`${styles.status} text_type_main-default mt-2 mb-6 ${status === 'done' && styles.statusDone}`}>
                 { !(location.pathname === '/feed') && engToRusStatusDict[status]}
                 </p>
