@@ -129,6 +129,9 @@ export interface ILogoutUserSuccessAction {
 export interface ILogoutUserFailedAction {
     readonly type: typeof LOGOUT_USER_FAILED;
 }
+export interface IDefaultAction {
+    readonly type: '';
+}
 
 export type TAccessAction = 
     ISetNameAction |
@@ -159,4 +162,5 @@ export type TAccessAction =
     IRefreshTokenFailedAction |
     ILogoutUserRequestAction |
     ILogoutUserSuccessAction |
-    ILogoutUserFailedAction;
+    ILogoutUserFailedAction |
+    IDefaultAction;
