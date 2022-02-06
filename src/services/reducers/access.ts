@@ -61,7 +61,7 @@ type TAccessState = {
     logoutMessage: string | null;
 }
 
-const initialAccessState = {
+export const initialAccessState = {
     user: {
         name: '',
         email: '',
