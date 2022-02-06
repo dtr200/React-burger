@@ -15,16 +15,19 @@ import {
   ForgotPasswordPage, 
   ResetPasswordPage, 
   ProfilePage, 
-  NotFound404 
+  NotFound404,
+  FeedPage,
+  OrderStatsPage
 } from '../../pages';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import OrderStats from '../order-stats/order-stats';
 import Modal from '../modal/modal';
-import { useDispatch } from 'react-redux';
-import { RESET_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
-import { CLOSE_MODAL } from '../../services/actions/modal';
-import { RESET_ORDER_REQUEST } from '../../services/actions/order';
+import { useDispatch } from '../../services/types/hooks';
+import { RESET_CURRENT_INGREDIENT } from '../../services/action-constants/ingredients';
+import { CLOSE_MODAL } from '../../services/action-constants/modal';
+import { RESET_ORDER_REQUEST } from '../../services/action-constants/order';
 import { INGREDIENTS_URL } from 
   '../../utils/constants';
 import { getIngredients } from '../../services/thunks/ingredients';
@@ -54,9 +57,18 @@ const App: FunctionComponent = () => {
       dispatch({ type: CLOSE_MODAL });
       dispatch({ type: RESET_CURRENT_INGREDIENT });
       dispatch({ type: RESET_ORDER_REQUEST });
-      history.replace({ pathname: '/'})
+      const url = location.pathname.split('/');
+      let path = '';
+      if(url[1] === 'ingredients' || url[1] === 'order') {
+        path = '/';
+      }
+      else{      
+        for(let i = 1; i < url.length - 1; i++)
+          path += `/${url[i]}`;
+      }
+        
+      history.replace({ pathname: path})
     }
-
     useEffect(() => {
       dispatch(getIngredients(INGREDIENTS_URL));
     }, []);
@@ -69,11 +81,9 @@ const App: FunctionComponent = () => {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <ProtectedRoute
-            path='/profile/orders/:orderNumber'
-            children={<OrderHistoryPage />}
-            exact
-          />
+          <ProtectedRoute path='/profile/orders/:id' exact>
+            <OrderStatsPage />
+          </ProtectedRoute>
           <Route path='/ingredients/:ingredientId' exact>
             <IngredientDetails />
           </Route>
@@ -92,6 +102,12 @@ const App: FunctionComponent = () => {
           <Route path="/reset-password" exact>
             <ResetPasswordPage />
           </Route>
+          <Route path="/feed" exact>
+            <FeedPage />
+          </Route>
+          <Route path='/feed/:id' exact>
+            <OrderStatsPage />
+          </Route>
           <ProtectedRoute path="/profile">
             <ProfilePage />
           </ProtectedRoute>
@@ -99,6 +115,20 @@ const App: FunctionComponent = () => {
             <NotFound404 />
           </Route>          
         </Switch>
+        {background && (
+          <Route path='/feed/:id' exact>
+            <Modal onClose={onModalClose}>
+              <OrderStats />
+            </Modal>
+          </Route>
+        )}
+        {background && (
+          <ProtectedRoute path='/profile/orders/:id' exact>
+              <Modal onClose={onModalClose}>
+                <OrderStats />
+              </Modal>
+          </ ProtectedRoute>
+        )}
         {background && (
           <Route path='/order'>
             <Modal onClose={onModalClose}>
@@ -112,17 +142,7 @@ const App: FunctionComponent = () => {
               <IngredientDetails />
             </Modal>
           </Route>
-        )}
-        {background && (
-          <ProtectedRoute
-            path='/profile/orders/:orderNumber'
-            children={
-              <Modal onClose={onModalClose}>
-                <OrderHistoryPage />
-              </Modal>
-            }
-          />
-        )}
+        )}        
       </div>
     );
   };

@@ -1,13 +1,13 @@
 import React, { useEffect, RefObject, SyntheticEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/types/hooks";
 import { useInView } from 'react-intersection-observer';
 
 import ItemCart from '../item-cart/item-cart';
-import { SET_MODAL_DATA } from '../../services/actions/modal';
+import { SET_MODAL_DATA } from '../../services/action-constants/modal';
 import {
     SET_CURRENT_INGREDIENT,
     SET_INGREDIENTS_TAB
-  } from '../../services/actions/ingredients';
+  } from '../../services/action-constants/ingredients';
 import { TProductItem } from '../../utils/types';
 import { TTypeToTitle } from '../burger-ingredients/burger-ingredients';
 
@@ -26,7 +26,10 @@ const IngredientsSection = React.forwardRef<HTMLHeadingElement, TIngredientsSect
     const { 
         ingredientsData,
         constructorIngredients
-      } = useSelector((store: any) => store.ingredients);
+      }: {
+          ingredientsData: TProductItem[],
+          constructorIngredients: TProductItem[]
+      } = useSelector(store => store.ingredients);
 
     const { ref: refDnd, inView, entry } = useInView({
         threshold: [0, 0.25, 0.5, 0.75, 1] });

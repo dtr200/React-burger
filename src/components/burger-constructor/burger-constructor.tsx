@@ -1,5 +1,5 @@
 import React, { useCallback, FunctionComponent, ReactElement } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/types/hooks";
 import { useLocation, useHistory } from 'react-router-dom';
 import { useDrop } from 'react-dnd';
 import ConstructorItem from '../constructor-item/constructor-item';
@@ -12,7 +12,7 @@ import {
     ADD_BUN,
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR_INGREDIENTS
-} from '../../services/actions/ingredients';
+} from '../../services/action-constants/ingredients';
 import { sendOrder } from '../../services/thunks/order';
 import { TProductItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';
@@ -26,7 +26,8 @@ type TBun = TProductItem | boolean | undefined;
 
 const BurgerConstructor: FunctionComponent = () => {
     const dispatch = useDispatch();
-    const { constructorIngredients } = useSelector((store: any) => store.ingredients);
+    const { constructorIngredients }: { constructorIngredients: TProductItem[] } = 
+        useSelector(store => store.ingredients);
     const location = useLocation();
     const history = useHistory();
 

@@ -1,15 +1,15 @@
-import { Dispatch } from 'redux';
 import {    
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
-} from '../actions/ingredients';
+} from '../action-constants/ingredients';
 
 import { BASE_URL } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
+import { AppThunk, AppDispatch } from '../types';
 
-export const getIngredients = (ingredientsURL: string) => {
-    return async (dispatch: Dispatch) => {
+export const getIngredients: AppThunk = (ingredientsURL) => {
+    return async (dispatch: AppDispatch) => {
         try{
             dispatch({ 
                 type: GET_INGREDIENTS_REQUEST 

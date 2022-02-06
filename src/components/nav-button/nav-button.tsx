@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import { BurgerIcon, ListIcon, ProfileIcon } from 
 '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -31,7 +31,7 @@ const NavButton: FunctionComponent<TNavButtonProps> = ({ title, logo }) => {
     const location = useLocation();
 
     const { currentIngredient: {_id} } = 
-        useSelector((store: any) => store.ingredients);
+        useSelector(store => store.ingredients);
 
     const dictTitleToLink: TDictTitleToLink = {
         'Конструктор': '/',

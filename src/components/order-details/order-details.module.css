@@ -7,6 +7,9 @@
 .orderDetails * {
     text-align: center;
 }
+.loading > div {
+    max-height: 57.2vh;
+}
 .num{
     text-shadow: 0 0 20px var(--blur);
 }

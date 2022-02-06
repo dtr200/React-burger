@@ -1,0 +1,55 @@
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(var(--space) * 16);
+    height: calc(var(--space) * 16);
+    border-radius: 50%;
+    position: relative;
+    background: linear-gradient(63.18deg, #801AB2, #4C4CFF);
+    list-style-type: none;
+    z-index: 5;
+}
+.overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(var(--space) * 15);
+    height: calc(var(--space) * 15);
+    position: absolute;
+    border-radius: 50%;    
+    background: #000;
+    z-index: 0;
+}
+.shift-1{
+    left: calc(var(--space) * -4);
+    z-index: 4;
+}
+.shift-2{
+    left: calc(var(--space) * -8);
+    z-index: 3;
+}
+.shift-3{
+    left: calc(var(--space) * -12);
+    z-index: 2;
+}
+.shift-4{
+    left: calc(var(--space) * -16);
+    z-index: 1;
+}
+.shift-5{
+    left: calc(var(--space) * -20);
+    z-index: 0;
+}
+.rest{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(var(--space) * 15);
+    height: calc(var(--space) * 15);
+    border-radius: 50%;
+    background: rgba(0,0,0,.4);
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}

@@ -3,7 +3,16 @@ import {
     SEND_ORDER_SUCCESS,
     SEND_ORDER_FAILED,
     RESET_ORDER_REQUEST
-} from '../actions/order';
+} from '../action-constants/order';
+
+import { TOrderAction } from '../actions/order';
+import { TOrderResponseData } from '../../utils/types';
+
+type TOrderState = {
+    orderRequest: boolean;
+    orderData: TOrderResponseData | {},
+    orderFailed: boolean;
+};
 
 const initialOrderState = {
     orderRequest: false,
@@ -11,7 +20,7 @@ const initialOrderState = {
     orderFailed: false,
 };
 
-export default (state = initialOrderState, action) => {
+export default (state = initialOrderState, action: TOrderAction): TOrderState => {
     switch(action.type){
         case SEND_ORDER_REQUEST: {
             return {
@@ -36,9 +45,7 @@ export default (state = initialOrderState, action) => {
             }
         }
         case RESET_ORDER_REQUEST: {
-            return {
-                initialOrderState
-            }
+            return initialOrderState;
         }
         default:
             return state;

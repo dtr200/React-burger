@@ -28,7 +28,38 @@ import {
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAILED
-} from '../actions/access';
+} from '../action-constants/access';
+
+import { TAccessAction } from '../actions/access';
+
+type TUserData = {
+    name: string;
+    email: string;
+    login: string;
+    password: string;
+    newPassword: string;
+}
+type TAccessState = {
+    user: TUserData;
+    registerRequest: boolean;
+    registerFailed: boolean;
+    loginRequest: boolean;
+    loginFailed: boolean;
+    userDataRequest: boolean;
+    userDataFailed: boolean;
+    changePasswordEmail: string;
+    changePasswordRequest: boolean;
+    changePasswordFailed: boolean;
+    changePasswordMessage: string | null;
+    newPasswordRequest: boolean;
+    newPasswordFailed: boolean;
+    restoreCode: string;
+    refreshTokenRequest: boolean;
+    refreshTokenFailed: boolean;
+    logoutRequest: boolean;
+    logoutFailed: boolean;
+    logoutMessage: string | null;
+}
 
 const initialAccessState = {
     user: {
@@ -50,7 +81,6 @@ const initialAccessState = {
     changePasswordMessage: null,    
     newPasswordRequest: false,
     newPasswordFailed: false,
-    newPasswordMessage: null,
     restoreCode: '',
     refreshTokenRequest: false,
     refreshTokenFailed: false,
@@ -59,7 +89,7 @@ const initialAccessState = {
     logoutMessage: null
 }
 
-export default (state = initialAccessState, action) => {
+export default (state = initialAccessState, action: TAccessAction): TAccessState => {
     switch(action.type){
         case SET_NAME: {
             return {
@@ -243,8 +273,7 @@ export default (state = initialAccessState, action) => {
             return {
                 ...state,
                 newPasswordRequest: false,
-                newPasswordFailed: false,
-                newPasswordMessage: action.message              
+                newPasswordFailed: false            
             }
         }
         case GET_NEW_PASSWORD_FAILED: {

@@ -1,11 +1,11 @@
 import React, { useRef, FunctionComponent, SyntheticEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/types/hooks";
 import { useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement, DragIcon } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import {
     DELETE_INGREDIENT
-} from '../../services/actions/ingredients';
+} from '../../services/action-constants/ingredients';
 
 import styles from './constructor-item.module.css';
 

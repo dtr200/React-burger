@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Fact from '../fact/fact';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import Spinner from "../spinner/spinner";
 import { TProductItem } from '../../utils/types';
@@ -21,15 +21,19 @@ type TIngredientData = {
     value: number;
 }
 
+type TIngredient = { [key: string]: any } | undefined;
+
 type TItem = TIngredientData | undefined;
 
 const IngredientDetails: FunctionComponent = () => {
-    const { ingredientsData, ingredientsRequest } = 
+    const { ingredientsData, ingredientsRequest } :
+    { ingredientsData: TProductItem[], ingredientsRequest: boolean} = 
         useSelector((store: any) => store.ingredients);
+
     const { ingredientId }: TIngredientId = useParams();
     const location: TLocation = useLocation();
 
-    const ingredient = ingredientsData.find((item: TProductItem) => 
+    const ingredient: TIngredient = ingredientsData.find((item: TProductItem) => 
             item._id === ingredientId);
 
     const keyToTabNameMap: TKeyToTabNameMap = {
@@ -45,9 +49,9 @@ const IngredientDetails: FunctionComponent = () => {
             if(keyToTabNameMap[key])
                 items.push(
                     { title: keyToTabNameMap[key],
-                      value: ingredient[key] }
+                        value: ingredient[key] }
                 );
-        }
+        }      
         return [ items.pop(), ...items.sort()];
     }
 
@@ -65,11 +69,11 @@ const IngredientDetails: FunctionComponent = () => {
                 </h3>
             </div>
             <div className={styles.ingredientDetails}>            
-                <img src={ingredient.image_large} 
+                <img src={ingredient?.image_large} 
                     className={styles.image} 
-                    alt={ingredient.name} />
+                    alt={ingredient?.name} />
                 <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
-                    {ingredient.name}
+                    {ingredient?.name}
                 </p>
                 <div className={styles.nutritionFacts}>
                     { createFactsArray().map((item: TItem, i: number) => {

@@ -1,0 +1,18 @@
+.ingredientsLine{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.itemData{
+    display: flex;
+    align-items: center;
+    column-gap: calc(var(--space) * 4);
+}
+.priceBlock{
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+}
+.priceBlock svg{
+    fill: white;
+}

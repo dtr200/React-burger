@@ -1,32 +1,26 @@
 import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import { Tab } from 
     '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ingredients-nav.module.css';
+import { TTabs } from '../../utils/types';
 
 type TIngredientsNavProps = {
     onTabClick: (value: string) => void;
 };
 
-type TTub = {
-    id: string;
-    title: string;
-    ratio: number;
-};
-
 const IngredientsNav: FunctionComponent<TIngredientsNavProps> = ({ onTabClick }) => {
-    const { tabs } = useSelector((store: any) => store.ingredients);
+    const { tabs }: { tabs: TTabs[] } = useSelector(store => store.ingredients);
 
-    const current = useSelector((state: any) => 
-        state.ingredients.tabs.reduce((current: TTub, tab: TTub) => {
+    const current = tabs.reduce((current: TTabs, tab: TTabs) => {
             return current.ratio < tab.ratio ? 
                 tab : current;
-        }, state.ingredients.tabs[0]).id);
+        }, tabs[0]).id;
 
     return(
         <nav>
             <ul className={`${styles.list} mb-10`}>
-                { tabs.map((tab: TTub, i: number) => {
+                { tabs.map((tab: TTabs, i: number) => {
                     const { title, id } = tab;
                     return <li key={i}>
                         <Tab 

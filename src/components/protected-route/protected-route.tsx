@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/types/hooks";
 import { Route, Redirect } from 'react-router-dom';
 import { updateToken } from '../../services/thunks/access';
 

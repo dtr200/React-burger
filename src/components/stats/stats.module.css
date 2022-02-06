@@ -1,0 +1,36 @@
+.stats{
+    width: 100%;
+}
+.orders{
+    display: flex;
+    column-gap: calc(var(--space) * 9);
+}
+.numbers{
+    width: 50%;
+}
+.allNumbers{
+    display: flex;
+    max-height: 260px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style-type: none;
+    padding-left: 0;
+}
+.num{    
+    font-size: 20px;
+}
+.inProgress{
+    color: white;
+}
+.done{
+    color: var(--light-green);
+}
+.totalTitle{
+    margin-bottom: 0;
+}
+.total{
+    margin-top: 0;
+    margin-bottom: 0;
+    text-shadow: 0 0 4px #3333ff80, 0 0 5px #3333ff40, 0 0 10px #3333ff40, 0 0 20px #3333ff40, 0 0 30px #3333ff40;
+}

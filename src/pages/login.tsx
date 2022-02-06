@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../services/types/hooks';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { loginUser } from '../services/thunks/access';
 import Spinner from '../components/spinner/spinner';
