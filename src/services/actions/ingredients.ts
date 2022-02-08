@@ -56,6 +56,9 @@ export interface ISetIngredientsTabAction {
     readonly id: string;
     readonly ratio: number;
 }
+export interface IIngredientsDefaultAction {
+    readonly type: '';
+}
 
 export type TIngredientsAction = 
     IGetIngredientsRequestAction |
@@ -68,4 +71,5 @@ export type TIngredientsAction =
     IResetCurrentIngredientAction |
     IMoveIngredientAction |
     IClearContructorIngredientsAction |
-    ISetIngredientsTabAction;
+    ISetIngredientsTabAction |
+    IIngredientsDefaultAction;

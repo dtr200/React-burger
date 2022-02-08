@@ -1,3 +1,5 @@
+import ingredients from './ingredients';
+
 import {    
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
@@ -14,3 +16,8 @@ import {
 
 import { initialIngredientsState } from './ingredients';
     
+describe('ingredients reducer', () => {
+    it('should return the initial state', () => {
+        expect(ingredients(undefined, { type: '' })).toEqual(initialIngredientsState)
+    })
+})
