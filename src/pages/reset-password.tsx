@@ -15,11 +15,13 @@ const ResetPasswordPage: FunctionComponent = () => {
         user: {newPassword}, 
         restoreCode,
         newPasswordRequest, 
-        changePasswordMessage 
+        changePasswordMessage,
+        changePasswordFailed
     } = useSelector((store: any) => store.access);
+    console.log('newpassw', newPassword)
     const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
-
+    console.log(changePasswordFailed)
     const restorePassword: () => void = () => 
         dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
 
@@ -47,7 +49,7 @@ const ResetPasswordPage: FunctionComponent = () => {
                         placeholder={'Введите новый пароль'}
                         onChange={(e) => setValue(e)}
                         value={newPassword}
-                        name={'password'}    
+                        name={'newPassword'}    
                         icon={'ShowIcon'}            
                         size={'default'}
                         />
