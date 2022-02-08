@@ -14,3 +14,21 @@ export const DEFAULT_ORDER_DATA: TOrderData = {
   description: 'Ваш заказ начали готовить', 
   extra: 'Дождитесь готовности на орбитальной станции'
 };
+
+export const TABS = [
+  {
+    id: 'bun',
+    title: 'Булки',
+    ratio: 0
+  },
+  {
+    id: 'sauce',
+    title: 'Соусы',
+    ratio: 0
+  },
+  {
+    id: 'main',
+    title: 'Начинки',
+    ratio: 0
+  }
+]
