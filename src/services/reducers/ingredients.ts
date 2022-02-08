@@ -14,6 +14,7 @@ import {
 
 import { TIngredientsAction } from '../actions/ingredients';
 import { TProductItem, TTabs } from '../../utils/types';
+import { TABS } from '../../utils/constants';
 
 type TIngredientsState = {
     ingredientsRequest: boolean;
@@ -30,23 +31,7 @@ export const initialIngredientsState = {
     ingredientsData: [],
     constructorIngredients: [],
     currentIngredient: {},
-    tabs: [
-        {
-          id: 'bun',
-          title: 'Булки',
-          ratio: 0
-        },
-        {
-          id: 'sauce',
-          title: 'Соусы',
-          ratio: 0
-        },
-        {
-          id: 'main',
-          title: 'Начинки',
-          ratio: 0
-        },
-    ]
+    tabs: TABS
 }
 
 export default (state = initialIngredientsState, action: TIngredientsAction): TIngredientsState => {
