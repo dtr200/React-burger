@@ -16,8 +16,12 @@ export interface ISetModalErrorAction {
 export interface ICloseModalAction {
     readonly type: typeof CLOSE_MODAL;
 }
+export interface IDefaultModalAction {
+    readonly type: '';
+}
 
 export type TModalAction = 
     ISetModalDataAction |
     ISetModalErrorAction |
-    ICloseModalAction;
+    ICloseModalAction |
+    IDefaultModalAction;
