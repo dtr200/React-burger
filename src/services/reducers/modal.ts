@@ -15,7 +15,7 @@ type TModalState = {
     modalVisible: boolean;
 }
 
-const initialModalState = {
+export const initialModalState = {
     modalMode: null, 
     modalTitle: null,
     modalData: null,
