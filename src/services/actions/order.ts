@@ -20,9 +20,13 @@ export interface ISendOrderFailedAction {
 export interface IResetOrderRequestAction {
     readonly type: typeof RESET_ORDER_REQUEST;
 }
+export interface IDefaultOrderAction {
+    readonly type: '';
+}
 
 export type TOrderAction = 
     ISendOrderRequestAction |
     ISendOrderSuccessAction |
     ISendOrderFailedAction |
-    IResetOrderRequestAction;
+    IResetOrderRequestAction | 
+    IDefaultOrderAction;
