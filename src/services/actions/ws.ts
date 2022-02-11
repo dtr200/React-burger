@@ -29,6 +29,9 @@ export interface ISendOrderAction {
     readonly type: typeof WS_SEND_ORDER;
     readonly payload: TWSOrder;
 }
+export interface IWSDefaultAction {
+    readonly type: '';
+}
 
 export type TWSOrdersActions = 
     IConnectionStartAction |
@@ -36,4 +39,5 @@ export type TWSOrdersActions =
     IConnectionErrorAction |
     IConnectionClosedAction |
     IGetOrdersAction |
-    ISendOrderAction;
+    ISendOrderAction | 
+    IWSDefaultAction;
