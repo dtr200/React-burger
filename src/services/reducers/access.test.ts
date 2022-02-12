@@ -229,13 +229,16 @@ describe('access reducer', () => {
                 ...initialAccessState.user,
                 newPassword: ''
             }
-
         };
         expect(access(initialAccessState, { type: GET_NEW_PASSWORD_REQUEST })).toEqual(state)
     })
     it('should handle GET_NEW_PASSWORD_SUCCESS', () => {
         const state = {
             ...initialAccessState, 
+            user: {
+                ...initialAccessState.user,
+                newPassword: 'changed'
+            },
             newPasswordRequest: false,
             newPasswordFailed: false
         };
