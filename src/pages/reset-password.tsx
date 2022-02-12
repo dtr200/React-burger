@@ -15,15 +15,13 @@ const ResetPasswordPage: FunctionComponent = () => {
         user: {newPassword}, 
         restoreCode,
         newPasswordRequest, 
-        changePasswordMessage,
-        changePasswordFailed
+        changePasswordMessage
     } = useSelector((store: any) => store.access);
-    console.log('newpassw', newPassword)
     const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
-    console.log(changePasswordFailed)
-    const restorePassword: () => void = () => 
-        dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode));
+    const restorePassword: () => void = () => {
+        dispatch(getNewPassword('/password-reset/reset', newPassword, restoreCode))
+    };
 
     const setValue = (e: SyntheticEvent) => {
         dispatch(dispatchData(
@@ -31,7 +29,7 @@ const ResetPasswordPage: FunctionComponent = () => {
             (e.target as HTMLInputElement).value
         ));
     }
-
+    console.log(changePasswordMessage)
     return (
         newPasswordRequest ? (
         <Spinner />

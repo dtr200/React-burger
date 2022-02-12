@@ -24,7 +24,6 @@ const dictNameToType: TDict<string> = {
 
 export const dispatchData: (key: string, value: string) => TDispatchData = 
     (key, value) => {
-    console.log(dictNameToType[key], value)
     return {
         type: dictNameToType[key],
         payload: value

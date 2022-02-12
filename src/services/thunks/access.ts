@@ -43,7 +43,6 @@ export const restorePassword: AppThunk = (restoreUrl, email) => {
             })
 
             const data = await checkResponse(res);
-            
             dispatch({
                 type: RESTORE_PASSWORD_SUCCESS,
                 message: data.message
@@ -73,7 +72,6 @@ export const getNewPassword: AppThunk = (restoreUrl, password, token) => {
             });
 
             const data = await checkResponse(res);
-
             dispatch({
                 type: GET_NEW_PASSWORD_SUCCESS,
                 message: data.message

@@ -36,7 +36,7 @@ import { initialAccessState } from './access';
 
 describe('access reducer', () => {
     it('should return the initial state', () => {
-        expect(access(undefined, { type: '' })).toEqual(initialAccessState)
+        expect(access(initialAccessState, { type: '' })).toEqual(initialAccessState)
     })
     it('should handle SET_NAME', () => {
         const state = {
@@ -46,7 +46,7 @@ describe('access reducer', () => {
                 name: 'name'
             }
         }
-        expect(access(undefined, { type: SET_NAME, payload: 'name' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_NAME, payload: 'name' })).toEqual(state)
     })
     it('should handle SET_EMAIL', () => {
         const state = {
@@ -56,7 +56,7 @@ describe('access reducer', () => {
                 email: 'email'
             }
         }
-        expect(access(undefined, { type: SET_EMAIL, payload: 'email' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_EMAIL, payload: 'email' })).toEqual(state)
     })
     it('should handle SET_LOGIN', () => {
         const state = {
@@ -66,7 +66,7 @@ describe('access reducer', () => {
                 login: 'login'
             }
         }
-        expect(access(undefined, { type: SET_LOGIN, payload: 'login' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_LOGIN, payload: 'login' })).toEqual(state)
     })
     it('should handle SET_PASSWORD', () => {
         const state = {
@@ -76,7 +76,7 @@ describe('access reducer', () => {
                 password: 'password'
             }
         }
-        expect(access(undefined, { type: SET_PASSWORD, payload: 'password' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_PASSWORD, payload: 'password' })).toEqual(state)
     })
     it('should handle SET_NEW_PASSWORD', () => {
         const state = {
@@ -86,21 +86,21 @@ describe('access reducer', () => {
                 newPassword: 'newpassword'
             }
         }
-        expect(access(undefined, { type: SET_NEW_PASSWORD, payload: 'newpassword' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_NEW_PASSWORD, payload: 'newpassword' })).toEqual(state)
     })
     it('should handle SET_RESTORE_EMAIL', () => {
         const state = {
             ...initialAccessState,
             changePasswordEmail: 'email'
         }
-        expect(access(undefined, { type: SET_RESTORE_EMAIL, email: 'email' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_RESTORE_EMAIL, email: 'email' })).toEqual(state)
     })
     it('should handle REGISTER_USER_REQUEST', () => {
         const state = {
             ...initialAccessState,
             registerRequest: true
         }
-        expect(access(undefined, { type: REGISTER_USER_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: REGISTER_USER_REQUEST })).toEqual(state)
     })
     it('should handle REGISTER_USER_SUCCESS', () => {
         const state = {
@@ -114,7 +114,7 @@ describe('access reducer', () => {
             registerRequest: false,
             registerFailed: false
         };
-        expect(access(undefined, { type: REGISTER_USER_SUCCESS })).toEqual(state)
+        expect(access(initialAccessState, { type: REGISTER_USER_SUCCESS })).toEqual(state)
     })
     it('should handle REGISTER_USER_FAILED', () => {
         const state = {
@@ -122,14 +122,14 @@ describe('access reducer', () => {
             registerRequest: false,
             registerFailed: true
         };
-        expect(access(undefined, { type: REGISTER_USER_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: REGISTER_USER_FAILED })).toEqual(state)
     })
     it('should handle LOGIN_USER_REQUEST', () => {
         const state = {
             ...initialAccessState,                   
             loginRequest: true
         };
-        expect(access(undefined, { type: LOGIN_USER_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: LOGIN_USER_REQUEST })).toEqual(state)
     })
     it('should handle LOGIN_USER_SUCCESS', () => {
         const state = {
@@ -143,7 +143,7 @@ describe('access reducer', () => {
             loginRequest: false,
             loginFailed: false
         };
-        expect(access(undefined, 
+        expect(access(initialAccessState, 
             { type: LOGIN_USER_SUCCESS, user: {name: 'name', email: 'email'} })).toEqual(state)
     })
     it('should handle LOGIN_USER_FAILED', () => {
@@ -152,14 +152,14 @@ describe('access reducer', () => {
             loginRequest: false,
             loginFailed: true
         };
-        expect(access(undefined, { type: LOGIN_USER_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: LOGIN_USER_FAILED })).toEqual(state)
     })
     it('should handle UPDATE_USER_DATA_REQUEST', () => {
         const state = {
             ...initialAccessState,                   
             userDataRequest: true
         };
-        expect(access(undefined, { type: UPDATE_USER_DATA_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: UPDATE_USER_DATA_REQUEST })).toEqual(state)
     })
     it('should handle UPDATE_USER_DATA_SUCCESS', () => {
         const state = {
@@ -173,7 +173,7 @@ describe('access reducer', () => {
                 password: ''
             }
         };
-        expect(access(undefined, 
+        expect(access(initialAccessState, 
             { type: UPDATE_USER_DATA_SUCCESS, user: {name: 'name', email: 'email'} })).toEqual(state)
     })
     it('should handle UPDATE_USER_DATA_FAILED', () => {
@@ -182,7 +182,7 @@ describe('access reducer', () => {
             userDataRequest: false,
             userDataFailed: true
         };
-        expect(access(undefined, { type: UPDATE_USER_DATA_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: UPDATE_USER_DATA_FAILED })).toEqual(state)
     })
     it('should handle CANCEL_UPDATE_USER_DATA', () => {
         const state = {
@@ -193,14 +193,14 @@ describe('access reducer', () => {
                 password: ''
             }
         };
-        expect(access(undefined, { type: CANCEL_UPDATE_USER_DATA })).toEqual(state)
+        expect(access(initialAccessState, { type: CANCEL_UPDATE_USER_DATA })).toEqual(state)
     })
     it('should handle RESTORE_PASSWORD_REQUEST', () => {
         const state = {
             ...initialAccessState,
             changePasswordRequest: true
         };
-        expect(access(undefined, { type: RESTORE_PASSWORD_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: RESTORE_PASSWORD_REQUEST })).toEqual(state)
     })
     it('should handle RESTORE_PASSWORD_SUCCESS', () => {
         const state = {
@@ -210,7 +210,7 @@ describe('access reducer', () => {
             changePasswordMessage: 'str',
             changePasswordEmail: ''
         };
-        expect(access(undefined, { type: RESTORE_PASSWORD_SUCCESS, message: 'str' })).toEqual(state)
+        expect(access(initialAccessState, { type: RESTORE_PASSWORD_SUCCESS, message: 'str' })).toEqual(state)
     })
     it('should handle RESTORE_PASSWORD_FAILED', () => {
         const state = {
@@ -219,7 +219,7 @@ describe('access reducer', () => {
             changePasswordFailed: true,
             changePasswordMessage: null
         };
-        expect(access(undefined, { type: RESTORE_PASSWORD_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: RESTORE_PASSWORD_FAILED })).toEqual(state)
     })
     it('should handle GET_NEW_PASSWORD_REQUEST', () => {
         const state = {
@@ -229,40 +229,39 @@ describe('access reducer', () => {
                 ...initialAccessState.user,
                 newPassword: ''
             }
+
         };
-        expect(access(undefined, { type: GET_NEW_PASSWORD_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: GET_NEW_PASSWORD_REQUEST })).toEqual(state)
     })
     it('should handle GET_NEW_PASSWORD_SUCCESS', () => {
         const state = {
             ...initialAccessState, 
             newPasswordRequest: false,
-            newPasswordFailed: false,
-            changePasswordFailed: true
+            newPasswordFailed: false
         };
-        expect(access(undefined, { type: GET_NEW_PASSWORD_SUCCESS })).toEqual(state)
+        expect(access(initialAccessState, { type: GET_NEW_PASSWORD_SUCCESS })).toEqual(state)
     })
     it('should handle GET_NEW_PASSWORD_FAILED', () => {
         const state = {
             ...initialAccessState, 
             newPasswordRequest: false,
-            newPasswordFailed: false,
-            changePasswordFailed: true
+            newPasswordFailed: true
         };
-        expect(access(undefined, { type: GET_NEW_PASSWORD_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: GET_NEW_PASSWORD_FAILED })).toEqual(state)
     })
     it('should handle SET_RESTORE_CODE', () => {
         const state = {
             ...initialAccessState, 
             restoreCode: 'code'
         };
-        expect(access(undefined, { type: SET_RESTORE_CODE, payload: 'code' })).toEqual(state)
+        expect(access(initialAccessState, { type: SET_RESTORE_CODE, payload: 'code' })).toEqual(state)
     })
     it('should handle REFRESH_TOKEN_REQUEST', () => {
         const state = {
             ...initialAccessState, 
             refreshTokenRequest: true
         };
-        expect(access(undefined, { type: REFRESH_TOKEN_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: REFRESH_TOKEN_REQUEST })).toEqual(state)
     })
     it('should handle REFRESH_TOKEN_SUCCESS', () => {
         const state = {
@@ -270,7 +269,7 @@ describe('access reducer', () => {
             refreshTokenRequest: false,
             refreshTokenFailed: false
         };
-        expect(access(undefined, { type: REFRESH_TOKEN_SUCCESS })).toEqual(state)
+        expect(access(initialAccessState, { type: REFRESH_TOKEN_SUCCESS })).toEqual(state)
     })
     it('should handle REFRESH_TOKEN_FAILED', () => {
         const state = {
@@ -278,7 +277,7 @@ describe('access reducer', () => {
             refreshTokenRequest: false,
             refreshTokenFailed: true
         };
-        expect(access(undefined, { type: REFRESH_TOKEN_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: REFRESH_TOKEN_FAILED })).toEqual(state)
     })
     it('should handle LOGOUT_USER_REQUEST', () => {
         const state = {
@@ -286,7 +285,7 @@ describe('access reducer', () => {
             refreshTokenRequest: false,
             logoutRequest: true
         };
-        expect(access(undefined, { type: LOGOUT_USER_REQUEST })).toEqual(state)
+        expect(access(initialAccessState, { type: LOGOUT_USER_REQUEST })).toEqual(state)
     })
     it('should handle LOGOUT_USER_SUCCESS', () => {
         const state = {
@@ -298,7 +297,7 @@ describe('access reducer', () => {
             logoutFailed: false,
             logoutMessage: 'message' 
         };
-        expect(access(undefined, { type: LOGOUT_USER_SUCCESS, message: 'message' })).toEqual(state)
+        expect(access(initialAccessState, { type: LOGOUT_USER_SUCCESS, message: 'message' })).toEqual(state)
     })
     it('should handle LOGOUT_USER_FAILED', () => {
         const state = {
@@ -309,6 +308,6 @@ describe('access reducer', () => {
             logoutRequest: false,
             logoutFailed: true
         };
-        expect(access(undefined, { type: LOGOUT_USER_FAILED })).toEqual(state)
+        expect(access(initialAccessState, { type: LOGOUT_USER_FAILED })).toEqual(state)
     })
 })
