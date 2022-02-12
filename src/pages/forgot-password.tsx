@@ -15,10 +15,9 @@ const ForgotPasswordPage: FunctionComponent = () => {
     const { 
         changePasswordRequest, 
         changePasswordEmail, 
-        changePasswordMessage,
-        changePasswordFailed
+        changePasswordMessage
     } = useSelector((store: any) => store.access);
-    console.log(changePasswordFailed)
+
     const isAccessTokenExist = 
         document.cookie.indexOf('accessToken=') !== -1;
 
