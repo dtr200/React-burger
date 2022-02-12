@@ -14,8 +14,7 @@ const ResetPasswordPage: FunctionComponent = () => {
     const { 
         user: {newPassword}, 
         restoreCode,
-        newPasswordRequest, 
-        changePasswordMessage
+        newPasswordRequest        
     } = useSelector((store: any) => store.access);
     const isAccessTokenExist: boolean = 
         document.cookie.indexOf('accessToken=') !== -1;
@@ -29,11 +28,11 @@ const ResetPasswordPage: FunctionComponent = () => {
             (e.target as HTMLInputElement).value
         ));
     }
-    console.log(changePasswordMessage)
+
     return (
         newPasswordRequest ? (
         <Spinner />
-        ) : ( isAccessTokenExist || !changePasswordMessage ) ? (
+        ) : ( isAccessTokenExist || newPassword === 'changed' ) ? (
         <Redirect to={'/'} />
         ) : (
         <form className={styles.main} onSubmit={restorePassword}>

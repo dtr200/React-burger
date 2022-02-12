@@ -272,6 +272,10 @@ export default (state = initialAccessState, action: TAccessAction): TAccessState
         case GET_NEW_PASSWORD_SUCCESS: {
             return {
                 ...state,
+                user: {
+                    ...state.user,
+                    newPassword: 'changed'
+                },
                 newPasswordRequest: false,
                 newPasswordFailed: false            
             }
