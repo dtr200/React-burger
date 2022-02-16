@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('should dnd and ordering works successfylly', () => {
+describe('should order works successfylly', () => {
     before(() => {
         cy.visit('http://localhost:3000')
         cy.contains('Соберите бургер')
@@ -53,16 +53,7 @@ describe('should dnd and ordering works successfylly', () => {
           .trigger('drop')
     });
 
-    it('should drag & drop works in constructor side', () => {
-        cy.get('main section')
-          .last()
-          .find('[alt="Соус традиционный галактический"]')
-          .trigger('dragstart')
-        cy.get('[alt="Филе Люминесцентного тетраодонтимформа"]')
-          .eq(1)
-          .trigger('drop')
-    })
-    /* it('should delete one ingredient', () => {
+    it('should delete one ingredient', () => {
         cy.get('main section')
           .last()
           .find('ul')
@@ -70,31 +61,31 @@ describe('should dnd and ordering works successfylly', () => {
           .find('svg')
           .eq(2)
           .click()
-    }) */
-    /* it('should order checkout successfylly', () => {
-      cy.get('main section')
-        .last()
-        .find('button')
-        .click()
-      cy.get('[name="email"]')
-        .type('jaxer@list.ru')
-      cy.get('[name="password"]')
-        .type('12')
-      cy.get('button')
-        .click()
-      cy.get('main section')
-        .last()
-        .find('button')
-        .click()
-      cy.get('#react-modals p', { timeout: 16000 })
-        .contains('идентификатор заказа')
+    })
+    it('should order checkout successfylly', () => {
+        cy.get('main section')
+          .last()
+          .find('button')
+          .click()
+        cy.get('[name="email"]')
+          .type('jaxer@list.ru')
+        cy.get('[name="password"]')
+          .type('12')
+        cy.get('button')
+          .click()
+        cy.get('main section')
+          .last()
+          .find('button')
+          .click()
+        cy.get('#react-modals p', { timeout: 16000 })
+          .contains('идентификатор заказа')
     })
     it('should close the order modal successfylly', () => {
-      cy.get('#react-modals')
-        .children()
-        .last()
-        .find('div')
-        .first()
-        .click()
-    }) */
+        cy.get('#react-modals')
+          .children()
+          .last()
+          .find('div')
+          .first()
+          .click()
+    })
 })
