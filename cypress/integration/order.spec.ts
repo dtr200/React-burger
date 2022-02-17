@@ -77,7 +77,7 @@ describe('should order works successfylly', () => {
           .last()
           .find('button')
           .click()
-        cy.get('#react-modals p', { timeout: 16000 })
+        cy.get('#react-modals p', { timeout: 17000 })
           .contains('идентификатор заказа')
     })
     it('should close the order modal successfylly', () => {
