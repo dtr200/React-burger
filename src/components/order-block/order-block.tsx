@@ -26,9 +26,9 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
     const { ingredientsData }: { ingredientsData: TProductItem[] } = 
         useSelector(store => store.ingredients);
     const location = useLocation();    
-
+    ingredients = ingredients.filter((item: string | null) => item !== null);
     let bunFlag = false;
-    const price = ingredients.reduce((accum: number, id: string) => {
+    const price = ingredients.reduce((accum: number, id: string ) => {
         const item = ingredientsData.find((item: TProductItem) => item._id === id);
         if(item!.type === 'bun'){
             if(bunFlag) return accum;
@@ -40,7 +40,7 @@ const OrderBlock: FunctionComponent<TOrderBlockProps> =
 
     const images = Array.from(
         new Set(
-            ingredients.map((id: string) =>
+            ingredients.map((id: string) => 
                 ingredientsData.find((item: TProductItem) => item._id === id)!.image_mobile)
             )
         ).sort();
