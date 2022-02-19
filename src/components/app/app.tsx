@@ -78,7 +78,7 @@ const App: FunctionComponent = () => {
         <AppHeader />
 
         <Switch location={background || location}>
-          <Route path={"/"} exact>
+          <Route path={["/", "/React-burger/"]} exact>
             <HomePage />
           </Route>
           <ProtectedRoute path='/profile/orders/:id' exact>
