@@ -34,7 +34,7 @@ const NavButton: FunctionComponent<TNavButtonProps> = ({ title, logo }) => {
         useSelector(store => store.ingredients);
 
     const dictTitleToLink: TDictTitleToLink = {
-        'Конструктор': '/',
+        'Конструктор': location.pathname === '/' ? '/' : '/React-burger/',
         'Лента заказов': '/feed',
         'Личный кабинет': '/profile'
     }
