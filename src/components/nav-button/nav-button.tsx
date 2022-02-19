@@ -34,13 +34,13 @@ const NavButton: FunctionComponent<TNavButtonProps> = ({ title, logo }) => {
         useSelector(store => store.ingredients);
 
     const dictTitleToLink: TDictTitleToLink = {
-        'Конструктор': location.pathname === '/' ? '/' : '/React-burger/',
+        'Конструктор': '/',
         'Лента заказов': '/feed',
         'Личный кабинет': '/profile'
     }
 
     const getType: (title: string) => TType = (title) =>
-        title === 'Конструктор' && location.pathname === '/' || 
+        title === 'Конструктор' && location.pathname === '/' ||
         title === 'Конструктор' && location.pathname === `/ingredients/${_id}` ||
         title === 'Конструктор' && location.pathname === `/order` ||
         title === 'Лента заказов' && location.pathname === '/feed' ||
