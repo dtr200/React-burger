@@ -83,7 +83,9 @@ const ConstructorItem: FunctionComponent<TConstructorItemProps> = (props) => {
     drag(drop(ref));
     return(  
         isBun ? ( 
-            <li className={`${styles.constructorItem} ${styles.bun}`}>
+            <li 
+                className={`${styles.constructorItem} ${styles.bun}`} 
+                data-cy="constructor-item">
                 { !start && <ConstructorElement {...props} /> }
             </li>
          ) : (      
@@ -91,11 +93,14 @@ const ConstructorItem: FunctionComponent<TConstructorItemProps> = (props) => {
               className={`${styles.constructorItem} ${opacity}`} 
               data-id={id}
               data-handler-id={handlerId}
+              data-cy="constructor-item"
               ref={ref}>
                 <div className={styles.settings}>
                     <DragIcon type={"primary"} />
                 </div>
-                <ConstructorElement {...props} handleClose={() => onDelete(id)} />
+                <ConstructorElement 
+                    {...props} 
+                    handleClose={() => onDelete(id)} />
             </li> 
         )                          
     )

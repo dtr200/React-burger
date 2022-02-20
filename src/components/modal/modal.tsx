@@ -29,7 +29,9 @@ const Modal: FunctionComponent<TModalProps> = ({ children, onClose }) => {
         <>
             <ModalOverlay onClose={onClose} />
             <div className={`${styles.modal} p-10 pb-15`} tabIndex={0}>
-                <div className={styles.close}>
+                <div 
+                    className={styles.close}
+                    data-cy="close-modal">
                     <CloseIcon onClick={onClose} type="primary" />       
                 </div>               
                 { children }

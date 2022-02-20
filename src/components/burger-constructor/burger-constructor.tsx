@@ -147,7 +147,9 @@ const BurgerConstructor: FunctionComponent = () => {
     const ingredientHover: string = isBunHover || isIngredientHover ? styles.listHover : '';
 
     return(
-        <section className={`${styles.burgerConstructor} pt-25 pl-4`}>
+        <section 
+            className={`${styles.burgerConstructor} pt-25 pl-4`}
+            data-cy="constructor">
             <ul 
               className={`${styles.bun} ${styles.bunTop} ${ingredientHover} mt-0 pr-4`}
               ref={dropTargetTopBun}>
@@ -155,7 +157,8 @@ const BurgerConstructor: FunctionComponent = () => {
             </ul>   
             <ul 
               className={`${styles.list} ${ingredientHover} pr-2`} 
-              ref={dropIngredientsTarget}>
+              ref={dropIngredientsTarget}
+              data-cy="constructor-main">
                 {
                     constructorIngredients.map((slice: any, i: number) => {
                         let { _id, name, price, image, type } = slice; 
@@ -187,7 +190,11 @@ const BurgerConstructor: FunctionComponent = () => {
                     </span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={onTotalClick}>
+                <Button 
+                    type="primary" 
+                    size="large" 
+                    onClick={onTotalClick}
+                    data-cy="order-button">
                     Оформить заказ
                 </Button>               
             </div>
