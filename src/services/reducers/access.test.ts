@@ -36,7 +36,7 @@ import { initialAccessState } from './access';
 
 describe('access reducer', () => {
     it('should return the initial state', () => {
-        expect(access(initialAccessState, { type: '' })).toEqual(initialAccessState)
+        expect(access(undefined, { type: '' })).toEqual(initialAccessState)
     })
     it('should handle SET_NAME', () => {
         const state = {
