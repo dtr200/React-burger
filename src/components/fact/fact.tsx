@@ -13,7 +13,9 @@ const Fact: FunctionComponent<TFactProps> = ({ title, value, width }) => {
     const w = width === 'wide' ? styles.wide : '';
     return (
         <div className={`${styles.fact} ${w} text text_color_inactive`}>
-            <span className={`${styles.text} text_type_main-default`}>
+            <span 
+                className={`${styles.text} text_type_main-default`}
+                data-cy="ingredient-modal-item">
                 {title}
             </span>
             <span className={`${styles.text} text_type_digits-default`}>

@@ -76,7 +76,10 @@ const LoginPage: FunctionComponent = () => {
                         />
                 </div>
                 <div className='mt-6 mb-20'>
-                    <Button type="primary" size="medium">
+                    <Button 
+                        type="primary" 
+                        size="medium"
+                        data-cy="login-button">
                         Войти
                     </Button>
                 </div>

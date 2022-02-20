@@ -26,7 +26,9 @@ const OrderDetails: FunctionComponent = () => {
             <div className={`${styles.num} text_type_digits-large`}>
                 {orderNum}
             </div>
-            <p className={`${styles.text} text_type_main-medium mt-8`}>
+            <p 
+                className={`${styles.text} text_type_main-medium mt-8`}
+                data-cy="order-details-title">
                 идентификатор заказа
             </p>
             <img src={done} 

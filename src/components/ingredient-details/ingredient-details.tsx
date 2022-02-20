@@ -72,7 +72,9 @@ const IngredientDetails: FunctionComponent = () => {
                 <img src={ingredient?.image_large} 
                     className={styles.image} 
                     alt={ingredient?.name} />
-                <p className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
+                <p 
+                    className={`${styles.name} text text_type_main-medium mt-4 mb-8`}
+                    data-cy="ingredient-modal-name">
                     {ingredient?.name}
                 </p>
                 <div className={styles.nutritionFacts}>
